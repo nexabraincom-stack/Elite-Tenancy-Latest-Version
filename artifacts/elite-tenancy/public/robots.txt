@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /tenant/
+Disallow: /landlord/
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /profile
+Disallow: /dashboard
+
+# Sitemap
+Sitemap: https://www.elitetenancy.co.uk/sitemap.xml

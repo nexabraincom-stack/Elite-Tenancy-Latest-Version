@@ -1,0 +1,32 @@
+import { Router, type IRouter } from "express";
+import healthRouter from "./health";
+import listingsRouter from "./listings";
+import blogRouter from "./blog";
+import contactRouter from "./contact";
+import platformRouter from "./platform";
+import landlordRouter from "./landlord";
+import tenantRouter from "./tenant";
+import adminRouter from "./admin";
+import matchingRouter from "./matching";
+import authRouter from "./auth";
+import ariaRouter from "./aria";
+import messagesRouter from "./messages";
+import paymentsRouter from "./payments";
+
+const router: IRouter = Router();
+
+router.use(authRouter);
+router.use(ariaRouter);
+router.use(messagesRouter);
+router.use(paymentsRouter);
+router.use(healthRouter);
+router.use(listingsRouter);
+router.use(blogRouter);
+router.use(contactRouter);
+router.use(platformRouter);
+router.use(landlordRouter);
+router.use(tenantRouter);
+router.use(adminRouter);
+router.use(matchingRouter);
+
+export default router;

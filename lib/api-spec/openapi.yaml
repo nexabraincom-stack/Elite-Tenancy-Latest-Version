@@ -1,0 +1,976 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: Elite Tenancy API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: listings
+    description: Property listings
+  - name: platform
+    description: Platform statistics
+  - name: blog
+    description: Blog articles
+  - name: contact
+    description: Contact and leads
+  - name: landlord
+    description: Landlord portal
+  - name: tenant
+    description: Tenant portal
+  - name: admin
+    description: Admin panel
+  - name: matching
+    description: AI-powered tenant matching
+
+paths:
+  /matching/score:
+    post:
+      operationId: getMatchingScore
+      tags: [matching]
+      summary: AI-powered tenant-to-listing match scoring
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TenantMatchRequest"
+      responses:
+        "200":
+          description: Ranked list of matching properties with AI scores
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenantMatchResponse"
+
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /listings:
+    get:
+      operationId: getListings
+      tags: [listings]
+      summary: Get all listings
+      parameters:
+        - in: query
+          name: city
+          schema: { type: string }
+        - in: query
+          name: minPrice
+          schema: { type: integer }
+        - in: query
+          name: maxPrice
+          schema: { type: integer }
+        - in: query
+          name: bedrooms
+          schema: { type: integer }
+        - in: query
+          name: category
+          schema: { type: string }
+        - in: query
+          name: furnished
+          schema: { type: boolean }
+      responses:
+        "200":
+          description: List of listings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Listing"
+    post:
+      operationId: createListing
+      tags: [listings]
+      summary: Create a listing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListingInput"
+      responses:
+        "201":
+          description: Created listing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Listing"
+
+  /listings/featured:
+    get:
+      operationId: getFeaturedListings
+      tags: [listings]
+      summary: Get featured listings
+      responses:
+        "200":
+          description: Featured listings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Listing"
+
+  /listings/{id}:
+    get:
+      operationId: getListingById
+      tags: [listings]
+      summary: Get a listing by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Listing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Listing"
+        "404":
+          description: Not found
+
+  /platform-stats:
+    get:
+      operationId: getPlatformStats
+      tags: [platform]
+      summary: Get platform statistics
+      responses:
+        "200":
+          description: Platform stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlatformStats"
+
+  /blog:
+    get:
+      operationId: getBlogArticles
+      tags: [blog]
+      summary: Get all blog articles
+      responses:
+        "200":
+          description: Blog articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BlogArticle"
+
+  /blog/{slug}:
+    get:
+      operationId: getBlogArticleBySlug
+      tags: [blog]
+      summary: Get a blog article by slug
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Blog article
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BlogArticle"
+        "404":
+          description: Not found
+
+  /leads:
+    post:
+      operationId: submitLead
+      tags: [contact]
+      summary: Submit an enquiry lead
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeadInput"
+      responses:
+        "201":
+          description: Lead created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lead"
+
+  /contact:
+    post:
+      operationId: submitContact
+      tags: [contact]
+      summary: Submit a contact form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactInput"
+      responses:
+        "200":
+          description: Contact submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /valuation:
+    post:
+      operationId: submitValuation
+      tags: [contact]
+      summary: Submit a free valuation request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValuationInput"
+      responses:
+        "200":
+          description: Valuation submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /landlord/stats:
+    get:
+      operationId: getLandlordStats
+      tags: [landlord]
+      summary: Get landlord dashboard stats
+      responses:
+        "200":
+          description: Landlord stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LandlordStats"
+
+  /landlord/listings:
+    get:
+      operationId: getLandlordListings
+      tags: [landlord]
+      summary: Get landlord's listings
+      responses:
+        "200":
+          description: Landlord listings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Listing"
+    post:
+      operationId: createLandlordListing
+      tags: [landlord]
+      summary: Create a new listing (landlord)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListingInput"
+      responses:
+        "201":
+          description: Created listing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Listing"
+
+  /landlord/tenants:
+    get:
+      operationId: getLandlordTenants
+      tags: [landlord]
+      summary: Get landlord's tenants
+      responses:
+        "200":
+          description: Tenants list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TenantRecord"
+
+  /landlord/finances:
+    get:
+      operationId: getLandlordFinances
+      tags: [landlord]
+      summary: Get landlord's finances
+      responses:
+        "200":
+          description: Finance summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FinanceSummary"
+
+  /landlord/maintenance:
+    get:
+      operationId: getLandlordMaintenance
+      tags: [landlord]
+      summary: Get landlord's maintenance requests
+      responses:
+        "200":
+          description: Maintenance requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MaintenanceRequest"
+
+  /landlord/leads:
+    get:
+      operationId: getLandlordLeads
+      tags: [landlord]
+      summary: Get landlord's leads
+      responses:
+        "200":
+          description: Leads list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Lead"
+
+  /tenant/stats:
+    get:
+      operationId: getTenantStats
+      tags: [tenant]
+      summary: Get tenant dashboard stats
+      responses:
+        "200":
+          description: Tenant stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenantStats"
+
+  /tenant/tenancy:
+    get:
+      operationId: getTenantTenancy
+      tags: [tenant]
+      summary: Get tenant's tenancy details
+      responses:
+        "200":
+          description: Tenancy details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenancyDetails"
+
+  /tenant/rent:
+    get:
+      operationId: getTenantRent
+      tags: [tenant]
+      summary: Get tenant's rent history
+      responses:
+        "200":
+          description: Rent records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RentRecord"
+
+  /tenant/maintenance:
+    get:
+      operationId: getTenantMaintenance
+      tags: [tenant]
+      summary: Get tenant's maintenance requests
+      responses:
+        "200":
+          description: Maintenance requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MaintenanceRequest"
+    post:
+      operationId: submitMaintenanceRequest
+      tags: [tenant]
+      summary: Submit a maintenance request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MaintenanceInput"
+      responses:
+        "201":
+          description: Maintenance request created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MaintenanceRequest"
+
+  /tenant/documents:
+    get:
+      operationId: getTenantDocuments
+      tags: [tenant]
+      summary: Get tenant's documents
+      responses:
+        "200":
+          description: Documents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TenantDocument"
+
+  /admin/stats:
+    get:
+      operationId: getAdminStats
+      tags: [admin]
+      summary: Get admin dashboard stats
+      responses:
+        "200":
+          description: Admin stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminStats"
+
+  /admin/listings:
+    get:
+      operationId: getAdminListings
+      tags: [admin]
+      summary: Get all listings (admin)
+      responses:
+        "200":
+          description: All listings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Listing"
+
+  /admin/leads:
+    get:
+      operationId: getAdminLeads
+      tags: [admin]
+      summary: Get all leads (admin)
+      responses:
+        "200":
+          description: All leads
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Lead"
+
+  /admin/articles:
+    get:
+      operationId: getAdminArticles
+      tags: [admin]
+      summary: Get all blog articles (admin)
+      responses:
+        "200":
+          description: All articles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BlogArticle"
+
+  /admin/users:
+    get:
+      operationId: getAdminUsers
+      tags: [admin]
+      summary: Get all users (admin)
+      responses:
+        "200":
+          description: All users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserRecord"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    Listing:
+      type: object
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        slug: { type: string }
+        description: { type: string }
+        price: { type: integer }
+        pricePeriod: { type: string }
+        category: { type: string }
+        city: { type: string }
+        postcode: { type: string }
+        addressLine1: { type: string }
+        bedrooms: { type: integer }
+        bathrooms: { type: integer }
+        floorAreaSqm: { type: ["integer", "null"] }
+        furnished: { type: boolean }
+        petsAllowed: { type: boolean }
+        billsIncluded: { type: boolean }
+        status: { type: string }
+        isFeatured: { type: boolean }
+        isPremium: { type: boolean }
+        photos: { type: array, items: { type: string } }
+        aiMatchScore: { type: ["integer", "null"] }
+        availableFrom: { type: ["string", "null"] }
+        viewCount: { type: integer }
+        enquiryCount: { type: integer }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+      required:
+        - id
+        - title
+        - slug
+        - description
+        - price
+        - pricePeriod
+        - category
+        - city
+        - postcode
+        - bedrooms
+        - bathrooms
+        - furnished
+        - petsAllowed
+        - billsIncluded
+        - status
+        - isFeatured
+        - isPremium
+        - photos
+        - viewCount
+        - enquiryCount
+        - createdAt
+        - updatedAt
+
+    ListingInput:
+      type: object
+      properties:
+        title: { type: string }
+        description: { type: string }
+        price: { type: integer }
+        pricePeriod: { type: string }
+        category: { type: string }
+        city: { type: string }
+        postcode: { type: string }
+        addressLine1: { type: string }
+        bedrooms: { type: integer }
+        bathrooms: { type: integer }
+        furnished: { type: boolean }
+        petsAllowed: { type: boolean }
+        billsIncluded: { type: boolean }
+        photos: { type: array, items: { type: string } }
+        availableFrom: { type: string }
+      required:
+        - title
+        - description
+        - price
+        - pricePeriod
+        - category
+        - city
+        - postcode
+        - bedrooms
+        - bathrooms
+
+    PlatformStats:
+      type: object
+      properties:
+        totalListings: { type: integer }
+        totalLandlords: { type: integer }
+        totalTenants: { type: integer }
+        averageLetTime: { type: integer }
+        citiesCovered: { type: integer }
+        satisfactionRate: { type: integer }
+      required:
+        - totalListings
+        - totalLandlords
+        - totalTenants
+        - averageLetTime
+        - citiesCovered
+        - satisfactionRate
+
+    BlogArticle:
+      type: object
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        slug: { type: string }
+        excerpt: { type: string }
+        content: { type: string }
+        category: { type: string }
+        author: { type: string }
+        imageUrl: { type: ["string", "null"] }
+        readTimeMinutes: { type: integer }
+        tags: { type: array, items: { type: string } }
+        publishedAt: { type: string }
+        createdAt: { type: string }
+      required:
+        - id
+        - title
+        - slug
+        - excerpt
+        - content
+        - category
+        - author
+        - readTimeMinutes
+        - tags
+        - publishedAt
+        - createdAt
+
+    Lead:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        email: { type: string }
+        phone: { type: ["string", "null"] }
+        message: { type: ["string", "null"] }
+        listingId: { type: ["integer", "null"] }
+        listingTitle: { type: ["string", "null"] }
+        status: { type: string }
+        createdAt: { type: string }
+      required:
+        - id
+        - name
+        - email
+        - status
+        - createdAt
+
+    LeadInput:
+      type: object
+      properties:
+        name: { type: string }
+        email: { type: string }
+        phone: { type: string }
+        message: { type: string }
+        listingId: { type: integer }
+        listingTitle: { type: string }
+      required:
+        - name
+        - email
+
+    ContactInput:
+      type: object
+      properties:
+        name: { type: string }
+        email: { type: string }
+        phone: { type: string }
+        subject: { type: string }
+        message: { type: string }
+      required:
+        - name
+        - email
+        - message
+
+    ValuationInput:
+      type: object
+      properties:
+        name: { type: string }
+        email: { type: string }
+        phone: { type: string }
+        address: { type: string }
+        postcode: { type: string }
+        propertyType: { type: string }
+        bedrooms: { type: integer }
+        message: { type: string }
+      required:
+        - name
+        - email
+        - postcode
+
+    SuccessResponse:
+      type: object
+      properties:
+        success: { type: boolean }
+        message: { type: string }
+      required:
+        - success
+        - message
+
+    LandlordStats:
+      type: object
+      properties:
+        activeListings: { type: integer }
+        totalTenants: { type: integer }
+        monthlyRevenue: { type: integer }
+        pendingMaintenance: { type: integer }
+        newLeads: { type: integer }
+        occupancyRate: { type: integer }
+      required:
+        - activeListings
+        - totalTenants
+        - monthlyRevenue
+        - pendingMaintenance
+        - newLeads
+        - occupancyRate
+
+    TenantRecord:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        email: { type: string }
+        phone: { type: ["string", "null"] }
+        propertyAddress: { type: string }
+        rentAmount: { type: integer }
+        leaseStart: { type: string }
+        leaseEnd: { type: string }
+        status: { type: string }
+      required:
+        - id
+        - name
+        - email
+        - propertyAddress
+        - rentAmount
+        - leaseStart
+        - leaseEnd
+        - status
+
+    FinanceSummary:
+      type: object
+      properties:
+        totalRevenue: { type: integer }
+        monthlyRevenue: { type: integer }
+        pendingPayments: { type: integer }
+        transactions: { type: array, items: { $ref: "#/components/schemas/FinanceTransaction" } }
+      required:
+        - totalRevenue
+        - monthlyRevenue
+        - pendingPayments
+        - transactions
+
+    FinanceTransaction:
+      type: object
+      properties:
+        id: { type: integer }
+        date: { type: string }
+        description: { type: string }
+        amount: { type: integer }
+        type: { type: string }
+        status: { type: string }
+      required:
+        - id
+        - date
+        - description
+        - amount
+        - type
+        - status
+
+    MaintenanceRequest:
+      type: object
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        description: { type: string }
+        category: { type: string }
+        priority: { type: string }
+        status: { type: string }
+        propertyAddress: { type: ["string", "null"] }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+      required:
+        - id
+        - title
+        - description
+        - category
+        - priority
+        - status
+        - createdAt
+        - updatedAt
+
+    MaintenanceInput:
+      type: object
+      properties:
+        title: { type: string }
+        description: { type: string }
+        category: { type: string }
+        priority: { type: string }
+      required:
+        - title
+        - description
+        - category
+        - priority
+
+    TenantStats:
+      type: object
+      properties:
+        rentDue: { type: integer }
+        rentDueDate: { type: string }
+        daysUntilRenewal: { type: integer }
+        openMaintenanceRequests: { type: integer }
+        documentsCount: { type: integer }
+      required:
+        - rentDue
+        - rentDueDate
+        - daysUntilRenewal
+        - openMaintenanceRequests
+        - documentsCount
+
+    TenancyDetails:
+      type: object
+      properties:
+        propertyAddress: { type: string }
+        landlordName: { type: string }
+        landlordEmail: { type: string }
+        monthlyRent: { type: integer }
+        depositAmount: { type: integer }
+        leaseStart: { type: string }
+        leaseEnd: { type: string }
+        tenancyType: { type: string }
+        status: { type: string }
+      required:
+        - propertyAddress
+        - landlordName
+        - landlordEmail
+        - monthlyRent
+        - depositAmount
+        - leaseStart
+        - leaseEnd
+        - tenancyType
+        - status
+
+    RentRecord:
+      type: object
+      properties:
+        id: { type: integer }
+        dueDate: { type: string }
+        paidDate: { type: ["string", "null"] }
+        amount: { type: integer }
+        status: { type: string }
+        reference: { type: string }
+      required:
+        - id
+        - dueDate
+        - amount
+        - status
+        - reference
+
+    TenantDocument:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        type: { type: string }
+        uploadedAt: { type: string }
+        size: { type: string }
+        downloadUrl: { type: string }
+      required:
+        - id
+        - name
+        - type
+        - uploadedAt
+        - size
+        - downloadUrl
+
+    AdminStats:
+      type: object
+      properties:
+        totalListings: { type: integer }
+        totalLeads: { type: integer }
+        totalUsers: { type: integer }
+        totalArticles: { type: integer }
+        newLeadsToday: { type: integer }
+        activeListings: { type: integer }
+      required:
+        - totalListings
+        - totalLeads
+        - totalUsers
+        - totalArticles
+        - newLeadsToday
+        - activeListings
+
+    UserRecord:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        email: { type: string }
+        role: { type: string }
+        createdAt: { type: string }
+        lastActiveAt: { type: ["string", "null"] }
+      required:
+        - id
+        - name
+        - email
+        - role
+        - createdAt
+
+    TenantMatchRequest:
+      type: object
+      properties:
+        city: { type: string }
+        minBudget: { type: number }
+        maxBudget: { type: number }
+        bedrooms: { type: number }
+        furnished: { type: boolean }
+        petsAllowed: { type: boolean }
+        billsIncluded: { type: boolean }
+        moveInDate: { type: string }
+        lifestyle: { type: string }
+        priorities: { type: string }
+      required:
+        - maxBudget
+
+    TenantMatchResult:
+      type: object
+      properties:
+        id: { type: integer }
+        score: { type: integer }
+        summary: { type: string }
+        highlights:
+          type: array
+          items: { type: string }
+        listing:
+          $ref: "#/components/schemas/Listing"
+      required:
+        - id
+        - score
+        - summary
+        - highlights
+        - listing
+
+    TenantMatchResponse:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            $ref: "#/components/schemas/TenantMatchResult"
+      required:
+        - matches

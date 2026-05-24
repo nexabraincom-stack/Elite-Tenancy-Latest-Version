@@ -1,0 +1,52 @@
+services:
+  - type: web
+    name: elite-tenancy-api
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: artifacts/api-server
+    buildCommand: pnpm install --frozen-lockfile && pnpm build
+    startCommand: node dist/index.js
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: elite-tenancy-db
+          property: connectionString
+      - key: CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: GOOGLE_AI_API_KEY
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: STRIPE_PRICE_STANDARD
+        sync: false
+      - key: STRIPE_PRICE_PROFESSIONAL
+        sync: false
+      - key: STRIPE_PRICE_PREMIUM
+        sync: false
+      - key: STRIPE_PRICE_MANAGED
+        sync: false
+      - key: WISE_API_KEY
+        sync: false
+      - key: WISE_PROFILE_ID
+        sync: false
+
+databases:
+  - name: elite-tenancy-db
+    databaseName: elite_tenancy
+    user: elite_tenancy_user
+    plan: free
+    region: oregon
+    postgresMajorVersion: 16
