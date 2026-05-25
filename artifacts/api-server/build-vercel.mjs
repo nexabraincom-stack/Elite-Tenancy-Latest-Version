@@ -1,12 +1,13 @@
 /**
  * Vercel build script — bundles src/app.ts (Express app only, no server listen)
- * into dist/vercel.mjs using esbuild. Used by Vercel's serverless deployment.
+ * into dist/vercel.mjs using esbuild.
+ *
+ * No pino plugin needed for serverless — pino logs directly to stdout in prod.
  */
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { build as esbuild } from "esbuild";
-import esbuildPluginPino from "esbuild-plugin-pino";
 
 globalThis.require = createRequire(import.meta.url);
 
@@ -51,7 +52,8 @@ await esbuild({
   external,
   sourcemap: "linked",
   banner,
-  plugins: [esbuildPluginPino({ transports: ["pino-pretty"] })],
+  // No pino plugin — serverless logs go directly to stdout
+  // pino-pretty is a dev tool only
 }).catch((err) => {
   console.error(err);
   process.exit(1);
