@@ -22,6 +22,7 @@ router.get("/auth/me", async (req, res): Promise<void> => {
     (auth.sessionClaims?.name as string | undefined) ?? "New User";
 
   // Upsert: avoids the TOCTOU race condition on first login
+  // Note: createdAt is omitted — the DB sets it via defaultNow()
   const [user] = await db
     .insert(usersTable)
     .values({
@@ -29,7 +30,6 @@ router.get("/auth/me", async (req, res): Promise<void> => {
       email: clerkEmail,
       name: clerkName,
       role: "tenant",
-      createdAt: new Date().toISOString(),
     })
     .onConflictDoUpdate({
       target: usersTable.clerkId,
