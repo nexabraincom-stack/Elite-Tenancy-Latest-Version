@@ -1,7 +1,7 @@
 import express, { type Express } from "express";
 import cors from "cors";
 import pinoHttp from "pino-http";
-import rateLimit from "express-rate-limit";
+import { rateLimit } from "express-rate-limit";
 import { clerkMiddleware } from "@clerk/express";
 import { publishableKeyFromHost } from "@clerk/shared/keys";
 import {
@@ -16,14 +16,17 @@ import { logger } from "./lib/logger";
 const app: Express = express();
 
 // ── Logging ──────────────────────────────────────────────────────────────────
+// ts-expect-error: pino-http default import callable via esModuleInterop;
+// TypeScript 5.9 esnext bundler mode requires this bypass for export= modules
 app.use(
+  // @ts-ignore
   pinoHttp({
     logger,
     serializers: {
-      req(req) {
+      req(req: { id: unknown; method: string; url?: string }) {
         return { id: req.id, method: req.method, url: req.url?.split("?")[0] };
       },
-      res(res) {
+      res(res: { statusCode: number }) {
         return { statusCode: res.statusCode };
       },
     },
