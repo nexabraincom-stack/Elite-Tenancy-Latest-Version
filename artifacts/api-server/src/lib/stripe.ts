@@ -5,8 +5,7 @@ if (!process.env.STRIPE_SECRET_KEY) {
 }
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  // @ts-ignore: LatestApiVersion literal differs between Stripe SDK minor versions;
-  // runtime Stripe API accepts any valid version string regardless of SDK-installed type
+  // @ts-ignore: LatestApiVersion literal differs between SDK minor versions; runtime accepts any valid string
   apiVersion: "2025-04-30.basil",
   typescript: true,
 });
