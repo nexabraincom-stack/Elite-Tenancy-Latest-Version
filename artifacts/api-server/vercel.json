@@ -8,8 +8,5 @@
     "api/index.js": {
       "maxDuration": 30
     }
-  },
-  "typescript": {
-    "ignoreBuildErrors": true
   }
 }
