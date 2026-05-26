@@ -3,11 +3,19 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const router: IRouter = Router();
 
-if (!process.env.GOOGLE_AI_API_KEY) {
-  throw new Error("GOOGLE_AI_API_KEY is required but was not set.");
-}
+// Lazy-initialised: defer creation to request time so a missing env var
+// returns a 503 instead of crashing the whole serverless function on cold start.
+let _genAI: GoogleGenerativeAI | null = null;
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
+function getGenAI(): GoogleGenerativeAI {
+  if (!_genAI) {
+    if (!process.env.GOOGLE_AI_API_KEY) {
+      throw new Error("GOOGLE_AI_API_KEY is not configured");
+    }
+    _genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
+  }
+  return _genAI;
+}
 
 const SYSTEM_PROMPT = `You are Aria, the AI assistant for Elite Tenancy — the UK's premier tenant-introduction service. You are warm, professional, knowledgeable, and concise.
 
@@ -74,6 +82,15 @@ router.post("/aria/chat", async (req, res): Promise<void> => {
 
   if (message.length > 1000) {
     res.status(400).json({ error: "Message too long" });
+    return;
+  }
+
+  // Guard: return 503 if AI is not configured rather than crashing
+  let genAI: GoogleGenerativeAI;
+  try {
+    genAI = getGenAI();
+  } catch {
+    res.status(503).json({ error: "AI service not available", reply: "The AI assistant is temporarily unavailable. Please try again later." });
     return;
   }
 

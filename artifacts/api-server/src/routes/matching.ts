@@ -6,7 +6,18 @@ import { eq, and, lte, gte } from "drizzle-orm";
 
 const router: IRouter = Router();
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY!);
+// Lazy singleton — deferred so a missing key returns 503 instead of crashing
+// the serverless function at module-load time.
+let _genAI: GoogleGenerativeAI | null = null;
+function getGenAI(): GoogleGenerativeAI {
+  if (!_genAI) {
+    if (!process.env.GOOGLE_AI_API_KEY) {
+      throw new Error("GOOGLE_AI_API_KEY is not configured");
+    }
+    _genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
+  }
+  return _genAI;
+}
 
 router.post("/matching/score", async (req, res): Promise<void> => {
   const {
@@ -43,6 +54,14 @@ router.post("/matching/score", async (req, res): Promise<void> => {
 
   if (listings.length === 0) {
     res.json({ matches: [] });
+    return;
+  }
+
+  let genAI: GoogleGenerativeAI;
+  try {
+    genAI = getGenAI();
+  } catch {
+    res.status(503).json({ error: "AI matching service is not available" });
     return;
   }
 

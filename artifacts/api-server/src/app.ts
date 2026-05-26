@@ -15,6 +15,12 @@ import { logger } from "./lib/logger";
 
 const app: Express = express();
 
+// ── Health check — registered FIRST, before any middleware that could crash ───
+// This ensures /health always responds even if Clerk/Stripe/DB are misconfigured.
+app.get("/health", (_req, res) => {
+  res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
 // ── Logging ──────────────────────────────────────────────────────────────────
 // ts-expect-error: pino-http default import callable via esModuleInterop;
 // TypeScript 5.9 esnext bundler mode requires this bypass for export= modules
@@ -84,11 +90,6 @@ const aiLimiter = rateLimit({
 
 app.use("/api/aria/chat", aiLimiter);
 app.use("/api/matching/score", aiLimiter);
-
-// ── Health check ─────────────────────────────────────────────────────────────
-app.get("/health", (_req, res) => {
-  res.json({ status: "ok", timestamp: new Date().toISOString() });
-});
 
 // ── Routes ───────────────────────────────────────────────────────────────────
 app.use("/api", router);

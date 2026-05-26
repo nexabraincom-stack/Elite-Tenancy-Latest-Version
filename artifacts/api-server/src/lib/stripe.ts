@@ -1,13 +1,30 @@
 import Stripe from "stripe";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error("STRIPE_SECRET_KEY is required");
+// Lazy singleton — instantiated on first use so a missing env var surfaces as
+// a 503 response rather than a module-level throw that crashes the entire
+// serverless function on cold start.
+let _stripe: Stripe | null = null;
+
+export function getStripe(): Stripe {
+  if (!_stripe) {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      throw new Error("STRIPE_SECRET_KEY is not configured");
+    }
+    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      // @ts-ignore: LatestApiVersion literal differs between SDK minor versions; runtime accepts any valid string
+      apiVersion: "2025-04-30.basil",
+      typescript: true,
+    });
+  }
+  return _stripe;
 }
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  // @ts-ignore: LatestApiVersion literal differs between SDK minor versions; runtime accepts any valid string
-  apiVersion: "2025-04-30.basil",
-  typescript: true,
+// Named export kept for backward compatibility — callers that do `stripe.foo`
+// will now call via the lazy getter.
+export const stripe: Stripe = new Proxy({} as Stripe, {
+  get(_target, prop) {
+    return (getStripe() as unknown as Record<string | symbol, unknown>)[prop];
+  },
 });
 
 // ── Stripe Price IDs (set in Stripe Dashboard → Products) ────────────────────
