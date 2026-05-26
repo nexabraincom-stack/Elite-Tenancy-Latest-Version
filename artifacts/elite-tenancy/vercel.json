@@ -1,7 +1,7 @@
 {
   "buildCommand": "BASE_PATH=/ PORT=3000 pnpm build",
   "outputDirectory": "dist/public",
-  "installCommand": "cd ../.. && npx pnpm@9 install --no-frozen-lockfile",
+  "installCommand": "npx pnpm@9 install --no-frozen-lockfile",
   "framework": null,
   "rewrites": [
     {
