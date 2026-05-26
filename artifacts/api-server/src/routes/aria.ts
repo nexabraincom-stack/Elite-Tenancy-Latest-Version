@@ -1,20 +1,18 @@
 import { Router, type IRouter } from "express";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const router: IRouter = Router();
 
-// Lazy-initialised: defer creation to request time so a missing env var
-// returns a 503 instead of crashing the whole serverless function on cold start.
-let _genAI: GoogleGenerativeAI | null = null;
+// ---------------------------------------------------------------------------
+// AI Gateway (Vercel) — OpenAI-compatible endpoint routing to Gemini 2.0 Flash
+// Falls back to direct Google AI SDK if AI_GATEWAY_API_KEY is absent.
+// ---------------------------------------------------------------------------
+const AI_GATEWAY_BASE = "https://ai-gateway.vercel.sh/v1";
+const GATEWAY_MODEL = "google/gemini-2.0-flash";
 
-function getGenAI(): GoogleGenerativeAI {
-  if (!_genAI) {
-    if (!process.env.GOOGLE_AI_API_KEY) {
-      throw new Error("GOOGLE_AI_API_KEY is not configured");
-    }
-    _genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
-  }
-  return _genAI;
+function getAIConfig(): { mode: "gateway"; apiKey: string } | { mode: "unavailable" } {
+  const gatewayKey = process.env.AI_GATEWAY_API_KEY;
+  if (gatewayKey) return { mode: "gateway", apiKey: gatewayKey };
+  return { mode: "unavailable" };
 }
 
 const SYSTEM_PROMPT = `You are Aria, the AI assistant for Elite Tenancy — the UK's premier tenant-introduction service. You are warm, professional, knowledgeable, and concise.
@@ -60,7 +58,7 @@ Rules:
 
 // In-memory session store: sessionId → last N messages
 // Each entry expires after 30 minutes of inactivity
-const sessions = new Map<string, { messages: Array<{ role: "user" | "model"; text: string }>; lastUsed: number }>();
+const sessions = new Map<string, { messages: Array<{ role: "user" | "assistant"; text: string }>; lastUsed: number }>();
 
 const SESSION_TTL_MS = 30 * 60 * 1000;
 const MAX_HISTORY = 8;
@@ -70,6 +68,37 @@ function pruneExpiredSessions() {
   for (const [id, session] of sessions) {
     if (now - session.lastUsed > SESSION_TTL_MS) sessions.delete(id);
   }
+}
+
+async function callGateway(
+  apiKey: string,
+  messages: Array<{ role: string; content: string }>,
+): Promise<string> {
+  const response = await fetch(`${AI_GATEWAY_BASE}/chat/completions`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: GATEWAY_MODEL,
+      messages,
+      max_tokens: 400,
+      temperature: 0.7,
+    }),
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`AI Gateway ${response.status}: ${body.slice(0, 200)}`);
+  }
+
+  const data = await response.json() as {
+    choices: Array<{ message: { content: string } }>;
+  };
+  const content = data.choices?.[0]?.message?.content;
+  if (!content) throw new Error("AI Gateway returned empty content");
+  return content.trim();
 }
 
 router.post("/aria/chat", async (req, res): Promise<void> => {
@@ -85,11 +114,8 @@ router.post("/aria/chat", async (req, res): Promise<void> => {
     return;
   }
 
-  // Guard: return 503 if AI is not configured rather than crashing
-  let genAI: GoogleGenerativeAI;
-  try {
-    genAI = getGenAI();
-  } catch {
+  const aiConfig = getAIConfig();
+  if (aiConfig.mode === "unavailable") {
     res.status(503).json({ error: "AI service not available", reply: "The AI assistant is temporarily unavailable. Please try again later." });
     return;
   }
@@ -101,31 +127,22 @@ router.post("/aria/chat", async (req, res): Promise<void> => {
   const session = sid ? (sessions.get(sid) ?? { messages: [], lastUsed: Date.now() }) : { messages: [], lastUsed: Date.now() };
   session.lastUsed = Date.now();
 
-  const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash",
-    systemInstruction: SYSTEM_PROMPT,
-  });
-
-  // Build Gemini history from server-side session (all except the last user turn)
-  const geminiHistory = session.messages.slice(-MAX_HISTORY).map((m) => ({
-    role: m.role,
-    parts: [{ text: m.text }],
-  }));
-
-  const chat = model.startChat({
-    history: geminiHistory,
-    generationConfig: { maxOutputTokens: 400, temperature: 0.7 },
-  });
+  // Build OpenAI-format messages with system prompt + history + new user message
+  const chatMessages: Array<{ role: string; content: string }> = [
+    { role: "system", content: SYSTEM_PROMPT },
+    ...session.messages.slice(-MAX_HISTORY).map((m) => ({ role: m.role, content: m.text })),
+    { role: "user", content: message },
+  ];
 
   let reply: string;
   try {
-    const result = await chat.sendMessage(message);
-    reply = result.response.text().trim();
+    reply = await callGateway(aiConfig.apiKey, chatMessages);
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
-    if (msg.includes("429") || msg.includes("quota")) {
+    if (msg.includes("429") || msg.includes("quota") || msg.includes("Too Many Requests")) {
       res.status(429).json({ error: "AI service busy", reply: "I'm a little busy right now — please try again in a moment!" });
     } else {
+      console.error("[aria] AI Gateway error:", msg);
       res.status(502).json({ error: "AI error", reply: "Something went wrong. Please try again." });
     }
     return;
@@ -133,7 +150,7 @@ router.post("/aria/chat", async (req, res): Promise<void> => {
 
   // Persist to server-side session
   session.messages.push({ role: "user", text: message });
-  session.messages.push({ role: "model", text: reply });
+  session.messages.push({ role: "assistant", text: reply });
   if (session.messages.length > MAX_HISTORY * 2) {
     session.messages = session.messages.slice(-MAX_HISTORY * 2);
   }

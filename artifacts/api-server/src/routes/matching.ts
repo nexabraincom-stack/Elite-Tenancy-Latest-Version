@@ -1,22 +1,48 @@
 import { Router, type IRouter } from "express";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { db } from "@workspace/db";
 import { listingsTable } from "@workspace/db/schema";
 import { eq, and, lte, gte } from "drizzle-orm";
 
 const router: IRouter = Router();
 
-// Lazy singleton — deferred so a missing key returns 503 instead of crashing
-// the serverless function at module-load time.
-let _genAI: GoogleGenerativeAI | null = null;
-function getGenAI(): GoogleGenerativeAI {
-  if (!_genAI) {
-    if (!process.env.GOOGLE_AI_API_KEY) {
-      throw new Error("GOOGLE_AI_API_KEY is not configured");
-    }
-    _genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
+// ---------------------------------------------------------------------------
+// AI Gateway (Vercel) — OpenAI-compatible endpoint routing to Gemini 2.0 Flash
+// ---------------------------------------------------------------------------
+const AI_GATEWAY_BASE = "https://ai-gateway.vercel.sh/v1";
+const GATEWAY_MODEL = "google/gemini-2.0-flash";
+
+function getAIConfig(): { mode: "gateway"; apiKey: string } | { mode: "unavailable" } {
+  const gatewayKey = process.env.AI_GATEWAY_API_KEY;
+  if (gatewayKey) return { mode: "gateway", apiKey: gatewayKey };
+  return { mode: "unavailable" };
+}
+
+async function callGateway(apiKey: string, prompt: string): Promise<string> {
+  const response = await fetch(`${AI_GATEWAY_BASE}/chat/completions`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: GATEWAY_MODEL,
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 2048,
+      temperature: 0.3,
+    }),
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`AI Gateway ${response.status}: ${body.slice(0, 200)}`);
   }
-  return _genAI;
+
+  const data = await response.json() as {
+    choices: Array<{ message: { content: string } }>;
+  };
+  const content = data.choices?.[0]?.message?.content;
+  if (!content) throw new Error("AI Gateway returned empty content");
+  return content.trim();
 }
 
 router.post("/matching/score", async (req, res): Promise<void> => {
@@ -57,15 +83,11 @@ router.post("/matching/score", async (req, res): Promise<void> => {
     return;
   }
 
-  let genAI: GoogleGenerativeAI;
-  try {
-    genAI = getGenAI();
-  } catch {
+  const aiConfig = getAIConfig();
+  if (aiConfig.mode === "unavailable") {
     res.status(503).json({ error: "AI matching service is not available" });
     return;
   }
-
-  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
   const tenantProfile = {
     city: city || "any",
@@ -122,20 +144,19 @@ Respond ONLY with valid JSON in this exact format (no markdown):
 
 Sort by score descending. Include all properties.`;
 
-  let result;
+  let text: string;
   try {
-    result = await model.generateContent(prompt);
+    text = await callGateway(aiConfig.apiKey, prompt);
   } catch (aiErr: unknown) {
     const msg = aiErr instanceof Error ? aiErr.message : String(aiErr);
     if (msg.includes("429") || msg.includes("quota") || msg.includes("Too Many Requests")) {
       res.status(429).json({ error: "AI service temporarily unavailable. Please try again in a moment." });
     } else {
+      console.error("[matching] AI Gateway error:", msg);
       res.status(502).json({ error: "AI service error", detail: msg });
     }
     return;
   }
-
-  const text = result.response.text().trim();
 
   let parsed: { matches: Array<{ id: number; score: number; summary: string; highlights: string[] }> };
   try {
