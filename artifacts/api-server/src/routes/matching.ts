@@ -1,4 +1,5 @@
 import { Router, type IRouter } from "express";
+import https from "node:https";
 import { db } from "@workspace/db";
 import { listingsTable } from "@workspace/db/schema";
 import { eq, and, lte, gte } from "drizzle-orm";
@@ -7,6 +8,8 @@ const router: IRouter = Router();
 
 // ---------------------------------------------------------------------------
 // AI Gateway (Vercel) — OpenAI-compatible endpoint routing to Gemini 2.0 Flash
+// Uses Node.js https module to avoid TypeScript Response type collisions with
+// the Express Response type when lib does not include "dom".
 // ---------------------------------------------------------------------------
 const AI_GATEWAY_BASE = "https://ai-gateway.vercel.sh/v1";
 const GATEWAY_MODEL = "google/gemini-2.0-flash";
@@ -17,28 +20,56 @@ function getAIConfig(): { mode: "gateway"; apiKey: string } | { mode: "unavailab
   return { mode: "unavailable" };
 }
 
+/** Minimal typed response wrapper returned by httpsPost */
+interface HttpResult {
+  statusCode: number;
+  body: string;
+}
+
+function httpsPost(url: string, headers: Record<string, string>, payload: string): Promise<HttpResult> {
+  return new Promise((resolve, reject) => {
+    const parsed = new URL(url);
+    const req = https.request(
+      {
+        hostname: parsed.hostname,
+        path: parsed.pathname + parsed.search,
+        method: "POST",
+        headers: { ...headers, "Content-Length": Buffer.byteLength(payload) },
+      },
+      (res) => {
+        const chunks: Buffer[] = [];
+        res.on("data", (chunk: Buffer) => chunks.push(chunk));
+        res.on("end", () => resolve({ statusCode: res.statusCode ?? 0, body: Buffer.concat(chunks).toString("utf8") }));
+      },
+    );
+    req.on("error", reject);
+    req.write(payload);
+    req.end();
+  });
+}
+
 async function callGateway(apiKey: string, prompt: string): Promise<string> {
-  // Use globalThis.fetch to avoid conflict with Express's Response type
-  const fetchRes = await globalThis.fetch(`${AI_GATEWAY_BASE}/chat/completions`, {
-    method: "POST",
-    headers: {
+  const payload = JSON.stringify({
+    model: GATEWAY_MODEL,
+    messages: [{ role: "user", content: prompt }],
+    max_tokens: 2048,
+    temperature: 0.3,
+  });
+
+  const result = await httpsPost(
+    `${AI_GATEWAY_BASE}/chat/completions`,
+    {
       "Authorization": `Bearer ${apiKey}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      model: GATEWAY_MODEL,
-      messages: [{ role: "user", content: prompt }],
-      max_tokens: 2048,
-      temperature: 0.3,
-    }),
-  });
+    payload,
+  );
 
-  if (!fetchRes.ok) {
-    const body = await fetchRes.text();
-    throw new Error(`AI Gateway ${fetchRes.status}: ${body.slice(0, 200)}`);
+  if (result.statusCode < 200 || result.statusCode >= 300) {
+    throw new Error(`AI Gateway ${result.statusCode}: ${result.body.slice(0, 200)}`);
   }
 
-  const data = await fetchRes.json() as {
+  const data = JSON.parse(result.body) as {
     choices: Array<{ message: { content: string } }>;
   };
   const content = data.choices?.[0]?.message?.content;
