@@ -18,7 +18,8 @@ function getAIConfig(): { mode: "gateway"; apiKey: string } | { mode: "unavailab
 }
 
 async function callGateway(apiKey: string, prompt: string): Promise<string> {
-  const response = await fetch(`${AI_GATEWAY_BASE}/chat/completions`, {
+  // Use globalThis.fetch to avoid conflict with Express's Response type
+  const fetchRes = await globalThis.fetch(`${AI_GATEWAY_BASE}/chat/completions`, {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${apiKey}`,
@@ -32,12 +33,12 @@ async function callGateway(apiKey: string, prompt: string): Promise<string> {
     }),
   });
 
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`AI Gateway ${response.status}: ${body.slice(0, 200)}`);
+  if (!fetchRes.ok) {
+    const body = await fetchRes.text();
+    throw new Error(`AI Gateway ${fetchRes.status}: ${body.slice(0, 200)}`);
   }
 
-  const data = await response.json() as {
+  const data = await fetchRes.json() as {
     choices: Array<{ message: { content: string } }>;
   };
   const content = data.choices?.[0]?.message?.content;
