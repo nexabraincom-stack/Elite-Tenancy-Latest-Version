@@ -2,10 +2,15 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
+    "noEmit": true,
     "types": ["node"],
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@workspace/api-zod": ["../../lib/api-zod/src/index.ts"],
+      "@workspace/db": ["../../lib/db/src/index.ts"]
+    }
   },
   "include": ["src"]
 }
