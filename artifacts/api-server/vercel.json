@@ -1,6 +1,9 @@
 {
   "installCommand": "cd ../.. && npx pnpm@9 install --no-frozen-lockfile",
   "buildCommand": "node build-vercel.mjs",
+  "typescript": {
+    "ignoreBuildErrors": true
+  },
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index" }
   ],

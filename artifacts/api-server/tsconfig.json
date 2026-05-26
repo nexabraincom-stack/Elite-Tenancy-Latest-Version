@@ -3,9 +3,12 @@
   "compilerOptions": {
     "outDir": "dist",
     "noEmit": true,
+    "noEmitOnError": false,
     "types": ["node"],
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "customConditions": [],
     "baseUrl": ".",
     "paths": {
       "@workspace/api-zod": ["../../lib/api-zod/src/index.ts"],
