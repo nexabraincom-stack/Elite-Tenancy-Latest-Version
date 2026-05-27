@@ -3,6 +3,43 @@
   "outputDirectory": "dist/public",
   "installCommand": "npx pnpm@9 install --no-frozen-lockfile",
   "framework": null,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "elitetenancy.co.uk" }],
+      "destination": "https://www.elitetenancy.co.uk/$1",
+      "permanent": true,
+      "statusCode": 308
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "elitetenancy.uk" }],
+      "destination": "https://www.elitetenancy.co.uk/$1",
+      "permanent": true,
+      "statusCode": 308
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.elitetenancy.uk" }],
+      "destination": "https://www.elitetenancy.co.uk/$1",
+      "permanent": true,
+      "statusCode": 308
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "elitetenancy.com" }],
+      "destination": "https://www.elitetenancy.co.uk/$1",
+      "permanent": true,
+      "statusCode": 308
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.elitetenancy.com" }],
+      "destination": "https://www.elitetenancy.co.uk/$1",
+      "permanent": true,
+      "statusCode": 308
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/:path*",
