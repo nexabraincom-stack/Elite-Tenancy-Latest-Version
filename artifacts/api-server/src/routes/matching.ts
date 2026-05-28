@@ -3,6 +3,7 @@ import https from "node:https";
 import { db } from "@workspace/db";
 import { listingsTable } from "@workspace/db/schema";
 import { eq, and, lte, gte } from "drizzle-orm";
+import { requireAuth } from "../middlewares/requireAuth";
 
 const router: IRouter = Router();
 
@@ -77,7 +78,7 @@ async function callGateway(apiKey: string, prompt: string): Promise<string> {
   return content.trim();
 }
 
-router.post("/matching/score", async (req, res): Promise<void> => {
+router.post("/matching/score", requireAuth(), async (req, res): Promise<void> => {
   const {
     city,
     minBudget,
