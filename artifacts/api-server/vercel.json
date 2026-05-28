@@ -8,5 +8,6 @@
     "api/index.js": {
       "maxDuration": 30
     }
-  }
+  },
+  "regions": ["lhr1"]
 }
