@@ -12,6 +12,9 @@ import authRouter from "./auth";
 import ariaRouter from "./aria";
 import messagesRouter from "./messages";
 import paymentsRouter from "./payments";
+import connectRouter from "./connect";
+import subscriptionsRouter from "./subscriptions";
+import n8nRouter from "./n8n";
 
 const router: IRouter = Router();
 
@@ -19,6 +22,9 @@ router.use(authRouter);
 router.use(ariaRouter);
 router.use(messagesRouter);
 router.use(paymentsRouter);
+router.use(connectRouter);
+router.use(subscriptionsRouter);
+router.use(n8nRouter);
 router.use(healthRouter);
 router.use(listingsRouter);
 router.use(blogRouter);

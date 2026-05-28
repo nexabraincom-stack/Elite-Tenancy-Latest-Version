@@ -86,9 +86,9 @@ export default function Contact() {
 
           <div className="space-y-5">
             {[
-              { icon: MapPin, title: "Office", lines: ["1 Spinningfields Square", "Manchester, M3 3EB"] },
-              { icon: Phone, title: "Phone", lines: ["0161 850 4200"] },
-              { icon: Mail, title: "Email", lines: ["hello@elitetenancy.co.uk"] },
+              { icon: MapPin, title: "Office", lines: ["Office 18077, 182-184 High Street North", "East Ham, London, E6 2JA"] },
+              { icon: Phone, title: "Phone", lines: ["+44 7446 192577"] },
+              { icon: Mail, title: "Email", lines: ["info@elitetenancy.co.uk"] },
               { icon: Clock, title: "Hours", lines: ["Mon–Fri: 9am–6pm", "Sat: 10am–4pm"] },
             ].map(({ icon: Icon, title, lines }) => (
               <div key={title} className="bg-card border border-border/50 rounded-xl p-5 flex gap-4">

@@ -9,6 +9,7 @@ const MIGRATIONS = [
   "001_add_tenancy_tables.sql",
   "002_add_messaging.sql",
   "003_add_payments.sql",
+  "004_add_connect_subscriptions.sql",
 ];
 
 export async function runMigrations(): Promise<void> {

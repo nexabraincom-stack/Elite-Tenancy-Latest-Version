@@ -10,9 +10,12 @@ export function getStripe(): Stripe {
     if (!process.env.STRIPE_SECRET_KEY) {
       throw new Error("STRIPE_SECRET_KEY is not configured");
     }
+    if (process.env.STRIPE_SECRET_KEY!.startsWith("sk_")) {
+      console.warn("[stripe] WARNING: Using secret key (sk_). Switch to a restricted key (rk_) with least-privilege permissions.");
+    }
     _stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
       // @ts-ignore: LatestApiVersion literal differs between SDK minor versions; runtime accepts any valid string
-      apiVersion: "2025-04-30.basil",
+      apiVersion: "2026-04-22.dahlia",
       typescript: true,
     });
   }

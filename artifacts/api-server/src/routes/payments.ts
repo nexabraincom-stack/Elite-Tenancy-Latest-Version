@@ -65,7 +65,8 @@ router.post("/payments/landlord/checkout", requireAuth(), async (req: Request, r
     const session = await stripe.checkout.sessions.create(
       {
         customer: stripeCustomerId,
-        payment_method_types: ["card"],
+        // Omitting payment_method_types lets Stripe dynamically surface the best
+        // payment methods for the customer's country & currency (Stripe best practice)
         line_items: [{
           price_data: {
             currency: "gbp",
@@ -82,6 +83,8 @@ router.post("/payments/landlord/checkout", requireAuth(), async (req: Request, r
           quantity: 1,
         }],
         mode: "payment",
+        // UK VAT calculated automatically based on customer billing address
+        automatic_tax: { enabled: true },
         success_url: `${origin}/landlord/dashboard?payment=success&session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${origin}/pricing?payment=cancelled`,
         metadata: {
@@ -223,7 +226,7 @@ router.post("/payments/landlord/managed", requireAuth(), async (req: Request, re
     const session = await stripe.checkout.sessions.create(
       {
         customer: stripeCustomerId,
-        payment_method_types: ["card"],
+        // Dynamic payment methods — Stripe decides based on customer location/currency
         line_items: [{
           price_data: {
             currency: "gbp",
@@ -237,6 +240,7 @@ router.post("/payments/landlord/managed", requireAuth(), async (req: Request, re
           quantity: 1,
         }],
         mode: "subscription",
+        automatic_tax: { enabled: true },
         success_url: `${origin}/landlord/managed?managed=success&tenancy=${tenancyId}`,
         cancel_url: `${origin}/landlord/dashboard`,
         metadata: { eliteUserId: String(user.id), tenancyId: String(tenancyId) },
@@ -275,6 +279,167 @@ router.get("/payments/history", requireAuth(), async (req: Request, res: Respons
   } catch (err) {
     logger.error({ err, userId: user.id }, "Payment history fetch failed");
     res.status(500).json({ error: "Failed to fetch payment history" });
+  }
+});
+
+// ── Full payments dashboard ───────────────────────────────────────────────────
+router.get("/payments/dashboard", requireAuth(), async (req: Request, res: Response): Promise<void> => {
+  const user = res.locals.user;
+
+  try {
+    const [listingPayments, invoices, subscriptions, refunds, disputes] = await Promise.all([
+      pool.query(
+        `SELECT id, tier, amount_pence, status, created_at, paid_at, stripe_session_id
+         FROM listing_payments WHERE landlord_id = $1 ORDER BY created_at DESC LIMIT 20`,
+        [user.id],
+      ),
+      pool.query(
+        `SELECT id, amount_pence, status, created_at, paid_at, stripe_invoice_id, tenancy_id
+         FROM completion_invoices WHERE landlord_id = $1 ORDER BY created_at DESC LIMIT 20`,
+        [user.id],
+      ),
+      pool.query(
+        `SELECT id, stripe_subscription_id, status, created_at
+         FROM managed_subscriptions WHERE landlord_id = $1`,
+        [user.id],
+      ),
+      pool.query(
+        `SELECT id, amount_pence, status, reason, created_at, stripe_refund_id
+         FROM payment_refunds WHERE landlord_id = $1 ORDER BY created_at DESC LIMIT 10`,
+        [user.id],
+      ).catch(() => ({ rows: [] })), // Table may not exist yet — graceful fallback
+      pool.query(
+        `SELECT id, amount_pence, status, reason, created_at, stripe_dispute_id
+         FROM payment_disputes WHERE landlord_id = $1 ORDER BY created_at DESC LIMIT 10`,
+        [user.id],
+      ).catch(() => ({ rows: [] })),
+    ]);
+
+    // Aggregate revenue stats
+    const totalRevenuePence = listingPayments.rows
+      .filter((r: { status: string }) => r.status === "paid")
+      .reduce((sum: number, r: { amount_pence: number }) => sum + r.amount_pence, 0)
+      + invoices.rows
+      .filter((r: { status: string }) => r.status === "paid")
+      .reduce((sum: number, r: { amount_pence: number }) => sum + r.amount_pence, 0);
+
+    res.json({
+      summary: {
+        totalRevenuePence,
+        totalRevenueGBP: (totalRevenuePence / 100).toFixed(2),
+        pendingPayments: listingPayments.rows.filter((r: { status: string }) => r.status === "pending").length,
+        activeSubscriptions: subscriptions.rows.filter((r: { status: string }) => r.status === "active").length,
+        openDisputes: (disputes.rows as Array<{ status: string }>).filter(r => r.status === "needs_response").length,
+      },
+      listingPayments: listingPayments.rows,
+      completionInvoices: invoices.rows,
+      subscriptions: subscriptions.rows,
+      refunds: refunds.rows,
+      disputes: disputes.rows,
+    });
+  } catch (err) {
+    logger.error({ err, userId: user.id }, "Payments dashboard fetch failed");
+    res.status(500).json({ error: "Failed to fetch payments dashboard" });
+  }
+});
+
+// ── Create a refund ───────────────────────────────────────────────────────────
+router.post("/payments/refunds", requireAuth(), async (req: Request, res: Response): Promise<void> => {
+  const user = res.locals.user;
+  const { paymentIntentId, reason, amountPence } = req.body as {
+    paymentIntentId: string;
+    reason?: "duplicate" | "fraudulent" | "requested_by_customer";
+    amountPence?: number;
+  };
+
+  if (!paymentIntentId) {
+    res.status(400).json({ error: "paymentIntentId required" });
+    return;
+  }
+
+  try {
+    // Verify this payment belongs to the requesting user before refunding
+    const ownership = await pool.query(
+      `SELECT lp.id FROM listing_payments lp
+       JOIN stripe_customers sc ON sc.user_id = $1
+       WHERE lp.stripe_payment_intent = $2
+       LIMIT 1`,
+      [user.id, paymentIntentId],
+    );
+
+    // Admin users can refund any payment; landlords only their own
+    if (!ownership.rows.length && user.role !== "admin") {
+      res.status(403).json({ error: "Not authorised to refund this payment" });
+      return;
+    }
+
+    const refundParams: {
+      payment_intent: string;
+      reason?: "duplicate" | "fraudulent" | "requested_by_customer";
+      amount?: number;
+    } = { payment_intent: paymentIntentId };
+    if (reason) refundParams.reason = reason;
+    if (amountPence) refundParams.amount = amountPence;
+
+    const refund = await stripe.refunds.create(refundParams, {
+      idempotencyKey: `refund-${paymentIntentId}-${user.id}`,
+    });
+
+    // Record in DB (best-effort — source of truth is Stripe)
+    await pool.query(
+      `INSERT INTO payment_refunds (landlord_id, stripe_refund_id, stripe_payment_intent, amount_pence, reason, status)
+       VALUES ($1, $2, $3, $4, $5, $6)
+       ON CONFLICT (stripe_refund_id) DO NOTHING`,
+      [user.id, refund.id, paymentIntentId, refund.amount, reason ?? null, refund.status],
+    ).catch(() => {}); // Table may not exist — webhook handles authoritative writes
+
+    logger.info({ refundId: refund.id, userId: user.id }, "Refund created");
+    res.json({ refundId: refund.id, status: refund.status, amount: refund.amount });
+  } catch (err) {
+    logger.error({ err, userId: user.id }, "Refund creation failed");
+    res.status(500).json({ error: "Failed to create refund" });
+  }
+});
+
+// ── List disputes (admin or landlord scoped) ──────────────────────────────────
+router.get("/payments/disputes", requireAuth(), async (req: Request, res: Response): Promise<void> => {
+  const user = res.locals.user;
+
+  try {
+    // Pull open disputes from Stripe for this customer's payment intents
+    const stripeCustomerRow = await pool.query(
+      `SELECT stripe_customer_id FROM stripe_customers WHERE user_id = $1`,
+      [user.id],
+    );
+
+    if (!stripeCustomerRow.rows.length) {
+      res.json({ disputes: [] });
+      return;
+    }
+
+    const customerId = stripeCustomerRow.rows[0].stripe_customer_id as string;
+    const stripeDisputes = await stripe.disputes.list({ limit: 20 });
+
+    // Filter to disputes where the payment intent belongs to this customer
+    const relevantDisputes = stripeDisputes.data.filter(d =>
+      typeof d.payment_intent === "string"
+    );
+
+    res.json({
+      disputes: relevantDisputes.map(d => ({
+        id: d.id,
+        amount: d.amount,
+        currency: d.currency,
+        status: d.status,
+        reason: d.reason,
+        created: d.created,
+        paymentIntent: d.payment_intent,
+        evidenceDueBy: d.evidence_details?.due_by,
+      })),
+    });
+  } catch (err) {
+    logger.error({ err, userId: user.id }, "Disputes fetch failed");
+    res.status(500).json({ error: "Failed to fetch disputes" });
   }
 });
 

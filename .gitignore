@@ -62,3 +62,8 @@ artifacts/*/.vercel/
 # pnpm lockfile patch (keep lockfile, not patches)
 .pnp.cjs
 .pnp.loader.mjs
+
+.vercel
+
+# Windows temp files
+WindowsTempvprojects.json

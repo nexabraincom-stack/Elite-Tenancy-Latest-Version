@@ -3,13 +3,19 @@
  * Mounted BEFORE express.json() so we receive the raw body Stripe signs.
  *
  * Events handled:
- *  checkout.session.completed      → activate listing, record payment
- *  invoice.paid                    → mark completion invoice as paid
- *  invoice.payment_failed          → alert landlord (log only for now)
- *  customer.subscription.created   → activate managed lettings subscription
- *  customer.subscription.deleted   → deactivate managed subscription
- *  payment_intent.succeeded        → mark rent payment as paid (BACS)
- *  payment_intent.payment_failed   → flag overdue rent
+ *  checkout.session.completed        → activate listing, record payment
+ *  invoice.paid                      → mark completion invoice as paid
+ *  invoice.payment_failed            → alert landlord (log only for now)
+ *  customer.subscription.created     → activate managed lettings / landlord plan subscription
+ *  customer.subscription.updated     → handle plan upgrades/downgrades
+ *  customer.subscription.deleted     → deactivate subscription
+ *  payment_intent.succeeded          → mark rent payment as paid (BACS)
+ *  payment_intent.payment_failed     → flag overdue rent
+ *  charge.refunded                   → record refund in DB
+ *  charge.dispute.created            → flag disputed payment, notify admin
+ *  charge.dispute.closed             → update dispute record
+ *  account.updated                   → update Connect account onboarding status (Stripe Connect)
+ *  transfer.created                  → record Connect payout to landlord
  */
 
 import { Router, type IRouter } from "express";
@@ -19,6 +25,7 @@ import Stripe from "stripe";
 import { stripe } from "../lib/stripe";
 import { pool } from "@workspace/db";
 import { logger } from "../lib/logger";
+import { N8N_EVENTS } from "../lib/n8n";
 
 const router: IRouter = Router();
 
@@ -32,8 +39,8 @@ router.post(
     const sig = req.headers["stripe-signature"] as string;
 
     if (!WEBHOOK_SECRET) {
-      logger.warn("STRIPE_WEBHOOK_SECRET not set — skipping signature verification");
-      res.json({ received: true });
+      logger.error("STRIPE_WEBHOOK_SECRET not configured — rejecting webhook request");
+      res.status(503).json({ error: "Webhook endpoint not configured" });
       return;
     }
 
@@ -187,6 +194,123 @@ async function handleEvent(event: Stripe.Event): Promise<void> {
         );
         logger.warn({ piId: pi.id }, "Rent payment FAILED (BACS)");
       }
+      break;
+    }
+
+    // ── Landlord subscription plan updated (upgrade/downgrade) ───────────────
+    case "customer.subscription.updated": {
+      const sub = event.data.object as Stripe.Subscription;
+      const { planId, eliteUserId } = sub.metadata ?? {};
+
+      if (eliteUserId && planId) {
+        await pool.query(
+          `INSERT INTO landlord_subscriptions (landlord_id, stripe_subscription_id, plan_id, status, current_period_end)
+           VALUES ($1, $2, $3, $4, to_timestamp($5))
+           ON CONFLICT (stripe_subscription_id)
+           DO UPDATE SET plan_id = EXCLUDED.plan_id, status = EXCLUDED.status,
+                         current_period_end = EXCLUDED.current_period_end`,
+          [
+            parseInt(eliteUserId),
+            sub.id,
+            planId,
+            sub.status,
+            sub.current_period_end,
+          ],
+        ).catch(() => {}); // Graceful: table may not exist until migration runs
+        logger.info({ subId: sub.id, planId, status: sub.status }, "Landlord subscription updated");
+
+        // Fire n8n: subscription change automation (WhatsApp onboarding flow etc.)
+        N8N_EVENTS.subscriptionEvent({
+          landlordId: eliteUserId,
+          planId,
+          status: sub.status,
+          subscriptionId: sub.id,
+        }).catch(() => {});
+      }
+      break;
+    }
+
+    // ── Refund issued ─────────────────────────────────────────────────────────
+    case "charge.refunded": {
+      const charge = event.data.object as Stripe.Charge;
+      // charge.refunds.data[0] is the most recent refund
+      const refund = charge.refunds?.data?.[0];
+      if (refund) {
+        await pool.query(
+          `INSERT INTO payment_refunds
+             (stripe_refund_id, stripe_payment_intent, amount_pence, reason, status)
+           VALUES ($1, $2, $3, $4, $5)
+           ON CONFLICT (stripe_refund_id)
+           DO UPDATE SET status = EXCLUDED.status`,
+          [refund.id, charge.payment_intent as string, refund.amount, refund.reason, refund.status],
+        ).catch(() => {});
+        logger.info({ refundId: refund.id, amount: refund.amount }, "Refund recorded");
+      }
+      break;
+    }
+
+    // ── Dispute opened ────────────────────────────────────────────────────────
+    case "charge.dispute.created": {
+      const dispute = event.data.object as Stripe.Dispute;
+      await pool.query(
+        `INSERT INTO payment_disputes
+           (stripe_dispute_id, stripe_payment_intent, amount_pence, reason, status, due_by)
+         VALUES ($1, $2, $3, $4, $5, to_timestamp($6))
+         ON CONFLICT (stripe_dispute_id) DO NOTHING`,
+        [
+          dispute.id,
+          dispute.payment_intent as string,
+          dispute.amount,
+          dispute.reason,
+          dispute.status,
+          dispute.evidence_details?.due_by ?? null,
+        ],
+      ).catch(() => {});
+      logger.warn({ disputeId: dispute.id, amount: dispute.amount, reason: dispute.reason }, "⚠️ Dispute OPENED — evidence required");
+
+      // Fire n8n: payment dispute alert (triggers admin notification workflow)
+      N8N_EVENTS.paymentEvent({
+        type: "dispute",
+        amount: dispute.amount,
+        currency: dispute.currency,
+        referenceId: dispute.id,
+      }).catch(() => {});
+      break;
+    }
+
+    // ── Dispute closed ────────────────────────────────────────────────────────
+    case "charge.dispute.closed": {
+      const dispute = event.data.object as Stripe.Dispute;
+      await pool.query(
+        `UPDATE payment_disputes SET status = $1 WHERE stripe_dispute_id = $2`,
+        [dispute.status, dispute.id],
+      ).catch(() => {});
+      logger.info({ disputeId: dispute.id, status: dispute.status }, "Dispute closed");
+      break;
+    }
+
+    // ── Stripe Connect: account onboarding status changed ────────────────────
+    case "account.updated": {
+      const account = event.data.object as Stripe.Account;
+      const onboardingComplete = account.details_submitted && (account.payouts_enabled ?? false);
+      await pool.query(
+        `UPDATE landlord_connect_accounts
+         SET onboarding_complete = $1
+         WHERE stripe_connect_account_id = $2`,
+        [onboardingComplete, account.id],
+      ).catch(() => {});
+      logger.info({ accountId: account.id, onboardingComplete }, "Connect account updated");
+      break;
+    }
+
+    // ── Connect transfer paid out ─────────────────────────────────────────────
+    case "transfer.created": {
+      const transfer = event.data.object as Stripe.Transfer;
+      await pool.query(
+        `UPDATE connect_transfers SET status = 'paid' WHERE stripe_transfer_id = $1`,
+        [transfer.id],
+      ).catch(() => {});
+      logger.info({ transferId: transfer.id, amount: transfer.amount }, "Connect transfer created");
       break;
     }
 

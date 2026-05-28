@@ -8,7 +8,7 @@ export default function Privacy() {
         <p className="text-sm text-muted-foreground mb-10">Last updated: 1 January 2025</p>
         <div className="prose prose-invert prose-sm max-w-none prose-headings:font-serif prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-li:text-muted-foreground">
           <h2>1. Who we are</h2>
-          <p>Elite Tenancy Ltd ("Elite Tenancy", "we", "us", "our") is a company registered in England and Wales. Our registered address is 1 Spinningfields Square, Manchester, M3 3EB. We are the controller of your personal data under this policy.</p>
+          <p>Elite Tenancy Ltd ("Elite Tenancy", "we", "us", "our") is a company registered in England and Wales. Our registered address is Office 18077, 182-184 High Street North, East Ham, London, E6 2JA. We are the controller of your personal data under this policy.</p>
           <h2>2. What personal data we collect</h2>
           <p>We collect and process the following categories of personal data:</p>
           <ul>
@@ -29,7 +29,7 @@ export default function Privacy() {
           <h2>6. Your rights</h2>
           <p>Under the UK General Data Protection Regulation (UK GDPR), you have the right to access, rectify, erase, restrict processing of, and port your personal data. You also have the right to object to processing and to withdraw consent where processing is based on consent. To exercise your rights, contact us at privacy@elitetenancy.co.uk.</p>
           <h2>7. Contact us</h2>
-          <p>For any questions or concerns about this Privacy Policy, please contact our Data Protection Officer at privacy@elitetenancy.co.uk or write to us at Elite Tenancy Ltd, 1 Spinningfields Square, Manchester, M3 3EB.</p>
+          <p>For any questions or concerns about this Privacy Policy, please contact our Data Protection Officer at privacy@elitetenancy.co.uk or write to us at Elite Tenancy Ltd, Office 18077, 182-184 High Street North, East Ham, London, E6 2JA.</p>
         </div>
       </div>
     </PublicLayout>
