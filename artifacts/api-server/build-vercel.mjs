@@ -14,31 +14,12 @@ globalThis.require = createRequire(import.meta.url);
 const artifactDir = path.dirname(fileURLToPath(import.meta.url));
 
 const external = [
-  // Native modules — never bundleable
-  "*.node", "sharp", "better-sqlite3", "sqlite3", "canvas", "bcrypt",
-  "argon2", "fsevents", "re2", "farmhash", "xxhash-addon", "bufferutil",
+  // True native binaries — cannot be bundled by esbuild under any circumstances
+  "*.node",
+  "sharp", "better-sqlite3", "sqlite3", "canvas", "bcrypt", "argon2",
+  "fsevents", "re2", "farmhash", "xxhash-addon", "bufferutil",
   "utf-8-validate", "ssh2", "cpu-features", "dtrace-provider", "isolated-vm",
   "lightningcss", "pg-native", "oracledb", "mongodb-client-encryption",
-  // Heavy runtime packages — installed by Vercel, no need to bundle
-  "stripe",
-  "express", "cors", "express-rate-limit",
-  "pino", "pino-http",
-  "drizzle-orm",
-  "zod",
-  "@clerk/express", "@clerk/shared", "@clerk/backend",
-  "ws",
-  // Unused heavy packages
-  "nodemailer", "handlebars", "knex", "typeorm", "protobufjs",
-  "onnxruntime-node", "@tensorflow/*", "@prisma/client", "@mikro-orm/*",
-  "@grpc/*", "@swc/*", "@aws-sdk/*", "@azure/*", "@opentelemetry/*",
-  "@google-cloud/*", "googleapis", "firebase-admin",
-  "@parcel/watcher", "@sentry/profiling-node", "@tree-sitter/*", "aws-sdk",
-  "classic-level", "dd-trace", "ffi-napi", "grpc", "hiredis", "kerberos",
-  "leveldown", "miniflare", "mysql2", "newrelic", "odbc", "piscina",
-  "realm", "ref-napi", "rocksdb", "sass-embedded", "sequelize",
-  "serialport", "snappy", "tinypool", "usb", "workerd", "wrangler",
-  "zeromq", "zeromq-prebuilt", "playwright", "puppeteer", "puppeteer-core",
-  "electron",
 ];
 
 const banner = {
