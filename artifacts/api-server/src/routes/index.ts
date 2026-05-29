@@ -10,6 +10,7 @@ import adminRouter from "./admin";
 import matchingRouter from "./matching";
 import authRouter from "./auth";
 import ellieRouter from "./ellie";
+import whatsappRouter from "./whatsapp";
 import messagesRouter from "./messages";
 import paymentsRouter from "./payments";
 import connectRouter from "./connect";
@@ -20,6 +21,7 @@ const router: IRouter = Router();
 
 router.use(authRouter);
 router.use(ellieRouter);
+router.use(whatsappRouter);
 router.use(messagesRouter);
 router.use(paymentsRouter);
 router.use(connectRouter);

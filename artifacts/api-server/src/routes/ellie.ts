@@ -310,32 +310,39 @@ function pruneExpiredSessions() {
   }
 }
 
-// ── Route ────────────────────────────────────────────────────────────────────
-router.post("/ellie/chat", async (req, res): Promise<void> => {
-  const { message, sessionId } = req.body as { message?: unknown; sessionId?: unknown };
+// ── Ellie Brain (shared by web chat + WhatsApp + any future channel) ──────────
+// "Write the bot logic once, run it everywhere" — Chat SDK principle.
+// Both the web route below and the WhatsApp webhook call askEllie().
 
+export type EllieResult =
+  | { ok: true; reply: string }
+  | { ok: false; status: number; reply: string };
+
+/**
+ * Core Ellie turn: takes a user message + a stable conversation key
+ * (sessionId for web, sender phone number for WhatsApp), maintains
+ * server-side history, and returns Ellie's reply.
+ */
+export async function askEllie(message: string, conversationKey: string | null): Promise<EllieResult> {
   if (!message || typeof message !== "string") {
-    res.status(400).json({ error: "message is required" });
-    return;
+    return { ok: false, status: 400, reply: "message is required" };
   }
-
   if (message.length > 1500) {
-    res.status(400).json({ error: "Message too long (max 1500 chars)" });
-    return;
+    return { ok: false, status: 400, reply: "Message too long (max 1500 chars)" };
   }
 
   const aiConfig = getAIConfig();
   if (aiConfig.mode === "unavailable") {
-    res.status(503).json({
-      error: "AI service unavailable",
+    return {
+      ok: false,
+      status: 503,
       reply: "I'm temporarily unavailable — please call us on **+44 7446 192577** or email info@elitetenancy.co.uk and a member of the team will help you right away! 🏡",
-    });
-    return;
+    };
   }
 
   pruneExpiredSessions();
 
-  const sid    = typeof sessionId === "string" && sessionId.length < 128 ? sessionId : null;
+  const sid = typeof conversationKey === "string" && conversationKey.length < 128 ? conversationKey : null;
   const session = sid
     ? (sessions.get(sid) ?? { messages: [], lastUsed: Date.now() })
     : { messages: [], lastUsed: Date.now() };
@@ -343,9 +350,7 @@ router.post("/ellie/chat", async (req, res): Promise<void> => {
 
   const chatMessages: Array<{ role: string; content: string }> = [
     { role: "system", content: ELLIE_SYSTEM_PROMPT },
-    ...session.messages
-      .slice(-MAX_HISTORY)
-      .map((m) => ({ role: m.role, content: m.text })),
+    ...session.messages.slice(-MAX_HISTORY).map((m) => ({ role: m.role, content: m.text })),
     { role: "user", content: message },
   ];
 
@@ -355,18 +360,18 @@ router.post("/ellie/chat", async (req, res): Promise<void> => {
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
     if (msg.includes("429") || msg.includes("quota") || msg.includes("Too Many Requests")) {
-      res.status(429).json({
-        error: "Rate limited",
+      return {
+        ok: false,
+        status: 429,
         reply: "I'm very busy right now — please try again in a moment, or call us on **+44 7446 192577**! 😊",
-      });
-    } else {
-      console.error("[ellie] AI Gateway error:", msg);
-      res.status(502).json({
-        error: "AI error",
-        reply: "Something went wrong on my end. Please try again, or contact us directly at info@elitetenancy.co.uk 🏡",
-      });
+      };
     }
-    return;
+    console.error("[ellie] AI Gateway error:", msg);
+    return {
+      ok: false,
+      status: 502,
+      reply: "Something went wrong on my end. Please try again, or contact us directly at info@elitetenancy.co.uk 🏡",
+    };
   }
 
   session.messages.push({ role: "user", text: message });
@@ -376,7 +381,21 @@ router.post("/ellie/chat", async (req, res): Promise<void> => {
   }
   if (sid) sessions.set(sid, session);
 
-  res.json({ reply, sessionId: sid });
+  return { ok: true, reply };
+}
+
+// ── Web chat route ────────────────────────────────────────────────────────────
+router.post("/ellie/chat", async (req, res): Promise<void> => {
+  const { message, sessionId } = req.body as { message?: unknown; sessionId?: unknown };
+  const result = await askEllie(
+    typeof message === "string" ? message : "",
+    typeof sessionId === "string" ? sessionId : null,
+  );
+  if (result.ok) {
+    res.json({ reply: result.reply, sessionId });
+  } else {
+    res.status(result.status).json({ error: "ellie", reply: result.reply });
+  }
 });
 
 export default router;
