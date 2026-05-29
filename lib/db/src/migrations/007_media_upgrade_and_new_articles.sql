@@ -399,4 +399,5 @@ INSERT INTO blog_articles (title, slug, excerpt, content, category, author, imag
   8,
   ARRAY['letting agent fees 2026', 'landlord costs UK', 'property management fees UK', 'how much letting agents charge', 'letting agent comparison'],
   '2026-05-26 08:00:00+00'
-);
+)
+ON CONFLICT (slug) DO NOTHING;
