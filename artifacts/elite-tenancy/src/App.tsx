@@ -49,7 +49,6 @@ import LandlordMessages from "@/pages/landlord/Messages";
 import TenantMatch from "@/pages/TenantMatch";
 import Profile from "@/pages/Profile";
 import NotFound from "@/pages/not-found";
-import AriaChat from "@/components/AriaChat";
 import { ChatProvider } from "@/contexts/ChatContext";
 
 // City SEO landing pages

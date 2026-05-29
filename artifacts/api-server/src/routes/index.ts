@@ -9,7 +9,7 @@ import tenantRouter from "./tenant";
 import adminRouter from "./admin";
 import matchingRouter from "./matching";
 import authRouter from "./auth";
-import ariaRouter from "./aria";
+import ellieRouter from "./ellie";
 import messagesRouter from "./messages";
 import paymentsRouter from "./payments";
 import connectRouter from "./connect";
@@ -19,7 +19,7 @@ import n8nRouter from "./n8n";
 const router: IRouter = Router();
 
 router.use(authRouter);
-router.use(ariaRouter);
+router.use(ellieRouter);
 router.use(messagesRouter);
 router.use(paymentsRouter);
 router.use(connectRouter);

@@ -1,18 +1,21 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Sparkles, RotateCcw } from "lucide-react";
+import { MessageCircle, X, Send, Home, RotateCcw } from "lucide-react";
 
 interface Message {
-  role: "user" | "aria";
+  role: "user" | "ellie";
   content: string;
 }
 
 const STARTERS = [
-  "How does Elite Tenancy work?",
-  "What are your fees?",
-  "How do I list my property?",
-  "Help me find a flat in Manchester",
+  "Find me a room in Manchester",
+  "What are your fees for landlords?",
+  "Do you accept Universal Credit tenants?",
+  "How much can I rent my flat for?",
 ];
+
+const GREETING =
+  "Hi, I'm **Ellie** — your Elite Tenancy letting assistant 🏡 I can help you find a home, explain how we work, answer pricing questions, or guide landlords through listing a property. What can I help you with today?";
 
 function TypingDots() {
   return (
@@ -29,7 +32,7 @@ function TypingDots() {
   );
 }
 
-/** Escape HTML, then apply safe bold/italic/newline substitutions. */
+/** Escape HTML, then apply safe bold/italic/link/newline substitutions. */
 function renderContent(text: string): string {
   const escaped = text
     .replace(/&/g, "&amp;")
@@ -41,17 +44,23 @@ function renderContent(text: string): string {
   return escaped
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.*?)\*/g, "<em>$1</em>")
+    // Linkify internal paths like /listings, /valuation, /find-my-match
+    .replace(
+      /(^|[\s(])(\/[a-z][a-z0-9/-]*)/g,
+      '$1<a href="$2" class="text-primary underline underline-offset-2 hover:opacity-80">$2</a>',
+    )
+    // Linkify phone number
+    .replace(
+      /\+44\s?7446\s?192577/g,
+      '<a href="tel:+447446192577" class="text-primary underline underline-offset-2">+44 7446 192577</a>',
+    )
     .replace(/\n/g, "<br/>");
 }
 
-export default function AriaChat() {
+export default function EllieChat() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    {
-      role: "aria",
-      content:
-        "Hi, I'm **Aria** — your Elite Tenancy assistant. I can help you find properties, explain how we work, answer questions about fees, or guide landlords through listing. What can I help you with?",
-    },
+    { role: "ellie", content: GREETING },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -82,23 +91,23 @@ export default function AriaChat() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${import.meta.env.BASE_URL}api/aria/chat`, {
+      const res = await fetch(`${import.meta.env.BASE_URL}api/ellie/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        // Send only the sessionId — server owns history, no client history injection
         body: JSON.stringify({ message: msg, sessionId }),
       });
       const data = await res.json();
       const reply =
         data.reply ?? "Sorry, I couldn't get a response. Please try again.";
-      setMessages([...newMessages, { role: "aria", content: reply }]);
+      setMessages([...newMessages, { role: "ellie", content: reply }]);
       if (!open) setUnread((n) => n + 1);
     } catch {
       setMessages([
         ...newMessages,
         {
-          role: "aria",
-          content: "Sorry, something went wrong. Please try again in a moment.",
+          role: "ellie",
+          content:
+            "Sorry, something went wrong. Please try again in a moment, or call us on **+44 7446 192577** 🏡",
         },
       ]);
     } finally {
@@ -107,13 +116,7 @@ export default function AriaChat() {
   }
 
   function resetConversation() {
-    setMessages([
-      {
-        role: "aria",
-        content:
-          "Hi, I'm **Aria** — your Elite Tenancy assistant. How can I help you today?",
-      },
-    ]);
+    setMessages([{ role: "ellie", content: GREETING }]);
     setInput("");
   }
 
@@ -129,8 +132,8 @@ export default function AriaChat() {
               exit={{ opacity: 0, y: 8, scale: 0.9 }}
               className="bg-card border border-primary/30 rounded-xl px-3 py-2 shadow-lg text-xs text-muted-foreground flex items-center gap-2"
             >
-              <Sparkles size={11} className="text-primary" />
-              Ask Aria anything
+              <Home size={11} className="text-primary" />
+              Chat with Ellie
             </motion.div>
           )}
         </AnimatePresence>
@@ -139,6 +142,7 @@ export default function AriaChat() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setOpen(!open)}
+          aria-label={open ? "Close chat" : "Open chat with Ellie"}
           className="w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 flex items-center justify-center relative"
         >
           <AnimatePresence mode="wait">
@@ -186,18 +190,19 @@ export default function AriaChat() {
             {/* Header */}
             <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border/50 bg-gradient-to-r from-card to-card/80 shrink-0">
               <div className="w-8 h-8 rounded-full bg-primary/15 flex items-center justify-center">
-                <Sparkles size={15} className="text-primary" />
+                <Home size={15} className="text-primary" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-foreground text-sm">Aria</p>
+                <p className="font-semibold text-foreground text-sm">Ellie</p>
                 <p className="text-xs text-muted-foreground">
-                  Elite Tenancy AI Assistant
+                  Elite Tenancy Letting Assistant
                 </p>
               </div>
               <button
                 onClick={resetConversation}
                 className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded"
                 title="Reset conversation"
+                aria-label="Reset conversation"
               >
                 <RotateCcw size={13} />
               </button>
@@ -217,9 +222,9 @@ export default function AriaChat() {
                   transition={{ duration: 0.2 }}
                   className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                  {msg.role === "aria" && (
+                  {msg.role === "ellie" && (
                     <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0 mt-0.5 mr-2">
-                      <Sparkles size={11} className="text-primary" />
+                      <Home size={11} className="text-primary" />
                     </div>
                   )}
                   <div
@@ -236,7 +241,7 @@ export default function AriaChat() {
               {loading && (
                 <div className="flex justify-start">
                   <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0 mt-0.5 mr-2">
-                    <Sparkles size={11} className="text-primary" />
+                    <Home size={11} className="text-primary" />
                   </div>
                   <div className="bg-muted/60 rounded-xl rounded-bl-sm px-3 py-2">
                     <TypingDots />
@@ -275,20 +280,21 @@ export default function AriaChat() {
                   ref={inputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask Aria anything…"
+                  placeholder="Ask Ellie anything…"
                   className="flex-1 bg-background text-foreground text-xs rounded-lg px-3 py-2.5 border border-border/40 outline-none focus:border-primary/50 placeholder:text-muted-foreground/60 transition-colors"
                   disabled={loading}
                 />
                 <button
                   type="submit"
                   disabled={loading || !input.trim()}
+                  aria-label="Send message"
                   className="w-9 h-9 rounded-lg bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:bg-primary/90 transition-colors shrink-0"
                 >
                   <Send size={14} />
                 </button>
               </form>
               <p className="text-center text-[10px] text-muted-foreground/50 mt-1.5">
-                Powered by Gemini AI
+                Ellie · Elite Tenancy AI Assistant
               </p>
             </div>
           </motion.div>

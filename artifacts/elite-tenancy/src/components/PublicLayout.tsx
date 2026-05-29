@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import AriaChat from "@/components/AriaChat";
+import EllieChat from "@/components/EllieChat";
 
 const navLinks = [
   { label: "Listings", href: "/listings" },
@@ -106,7 +106,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       </header>
 
       <main className="flex-1">{children}</main>
-      <AriaChat />
+      <EllieChat />
 
       <footer className="bg-card border-t border-border/50 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

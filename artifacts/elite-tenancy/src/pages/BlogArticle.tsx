@@ -3,6 +3,7 @@ import { ChevronLeft, Clock, Tag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import PublicLayout from "@/components/PublicLayout";
 import { useGetBlogArticleBySlug } from "@workspace/api-client-react";
+import { useSeo } from "@/hooks/use-seo";
 
 export default function BlogArticle() {
   const params = useParams<{ slug: string }>();
@@ -30,6 +31,13 @@ export default function BlogArticle() {
       </PublicLayout>
     );
   }
+
+  useSeo({
+    title: article.title,
+    description: article.excerpt,
+    canonical: `https://www.elitetenancy.co.uk/blog/${article.slug}`,
+    ogImage: article.imageUrl ?? undefined,
+  });
 
   return (
     <PublicLayout>

@@ -88,7 +88,7 @@ const aiLimiter = rateLimit({
   message: { error: "Too many requests — please slow down." },
 });
 
-app.use("/api/aria/chat", aiLimiter);
+app.use("/api/ellie/chat", aiLimiter);
 app.use("/api/matching/score", aiLimiter);
 
 // ── Routes ───────────────────────────────────────────────────────────────────

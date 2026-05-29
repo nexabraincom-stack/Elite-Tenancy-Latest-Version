@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Search, SlidersHorizontal } from "lucide-react";
+import { useSeo } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -9,6 +10,11 @@ import PropertyCard from "@/components/PropertyCard";
 import { useGetListings } from "@workspace/api-client-react";
 
 export default function Listings() {
+  useSeo({
+    title: "Browse Premium UK Rental Properties 2026",
+    description: "Find rooms, flats, and houses to rent across London, Manchester, Birmingham, Leeds, Bristol and more. AI-powered matching, verified landlords, zero tenant fees.",
+    canonical: "https://www.elitetenancy.co.uk/listings",
+  });
   const [city, setCity] = useState("");
   const [minPrice, setMinPrice] = useState<number | undefined>();
   const [maxPrice, setMaxPrice] = useState<number | undefined>();
