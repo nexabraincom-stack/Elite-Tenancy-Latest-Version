@@ -11,8 +11,125 @@
 
 import { Router, type IRouter } from "express";
 import https from "node:https";
+import { db } from "@workspace/db";
+import { listingsTable, leadsTable } from "@workspace/db/schema";
+import { eq } from "drizzle-orm";
 
 const router: IRouter = Router();
+
+// ── Live listings cache (5-minute TTL) ──────────────────────────────────────
+interface CachedListings {
+  snapshot: string;   // compact text injected into Ellie's context
+  fetchedAt: number;
+}
+let listingsCache: CachedListings | null = null;
+const LISTINGS_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+async function getLiveListingsSnapshot(): Promise<string> {
+  const now = Date.now();
+  if (listingsCache && now - listingsCache.fetchedAt < LISTINGS_TTL_MS) {
+    return listingsCache.snapshot;
+  }
+  try {
+    const rows = await db
+      .select({
+        title: listingsTable.title,
+        city: listingsTable.city,
+        price: listingsTable.price,
+        bedrooms: listingsTable.bedrooms,
+        propertyType: listingsTable.category,
+        status: listingsTable.status,
+        addressLine1: listingsTable.addressLine1,
+      })
+      .from(listingsTable)
+      .where(eq(listingsTable.status, "active"));
+
+    if (!rows.length) {
+      listingsCache = { snapshot: "No active listings at this time.", fetchedAt: now };
+      return listingsCache.snapshot;
+    }
+
+    // Group by city
+    const byCityMap: Record<string, typeof rows> = {};
+    for (const r of rows) {
+      const city = r.city ?? "Other";
+      if (!byCityMap[city]) byCityMap[city] = [];
+      byCityMap[city].push(r);
+    }
+
+    const lines: string[] = ["LIVE PROPERTY INVENTORY (updated every 5 minutes):"];
+    for (const [city, listings] of Object.entries(byCityMap)) {
+      const items = listings.map((l) => {
+        const beds = l.bedrooms === 0 ? "Studio" : `${l.bedrooms}-bed`;
+        const type = l.propertyType ?? "flat";
+        const price = l.price ? `£${l.price}/mo` : "POA";
+        const area = l.addressLine1 ? `, ${l.addressLine1}` : "";
+        return `  • ${beds} ${type}${area} — ${price}`;
+      });
+      lines.push(`${city}:`);
+      lines.push(...items);
+    }
+    lines.push("When a user asks what properties are available in a city, reference ONLY this list. Do not invent properties.");
+
+    const snapshot = lines.join("\n");
+    listingsCache = { snapshot, fetchedAt: now };
+    return snapshot;
+  } catch (err) {
+    console.error("[ellie] Failed to fetch live listings:", err instanceof Error ? err.message : String(err));
+    return "Live listings temporarily unavailable — direct users to /listings to browse.";
+  }
+}
+
+// ── Lead capture ─────────────────────────────────────────────────────────────
+// Scans conversation history for contact info (email + phone).
+// Saves once per session to avoid duplicate leads.
+const capturedSessions = new Set<string>();
+
+const EMAIL_RE = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/;
+const PHONE_RE = /(?:07\d{8,9}|\+44\s?\d{10}|0\d{9,10})/;
+
+async function maybeCaptureLeadFromSession(
+  sid: string,
+  messages: Array<{ role: "user" | "assistant"; text: string }>,
+): Promise<void> {
+  if (capturedSessions.has(sid)) return;          // already saved
+  if (messages.length < 4) return;               // too early — need some conversation
+
+  const fullText = messages.map((m) => m.text).join(" ");
+  const emailMatch = fullText.match(EMAIL_RE);
+  const phoneMatch = fullText.match(PHONE_RE);
+
+  // Need at least email OR phone to save a lead
+  if (!emailMatch && !phoneMatch) return;
+
+  // Extract a plausible name from the conversation
+  const nameMatch = fullText.match(/(?:my name is|i(?:'m| am)\s+)([A-Z][a-z]+(?: [A-Z][a-z]+)?)/i);
+  const name = nameMatch?.[1] ?? "Website Enquiry";
+  const email = emailMatch?.[0] ?? "noreply@unknown.com";
+  const phone = phoneMatch?.[0] ?? undefined;
+
+  // Build a short summary from the last few user messages
+  const userMessages = messages
+    .filter((m) => m.role === "user")
+    .slice(-4)
+    .map((m) => m.text)
+    .join("; ");
+
+  try {
+    await db.insert(leadsTable).values({
+      name,
+      email,
+      phone: phone ?? null,
+      message: `Ellie chat lead — session ${sid}. Conversation: ${userMessages.slice(0, 500)}`,
+      status: "new",
+    });
+    capturedSessions.add(sid);
+    console.info("[ellie] Lead captured from session", sid, "—", name, email);
+  } catch (err) {
+    // Non-fatal — don't interrupt the chat
+    console.error("[ellie] Lead save failed:", err instanceof Error ? err.message : String(err));
+  }
+}
 
 // ── AI Gateway (Vercel) ─────────────────────────────────────────────────────
 const AI_GATEWAY_BASE = "https://ai-gateway.vercel.sh/v1";
@@ -348,8 +465,12 @@ export async function askEllie(message: string, conversationKey: string | null):
     : { messages: [], lastUsed: Date.now() };
   session.lastUsed = Date.now();
 
+  // Inject live listings into system context so Ellie knows real availability
+  const listingsSnapshot = await getLiveListingsSnapshot();
+  const systemWithListings = `${ELLIE_SYSTEM_PROMPT}\n\n## REAL-TIME DATA\n${listingsSnapshot}`;
+
   const chatMessages: Array<{ role: string; content: string }> = [
-    { role: "system", content: ELLIE_SYSTEM_PROMPT },
+    { role: "system", content: systemWithListings },
     ...session.messages.slice(-MAX_HISTORY).map((m) => ({ role: m.role, content: m.text })),
     { role: "user", content: message },
   ];
@@ -380,6 +501,11 @@ export async function askEllie(message: string, conversationKey: string | null):
     session.messages = session.messages.slice(-MAX_HISTORY * 2);
   }
   if (sid) sessions.set(sid, session);
+
+  // Fire-and-forget lead capture — never blocks the chat response
+  if (sid) {
+    maybeCaptureLeadFromSession(sid, session.messages).catch(() => {});
+  }
 
   return { ok: true, reply };
 }
