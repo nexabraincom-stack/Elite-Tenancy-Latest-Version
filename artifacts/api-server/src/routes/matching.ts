@@ -8,12 +8,14 @@ import { requireAuth } from "../middlewares/requireAuth";
 const router: IRouter = Router();
 
 // ---------------------------------------------------------------------------
-// AI Gateway (Vercel) — OpenAI-compatible endpoint routing to Gemini 2.0 Flash
+// AI Gateway (Vercel) — OpenAI-compatible endpoint routing to Llama 4 Maverick
+// Upgraded from Gemini 2.0 Flash — Llama 4 Maverick gives sharper tenant
+// compatibility scoring and better structured JSON output for matching use.
 // Uses Node.js https module to avoid TypeScript Response type collisions with
 // the Express Response type when lib does not include "dom".
 // ---------------------------------------------------------------------------
 const AI_GATEWAY_BASE = "https://ai-gateway.vercel.sh/v1";
-const GATEWAY_MODEL = "google/gemini-2.0-flash";
+const GATEWAY_MODEL = "meta/llama-4-maverick";
 
 function getAIConfig(): { mode: "gateway"; apiKey: string } | { mode: "unavailable" } {
   const gatewayKey = process.env.AI_GATEWAY_API_KEY;

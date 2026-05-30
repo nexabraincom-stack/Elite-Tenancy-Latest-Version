@@ -16,7 +16,7 @@ const router: IRouter = Router();
 
 // ── AI Gateway (Vercel) ─────────────────────────────────────────────────────
 const AI_GATEWAY_BASE = "https://ai-gateway.vercel.sh/v1";
-const GATEWAY_MODEL   = "google/gemini-2.0-flash";
+const GATEWAY_MODEL   = "meta/llama-4-maverick"; // Upgraded from gemini-2.0-flash — better RRA 2025 reasoning + legal accuracy
 
 function getAIConfig(): { mode: "gateway"; apiKey: string } | { mode: "unavailable" } {
   const key = process.env.AI_GATEWAY_API_KEY;
