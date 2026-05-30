@@ -15,9 +15,21 @@ import { logger } from "./lib/logger";
 
 const app: Express = express();
 
+// ── Security headers ─────────────────────────────────────────────────────────
+// Manually set the critical security headers that helmet would provide,
+// without adding the helmet dependency. Keeps the bundle lean.
+app.use((_req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("X-XSS-Protection", "1; mode=block");
+  res.removeHeader("X-Powered-By");
+  next();
+});
+
 // ── Health check — registered FIRST, before any middleware that could crash ───
-// This ensures /health always responds even if Clerk/Stripe/DB are misconfigured.
-app.get("/health", (_req, res) => {
+// Exposed at both /health (direct) and /api/health (via frontend proxy rewrite)
+// so uptime monitors hitting either URL get a valid response.
+app.get(["/health", "/api/health"], (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
