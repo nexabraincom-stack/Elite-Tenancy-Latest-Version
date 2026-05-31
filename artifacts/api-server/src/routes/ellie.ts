@@ -167,6 +167,8 @@ function httpsPost(url: string, headers: Record<string, string>, payload: string
   });
 }
 
+const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
+
 async function callGateway(
   apiKey: string,
   messages: Array<{ role: string; content: string }>,
@@ -178,20 +180,37 @@ async function callGateway(
     temperature: 0.75,
   });
 
-  const result = await httpsPost(
-    `${AI_GATEWAY_BASE}/chat/completions`,
-    { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    payload,
-  );
+  // Retry with exponential backoff on transient upstream errors (429 / 5xx).
+  // The AI Gateway provider can throttle under bursts — retrying briefly means
+  // far fewer users ever see the "I'm very busy" fallback.
+  const MAX_ATTEMPTS = 3;
+  const BACKOFF_MS = [400, 1200]; // waits before attempt 2 and attempt 3
+  let lastError = "";
 
-  if (result.statusCode < 200 || result.statusCode >= 300) {
-    throw new Error(`AI Gateway ${result.statusCode}: ${result.body.slice(0, 200)}`);
+  for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+    const result = await httpsPost(
+      `${AI_GATEWAY_BASE}/chat/completions`,
+      { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      payload,
+    );
+
+    if (result.statusCode >= 200 && result.statusCode < 300) {
+      const data = JSON.parse(result.body) as { choices: Array<{ message: { content: string } }> };
+      const content = data.choices?.[0]?.message?.content;
+      if (!content) throw new Error("AI Gateway returned empty content");
+      return content.trim();
+    }
+
+    lastError = `AI Gateway ${result.statusCode}: ${result.body.slice(0, 200)}`;
+
+    // Only retry transient errors (429 rate limit, 502/503/504 upstream).
+    const isTransient = result.statusCode === 429 || (result.statusCode >= 500 && result.statusCode < 600);
+    if (!isTransient || attempt === MAX_ATTEMPTS - 1) break;
+
+    await sleep(BACKOFF_MS[attempt] ?? 1200);
   }
 
-  const data = JSON.parse(result.body) as { choices: Array<{ message: { content: string } }> };
-  const content = data.choices?.[0]?.message?.content;
-  if (!content) throw new Error("AI Gateway returned empty content");
-  return content.trim();
+  throw new Error(lastError || "AI Gateway request failed");
 }
 
 // ── ELLIE EXPERT SYSTEM PROMPT ──────────────────────────────────────────────
@@ -512,7 +531,9 @@ export async function askEllie(message: string, conversationKey: string | null):
 
 // ── Web chat route ────────────────────────────────────────────────────────────
 router.post("/ellie/chat", async (req, res): Promise<void> => {
-  const { message, sessionId } = req.body as { message?: unknown; sessionId?: unknown };
+  // Guard against undefined/non-object bodies (no content-type, empty POST)
+  const body = (req.body ?? {}) as { message?: unknown; sessionId?: unknown };
+  const { message, sessionId } = body;
   const result = await askEllie(
     typeof message === "string" ? message : "",
     typeof sessionId === "string" ? sessionId : null,

@@ -81,6 +81,22 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ── Malformed-JSON guard ──────────────────────────────────────────────────────
+// express.json() throws a SyntaxError on invalid bodies, which Express would
+// otherwise render as a 500 HTML page. Catch it and return a clean JSON 400.
+app.use((
+  err: Error & { type?: string; status?: number },
+  _req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
+  if (err && (err.type === "entity.parse.failed" || err instanceof SyntaxError)) {
+    res.status(400).json({ error: "Invalid JSON in request body" });
+    return;
+  }
+  next(err);
+});
+
 // ── Clerk auth middleware ─────────────────────────────────────────────────────
 app.use(
   clerkMiddleware((req) => ({
