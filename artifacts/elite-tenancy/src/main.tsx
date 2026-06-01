@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/react";
 import App from "./App";
 import CinematicIntro from "./components/CinematicIntro";
 import CookieConsent from "./components/CookieConsent";
@@ -12,6 +13,7 @@ createRoot(document.getElementById("root")!).render(
     <CinematicIntro />
     <App />
     <CookieConsent />
+    <Analytics />
     <SpeedInsights />
   </>,
 );
