@@ -66,22 +66,84 @@
     <priority>0.6</priority>
   </url>
 
-  <!-- Blog -->
+  <!-- Blog index -->
   <url>
     <loc>https://www.elitetenancy.co.uk/blog</loc>
-    <lastmod>2026-05-27</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Blog articles (all 12) -->
   <url>
-    <loc>https://www.elitetenancy.co.uk/blog/renters-rights-act-2025</loc>
-    <lastmod>2026-05-27</lastmod>
+    <loc>https://www.elitetenancy.co.uk/blog/renters-rights-act-2026-landlord-guide</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.elitetenancy.co.uk/blog/how-to-find-premium-rental</loc>
-    <lastmod>2026-05-27</lastmod>
+    <loc>https://www.elitetenancy.co.uk/blog/section-21-abolished-2026-landlord-guide</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.elitetenancy.co.uk/blog/no-dss-illegal-2026-benefits-tenants-landlord-guide</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.elitetenancy.co.uk/blog/hmo-licence-uk-2026-complete-guide</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.elitetenancy.co.uk/blog/letting-agent-fees-uk-2026-landlord-guide</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.elitetenancy.co.uk/blog/landlord-guide-letting-2026</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.elitetenancy.co.uk/blog/buy-to-let-2026-worth-it</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.elitetenancy.co.uk/blog/average-rent-uk-2026-city-price-guide</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.elitetenancy.co.uk/blog/manchester-vs-london-rent-2026</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.elitetenancy.co.uk/blog/find-premium-rentals-london-2026</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.elitetenancy.co.uk/blog/tenancy-agreement-clauses-guide</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.elitetenancy.co.uk/blog/ai-tenant-matching-how-it-works</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
