@@ -9,6 +9,7 @@ import {
   clerkProxyMiddleware,
   getClerkProxyHost,
 } from "./middlewares/clerkProxyMiddleware";
+import { analyticsMiddleware } from "./middlewares/analyticsMiddleware";
 import router from "./routes";
 import webhookRouter from "./routes/webhook";
 import { logger } from "./lib/logger";
@@ -118,6 +119,10 @@ const aiLimiter = rateLimit({
 
 app.use("/api/ellie/chat", aiLimiter);
 app.use("/api/matching/score", aiLimiter);
+
+// ── Vercel Analytics ─────────────────────────────────────────────────────────
+// Track API requests for observability and usage analytics
+app.use("/api", analyticsMiddleware());
 
 // ── Routes ───────────────────────────────────────────────────────────────────
 app.use("/api", router);
