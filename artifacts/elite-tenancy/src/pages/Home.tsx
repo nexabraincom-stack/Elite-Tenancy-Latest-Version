@@ -16,9 +16,9 @@ export default function Home() {
     <PublicLayout>
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[85vh] flex items-center">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-card to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(201,162,39,0.08),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(13,27,42,0.9),transparent_50%)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,146,63,0.12),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(31,74,63,0.06),transparent_55%)]" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <motion.div
@@ -32,7 +32,7 @@ export default function Home() {
             </Badge>
             <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] tracking-tight">
               Find your{" "}
-              <span className="text-primary">perfect</span>
+              <span className="text-accent italic">perfect</span>
               <br />
               tenancy today
             </h1>
