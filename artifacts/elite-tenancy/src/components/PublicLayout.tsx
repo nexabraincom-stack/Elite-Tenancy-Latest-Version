@@ -23,7 +23,26 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       <header className="sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2.5">
+              <svg viewBox="0 0 120 150" className="h-9 w-auto shrink-0" fill="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="etHeaderGold" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stopColor="#f1e0a8" />
+                    <stop offset="0.4" stopColor="#e6c45a" />
+                    <stop offset="0.75" stopColor="#c9a227" />
+                    <stop offset="1" stopColor="#9c7c1c" />
+                  </linearGradient>
+                </defs>
+                <path d="M60 4 L108 24 L108 88 L60 146 L12 88 L12 24 Z" stroke="url(#etHeaderGold)" strokeWidth="4" strokeLinejoin="round" opacity="0.9" />
+                <g stroke="url(#etHeaderGold)" strokeWidth="8" strokeLinecap="square">
+                  <path d="M43 46 V104" />
+                  <path d="M43 46 H62" />
+                  <path d="M43 75 H58" />
+                  <path d="M43 104 H62" />
+                  <path d="M56 46 H88" />
+                  <path d="M72 46 V104" />
+                </g>
+              </svg>
               <span className="font-serif text-2xl font-bold text-primary tracking-tight">
                 Elite Tenancy
               </span>
