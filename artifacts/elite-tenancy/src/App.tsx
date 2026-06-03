@@ -49,6 +49,7 @@ import LandlordMessages from "@/pages/landlord/Messages";
 import TenantMatch from "@/pages/TenantMatch";
 import SpareRoomAlternative from "@/pages/SpareRoomAlternative";
 import RRAChecker from "@/pages/RRAChecker";
+import RoomsToLet from "@/pages/RoomsToLet";
 import Profile from "@/pages/Profile";
 import NotFound from "@/pages/not-found";
 import { ChatProvider } from "@/contexts/ChatContext";
@@ -285,6 +286,8 @@ function AppRoutes() {
       <Route path="/find-a-room" component={FindARoom} />
       <Route path="/spareroom-alternative" component={SpareRoomAlternative} />
       <Route path="/rra-2025-checker" component={RRAChecker} />
+      <Route path="/rooms-to-let/:city" component={RoomsToLet} />
+      <Route path="/rooms-to-let" component={RoomsToLet} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogArticle} />
       <Route path="/valuation" component={Valuation} />

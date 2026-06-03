@@ -308,4 +308,30 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Programmatic city landing pages (rooms to let) -->
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/london</loc><lastmod>2026-06-02</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/manchester</loc><lastmod>2026-06-02</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/birmingham</loc><lastmod>2026-06-02</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/leeds</loc><lastmod>2026-06-02</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/bristol</loc><lastmod>2026-06-02</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/sheffield</loc><lastmod>2026-06-02</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/liverpool</loc><lastmod>2026-06-02</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/edinburgh</loc><lastmod>2026-06-02</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/cardiff</loc><lastmod>2026-06-02</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/glasgow</loc><lastmod>2026-06-02</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/harrogate</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/nottingham</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/newcastle</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/leicester</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/coventry</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/brighton</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/reading</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/cambridge</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/oxford</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/southampton</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/york</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/bath</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/aberdeen</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.elitetenancy.co.uk/rooms-to-let/belfast</loc><lastmod>2026-06-02</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+
 </urlset>
