@@ -2,7 +2,6 @@ import { Router, type IRouter } from "express";
 import https from "node:https";
 import { db, renterPassportsTable, listingsTable } from "@workspace/db";
 import { and, eq, lte, gte, desc, ilike } from "drizzle-orm";
-import { z } from "zod/v4";
 import { requireAuth, requireRole } from "../middlewares/requireAuth";
 import {
   isEmailConfigured,
@@ -26,20 +25,61 @@ const GATEWAY_MODEL = "meta/llama-4-maverick";
 
 const router: IRouter = Router();
 
-const PassportBody = z.object({
-  name: z.string().min(1).max(120),
-  email: z.string().email().max(160),
-  phone: z.string().max(40).optional().nullable(),
-  city: z.string().min(1).max(80),
-  minBudget: z.coerce.number().int().nonnegative().optional().nullable(),
-  maxBudget: z.coerce.number().int().positive(),
-  bedrooms: z.coerce.number().int().min(0).max(10).optional().nullable(),
-  moveInDate: z.string().max(60).optional().nullable(),
-  occupants: z.string().max(120).optional().nullable(),
-  employment: z.string().max(160).optional().nullable(),
-  petsOwner: z.coerce.boolean().optional(),
-  about: z.string().max(1200).optional().nullable(),
-});
+interface PassportInput {
+  name: string;
+  email: string;
+  phone: string | null;
+  city: string;
+  minBudget: number | null;
+  maxBudget: number;
+  bedrooms: number | null;
+  moveInDate: string | null;
+  occupants: string | null;
+  employment: string | null;
+  petsOwner: boolean;
+  about: string | null;
+}
+
+function asStr(v: unknown, max: number): string | null {
+  if (typeof v !== "string") return null;
+  const t = v.trim();
+  return t ? t.slice(0, max) : null;
+}
+function asNum(v: unknown): number | null {
+  if (v === "" || v === null || v === undefined) return null;
+  const n = Number(v);
+  return Number.isFinite(n) ? Math.trunc(n) : null;
+}
+
+/** Manual validation (api-server has no direct zod dependency). */
+function validatePassport(b: Record<string, unknown>): { ok: true; data: PassportInput } | { ok: false; error: string } {
+  const name = asStr(b?.name, 120);
+  const email = asStr(b?.email, 160);
+  const city = asStr(b?.city, 80);
+  const maxBudget = asNum(b?.maxBudget);
+  if (!name) return { ok: false, error: "Name is required" };
+  if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { ok: false, error: "A valid email is required" };
+  if (!city) return { ok: false, error: "Preferred city is required" };
+  if (!maxBudget || maxBudget <= 0) return { ok: false, error: "Max budget is required" };
+  const bedroomsRaw = asNum(b?.bedrooms);
+  return {
+    ok: true,
+    data: {
+      name,
+      email,
+      city,
+      maxBudget,
+      phone: asStr(b?.phone, 40),
+      minBudget: asNum(b?.minBudget),
+      bedrooms: bedroomsRaw != null && bedroomsRaw >= 0 && bedroomsRaw <= 10 ? bedroomsRaw : null,
+      moveInDate: asStr(b?.moveInDate, 60),
+      occupants: asStr(b?.occupants, 120),
+      employment: asStr(b?.employment, 160),
+      petsOwner: b?.petsOwner === true || b?.petsOwner === "true",
+      about: asStr(b?.about, 1200),
+    },
+  };
+}
 
 interface HttpResult { statusCode: number; body: string; }
 
@@ -62,7 +102,7 @@ function httpsPost(url: string, headers: Record<string, string>, payload: string
 }
 
 /** Best-effort AI persona + readiness score. Falls back to a heuristic if AI is unavailable. */
-async function buildPersona(p: z.infer<typeof PassportBody>): Promise<{ persona: string; score: number }> {
+async function buildPersona(p: PassportInput): Promise<{ persona: string; score: number }> {
   const apiKey = process.env.AI_GATEWAY_API_KEY;
 
   // Heuristic fallback score from profile completeness/strength.
@@ -106,12 +146,12 @@ Respond ONLY with valid JSON (no markdown):
 
 // ── Public: submit a Renter Passport ─────────────────────────────────────────
 router.post("/passport", async (req, res): Promise<void> => {
-  const parsed = PassportBody.safeParse(req.body);
-  if (!parsed.success) {
-    res.status(400).json({ error: "Invalid passport details", detail: parsed.error.message });
+  const v = validatePassport((req.body ?? {}) as Record<string, unknown>);
+  if (!v.ok) {
+    res.status(400).json({ error: v.error });
     return;
   }
-  const p = parsed.data;
+  const p = v.data;
 
   const { persona, score } = await buildPersona(p);
 
