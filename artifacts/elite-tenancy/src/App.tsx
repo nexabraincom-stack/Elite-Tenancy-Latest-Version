@@ -47,6 +47,7 @@ import AdminUsers from "@/pages/admin/Users";
 import TenantMessages from "@/pages/tenant/Messages";
 import LandlordMessages from "@/pages/landlord/Messages";
 import TenantMatch from "@/pages/TenantMatch";
+import SpareRoomAlternative from "@/pages/SpareRoomAlternative";
 import Profile from "@/pages/Profile";
 import NotFound from "@/pages/not-found";
 import { ChatProvider } from "@/contexts/ChatContext";
@@ -281,6 +282,7 @@ function AppRoutes() {
       <Route path="/how-it-works" component={HowItWorks} />
       <Route path="/list-your-property" component={ListYourProperty} />
       <Route path="/find-a-room" component={FindARoom} />
+      <Route path="/spareroom-alternative" component={SpareRoomAlternative} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogArticle} />
       <Route path="/valuation" component={Valuation} />
