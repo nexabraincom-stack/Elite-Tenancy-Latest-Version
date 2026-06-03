@@ -38,12 +38,12 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,146,63,0.12),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(31,74,63,0.06),transparent_55%)]" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24 grid lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-3xl"
+            className="max-w-2xl"
           >
             <Badge className="bg-primary/15 text-primary border-primary/30 mb-6 text-xs tracking-wide uppercase">
               UK's Premier Lettings Platform
@@ -130,6 +130,60 @@ export default function Home() {
               <span className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" />No upfront fees</span>
               <span className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" />Rigorous tenant screening</span>
               <span className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" />Member of The Property Ombudsman</span>
+            </div>
+          </motion.div>
+
+          {/* Right column — luxury property visual + floating trust cards */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="relative hidden lg:block"
+          >
+            <div className="relative rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-primary/15 bg-gradient-to-br from-primary/10 to-accent/10 aspect-[4/5]">
+              <img
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1100&q=80"
+                alt="A beautiful, light-filled premium UK home let through Elite Tenancy"
+                loading="eager"
+                className="absolute inset-0 w-full h-full object-cover"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+              />
+              {/* brand-tone overlays so any image harmonises with the ivory/green/gold palette */}
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/55 via-primary/10 to-transparent" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,146,63,0.22),transparent_60%)]" />
+
+              {/* top-right floating badge */}
+              <div className="absolute top-5 right-5 flex items-center gap-2 bg-background/85 backdrop-blur-md border border-accent/30 rounded-full px-4 py-2 shadow-lg">
+                <Star size={14} className="text-accent fill-accent" />
+                <span className="text-xs font-bold text-foreground">AI-matched homes</span>
+              </div>
+
+              {/* bottom floating trust card */}
+              <div className="absolute bottom-5 left-5 right-5 bg-background/90 backdrop-blur-md border border-border/60 rounded-2xl p-4 shadow-xl">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-xl bg-primary/12 flex items-center justify-center">
+                      <Shield size={20} className="text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-foreground leading-tight">Verified landlords only</p>
+                      <p className="text-xs text-muted-foreground">Every home ID-checked & deposit protected</p>
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="font-serif text-xl font-bold text-accent leading-none flex items-center gap-1">
+                      4.9<Star size={13} className="text-accent fill-accent" />
+                    </p>
+                    <p className="text-[10px] text-muted-foreground mt-1">tenant rating</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* offset accent stat chip */}
+            <div className="absolute -bottom-5 -left-5 bg-primary text-primary-foreground rounded-2xl px-5 py-3 shadow-xl">
+              <p className="font-serif text-2xl font-bold leading-none">14 days</p>
+              <p className="text-[11px] opacity-80 mt-1">average time to let</p>
             </div>
           </motion.div>
         </div>

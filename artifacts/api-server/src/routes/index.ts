@@ -16,6 +16,7 @@ import paymentsRouter from "./payments";
 import connectRouter from "./connect";
 import subscriptionsRouter from "./subscriptions";
 import n8nRouter from "./n8n";
+import reviewsRouter from "./reviews";
 
 const router: IRouter = Router();
 
@@ -27,6 +28,7 @@ router.use(paymentsRouter);
 router.use(connectRouter);
 router.use(subscriptionsRouter);
 router.use(n8nRouter);
+router.use(reviewsRouter);
 router.use(healthRouter);
 router.use(listingsRouter);
 router.use(blogRouter);

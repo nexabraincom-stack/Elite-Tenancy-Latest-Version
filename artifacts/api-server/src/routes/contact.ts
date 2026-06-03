@@ -6,8 +6,30 @@ import {
   SubmitValuationBody,
 } from "@workspace/api-zod";
 import { N8N_EVENTS } from "../lib/n8n";
+import {
+  isEmailConfigured,
+  sendEmail,
+  getAdminEmail,
+  adminLeadEmail,
+  customerAckEmail,
+  type LeadLike,
+} from "../lib/email";
 
 const router: IRouter = Router();
+
+/**
+ * Fire-and-forget email notifications for a new enquiry:
+ *  - admin alert to the business inbox (works immediately)
+ *  - branded autoresponder to the customer (needs verified Resend domain)
+ * Never throws — email is non-critical to the API response.
+ */
+function notifyByEmail(lead: LeadLike): void {
+  if (!isEmailConfigured()) return;
+  const admin = adminLeadEmail(lead);
+  sendEmail({ to: getAdminEmail(), subject: admin.subject, html: admin.html, replyTo: lead.email }).catch(() => {});
+  const ack = customerAckEmail(lead.name);
+  sendEmail({ to: lead.email, subject: ack.subject, html: ack.html }).catch(() => {});
+}
 
 router.post("/leads", async (req, res): Promise<void> => {
   const parsed = SubmitLeadBody.safeParse(req.body);
@@ -33,6 +55,15 @@ router.post("/leads", async (req, res): Promise<void> => {
     listingTitle: row.listingTitle ?? null,
     source: "lead",
   }).catch(() => {}); // swallow — n8n is non-critical
+
+  notifyByEmail({
+    name: row.name,
+    email: row.email,
+    phone: row.phone ?? null,
+    message: row.message ?? null,
+    source: "lead",
+    listingTitle: row.listingTitle ?? null,
+  });
 
   res.status(201).json({
     id: row.id,
@@ -78,6 +109,14 @@ router.post("/contact", async (req, res): Promise<void> => {
     source: "contact",
   }).catch(() => {});
 
+  notifyByEmail({
+    name: parsed.data.name,
+    email: parsed.data.email,
+    phone: parsed.data.phone ?? null,
+    message: `[${parsed.data.subject ?? "Contact"}] ${parsed.data.message}`,
+    source: "contact",
+  });
+
   req.log.info({ email: parsed.data.email }, "Contact form submitted");
   res.json({ success: true, message: "Your message has been received. We will be in touch shortly." });
 });
@@ -114,6 +153,14 @@ router.post("/valuation", async (req, res): Promise<void> => {
     listingTitle: null,
     source: "valuation",
   }).catch(() => {});
+
+  notifyByEmail({
+    name: parsed.data.name,
+    email: parsed.data.email,
+    phone: parsed.data.phone ?? null,
+    message: messageText,
+    source: "valuation",
+  });
 
   req.log.info({ email: parsed.data.email }, "Valuation request submitted");
   res.json({ success: true, message: "Thank you! Our team will contact you with a free valuation within 24 hours." });
