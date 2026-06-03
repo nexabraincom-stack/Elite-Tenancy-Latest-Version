@@ -50,6 +50,7 @@ import TenantMatch from "@/pages/TenantMatch";
 import SpareRoomAlternative from "@/pages/SpareRoomAlternative";
 import RRAChecker from "@/pages/RRAChecker";
 import RoomsToLet from "@/pages/RoomsToLet";
+import ForAgents from "@/pages/ForAgents";
 import Profile from "@/pages/Profile";
 import NotFound from "@/pages/not-found";
 import { ChatProvider } from "@/contexts/ChatContext";
@@ -280,6 +281,7 @@ function AppRoutes() {
       <Route path="/listings" component={Listings} />
       <Route path="/listings/:id" component={ListingDetail} />
       <Route path="/for-landlords" component={ForLandlords} />
+      <Route path="/for-agents" component={ForAgents} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/how-it-works" component={HowItWorks} />
       <Route path="/list-your-property" component={ListYourProperty} />

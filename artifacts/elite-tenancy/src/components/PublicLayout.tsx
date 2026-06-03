@@ -153,6 +153,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><Link href="/how-it-works" className="hover:text-primary transition-colors">How It Works</Link></li>
                 <li><Link href="/for-landlords" className="hover:text-primary transition-colors">For Landlords</Link></li>
+                <li><Link href="/for-agents" className="hover:text-primary transition-colors">For Agents</Link></li>
                 <li><Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
                 <li><Link href="/blog" className="hover:text-primary transition-colors">Blog</Link></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
