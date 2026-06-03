@@ -118,6 +118,7 @@ const aiLimiter = rateLimit({
 
 app.use("/api/ellie/chat", aiLimiter);
 app.use("/api/matching/score", aiLimiter);
+app.use("/api/passport", aiLimiter);
 
 // ── Routes ───────────────────────────────────────────────────────────────────
 app.use("/api", router);

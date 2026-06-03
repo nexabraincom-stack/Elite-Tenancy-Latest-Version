@@ -7,7 +7,7 @@ import EllieChat from "@/components/EllieChat";
 
 const navLinks = [
   { label: "Listings", href: "/listings" },
-  { label: "AI Match", href: "/find-my-match" },
+  { label: "Renter Passport", href: "/renter-passport" },
   { label: "How It Works", href: "/how-it-works" },
   { label: "For Landlords", href: "/for-landlords" },
   { label: "Pricing", href: "/pricing" },
@@ -143,6 +143,8 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
               <h4 className="text-sm font-semibold text-foreground mb-4">Properties</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><Link href="/listings" className="hover:text-primary transition-colors">Browse Listings</Link></li>
+                <li><Link href="/renter-passport" className="hover:text-primary transition-colors">Renter Passport</Link></li>
+                <li><Link href="/find-my-match" className="hover:text-primary transition-colors">AI Match</Link></li>
                 <li><Link href="/find-a-room" className="hover:text-primary transition-colors">Find a Room</Link></li>
                 <li><Link href="/valuation" className="hover:text-primary transition-colors">Free Valuation</Link></li>
                 <li><Link href="/list-your-property" className="hover:text-primary transition-colors">List Your Property</Link></li>

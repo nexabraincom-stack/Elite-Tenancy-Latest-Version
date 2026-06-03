@@ -147,6 +147,32 @@ export const messagesTable = pgTable("messages", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+// ── Renter Passport (two-way AI matching — Play ④) ─────────────────────────────
+
+export const renterPassportsTable = pgTable("renter_passports", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  city: text("city").notNull(),
+  minBudget: integer("min_budget"),
+  maxBudget: integer("max_budget").notNull(),
+  bedrooms: integer("bedrooms"),
+  moveInDate: text("move_in_date"),
+  occupants: text("occupants"),
+  employment: text("employment"),
+  petsOwner: boolean("pets_owner").notNull().default(false),
+  about: text("about"),
+  aiPersona: text("ai_persona"),          // landlord-facing AI summary
+  aiScore: integer("ai_score"),           // 0–100 tenant readiness/fit
+  status: leadStatusEnum("status").notNull().default("new"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const insertRenterPassportSchema = createInsertSchema(renterPassportsTable).omit({ id: true, createdAt: true, aiPersona: true, aiScore: true, status: true });
+export type RenterPassport = typeof renterPassportsTable.$inferSelect;
+export type InsertRenterPassport = z.infer<typeof insertRenterPassportSchema>;
+
 export const insertConversationSchema = createInsertSchema(conversationsTable).omit({ id: true, createdAt: true, lastMessageAt: true });
 export const insertMessageSchema = createInsertSchema(messagesTable).omit({ id: true, createdAt: true, readAt: true });
 
