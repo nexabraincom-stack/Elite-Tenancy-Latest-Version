@@ -173,6 +173,20 @@ export const insertRenterPassportSchema = createInsertSchema(renterPassportsTabl
 export type RenterPassport = typeof renterPassportsTable.$inferSelect;
 export type InsertRenterPassport = z.infer<typeof insertRenterPassportSchema>;
 
+// ── Right to Rent checks (immigration share-code tracking + expiry alerts) ─────
+export const rtrChecksTable = pgTable("rtr_checks", {
+  id: serial("id").primaryKey(),
+  landlordEmail: text("landlord_email").notNull(),
+  landlordName: text("landlord_name"),
+  tenantName: text("tenant_name").notNull(),
+  rightStatus: text("right_status").notNull(),     // unlimited | time_limited | none
+  expiryDate: text("expiry_date"),                 // for time_limited (ISO date)
+  status: text("status").notNull().default("active"), // active | reminded | renewed | expired
+  remindedAt: timestamp("reminded_at"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+export type RtrCheck = typeof rtrChecksTable.$inferSelect;
+
 export const insertConversationSchema = createInsertSchema(conversationsTable).omit({ id: true, createdAt: true, lastMessageAt: true });
 export const insertMessageSchema = createInsertSchema(messagesTable).omit({ id: true, createdAt: true, readAt: true });
 

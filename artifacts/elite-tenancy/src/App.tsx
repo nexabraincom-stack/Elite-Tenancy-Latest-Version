@@ -54,6 +54,7 @@ import ForAgents from "@/pages/ForAgents";
 import RenterPassport from "@/pages/RenterPassport";
 import RoomWanted from "@/pages/RoomWanted";
 import VerifyLandlord from "@/pages/VerifyLandlord";
+import RightToRentCheck from "@/pages/RightToRentCheck";
 import Profile from "@/pages/Profile";
 import NotFound from "@/pages/not-found";
 import { ChatProvider } from "@/contexts/ChatContext";
@@ -284,6 +285,7 @@ function AppRoutes() {
       <Route path="/renter-passport" component={RenterPassport} />
       <Route path="/room-wanted" component={RoomWanted} />
       <Route path="/verify-landlord" component={VerifyLandlord} />
+      <Route path="/right-to-rent-check" component={RightToRentCheck} />
       <Route path="/listings" component={Listings} />
       <Route path="/listings/:id" component={ListingDetail} />
       <Route path="/for-landlords" component={ForLandlords} />
