@@ -9,5 +9,8 @@
       "maxDuration": 30
     }
   },
+  "crons": [
+    { "path": "/api/rtr/run-reminders", "schedule": "0 9 * * *" }
+  ],
   "regions": ["lhr1"]
 }

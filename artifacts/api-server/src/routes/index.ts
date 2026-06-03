@@ -20,6 +20,7 @@ import reviewsRouter from "./reviews";
 import passportRouter from "./passport";
 import verifyRouter from "./verify";
 import rtrRouter from "./rtr";
+import integrationsRouter from "./integrations";
 
 const router: IRouter = Router();
 
@@ -35,6 +36,7 @@ router.use(reviewsRouter);
 router.use(passportRouter);
 router.use(verifyRouter);
 router.use(rtrRouter);
+router.use(integrationsRouter);
 router.use(healthRouter);
 router.use(listingsRouter);
 router.use(blogRouter);

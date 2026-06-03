@@ -68,22 +68,24 @@ router.post("/rtr/check", async (req, res): Promise<void> => {
   res.status(201).json({ id: row.id, tenantName: row.tenantName, rightStatus: row.rightStatus, expiryDate: row.expiryDate });
 });
 
-// Cron-triggered reminder sweep
-router.post("/rtr/run-reminders", async (req, res): Promise<void> => {
-  const expected = process.env.REVIEW_TRIGGER_TOKEN;
-  if (!expected || req.header("x-cron-token") !== expected) { res.status(401).json({ error: "Unauthorized" }); return; }
-  if (!isEmailConfigured()) { res.status(503).json({ error: "Email not configured" }); return; }
+// Authorise either a Vercel Cron call (Bearer CRON_SECRET) or a manual token.
+function cronAuthorized(req: { header(name: string): string | undefined }): boolean {
+  const cronSecret = process.env.CRON_SECRET;
+  if (cronSecret && req.header("authorization") === `Bearer ${cronSecret}`) return true;
+  const token = process.env.REVIEW_TRIGGER_TOKEN;
+  if (token && req.header("x-cron-token") === token) return true;
+  return false;
+}
 
+async function runReminders(): Promise<{ checked: number; reminded: number }> {
   // 30 days out (ISO date string compares correctly lexicographically)
   const cutoff = new Date(Date.now() + 30 * 86400000).toISOString().slice(0, 10);
-
   const due = await db.select().from(rtrChecksTable).where(and(
     eq(rtrChecksTable.status, "active"),
     eq(rtrChecksTable.rightStatus, "time_limited"),
     isNull(rtrChecksTable.remindedAt),
     lte(rtrChecksTable.expiryDate, cutoff),
   ));
-
   let sent = 0;
   for (const c of due) {
     const r = await sendEmail({
@@ -93,7 +95,17 @@ router.post("/rtr/run-reminders", async (req, res): Promise<void> => {
     });
     if (r.ok) { await db.update(rtrChecksTable).set({ remindedAt: new Date(), status: "reminded" }).where(eq(rtrChecksTable.id, c.id)); sent++; }
   }
-  res.json({ checked: due.length, reminded: sent });
-});
+  return { checked: due.length, reminded: sent };
+}
+
+// Cron-triggered reminder sweep — Vercel Cron hits this via GET; manual via POST.
+async function reminderHandler(req: import("express").Request, res: import("express").Response): Promise<void> {
+  if (!cronAuthorized(req)) { res.status(401).json({ error: "Unauthorized" }); return; }
+  if (!isEmailConfigured()) { res.status(503).json({ error: "Email not configured" }); return; }
+  const result = await runReminders();
+  res.json(result);
+}
+router.get("/rtr/run-reminders", reminderHandler);
+router.post("/rtr/run-reminders", reminderHandler);
 
 export default router;
