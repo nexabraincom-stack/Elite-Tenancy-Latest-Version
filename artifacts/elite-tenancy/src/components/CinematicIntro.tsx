@@ -132,8 +132,8 @@ export default function CinematicIntro() {
       <svg className="et-skyline" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
         <defs>
           <linearGradient id="etSky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#c9a227" stopOpacity="0.55" />
-            <stop offset="1" stopColor="#c9a227" stopOpacity="0.05" />
+            <stop offset="0" stopColor="#1f4a3f" stopOpacity="0.6" />
+            <stop offset="1" stopColor="#1f4a3f" stopOpacity="0.06" />
           </linearGradient>
         </defs>
         <path fill="url(#etSky)" d="M0 220 L0 150 L60 150 L60 110 L110 110 L110 150 L170 150 L170 80 L210 80 L210 60 L250 60 L250 80 L300 80 L300 130 L360 130 L360 95 L410 95 L410 130 L470 130 L470 70 L500 70 L500 40 L540 40 L540 70 L600 70 L600 120 L660 120 L660 90 L710 90 L710 120 L770 120 L770 55 L810 55 L810 30 L850 30 L850 55 L910 55 L910 105 L970 105 L970 75 L1020 75 L1020 105 L1080 105 L1080 60 L1120 60 L1120 100 L1180 100 L1180 130 L1240 130 L1240 85 L1290 85 L1290 130 L1350 130 L1350 150 L1440 150 L1440 220 Z" />
@@ -166,10 +166,10 @@ export default function CinematicIntro() {
           <svg className="et-monogram" viewBox="0 0 120 150" fill="none" aria-hidden="true">
             <defs>
               <linearGradient id="etGold" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stopColor="#f1e0a8" />
-                <stop offset="0.4" stopColor="#e6c45a" />
-                <stop offset="0.75" stopColor="#c9a227" />
-                <stop offset="1" stopColor="#9c7c1c" />
+                <stop offset="0" stopColor="#d9b566" />
+                <stop offset="0.4" stopColor="#c9a227" />
+                <stop offset="0.75" stopColor="#a07c20" />
+                <stop offset="1" stopColor="#7a5e18" />
               </linearGradient>
             </defs>
             <path
@@ -179,7 +179,7 @@ export default function CinematicIntro() {
               strokeWidth="2.2"
               strokeLinejoin="round"
             />
-            <g className="et-mono-letters" stroke="#f0d570" strokeWidth="7" strokeLinecap="square">
+            <g className="et-mono-letters" stroke="url(#etGold)" strokeWidth="7.5" strokeLinecap="square">
               <path d="M44 46 V104" />
               <path d="M44 46 H62" />
               <path d="M44 75 H58" />
@@ -227,7 +227,7 @@ const CSS = `
 .et-intro{
   position:fixed;inset:0;z-index:9999;
   display:flex;align-items:center;justify-content:center;overflow:hidden;
-  background:radial-gradient(ellipse at 50% 36%, #16263a 0%, #0d1b2a 45%, #08111c 100%);
+  background:radial-gradient(ellipse at 50% 40%, #ffffff 0%, #faf7f1 45%, #f0eadf 100%);
   opacity:1;transition:opacity ${FADE_MS}ms ease;
 }
 .et-intro.et-intro--out{opacity:0;}
@@ -242,7 +242,7 @@ const CSS = `
 @keyframes etAuroraDrift{0%{transform:translate(0,0) scale(1);}100%{transform:translate(4%,-3%) scale(1.12);}}
 
 /* letterbox bars */
-.et-bar{position:absolute;left:0;right:0;height:10vh;background:#000;z-index:6;}
+.et-bar{position:absolute;left:0;right:0;height:9vh;background:#15302a;z-index:6;}
 .et-bar--top{top:0;transform:translateY(-100%);
   animation:etBarInTop .85s cubic-bezier(.16,1,.3,1) .25s forwards, etBarOutTop .85s ease 6.7s forwards;}
 .et-bar--bottom{bottom:0;transform:translateY(100%);
@@ -330,20 +330,20 @@ const CSS = `
 @keyframes etMonoIn{to{opacity:1;transform:scale(1);}}
 
 .et-crest{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;letter-spacing:.5em;
-  text-transform:uppercase;color:#c9a227;opacity:0;margin-bottom:20px;transform:translateY(8px);
+  text-transform:uppercase;color:#b8923f;opacity:0;margin-bottom:20px;transform:translateY(8px);
   animation:etFadeUp .9s ease 2.3s forwards;}
 
 .et-rule{height:1px;width:0;margin:0 auto 24px;
-  background:linear-gradient(90deg, transparent, #c9a227 50%, transparent);
+  background:linear-gradient(90deg, transparent, #b8923f 50%, transparent);
   animation:etRuleGrow 1.2s cubic-bezier(.16,1,.3,1) 2.5s forwards;}
 @keyframes etRuleGrow{to{width:min(360px,72vw);}}
 
 /* brand — letter by letter */
-.et-brand{position:relative;font-family:'Playfair Display',serif;font-weight:600;
-  font-size:clamp(40px,8.6vw,104px);line-height:1.04;letter-spacing:.02em;display:inline-block;}
+.et-brand{position:relative;font-family:'Cormorant Garamond','Playfair Display',serif;font-weight:700;
+  font-size:clamp(44px,9vw,112px);line-height:1.02;letter-spacing:.01em;display:inline-block;}
 .et-line{display:inline-block;white-space:nowrap;}
 .et-letter{display:inline-block;opacity:0;transform:translateY(28px) scale(.9) rotate(4deg);filter:blur(8px);
-  background:linear-gradient(180deg,#f1e0a8 0%,#e6c45a 38%,#c9a227 72%,#9c7c1c 100%);
+  background:linear-gradient(180deg,#2c6353 0%,#1f4a3f 48%,#15302a 100%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
   animation:etLetterIn .8s cubic-bezier(.16,1,.3,1) forwards;}
 @keyframes etLetterIn{to{opacity:1;transform:translateY(0) scale(1) rotate(0);filter:blur(0);}}
@@ -357,25 +357,26 @@ const CSS = `
 
 .et-tag{font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;
   font-size:clamp(11px,1.5vw,15px);letter-spacing:.4em;text-transform:uppercase;
-  color:#f1ece1;opacity:0;margin-top:28px;transform:translateY(10px);
+  color:#1f4a3f;opacity:0;margin-top:28px;transform:translateY(10px);
   animation:etFadeUp .9s ease 4.8s forwards;}
-.et-tag span{color:#c9a227;}
+.et-tag span{color:#b8923f;}
 
-.et-sub{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;
-  font-size:clamp(14px,2.2vw,20px);letter-spacing:.01em;color:#cabfa6;opacity:0;margin-top:16px;
+.et-sub{font-family:'Cormorant Garamond','Playfair Display',serif;font-style:italic;font-weight:600;
+  font-size:clamp(16px,2.4vw,22px);letter-spacing:.01em;color:#6b6256;opacity:0;margin-top:16px;
   transform:translateY(10px);animation:etFadeUp 1s ease 5.3s forwards;}
 
 @keyframes etFadeUp{to{opacity:1;transform:translateY(0);}}
 
 .et-vignette{position:absolute;inset:0;z-index:3;pointer-events:none;
-  box-shadow:inset 0 0 240px 70px rgba(0,0,0,.66);}
+  box-shadow:inset 0 0 180px 60px rgba(21,48,42,.10);}
 
 .et-skip{position:absolute;bottom:13vh;right:34px;z-index:7;
   font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;letter-spacing:.2em;
   text-transform:uppercase;color:#7d8696;background:transparent;border:none;cursor:pointer;
   opacity:0;animation:etFadeUp 1s ease 2.0s forwards;transition:color .2s;
   -webkit-tap-highlight-color:transparent;padding:10px;}
-.et-skip:hover{color:#c9a227;}
+.et-skip{color:#6b6256;}
+.et-skip:hover{color:#b8923f;}
 
 /* mobile tuning */
 @media (max-width:600px){
