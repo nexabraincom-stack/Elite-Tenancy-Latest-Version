@@ -264,7 +264,7 @@ export default function Home() {
               {
                 icon: Shield,
                 title: "Completion-Only Fees",
-                desc: "We only charge when your property lets. £395 for introduction or 8% managed — payable on success, not on hope.",
+                desc: "We only charge when your property lets. Two weeks' rent for introduction or 8% managed — payable on success, not on hope.",
               },
               {
                 icon: Star,

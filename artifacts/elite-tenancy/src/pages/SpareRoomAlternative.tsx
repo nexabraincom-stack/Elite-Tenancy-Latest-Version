@@ -13,7 +13,7 @@ import { useSeo } from "@/hooks/use-seo";
  */
 
 const ROWS: Array<{ feature: string; elite: string; them: string; eliteWin: boolean }> = [
-  { feature: "When you pay", elite: "Only on success — £395 or 8% managed", them: "Upfront, whether or not it lets", eliteWin: true },
+  { feature: "When you pay", elite: "Only on success — 2 weeks' rent or 8% managed", them: "Upfront, whether or not it lets", eliteWin: true },
   { feature: "Empty property? ", elite: "You pay nothing", them: "You still pay for the advert", eliteWin: true },
   { feature: "AI tenant–property matching", elite: "Yes — every property AI-scored", them: "No — manual scroll & filter", eliteWin: true },
   { feature: "After the introduction", elite: "Full portal: rent, docs, maintenance", them: "Relationship ends at contact", eliteWin: true },

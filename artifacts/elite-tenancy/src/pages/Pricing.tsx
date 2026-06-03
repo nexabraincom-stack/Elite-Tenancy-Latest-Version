@@ -7,8 +7,8 @@ import PublicLayout from "@/components/PublicLayout";
 const plans = [
   {
     name: "Introduction Only",
-    price: "£395",
-    period: "per successful let",
+    price: "2 weeks'",
+    period: "rent — per successful let",
     description: "We find you an exceptional tenant. You manage the tenancy yourself.",
     popular: false,
     includes: [
@@ -31,6 +31,30 @@ const plans = [
     ],
     cta: "Get Started",
     href: "/valuation",
+  },
+  {
+    name: "Smart Managed",
+    price: "3–5%",
+    period: "of monthly rent — tailored",
+    description: "Our lightest-touch managed plan with rent collection, at our lowest commission. Your rate is set to your portfolio — the more you list, the less you pay.",
+    popular: false,
+    badge: "New",
+    includes: [
+      "Everything in Introduction Only",
+      "Monthly rent collection & statements",
+      "Automated rent reminders & chasing",
+      "Adjustable 3–5% rate to suit your portfolio",
+      "Deposit handling & protection",
+      "Tenant support line",
+      "Annual compliance updates",
+      "Dedicated account manager",
+    ],
+    excludes: [
+      "Maintenance coordination",
+      "Quarterly property inspections",
+    ],
+    cta: "Get a tailored quote",
+    href: "/contact",
   },
   {
     name: "Premium Managed",
@@ -58,8 +82,12 @@ const plans = [
 
 const faqs = [
   {
+    q: "How does the Smart Managed 3–5% rate work?",
+    a: "Smart Managed is our lightest-touch managed plan with rent collection at our lowest commission. Your exact rate sits between 3% and 5% and is tailored to your portfolio — the more properties you list with us, the lower your rate. Request a tailored quote and we'll confirm your rate in writing before you commit."
+  },
+  {
     q: "When is payment due?",
-    a: "For Introduction Only, our £395 fee is due on the commencement date of the tenancy. For Premium Managed, our 8% is deducted from the rent before payment is made to you each month."
+    a: "For Introduction Only, our fee — equivalent to two weeks' rent — is due on the commencement date of the tenancy. For Smart Managed and Premium Managed, our commission is deducted from the rent before payment is made to you each month."
   },
   {
     q: "What if the property doesn't let?",
@@ -83,13 +111,13 @@ export default function Pricing() {
           <p className="text-xs text-primary uppercase tracking-widest font-medium mb-3">Simple, honest pricing</p>
           <h1 className="font-serif text-5xl font-bold text-foreground mb-4">No let, no fee. Always.</h1>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Two plans. No hidden charges. We only earn when you do.
+            Three plans. No hidden charges. We only earn when you do.
           </p>
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {plans.map((plan) => (
             <div
               key={plan.name}
@@ -102,6 +130,11 @@ export default function Pricing() {
               {plan.popular && (
                 <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4">
                   Most Popular
+                </Badge>
+              )}
+              {!plan.popular && (plan as { badge?: string }).badge && (
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground px-4">
+                  {(plan as { badge?: string }).badge}
                 </Badge>
               )}
               <div className="mb-6">

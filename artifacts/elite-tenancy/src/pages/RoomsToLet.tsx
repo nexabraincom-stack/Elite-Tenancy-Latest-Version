@@ -129,7 +129,7 @@ export default function RoomsToLet() {
       <section className="bg-card/50 border-y border-border/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center">
           <h2 className="font-serif text-3xl font-bold text-foreground">Letting a property in {cityName}?</h2>
-          <p className="mt-3 text-muted-foreground max-w-xl mx-auto">List free and pay only when we place a tenant — £395 introduction or 8% managed. No upfront fees, no empty-room risk.</p>
+          <p className="mt-3 text-muted-foreground max-w-xl mx-auto">List free and pay only when we place a tenant — two weeks' rent introduction or 8% managed. No upfront fees, no empty-room risk.</p>
           <Link href="/list-your-property"><Button size="lg" className="mt-6 bg-primary text-primary-foreground hover:bg-primary/90 gap-2">List your {cityName} property <ArrowRight size={15} /></Button></Link>
         </div>
       </section>
