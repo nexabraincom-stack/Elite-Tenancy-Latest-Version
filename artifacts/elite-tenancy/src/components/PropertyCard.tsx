@@ -12,6 +12,7 @@ interface PropertyCardProps {
 export default function PropertyCard({ listing }: PropertyCardProps) {
   const photo = listing.photos?.[0] ?? "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600";
   const price = listing.price?.toLocaleString("en-GB") ?? "0";
+  const aiScore = (listing as { aiMatchScore?: number | null }).aiMatchScore ?? null;
 
   return (
     <motion.div
@@ -33,11 +34,15 @@ export default function PropertyCard({ listing }: PropertyCardProps) {
             Premium
           </Badge>
         )}
-        {listing.isFeatured && (
+        {aiScore != null ? (
+          <Badge className="absolute top-3 right-3 bg-background/90 backdrop-blur text-accent text-xs font-bold border border-accent/40">
+            ✦ {aiScore}% match
+          </Badge>
+        ) : listing.isFeatured ? (
           <Badge className="absolute top-3 right-3 bg-background/80 backdrop-blur text-foreground text-xs border border-border/50">
             Featured
           </Badge>
-        )}
+        ) : null}
         <div className="absolute bottom-3 left-3">
           <p className="text-white text-xl font-bold">
             £{price}

@@ -1,16 +1,34 @@
-import { Link } from "wouter";
+import { useState, type FormEvent } from "react";
+import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight, Shield, Clock, Star, Users, Building2, TrendingUp, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Shield, Clock, Star, Users, Building2, TrendingUp, CheckCircle2, Search, MapPin, PoundSterling, Bed } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import PublicLayout from "@/components/PublicLayout";
 import PropertyCard from "@/components/PropertyCard";
 import { useGetFeaturedListings, useGetPlatformStats, useGetBlogArticles } from "@workspace/api-client-react";
 
+const SEARCH_CITIES = ["London", "Manchester", "Birmingham", "Leeds", "Bristol", "Sheffield", "Liverpool", "Edinburgh", "Cardiff", "Glasgow", "Harrogate"];
+const SEARCH_BUDGETS = [800, 1000, 1200, 1500, 2000, 2500, 3000];
+
 export default function Home() {
   const { data: featured } = useGetFeaturedListings();
   const { data: stats } = useGetPlatformStats();
   const { data: articles } = useGetBlogArticles();
+  const [, navigate] = useLocation();
+  const [city, setCity] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [bedrooms, setBedrooms] = useState("");
+
+  function runSearch(e: FormEvent) {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (city) params.set("city", city);
+    if (maxPrice) params.set("maxPrice", maxPrice);
+    if (bedrooms) params.set("bedrooms", bedrooms);
+    const qs = params.toString();
+    navigate(qs ? `/listings?${qs}` : "/listings");
+  }
 
   return (
     <PublicLayout>
@@ -52,12 +70,80 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
+
+            {/* Hero search bar */}
+            <form
+              onSubmit={runSearch}
+              className="mt-8 bg-card border border-border rounded-2xl p-2.5 flex flex-col sm:flex-row gap-2 shadow-xl max-w-2xl"
+            >
+              <label className="flex-1 flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-muted/50 transition-colors cursor-pointer">
+                <MapPin size={16} className="text-primary shrink-0" />
+                <span className="flex flex-col w-full">
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Location</span>
+                  <select
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    className="bg-transparent text-sm font-medium text-foreground outline-none cursor-pointer w-full"
+                  >
+                    <option value="">Any city</option>
+                    {SEARCH_CITIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                </span>
+              </label>
+              <label className="flex-1 flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-muted/50 transition-colors cursor-pointer sm:border-l sm:border-border">
+                <PoundSterling size={16} className="text-primary shrink-0" />
+                <span className="flex flex-col w-full">
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Max Budget</span>
+                  <select
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(e.target.value)}
+                    className="bg-transparent text-sm font-medium text-foreground outline-none cursor-pointer w-full"
+                  >
+                    <option value="">Any</option>
+                    {SEARCH_BUDGETS.map((b) => <option key={b} value={b}>£{b.toLocaleString()}/mo</option>)}
+                  </select>
+                </span>
+              </label>
+              <label className="flex-1 flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-muted/50 transition-colors cursor-pointer sm:border-l sm:border-border">
+                <Bed size={16} className="text-primary shrink-0" />
+                <span className="flex flex-col w-full">
+                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Bedrooms</span>
+                  <select
+                    value={bedrooms}
+                    onChange={(e) => setBedrooms(e.target.value)}
+                    className="bg-transparent text-sm font-medium text-foreground outline-none cursor-pointer w-full"
+                  >
+                    <option value="">Any</option>
+                    <option value="0">Studio</option>
+                    <option value="1">1+</option>
+                    <option value="2">2+</option>
+                    <option value="3">3+</option>
+                    <option value="4">4+</option>
+                  </select>
+                </span>
+              </label>
+              <Button type="submit" size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2 px-6 sm:self-stretch">
+                <Search size={16} /> Search
+              </Button>
+            </form>
             <div className="flex flex-wrap gap-6 mt-10 text-sm text-muted-foreground">
               <span className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" />No upfront fees</span>
               <span className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" />Rigorous tenant screening</span>
               <span className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" />Member of The Property Ombudsman</span>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Accreditation trust bar */}
+      <section className="bg-card border-y border-border/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-xs sm:text-sm font-medium text-muted-foreground">
+            <span className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" />Member of <strong className="text-foreground">The Property Ombudsman</strong></span>
+            <span className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" /><strong className="text-foreground">RRA 2025</strong> Compliant</span>
+            <span className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" /><strong className="text-foreground">Tenant Fees Act 2019</strong></span>
+            <span className="flex items-center gap-2"><CheckCircle2 size={14} className="text-primary" /><strong className="text-foreground">Deposit Protected</strong></span>
+          </div>
         </div>
       </section>
 
