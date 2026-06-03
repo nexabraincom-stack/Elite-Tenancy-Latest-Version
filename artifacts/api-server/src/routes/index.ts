@@ -18,6 +18,7 @@ import subscriptionsRouter from "./subscriptions";
 import n8nRouter from "./n8n";
 import reviewsRouter from "./reviews";
 import passportRouter from "./passport";
+import verifyRouter from "./verify";
 
 const router: IRouter = Router();
 
@@ -31,6 +32,7 @@ router.use(subscriptionsRouter);
 router.use(n8nRouter);
 router.use(reviewsRouter);
 router.use(passportRouter);
+router.use(verifyRouter);
 router.use(healthRouter);
 router.use(listingsRouter);
 router.use(blogRouter);
