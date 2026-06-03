@@ -225,6 +225,54 @@ router.post("/passport", async (req, res): Promise<void> => {
   });
 });
 
+// ── Public: anonymised "Room Wanted" board ───────────────────────────────────
+// Renters who built a passport are explicitly seeking to be found by landlords.
+// We expose a PRIVACY-TRIMMED view (first name only, no email/phone) so landlords
+// and agents can browse live demand. Full contact details stay landlord-gated.
+router.get("/wanted", async (_req, res): Promise<void> => {
+  const rows = await db
+    .select({
+      id: renterPassportsTable.id,
+      name: renterPassportsTable.name,
+      city: renterPassportsTable.city,
+      minBudget: renterPassportsTable.minBudget,
+      maxBudget: renterPassportsTable.maxBudget,
+      bedrooms: renterPassportsTable.bedrooms,
+      moveInDate: renterPassportsTable.moveInDate,
+      occupants: renterPassportsTable.occupants,
+      aiPersona: renterPassportsTable.aiPersona,
+      aiScore: renterPassportsTable.aiScore,
+      createdAt: renterPassportsTable.createdAt,
+    })
+    .from(renterPassportsTable)
+    .orderBy(desc(renterPassportsTable.createdAt))
+    .limit(60);
+
+  // Anonymise (first name + initial) and drop obvious test rows
+  const TEST_RE = /\b(test|check|smoke|demo|sample)\b/i;
+  const wanted = rows
+    .filter((r) => r.aiPersona && !TEST_RE.test(r.name))
+    .map((r) => {
+      const parts = r.name.trim().split(/\s+/);
+      const displayName = parts[1] ? `${parts[0]} ${parts[1][0].toUpperCase()}.` : parts[0];
+      return {
+        id: r.id,
+        displayName,
+        city: r.city,
+        minBudget: r.minBudget,
+        maxBudget: r.maxBudget,
+        bedrooms: r.bedrooms,
+        moveInDate: r.moveInDate,
+        occupants: r.occupants,
+        aiPersona: r.aiPersona,
+        aiScore: r.aiScore,
+        createdAt: r.createdAt.toISOString(),
+      };
+    });
+
+  res.json({ wanted });
+});
+
 // ── Landlord/Admin: AI-ranked pool of prospective tenants ────────────────────
 router.get("/passports", requireAuth(), requireRole("landlord", "admin"), async (_req, res): Promise<void> => {
   const passports = await db
