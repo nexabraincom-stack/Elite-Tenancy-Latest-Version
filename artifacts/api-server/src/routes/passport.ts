@@ -9,6 +9,7 @@ import {
   getAdminEmail,
   adminLeadEmail,
 } from "../lib/email";
+import { aiChat, isAIConfigured } from "../lib/ai";
 
 /**
  * Play ④ — Two-way AI matching ("Renter Passport").
@@ -103,8 +104,6 @@ function httpsPost(url: string, headers: Record<string, string>, payload: string
 
 /** Best-effort AI persona + readiness score. Falls back to a heuristic if AI is unavailable. */
 async function buildPersona(p: PassportInput): Promise<{ persona: string; score: number }> {
-  const apiKey = process.env.AI_GATEWAY_API_KEY;
-
   // Heuristic fallback score from profile completeness/strength.
   const heuristic = (): { persona: string; score: number } => {
     let s = 55;
@@ -119,7 +118,7 @@ async function buildPersona(p: PassportInput): Promise<{ persona: string; score:
     return { persona, score: s };
   };
 
-  if (!apiKey) return heuristic();
+  if (!isAIConfigured()) return heuristic();
 
   const prompt = `You are an expert UK lettings agent at Elite Tenancy. Write a concise, warm LANDLORD-FACING summary of this prospective tenant and rate how strong/ready an applicant they are.
 
@@ -130,11 +129,8 @@ Respond ONLY with valid JSON (no markdown):
 {"persona":"<2 sentences, max 240 chars, professional and positive but honest>","score":<0-100 integer readiness/strength>}`;
 
   try {
-    const payload = JSON.stringify({ model: GATEWAY_MODEL, messages: [{ role: "user", content: prompt }], max_tokens: 400, temperature: 0.4 });
-    const r = await httpsPost(`${AI_GATEWAY_BASE}/chat/completions`, { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" }, payload);
-    if (r.statusCode < 200 || r.statusCode >= 300) return heuristic();
-    const data = JSON.parse(r.body) as { choices: Array<{ message: { content: string } }> };
-    const content = (data.choices?.[0]?.message?.content ?? "").replace(/^```json\n?/, "").replace(/\n?```$/, "").trim();
+    const content = (await aiChat([{ role: "user", content: prompt }], { maxTokens: 400, temperature: 0.4 }))
+      .replace(/^```json\n?/, "").replace(/\n?```$/, "").trim();
     const parsed = JSON.parse(content) as { persona?: string; score?: number };
     const score = Math.max(0, Math.min(100, Math.round(Number(parsed.score))));
     if (parsed.persona && Number.isFinite(score)) return { persona: parsed.persona.slice(0, 280), score };

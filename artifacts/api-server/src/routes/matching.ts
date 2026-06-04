@@ -4,6 +4,7 @@ import { db } from "@workspace/db";
 import { listingsTable } from "@workspace/db/schema";
 import { eq, and, lte, gte } from "drizzle-orm";
 import { requireAuth } from "../middlewares/requireAuth";
+import { aiChat, isAIConfigured } from "../lib/ai";
 
 const router: IRouter = Router();
 
@@ -118,8 +119,7 @@ router.post("/matching/score", requireAuth(), async (req, res): Promise<void> =>
     return;
   }
 
-  const aiConfig = getAIConfig();
-  if (aiConfig.mode === "unavailable") {
+  if (!isAIConfigured()) {
     res.status(503).json({ error: "AI matching service is not available" });
     return;
   }
@@ -181,7 +181,7 @@ Sort by score descending. Include all properties.`;
 
   let text: string;
   try {
-    text = await callGateway(aiConfig.apiKey, prompt);
+    text = await aiChat([{ role: "user", content: prompt }], { maxTokens: 2048, temperature: 0.3 });
   } catch (aiErr: unknown) {
     const msg = aiErr instanceof Error ? aiErr.message : String(aiErr);
     if (msg.includes("429") || msg.includes("quota") || msg.includes("Too Many Requests")) {

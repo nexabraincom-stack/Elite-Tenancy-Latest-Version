@@ -131,6 +131,8 @@ async function maybeCaptureLeadFromSession(
   }
 }
 
+import { aiChat, isAIConfigured } from "../lib/ai";
+
 // ── AI Gateway (Vercel) ─────────────────────────────────────────────────────
 const AI_GATEWAY_BASE = "https://ai-gateway.vercel.sh/v1";
 const GATEWAY_MODEL   = "meta/llama-4-maverick"; // Upgraded from gemini-2.0-flash — better RRA 2025 reasoning + legal accuracy
@@ -476,8 +478,7 @@ export async function askEllie(message: string, conversationKey: string | null):
     return { ok: false, status: 400, reply: "Message too long (max 1500 chars)" };
   }
 
-  const aiConfig = getAIConfig();
-  if (aiConfig.mode === "unavailable") {
+  if (!isAIConfigured()) {
     return {
       ok: false,
       status: 503,
@@ -505,7 +506,7 @@ export async function askEllie(message: string, conversationKey: string | null):
 
   let reply: string;
   try {
-    reply = await callGateway(aiConfig.apiKey, chatMessages);
+    reply = await aiChat(chatMessages, { maxTokens: 500, temperature: 0.75 });
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
     if (msg.includes("429") || msg.includes("quota") || msg.includes("Too Many Requests")) {
