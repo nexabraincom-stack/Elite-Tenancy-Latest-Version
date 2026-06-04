@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { MapPin, Star, Shield, Clock, ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PublicLayout from "@/components/PublicLayout";
+import { useSeo } from "@/hooks/use-seo";
 
 export interface CityPageProps {
   city: string;
@@ -12,6 +13,8 @@ export interface CityPageProps {
   popularAreas: string[];
   highlights: string[];
   faqs: Array<{ q: string; a: string }>;
+  /** URL slug; defaults to the lowercased city name. Pass explicitly for multi-word cities (e.g. "milton-keynes"). */
+  slug?: string;
 }
 
 export default function CityPage({
@@ -23,12 +26,20 @@ export default function CityPage({
   popularAreas,
   highlights,
   faqs,
+  slug,
 }: CityPageProps) {
-  const citySlug = city.toLowerCase();
+  const citySlug = slug ?? city.toLowerCase();
+  const canonical = `https://www.elitetenancy.co.uk/${citySlug}`;
+
+  useSeo({
+    title: `Premium Rentals & Tenant Introduction in ${city}`,
+    description: `Find premium rental properties in ${city}, ${region} with Elite Tenancy. Verified landlords, AI-powered matching, and a transparent completion-only fee. Average rent ${avgRent}/month.`,
+    canonical,
+  });
 
   return (
     <PublicLayout>
-      {/* SEO structured data */}
+      {/* SEO structured data — RealEstateAgent */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -37,12 +48,45 @@ export default function CityPage({
             "@type": "RealEstateAgent",
             name: `Elite Tenancy ${city}`,
             description: `Premium rental properties in ${city}, ${region}. Find your perfect home with Elite Tenancy.`,
-            url: `https://www.elitetenancy.co.uk/${citySlug}`,
+            url: canonical,
             areaServed: {
               "@type": "City",
               name: city,
               containedIn: region,
             },
+          }),
+        }}
+      />
+
+      {/* SEO structured data — FAQPage (AEO / Google AI Overviews / People Also Ask) */}
+      {faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faqs.map(({ q, a }) => ({
+                "@type": "Question",
+                name: q,
+                acceptedAnswer: { "@type": "Answer", text: a },
+              })),
+            }),
+          }}
+        />
+      )}
+
+      {/* SEO structured data — BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://www.elitetenancy.co.uk/" },
+              { "@type": "ListItem", position: 2, name: `Rentals in ${city}`, item: canonical },
+            ],
           }),
         }}
       />
