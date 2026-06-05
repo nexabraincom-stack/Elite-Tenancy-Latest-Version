@@ -43,6 +43,7 @@ import AdminListings from "@/pages/admin/Listings";
 import AdminLeads from "@/pages/admin/Leads";
 import AdminArticles from "@/pages/admin/Articles";
 import AdminUsers from "@/pages/admin/Users";
+import AdminSeoDashboard from "@/pages/admin/SeoDashboard";
 
 import TenantMessages from "@/pages/tenant/Messages";
 import LandlordMessages from "@/pages/landlord/Messages";
@@ -70,6 +71,8 @@ import Liverpool from "@/pages/city/Liverpool";
 import Edinburgh from "@/pages/city/Edinburgh";
 import Cardiff from "@/pages/city/Cardiff";
 import Glasgow from "@/pages/city/Glasgow";
+import CityPage from "@/pages/city/CityPage";
+import { EXTRA_CITIES } from "@/pages/city/extraCities";
 
 const clerkPubKey = publishableKeyFromHost(
   window.location.hostname,
@@ -318,6 +321,13 @@ function AppRoutes() {
       <Route path="/cardiff" component={Cardiff} />
       <Route path="/glasgow" component={Glasgow} />
 
+      {/* Programmatic city SEO landing pages (data-driven — see extraCities.ts) */}
+      {EXTRA_CITIES.map((c) => (
+        <Route key={c.slug} path={`/${c.slug}`}>
+          {() => <CityPage {...c} />}
+        </Route>
+      ))}
+
       {/* Auth — Clerk-managed */}
       <Route path="/sign-in/*?" component={SignInPage} />
       <Route path="/sign-up/*?" component={SignUpPage} />
@@ -402,6 +412,9 @@ function AppRoutes() {
       </Route>
       <Route path="/admin/users">
         {() => <ProtectedRoute component={AdminUsers} requiredRole="admin" />}
+      </Route>
+      <Route path="/admin/seo-dashboard">
+        {() => <ProtectedRoute component={AdminSeoDashboard} requiredRole="admin" />}
       </Route>
 
       <Route component={NotFound} />

@@ -1,0 +1,46 @@
+# Elite Tenancy
+
+> Elite Tenancy is a premium UK lettings platform and tenant introduction service connecting high-quality tenants with verified landlords and exceptional rental properties across the United Kingdom. It uses AI-powered tenant matching, charges landlords a transparent completion-only fee (two weeks' rent — no monthly management cut), and provides dedicated portals for tenants, landlords, and agents. Operated by Elite Tenancy Ltd (Companies House no. 17135665), based in East Ham, London.
+
+## What Elite Tenancy does
+
+- **Tenant introduction service**: matches referenced, ready-to-move tenants to landlords for a one-off completion fee of two weeks' rent — instead of a traditional letting agent's 8–15% monthly management commission.
+- **AI tenant matching ("Renter Passport")**: tenants build a profile and an AI writes a landlord-facing persona plus a readiness score, then returns their best-matching live homes.
+- **Verified landlords**: every landlord is checked; Companies House verification is available via the Verify-a-Landlord tool.
+- **Right to Rent checks**: built-in Right to Rent share-code checking and reminders, compliant with UK Home Office requirements.
+- **Renters' Rights Act 2025 guidance**: up-to-date resources for landlords and tenants navigating the new legislation.
+
+## Key facts
+
+- **Service area**: United Kingdom (all major cities — London, Manchester, Birmingham, Leeds, Liverpool, Sheffield, Bristol, Nottingham, Leicester, Cardiff, Edinburgh, Glasgow and more).
+- **Pricing model**: landlords pay two weeks' rent on completion only. No upfront fees, no monthly commission.
+- **Audiences served**: private landlords, tenants/renters, letting agencies, and first-time/accidental landlords.
+- **Company**: Elite Tenancy Ltd, Companies House registration 17135665.
+- **Website**: https://www.elitetenancy.co.uk
+
+## Core pages
+
+- [Home](https://www.elitetenancy.co.uk/): overview of the platform and how it works.
+- [How It Works](https://www.elitetenancy.co.uk/how-it-works): step-by-step of the introduction process.
+- [Pricing](https://www.elitetenancy.co.uk/pricing): the two-weeks'-rent completion-only model explained.
+- [For Landlords](https://www.elitetenancy.co.uk/for-landlords): why landlords use Elite Tenancy instead of a traditional agent.
+- [For Agents](https://www.elitetenancy.co.uk/for-agents): white-label / partner tenant introduction for agencies.
+- [Find My Match](https://www.elitetenancy.co.uk/find-my-match): AI-powered tenant–property matching.
+- [Renter Passport](https://www.elitetenancy.co.uk/renter-passport): build a tenant profile to be matched and found by landlords.
+- [Verify a Landlord](https://www.elitetenancy.co.uk/verify-landlord): check a landlord's company via Companies House.
+- [Right to Rent Check](https://www.elitetenancy.co.uk/right-to-rent-check): UK Right to Rent share-code verification.
+- [Renters' Rights Act 2025 Checker](https://www.elitetenancy.co.uk/rra-2025-checker): assess compliance with the new Act.
+- [Listings](https://www.elitetenancy.co.uk/listings): browse available premium rental properties.
+- [Blog](https://www.elitetenancy.co.uk/blog): guides on UK renting, landlord law, and the rental market.
+
+## Common questions
+
+- **What is a tenant introduction service?** A service that finds and references a suitable tenant for a landlord's property and introduces them for a one-off fee, leaving the landlord to manage the tenancy themselves — unlike full management, which charges an ongoing monthly percentage.
+- **How much does Elite Tenancy cost a landlord?** Two weeks' rent, payable only on successful completion (when a tenant moves in). There are no upfront or monthly fees.
+- **Does Elite Tenancy cover my city?** Elite Tenancy operates UK-wide, with dedicated local pages for major cities and towns.
+- **Is Elite Tenancy a real, registered company?** Yes — Elite Tenancy Ltd, Companies House number 17135665.
+
+## Contact
+
+- Email: info@elitetenancy.co.uk
+- Website: https://www.elitetenancy.co.uk/contact
