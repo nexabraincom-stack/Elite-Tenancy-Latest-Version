@@ -60,6 +60,16 @@ export default function BlogArticle() {
     query: { enabled: !!params.slug },
   });
 
+  // IMPORTANT: all hooks must run on every render, BEFORE any early return.
+  // useSeo wraps useEffect — calling it after the isLoading/!article returns
+  // changed the hook count between renders and crashed the page (blank screen).
+  useSeo({
+    title: article?.title ?? "Blog",
+    description: article?.excerpt ?? undefined,
+    canonical: article ? `https://www.elitetenancy.co.uk/blog/${article.slug}` : undefined,
+    ogImage: article?.imageUrl ?? undefined,
+  });
+
   if (isLoading) {
     return (
       <PublicLayout>
@@ -80,13 +90,6 @@ export default function BlogArticle() {
       </PublicLayout>
     );
   }
-
-  useSeo({
-    title: article.title,
-    description: article.excerpt,
-    canonical: `https://www.elitetenancy.co.uk/blog/${article.slug}`,
-    ogImage: article.imageUrl ?? undefined,
-  });
 
   const related = RELATED_GUIDES.filter((g) => g.slug !== article.slug).slice(0, 3);
 
