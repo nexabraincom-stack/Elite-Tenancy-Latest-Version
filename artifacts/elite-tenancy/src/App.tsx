@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, lazy, Suspense } from "react";
 import { ClerkProvider, SignIn, SignUp, Show, useClerk, useUser } from "@clerk/react";
 import { useGetAuthMe } from "@workspace/api-client-react";
 import { publishableKeyFromHost } from "@clerk/react/internal";
@@ -8,70 +8,74 @@ import { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/reac
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-import Home from "@/pages/Home";
-import Listings from "@/pages/Listings";
-import ListingDetail from "@/pages/ListingDetail";
-import ForLandlords from "@/pages/ForLandlords";
-import Pricing from "@/pages/Pricing";
-import HowItWorks from "@/pages/HowItWorks";
-import ListYourProperty from "@/pages/ListYourProperty";
-import FindARoom from "@/pages/FindARoom";
-import Blog from "@/pages/Blog";
-import BlogArticle from "@/pages/BlogArticle";
-import Valuation from "@/pages/Valuation";
-import Contact from "@/pages/Contact";
-import Privacy from "@/pages/Privacy";
-import Terms from "@/pages/Terms";
-import Cookies from "@/pages/Cookies";
+// Pages are lazy-loaded so each route ships as its own chunk. This keeps the
+// initial JS bundle small (huge mobile FCP/LCP win) instead of loading all
+// ~58 pages up front. A <Suspense> boundary around the router shows PageLoader
+// while a route's chunk downloads.
+const Home = lazy(() => import("@/pages/Home"));
+const Listings = lazy(() => import("@/pages/Listings"));
+const ListingDetail = lazy(() => import("@/pages/ListingDetail"));
+const ForLandlords = lazy(() => import("@/pages/ForLandlords"));
+const Pricing = lazy(() => import("@/pages/Pricing"));
+const HowItWorks = lazy(() => import("@/pages/HowItWorks"));
+const ListYourProperty = lazy(() => import("@/pages/ListYourProperty"));
+const FindARoom = lazy(() => import("@/pages/FindARoom"));
+const Blog = lazy(() => import("@/pages/Blog"));
+const BlogArticle = lazy(() => import("@/pages/BlogArticle"));
+const Valuation = lazy(() => import("@/pages/Valuation"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const Privacy = lazy(() => import("@/pages/Privacy"));
+const Terms = lazy(() => import("@/pages/Terms"));
+const Cookies = lazy(() => import("@/pages/Cookies"));
 
-import TenantDashboard from "@/pages/tenant/Dashboard";
-import MyTenancy from "@/pages/tenant/MyTenancy";
-import Rent from "@/pages/tenant/Rent";
-import TenantMaintenance from "@/pages/tenant/Maintenance";
-import TenantDocuments from "@/pages/tenant/Documents";
+const TenantDashboard = lazy(() => import("@/pages/tenant/Dashboard"));
+const MyTenancy = lazy(() => import("@/pages/tenant/MyTenancy"));
+const Rent = lazy(() => import("@/pages/tenant/Rent"));
+const TenantMaintenance = lazy(() => import("@/pages/tenant/Maintenance"));
+const TenantDocuments = lazy(() => import("@/pages/tenant/Documents"));
 
-import LandlordDashboard from "@/pages/landlord/Dashboard";
-import LandlordListings from "@/pages/landlord/Listings";
-import LandlordTenants from "@/pages/landlord/Tenants";
-import LandlordFinances from "@/pages/landlord/Finances";
-import LandlordMaintenance from "@/pages/landlord/Maintenance";
-import LandlordLeads from "@/pages/landlord/Leads";
-import LandlordManaged from "@/pages/landlord/Managed";
+const LandlordDashboard = lazy(() => import("@/pages/landlord/Dashboard"));
+const LandlordListings = lazy(() => import("@/pages/landlord/Listings"));
+const LandlordTenants = lazy(() => import("@/pages/landlord/Tenants"));
+const LandlordFinances = lazy(() => import("@/pages/landlord/Finances"));
+const LandlordMaintenance = lazy(() => import("@/pages/landlord/Maintenance"));
+const LandlordLeads = lazy(() => import("@/pages/landlord/Leads"));
+const LandlordManaged = lazy(() => import("@/pages/landlord/Managed"));
 
-import AdminDashboard from "@/pages/admin/Dashboard";
-import AdminListings from "@/pages/admin/Listings";
-import AdminLeads from "@/pages/admin/Leads";
-import AdminArticles from "@/pages/admin/Articles";
-import AdminUsers from "@/pages/admin/Users";
-import AdminSeoDashboard from "@/pages/admin/SeoDashboard";
+const AdminDashboard = lazy(() => import("@/pages/admin/Dashboard"));
+const AdminListings = lazy(() => import("@/pages/admin/Listings"));
+const AdminLeads = lazy(() => import("@/pages/admin/Leads"));
+const AdminArticles = lazy(() => import("@/pages/admin/Articles"));
+const AdminUsers = lazy(() => import("@/pages/admin/Users"));
+const AdminSeoDashboard = lazy(() => import("@/pages/admin/SeoDashboard"));
 
-import TenantMessages from "@/pages/tenant/Messages";
-import LandlordMessages from "@/pages/landlord/Messages";
-import TenantMatch from "@/pages/TenantMatch";
-import SpareRoomAlternative from "@/pages/SpareRoomAlternative";
-import RRAChecker from "@/pages/RRAChecker";
-import RoomsToLet from "@/pages/RoomsToLet";
-import ForAgents from "@/pages/ForAgents";
-import RenterPassport from "@/pages/RenterPassport";
-import RoomWanted from "@/pages/RoomWanted";
-import VerifyLandlord from "@/pages/VerifyLandlord";
-import RightToRentCheck from "@/pages/RightToRentCheck";
-import Profile from "@/pages/Profile";
-import NotFound from "@/pages/not-found";
+const TenantMessages = lazy(() => import("@/pages/tenant/Messages"));
+const LandlordMessages = lazy(() => import("@/pages/landlord/Messages"));
+const TenantMatch = lazy(() => import("@/pages/TenantMatch"));
+const SpareRoomAlternative = lazy(() => import("@/pages/SpareRoomAlternative"));
+const RRAChecker = lazy(() => import("@/pages/RRAChecker"));
+const RoomsToLet = lazy(() => import("@/pages/RoomsToLet"));
+const ForAgents = lazy(() => import("@/pages/ForAgents"));
+const RenterPassport = lazy(() => import("@/pages/RenterPassport"));
+const RoomWanted = lazy(() => import("@/pages/RoomWanted"));
+const VerifyLandlord = lazy(() => import("@/pages/VerifyLandlord"));
+const RightToRentCheck = lazy(() => import("@/pages/RightToRentCheck"));
+const Profile = lazy(() => import("@/pages/Profile"));
+const NotFound = lazy(() => import("@/pages/not-found"));
 import { ChatProvider } from "@/contexts/ChatContext";
 
 // City SEO landing pages
-import London from "@/pages/city/London";
-import Manchester from "@/pages/city/Manchester";
-import Birmingham from "@/pages/city/Birmingham";
-import Leeds from "@/pages/city/Leeds";
-import Bristol from "@/pages/city/Bristol";
-import Sheffield from "@/pages/city/Sheffield";
-import Liverpool from "@/pages/city/Liverpool";
-import Edinburgh from "@/pages/city/Edinburgh";
-import Cardiff from "@/pages/city/Cardiff";
-import Glasgow from "@/pages/city/Glasgow";
-import CityPage from "@/pages/city/CityPage";
+const London = lazy(() => import("@/pages/city/London"));
+const Manchester = lazy(() => import("@/pages/city/Manchester"));
+const Birmingham = lazy(() => import("@/pages/city/Birmingham"));
+const Leeds = lazy(() => import("@/pages/city/Leeds"));
+const Bristol = lazy(() => import("@/pages/city/Bristol"));
+const Sheffield = lazy(() => import("@/pages/city/Sheffield"));
+const Liverpool = lazy(() => import("@/pages/city/Liverpool"));
+const Edinburgh = lazy(() => import("@/pages/city/Edinburgh"));
+const Cardiff = lazy(() => import("@/pages/city/Cardiff"));
+const Glasgow = lazy(() => import("@/pages/city/Glasgow"));
+const CityPage = lazy(() => import("@/pages/city/CityPage"));
 import { EXTRA_CITIES } from "@/pages/city/extraCities";
 
 const clerkPubKey = publishableKeyFromHost(
@@ -279,8 +283,21 @@ function ClerkQueryClientCacheInvalidator() {
   return null;
 }
 
+function PageLoader() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      <div
+        className="h-10 w-10 rounded-full border-2 border-primary/30 border-t-primary animate-spin"
+        role="status"
+        aria-label="Loading"
+      />
+    </div>
+  );
+}
+
 function AppRoutes() {
   return (
+    <Suspense fallback={<PageLoader />}>
     <Switch>
       {/* Public */}
       <Route path="/" component={Home} />
@@ -419,6 +436,7 @@ function AppRoutes() {
 
       <Route component={NotFound} />
     </Switch>
+    </Suspense>
   );
 }
 

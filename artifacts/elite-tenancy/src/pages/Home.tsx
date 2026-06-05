@@ -145,6 +145,7 @@ export default function Home() {
                 src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1100&q=80"
                 alt="A beautiful, light-filled premium UK home let through Elite Tenancy"
                 loading="eager"
+                fetchPriority="high"
                 className="absolute inset-0 w-full h-full object-cover"
                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
               />
