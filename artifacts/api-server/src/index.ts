@@ -1,3 +1,4 @@
+import "./instrument"; // Sentry must be first — before all other imports
 import { createServer } from "http";
 import app from "./app";
 import { logger } from "./lib/logger";

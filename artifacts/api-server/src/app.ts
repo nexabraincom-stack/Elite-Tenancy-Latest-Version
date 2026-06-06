@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/node";
 import express, { type Express } from "express";
 import cors from "cors";
 import pinoHttp from "pino-http";
@@ -124,5 +125,10 @@ app.use("/api/rtr/check", aiLimiter);
 
 // ── Routes ───────────────────────────────────────────────────────────────────
 app.use("/api", router);
+
+// ── Sentry error handler — must be after all routes ──────────────────────────
+// Captures unhandled Express errors and sends them to Sentry before the
+// generic error handler runs. Must come before any other error middleware.
+Sentry.setupExpressErrorHandler(app);
 
 export default app;
