@@ -1,7 +1,6 @@
 import { useEffect, useRef, lazy, Suspense } from "react";
 import { ClerkProvider, SignIn, SignUp, Show, useClerk, useUser } from "@clerk/react";
 import { useGetAuthMe } from "@workspace/api-client-react";
-import { publishableKeyFromHost } from "@clerk/react/internal";
 import { shadcn } from "@clerk/themes";
 import { Switch, Route, Router as WouterRouter, useLocation, Redirect } from "wouter";
 import { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
@@ -78,10 +77,15 @@ const Glasgow = lazy(() => import("@/pages/city/Glasgow"));
 const CityPage = lazy(() => import("@/pages/city/CityPage"));
 import { EXTRA_CITIES } from "@/pages/city/extraCities";
 
-const clerkPubKey = publishableKeyFromHost(
-  window.location.hostname,
-  import.meta.env.VITE_CLERK_PUBLISHABLE_KEY,
-);
+// Use the publishable key exactly as issued so Clerk loads its JS from the
+// key's real Frontend API domain (clerk.elitetenancy.co.uk — which resolves).
+//
+// Previously this was publishableKeyFromHost(window.location.hostname, key),
+// which rewrites the Frontend API to clerk.<current-host>. On the canonical
+// www host that produced clerk.www.elitetenancy.co.uk, which has NO DNS record,
+// so Clerk JS failed to load (ERR_NAME_NOT_RESOLVED) and every /sign-in and
+// /sign-up page rendered blank. The key already encodes the correct domain.
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
 
