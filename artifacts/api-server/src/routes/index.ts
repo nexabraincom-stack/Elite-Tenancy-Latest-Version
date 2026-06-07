@@ -25,6 +25,7 @@ import integrationsRouter from "./integrations";
 import takeoverRouter from "./takeover";
 import interestRouter from "./interest";
 import { router as launchDiscountRouter } from "../services/launchDiscount";
+import seedArticlesRouter from "./seedArticles";
 
 const router: IRouter = Router();
 
@@ -54,5 +55,6 @@ router.use(matchingRouter);
 router.use("/takeover",       takeoverRouter);
 router.use("/interest",       interestRouter);
 router.use("/launch-discount", launchDiscountRouter);
+router.use(seedArticlesRouter);
 
 export default router;

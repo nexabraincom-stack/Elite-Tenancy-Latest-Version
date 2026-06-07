@@ -35,16 +35,19 @@ export function useSeo({ title, description, canonical, ogImage }: SeoOptions = 
     }
     metaDesc.content = fullDesc;
 
-    // Canonical
-    if (canonical) {
-      let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
-      if (!link) {
-        link = document.createElement("link");
-        link.rel = "canonical";
-        document.head.appendChild(link);
-      }
-      link.href = canonical;
+    // Canonical — always set; fall back to the current page URL so every
+    // page gets a unique canonical even when no explicit override is provided
+    // (e.g. a blog article whose API fetch failed still gets the right URL,
+    // not the homepage fallback that was previously hard-coded in index.html).
+    const effectiveCanonical =
+      canonical ?? `${window.location.origin}${window.location.pathname}`;
+    let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "canonical";
+      document.head.appendChild(link);
     }
+    link.href = effectiveCanonical;
 
     // OG title + description
     const ogTitle = document.querySelector('meta[property="og:title"]') as HTMLMetaElement | null;
