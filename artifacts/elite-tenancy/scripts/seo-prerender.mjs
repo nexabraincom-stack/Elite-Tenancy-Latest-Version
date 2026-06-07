@@ -212,6 +212,36 @@ const ROUTES = [
     desc: "Contact Elite Tenancy for landlord or tenant support. Call, email, or submit a form — our team responds within one business day.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }],
   },
+  {
+    path: "/find-my-match",
+    title: "Find My Perfect Room Match | AI-Powered Search | Elite Tenancy",
+    desc: "Use Elite Tenancy's AI-powered matching to find your ideal room or property. Answer a few questions and we'll surface the best options for you.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Find My Match", path: "/find-my-match" }],
+  },
+  {
+    path: "/room-wanted",
+    title: "Room Wanted — Post Your Search | Elite Tenancy",
+    desc: "Post a room-wanted listing and let landlords come to you. Tell us what you need and we'll match you with the right property across the UK.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Room Wanted", path: "/room-wanted" }],
+  },
+  {
+    path: "/privacy",
+    title: "Privacy Policy | Elite Tenancy",
+    desc: "Elite Tenancy's privacy policy. How we collect, use, and protect your personal data in accordance with UK GDPR.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Privacy Policy", path: "/privacy" }],
+  },
+  {
+    path: "/terms",
+    title: "Terms of Service | Elite Tenancy",
+    desc: "Elite Tenancy's terms of service. The rules that govern your use of our platform as a landlord, tenant, or agent.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Terms of Service", path: "/terms" }],
+  },
+  {
+    path: "/cookies",
+    title: "Cookie Policy | Elite Tenancy",
+    desc: "Elite Tenancy's cookie policy. What cookies we use, why we use them, and how to manage your preferences.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Cookie Policy", path: "/cookies" }],
+  },
 
   // ── International pages ────────────────────────────────────────────────
   {
@@ -503,30 +533,30 @@ function injectSeo(template, route) {
     `$1${safe(canonical)}$2`
   );
 
-  // OG title
+  // OG title  — use \s+ to tolerate alignment whitespace in index.html
   html = html.replace(
-    /(<meta property="og:title" content=")[^"]*(")/,
+    /(<meta property="og:title"\s+content=")[^"]*(")/,
     `$1${safe(route.title)}$2`
   );
   // OG description
   html = html.replace(
-    /(<meta property="og:description" content=")[^"]*(")/,
+    /(<meta property="og:description"\s+content=")[^"]*(")/,
     `$1${safe(route.desc)}$2`
   );
   // OG url
   html = html.replace(
-    /(<meta property="og:url" content=")[^"]*(")/,
+    /(<meta property="og:url"\s+content=")[^"]*(")/,
     `$1${safe(canonical)}$2`
   );
 
-  // Twitter title
+  // Twitter title  — same whitespace fix
   html = html.replace(
-    /(<meta name="twitter:title" content=")[^"]*(")/,
+    /(<meta name="twitter:title"\s+content=")[^"]*(")/,
     `$1${safe(route.title)}$2`
   );
   // Twitter description
   html = html.replace(
-    /(<meta name="twitter:description" content=")[^"]*(")/,
+    /(<meta name="twitter:description"\s+content=")[^"]*(")/,
     `$1${safe(route.desc)}$2`
   );
 
