@@ -1,6 +1,12 @@
 /**
- * Elite Tenancy — OG Image Generator
- * Generates a 1200×630 JPEG for social media previews using Playwright.
+ * Elite Tenancy — OG Image Generator (IVORY LUXE theme)
+ * Matches the website's exact "Ivory Luxe" palette:
+ *   Background : hsl(40 33% 96%)  → #F8F5EE warm ivory
+ *   Foreground : hsl(167 39% 14%) → #132B24 deep forest green
+ *   Primary    : hsl(165 41% 21%) → #1A3B34 forest green
+ *   Accent     : hsl(41 49% 48%)  → #B8892E champagne gold
+ *   Muted fg   : hsl(34 11% 40%)  → #736860 warm taupe
+ *   Border     : hsl(150 18% 88%) → #D7E4DE soft sage
  * Run: node scripts/generate-og-image.mjs
  */
 
@@ -12,7 +18,6 @@ import fs from "fs";
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Load playwright from global npm installation
 const PLAYWRIGHT_PATH = "C:/Users/hp/AppData/Roaming/npm/node_modules/playwright/index.js";
 const { chromium } = require(PLAYWRIGHT_PATH);
 
@@ -26,7 +31,7 @@ const HTML = /* html */ `
   <meta name="viewport" content="width=1200"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -34,189 +39,227 @@ const HTML = /* html */ `
       width: 1200px;
       height: 630px;
       overflow: hidden;
-      background: #07060e;
+      /* Warm ivory background — matches website --background: hsl(40 33% 96%) */
+      background: #F8F5EE;
       font-family: 'Plus Jakarta Sans', sans-serif;
       position: relative;
     }
 
-    /* ── Subtle grid texture overlay ── */
+    /* ── Subtle linen texture (layered radials for depth) ── */
+    .texture {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 900px 500px at 15% 50%, rgba(26,59,52,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 400px at 85% 20%, rgba(184,137,46,0.06) 0%, transparent 65%),
+        radial-gradient(ellipse 500px 300px at 80% 90%, rgba(26,59,52,0.03) 0%, transparent 70%);
+    }
+
+    /* ── Subtle grid (sage green lines) ── */
     .grid {
       position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(193,155,40,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(193,155,40,0.05) 1px, transparent 1px);
+        linear-gradient(rgba(26,59,52,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,59,52,0.04) 1px, transparent 1px);
       background-size: 60px 60px;
     }
 
-    /* ── Radial glow top-left ── */
-    .glow-tl {
+    /* ── Outer border — sage green ── */
+    .border-outer {
       position: absolute;
-      top: -160px; left: -160px;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(193,155,40,0.18) 0%, transparent 65%);
-      border-radius: 50%;
+      inset: 0;
+      border-bottom: 4px solid #1A3B34;
     }
 
-    /* ── Radial glow bottom-right ── */
-    .glow-br {
-      position: absolute;
-      bottom: -200px; right: -80px;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(114,76,11,0.22) 0%, transparent 65%);
-      border-radius: 50%;
-    }
-
-    /* ── Thin gold border inset ── */
+    /* ── Inner frame — thin champagne gold ── */
     .border-frame {
       position: absolute;
-      inset: 18px;
-      border: 1px solid rgba(193,155,40,0.22);
-      border-radius: 4px;
-      pointer-events: none;
+      inset: 20px;
+      border: 1px solid rgba(184,137,46,0.3);
+      border-radius: 3px;
     }
 
-    /* ── Corner accents ── */
+    /* ── Corner accents — forest green ── */
     .corner {
       position: absolute;
-      width: 20px; height: 20px;
-      border-color: rgba(193,155,40,0.7);
+      width: 22px; height: 22px;
+      border-color: #1A3B34;
       border-style: solid;
+      opacity: 0.6;
     }
-    .corner.tl { top: 18px;    left: 18px;   border-width: 2px 0 0 2px; }
-    .corner.tr { top: 18px;    right: 18px;  border-width: 2px 2px 0 0; }
-    .corner.bl { bottom: 18px; left: 18px;   border-width: 0 0 2px 2px; }
-    .corner.br { bottom: 18px; right: 18px;  border-width: 0 2px 2px 0; }
+    .corner.tl { top: 20px;    left: 20px;   border-width: 2px 0 0 2px; }
+    .corner.tr { top: 20px;    right: 20px;  border-width: 2px 2px 0 0; }
+    .corner.bl { bottom: 20px; left: 20px;   border-width: 0 0 2px 2px; }
+    .corner.br { bottom: 20px; right: 20px;  border-width: 0 2px 2px 0; }
 
-    /* ── Main content ── */
+    /* ── Left accent bar — champagne gold ── */
+    .accent-bar {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 6px;
+      background: linear-gradient(180deg, #B8892E 0%, #D4A84B 40%, #B8892E 70%, #8B6622 100%);
+    }
+
+    /* ── Main content container ── */
     .content {
       position: absolute; inset: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0;
-      padding: 48px 80px;
+      padding: 56px 90px 56px 96px;
     }
 
-    /* ── Monogram shield ── */
+    /* ── ET shield monogram ── */
     .shield {
-      width: 72px; height: 72px;
-      margin-bottom: 22px;
-      opacity: 0.95;
-    }
-
-    /* ── "PREMIUM UK LETTINGS" pill ── */
-    .pill {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: #9a8f7a;
-      border: 1px solid rgba(154,143,122,0.3);
-      padding: 5px 16px;
-      border-radius: 20px;
+      width: 64px; height: 64px;
       margin-bottom: 20px;
     }
 
-    /* ── Wordmark ── */
+    /* ── "PREMIUM UK LETTINGS" overline ── */
+    .overline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 5.5px;
+      text-transform: uppercase;
+      /* muted foreground: hsl(34 11% 40%) */
+      color: #736860;
+      margin-bottom: 14px;
+    }
+
+    /* ── Main wordmark — Cormorant Garamond serif ── */
     .wordmark {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 72px;
-      font-weight: 400;
-      line-height: 1;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 82px;
+      font-weight: 600;
+      font-style: italic;
+      line-height: 0.95;
       letter-spacing: -1px;
-      background: linear-gradient(180deg, #f1e0a8 0%, #e6c45a 35%, #c9a227 72%, #9c7c1c 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 18px;
+      /* deep forest green foreground */
+      color: #132B24;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    /* ── "UK's Premier Lettings Platform" sub-wordmark ── */
+    .sub-wordmark {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #1A3B34;
+      opacity: 0.5;
+      margin-bottom: 30px;
+    }
+
+    /* ── Gold divider ── */
+    .divider {
+      width: 360px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #B8892E, transparent);
+      margin-bottom: 26px;
     }
 
     /* ── Tagline ── */
     .tagline {
-      font-size: 19px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.6);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: #1A3B34;
+      opacity: 0.75;
       text-align: center;
       line-height: 1.5;
-      max-width: 680px;
-      margin-bottom: 36px;
-    }
-    .tagline strong {
-      color: rgba(255,255,255,0.85);
-      font-weight: 600;
+      max-width: 640px;
+      margin-bottom: 30px;
     }
 
-    /* ── Divider ── */
-    .divider {
-      width: 100%;
-      max-width: 480px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(193,155,40,0.4), transparent);
-      margin-bottom: 28px;
-    }
-
-    /* ── Feature row ── */
+    /* ── Feature pills ── */
     .features {
       display: flex;
-      gap: 36px;
+      gap: 12px;
       align-items: center;
-    }
-    .feature {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.5);
-    }
-    .feature-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #e6c45a, #c9a227);
-      flex-shrink: 0;
-    }
-    .sep {
-      width: 1px; height: 14px;
-      background: rgba(193,155,40,0.25);
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    /* ── Domain badge ── */
+    .pill-feature {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(26,59,52,0.06);
+      border: 1px solid rgba(26,59,52,0.12);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #1A3B34;
+      letter-spacing: 0.3px;
+    }
+    .pill-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #B8892E;
+      flex-shrink: 0;
+    }
+
+    /* ── Domain watermark ── */
     .domain {
       position: absolute;
-      bottom: 34px;
-      right: 44px;
-      font-size: 12px;
+      bottom: 30px;
+      right: 40px;
+      font-size: 11px;
       font-weight: 500;
-      letter-spacing: 1px;
-      color: rgba(154,143,122,0.6);
+      letter-spacing: 1.5px;
+      color: #736860;
+      opacity: 0.7;
+    }
+
+    /* ── "Est. 2025" badge top-right ── */
+    .est {
+      position: absolute;
+      top: 34px;
+      right: 40px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #B8892E;
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
+  <div class="texture"></div>
   <div class="grid"></div>
-  <div class="glow-tl"></div>
-  <div class="glow-br"></div>
+  <div class="accent-bar"></div>
+  <div class="border-outer"></div>
   <div class="border-frame"></div>
   <div class="corner tl"></div>
   <div class="corner tr"></div>
   <div class="corner bl"></div>
   <div class="corner br"></div>
 
+  <div class="est">Est. 2025 · London</div>
+
   <div class="content">
+
+    <!-- ET shield monogram in forest green + gold -->
     <svg class="shield" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 150" fill="none">
       <defs>
-        <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0"    stop-color="#f1e0a8"/>
-          <stop offset="0.4"  stop-color="#e6c45a"/>
-          <stop offset="0.75" stop-color="#c9a227"/>
-          <stop offset="1"    stop-color="#9c7c1c"/>
+        <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0"    stop-color="#D4A84B"/>
+          <stop offset="0.5"  stop-color="#B8892E"/>
+          <stop offset="1"    stop-color="#8B6622"/>
         </linearGradient>
       </defs>
+      <!-- Shield outline in forest green -->
       <path d="M60 4 L108 24 L108 88 L60 146 L12 88 L12 24 Z"
-            stroke="url(#g)" stroke-width="3" stroke-linejoin="round" fill="none" opacity="0.9"/>
-      <g stroke="url(#g)" stroke-width="7.5" stroke-linecap="square" fill="none">
+            stroke="#1A3B34" stroke-width="3" stroke-linejoin="round"
+            fill="rgba(26,59,52,0.05)" opacity="0.8"/>
+      <!-- ET letters in champagne gold -->
+      <g stroke="url(#goldGrad)" stroke-width="7.5" stroke-linecap="square" fill="none">
         <path d="M43 46 V104"/>
         <path d="M43 46 H62"/>
         <path d="M43 75 H58"/>
@@ -226,24 +269,23 @@ const HTML = /* html */ `
       </g>
     </svg>
 
-    <div class="pill">Premium UK Lettings</div>
-    <div class="wordmark">Elite Tenancy</div>
+    <div class="overline">Premium UK Lettings</div>
 
-    <p class="tagline">
-      <strong>Quality rentals. Zero fees.</strong> AI-powered tenant matching,<br/>
-      verified landlords, and a seamless letting experience across the UK.
-    </p>
+    <div class="wordmark">Elite Tenancy</div>
+    <div class="sub-wordmark">Est. · London · Nationwide</div>
 
     <div class="divider"></div>
 
+    <p class="tagline">
+      Quality rentals, verified landlords &amp; zero upfront fees —<br/>
+      powered by AI matching across the United Kingdom.
+    </p>
+
     <div class="features">
-      <div class="feature"><div class="feature-dot"></div>0% Upfront Fees</div>
-      <div class="sep"></div>
-      <div class="feature"><div class="feature-dot"></div>AI Tenant Matching</div>
-      <div class="sep"></div>
-      <div class="feature"><div class="feature-dot"></div>Verified Landlords</div>
-      <div class="sep"></div>
-      <div class="feature"><div class="feature-dot"></div>Premium Properties</div>
+      <div class="pill-feature"><div class="pill-dot"></div>0% Upfront Fees</div>
+      <div class="pill-feature"><div class="pill-dot"></div>AI Tenant Matching</div>
+      <div class="pill-feature"><div class="pill-dot"></div>Verified Landlords</div>
+      <div class="pill-feature"><div class="pill-dot"></div>Premium Properties</div>
     </div>
   </div>
 
@@ -253,25 +295,24 @@ const HTML = /* html */ `
 `;
 
 (async () => {
-  console.log("🎨 Launching Playwright to render OG image...");
+  console.log("🎨 Rendering OG image (Ivory Luxe theme)...");
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
   await page.setViewportSize({ width: 1200, height: 630 });
   await page.setContent(HTML, { waitUntil: "networkidle" });
-
-  // Wait for Google Fonts to load
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(2500); // wait for Google Fonts
 
   const buffer = await page.screenshot({
     type: "jpeg",
-    quality: 92,
+    quality: 94,
     clip: { x: 0, y: 0, width: 1200, height: 630 },
   });
 
   fs.writeFileSync(OUTPUT, buffer);
   console.log(`✅ OG image saved → ${OUTPUT}`);
-  console.log(`   Size: ${(buffer.length / 1024).toFixed(1)} KB | 1200×630px JPEG`);
+  console.log(`   ${(buffer.length / 1024).toFixed(1)} KB  |  1200×630px JPEG`);
+  console.log(`   Theme: Ivory Luxe (#F8F5EE bg · #132B24 forest green · #B8892E champagne gold)`);
 
   await browser.close();
 })();
