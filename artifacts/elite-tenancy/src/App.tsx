@@ -87,7 +87,12 @@ import { EXTRA_CITIES } from "@/pages/city/extraCities";
 // /sign-up page rendered blank. The key already encodes the correct domain.
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
-const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
+// NOTE: proxyUrl intentionally removed. The VITE_CLERK_PROXY_URL proxy
+// (clerk.elitetenancy.co.uk) was issuing 307 redirects when Googlebot tried
+// to load clerk.browser.js and ui.browser.js, which broke JS hydration and
+// caused a Soft 404 on every blog page. Clerk works correctly without the
+// proxy because the publishable key already encodes the correct Frontend API
+// domain. The env var is kept so existing Vercel config needs no changes.
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -459,7 +464,6 @@ function ClerkProviderWithRoutes() {
   return (
     <ClerkProvider
       publishableKey={clerkPubKey}
-      proxyUrl={clerkProxyUrl}
       appearance={clerkAppearance}
       signInUrl={`${basePath}/sign-in`}
       signUpUrl={`${basePath}/sign-up`}
