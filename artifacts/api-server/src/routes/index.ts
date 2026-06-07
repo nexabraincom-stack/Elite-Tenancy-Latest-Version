@@ -21,6 +21,10 @@ import passportRouter from "./passport";
 import verifyRouter from "./verify";
 import rtrRouter from "./rtr";
 import integrationsRouter from "./integrations";
+// ── Module 2-4: Portal Architecture ──────────────────────────────────────────
+import takeoverRouter from "./takeover";
+import interestRouter from "./interest";
+import { router as launchDiscountRouter } from "../services/launchDiscount";
 
 const router: IRouter = Router();
 
@@ -46,5 +50,9 @@ router.use(landlordRouter);
 router.use(tenantRouter);
 router.use(adminRouter);
 router.use(matchingRouter);
+// ── Portal Architecture routes ────────────────────────────────────────────────
+router.use("/takeover",       takeoverRouter);
+router.use("/interest",       interestRouter);
+router.use("/launch-discount", launchDiscountRouter);
 
 export default router;

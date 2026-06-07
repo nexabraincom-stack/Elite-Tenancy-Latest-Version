@@ -41,8 +41,9 @@ export const STRIPE_PRICES = {
 
 export type ListingTier = "standard" | "professional" | "premium";
 
+// Competitive pricing benchmarked against OpenRent (£29 portal listing) and UK market
 export const TIER_AMOUNTS: Record<ListingTier, number> = {
-  standard:     14900, // £149
-  professional: 29900, // £299
-  premium:      49900, // £499
+  standard:         0, // Free — listed on Elite Tenancy only (no checkout required)
+  professional:  2900, // £29  — matches OpenRent portal listing
+  premium:       5900, // £59  — premium placement + featured badge
 };

@@ -24,6 +24,7 @@ import type { IncomingMessage, Server } from "http";
 import { db, messagesTable, conversationsTable, usersTable } from "@workspace/db";
 import { eq, and, or, isNull, ne } from "drizzle-orm";
 import { logger } from "../lib/logger";
+import { registerDispatcher } from "../lib/wsDispatch";
 import crypto from "crypto";
 
 // ── Token store for WS handshake auth ────────────────────────────────────────
@@ -248,6 +249,14 @@ export function setupWebSocket(server: Server): void {
       if (now > val.expires) wsTokenStore.delete(key);
     }
   }, 60_000);
+
+  // Register the internal dispatcher so routes can push frames to connected users
+  registerDispatcher((userId: number, payload: unknown) => {
+    const ws = clients.get(userId);
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify(payload));
+    }
+  });
 
   logger.info("WebSocket server running on /ws");
 }

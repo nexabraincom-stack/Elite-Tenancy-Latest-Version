@@ -56,6 +56,18 @@ router.post("/payments/landlord/checkout", requireAuth(), async (req: Request, r
   try {
     const origin = req.headers.origin ?? "https://www.elitetenancy.co.uk";
 
+    // Standard tier is free — skip Stripe checkout entirely
+    if (tier === "standard") {
+      await pool.query(
+        `INSERT INTO listing_payments (listing_id, landlord_id, stripe_session_id, tier, amount_pence, status, paid_at)
+         VALUES ($1, $2, $3, $4, 0, 'paid', NOW())
+         ON CONFLICT (stripe_session_id) DO NOTHING`,
+        [listingId ?? null, user.id, `free-${user.id}-${listingId ?? "none"}-${Date.now()}`],
+      );
+      res.json({ checkoutUrl: `${origin}/landlord/dashboard?payment=success`, sessionId: null });
+      return;
+    }
+
     const stripeCustomerId = await getOrCreateStripeCustomer(user.id, user.email, user.name);
 
     // Idempotency key scoped to user+tier+listing within a 1-hour window
@@ -73,11 +85,9 @@ router.post("/payments/landlord/checkout", requireAuth(), async (req: Request, r
             unit_amount: TIER_AMOUNTS[tier],
             product_data: {
               name: `Elite Tenancy — ${tier.charAt(0).toUpperCase() + tier.slice(1)} Listing`,
-              description: tier === "standard"
-                ? "Your property listed until let — pay only on completion"
-                : tier === "professional"
-                ? "Professional photography, premium placement, tenant shortlisting"
-                : "Premium: everything + 12-month landlord guarantee + legal pack",
+              description: tier === "professional"
+                ? "Listed on Elite Tenancy + Rightmove + Zoopla, tenant shortlisting included"
+                : "Everything in Professional + featured badge, priority placement, legal pack",
             },
           },
           quantity: 1,
@@ -144,7 +154,8 @@ router.post("/payments/rent/setup-mandate", requireAuth(), async (req: Request, 
 // ── Landlord: Completion fee invoice ─────────────────────────────────────────
 router.post("/payments/landlord/completion-fee", requireAuth(), async (req: Request, res: Response): Promise<void> => {
   const user = res.locals.user;
-  const { tenancyId, monthlyRent, tierPercent = 50 } = req.body as {
+  // tierPercent defaults to 25 = one week's rent (industry-competitive vs SpareRoom's £149 flat)
+  const { tenancyId, monthlyRent, tierPercent = 25 } = req.body as {
     tenancyId: number;
     monthlyRent: number;
     tierPercent?: number;
@@ -175,7 +186,7 @@ router.post("/payments/landlord/completion-fee", requireAuth(), async (req: Requ
       invoice: invoice.id,
       amount: completionAmount * 100, // pence
       currency: "gbp",
-      description: `Elite Tenancy completion fee (${tierPercent}% of first month's rent)`,
+      description: `Elite Tenancy completion fee — one week's rent (${tierPercent}% of monthly). No placement, no charge.`,
     });
 
     const finalised = await stripe.invoices.finalizeInvoice(invoice.id);
