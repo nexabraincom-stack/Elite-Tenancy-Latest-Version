@@ -2,6 +2,7 @@ import { useState } from "react";
 import PublicLayout from "@/components/PublicLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { useSeo } from "@/hooks/use-seo";
 
 const landlordSteps = [
   { step: "01", title: "Book your free valuation", desc: "A senior member of our team visits your property, assesses its condition and location, and provides a realistic, data-backed rental valuation." },
@@ -22,6 +23,11 @@ const tenantSteps = [
 ];
 
 export default function HowItWorks() {
+  useSeo({
+    title: "How Elite Tenancy Works | UK Lettings Made Simple",
+    description: "See exactly how Elite Tenancy works for landlords and tenants. From valuation to move-in in as little as 12 days.",
+    canonical: "https://www.elitetenancy.co.uk/how-it-works",
+  });
   const [tab, setTab] = useState<"landlord" | "tenant">("landlord");
   const steps = tab === "landlord" ? landlordSteps : tenantSteps;
 

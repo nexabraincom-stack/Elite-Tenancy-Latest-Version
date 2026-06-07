@@ -3,8 +3,14 @@ import { Badge } from "@/components/ui/badge";
 import { Clock } from "lucide-react";
 import PublicLayout from "@/components/PublicLayout";
 import { useGetBlogArticles } from "@workspace/api-client-react";
+import { useSeo } from "@/hooks/use-seo";
 
 export default function Blog() {
+  useSeo({
+    title: "UK Lettings Blog — Landlord & Tenant Guides 2026 | Elite Tenancy",
+    description: "Expert UK lettings guides for landlords and tenants. Renters' Rights Act, Section 21, HMO licences, deposit rules, and rental market insights.",
+    canonical: "https://www.elitetenancy.co.uk/blog",
+  });
   const { data: articles, isLoading } = useGetBlogArticles();
 
   return (

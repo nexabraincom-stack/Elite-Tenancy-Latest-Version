@@ -1,33 +1,46 @@
 import { useEffect } from "react";
 
+const BASE_URL = "https://www.elitetenancy.co.uk";
 const DEFAULT_TITLE = "Elite Tenancy — Premium UK Lettings Platform";
 const DEFAULT_DESC =
   "Elite Tenancy connects high-quality tenants with premium UK rental properties. AI-powered tenant matching, transparent pricing, and dedicated support for landlords and renters.";
+const DEFAULT_IMAGE = `${BASE_URL}/og-image.jpg`;
 
 interface SeoOptions {
   title?: string;
   description?: string;
   canonical?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 
 /**
- * Dynamically updates <title>, meta description, and canonical link
- * for each page. Called in each page component's top-level render.
- *
- * Resets to defaults on unmount so navigating back to a page
- * without useSeo doesn't leave a stale title.
+ * Dynamically updates all SEO-relevant <head> tags for the current page.
+ * Handles: <title>, meta description, robots, canonical, og:*, twitter:*
+ * Resets to homepage defaults on unmount so navigating away doesn't leave
+ * stale tags on the next page that doesn't call useSeo().
  */
-export function useSeo({ title, description, canonical, ogImage }: SeoOptions = {}) {
-  const fullTitle = title ? `${title} | Elite Tenancy` : DEFAULT_TITLE;
+export function useSeo({
+  title,
+  description,
+  canonical,
+  ogImage,
+  noindex = false,
+}: SeoOptions = {}) {
+  const fullTitle = title ?? DEFAULT_TITLE;
   const fullDesc = description ?? DEFAULT_DESC;
+  const effectiveCanonical =
+    canonical ?? `${window.location.origin}${window.location.pathname}`;
+  const effectiveImage = ogImage ?? DEFAULT_IMAGE;
 
   useEffect(() => {
-    // Title
+    // ── Title ──────────────────────────────────────────────────────────────
     document.title = fullTitle;
 
-    // Meta description
-    let metaDesc = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    // ── Meta description ───────────────────────────────────────────────────
+    let metaDesc = document.querySelector(
+      'meta[name="description"]'
+    ) as HTMLMetaElement | null;
     if (!metaDesc) {
       metaDesc = document.createElement("meta");
       metaDesc.name = "description";
@@ -35,13 +48,21 @@ export function useSeo({ title, description, canonical, ogImage }: SeoOptions = 
     }
     metaDesc.content = fullDesc;
 
-    // Canonical — always set; fall back to the current page URL so every
-    // page gets a unique canonical even when no explicit override is provided
-    // (e.g. a blog article whose API fetch failed still gets the right URL,
-    // not the homepage fallback that was previously hard-coded in index.html).
-    const effectiveCanonical =
-      canonical ?? `${window.location.origin}${window.location.pathname}`;
-    let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    // ── Robots ─────────────────────────────────────────────────────────────
+    let metaRobots = document.querySelector(
+      'meta[name="robots"]'
+    ) as HTMLMetaElement | null;
+    if (!metaRobots) {
+      metaRobots = document.createElement("meta");
+      metaRobots.name = "robots";
+      document.head.appendChild(metaRobots);
+    }
+    metaRobots.content = noindex ? "noindex, nofollow" : "index, follow";
+
+    // ── Canonical ──────────────────────────────────────────────────────────
+    let link = document.querySelector(
+      'link[rel="canonical"]'
+    ) as HTMLLinkElement | null;
     if (!link) {
       link = document.createElement("link");
       link.rel = "canonical";
@@ -49,25 +70,39 @@ export function useSeo({ title, description, canonical, ogImage }: SeoOptions = 
     }
     link.href = effectiveCanonical;
 
-    // OG title + description
-    const ogTitle = document.querySelector('meta[property="og:title"]') as HTMLMetaElement | null;
-    if (ogTitle) ogTitle.content = fullTitle;
-    const ogDesc = document.querySelector('meta[property="og:description"]') as HTMLMetaElement | null;
-    if (ogDesc) ogDesc.content = fullDesc;
-    if (ogImage) {
-      const ogImg = document.querySelector('meta[property="og:image"]') as HTMLMetaElement | null;
-      if (ogImg) ogImg.content = ogImage;
-    }
+    // ── Open Graph ─────────────────────────────────────────────────────────
+    const setMeta = (
+      selector: string,
+      attr: string,
+      value: string
+    ) => {
+      const el = document.querySelector(selector) as HTMLMetaElement | null;
+      if (el) el.setAttribute(attr, value);
+    };
 
-    // Twitter
-    const twTitle = document.querySelector('meta[name="twitter:title"]') as HTMLMetaElement | null;
-    if (twTitle) twTitle.content = fullTitle;
-    const twDesc = document.querySelector('meta[name="twitter:description"]') as HTMLMetaElement | null;
-    if (twDesc) twDesc.content = fullDesc;
+    setMeta('meta[property="og:title"]',       "content", fullTitle);
+    setMeta('meta[property="og:description"]', "content", fullDesc);
+    setMeta('meta[property="og:url"]',         "content", effectiveCanonical);
+    setMeta('meta[property="og:image"]',       "content", effectiveImage);
 
+    // ── Twitter Card ───────────────────────────────────────────────────────
+    setMeta('meta[name="twitter:title"]',       "content", fullTitle);
+    setMeta('meta[name="twitter:description"]', "content", fullDesc);
+    setMeta('meta[name="twitter:image"]',       "content", effectiveImage);
+
+    // ── Cleanup: reset to homepage defaults on unmount ─────────────────────
     return () => {
       document.title = DEFAULT_TITLE;
-      if (metaDesc) metaDesc.content = DEFAULT_DESC;
+      if (metaDesc)   metaDesc.content   = DEFAULT_DESC;
+      if (metaRobots) metaRobots.content = "index, follow";
+      if (link)       link.href          = `${BASE_URL}/`;
+      setMeta('meta[property="og:title"]',       "content", DEFAULT_TITLE);
+      setMeta('meta[property="og:description"]', "content", DEFAULT_DESC);
+      setMeta('meta[property="og:url"]',         "content", `${BASE_URL}/`);
+      setMeta('meta[property="og:image"]',       "content", DEFAULT_IMAGE);
+      setMeta('meta[name="twitter:title"]',       "content", DEFAULT_TITLE);
+      setMeta('meta[name="twitter:description"]', "content", DEFAULT_DESC);
+      setMeta('meta[name="twitter:image"]',       "content", DEFAULT_IMAGE);
     };
-  }, [fullTitle, fullDesc, canonical, ogImage]);
+  }, [fullTitle, fullDesc, effectiveCanonical, effectiveImage, noindex]);
 }

@@ -59,6 +59,13 @@ const RenterPassport = lazy(() => import("@/pages/RenterPassport"));
 const RoomWanted = lazy(() => import("@/pages/RoomWanted"));
 const VerifyLandlord = lazy(() => import("@/pages/VerifyLandlord"));
 const RightToRentCheck = lazy(() => import("@/pages/RightToRentCheck"));
+
+// International SEO landing pages
+const InternationalStudents = lazy(() => import("@/pages/InternationalStudents"));
+const MoveToUK = lazy(() => import("@/pages/MoveToUK"));
+const EuCitizensGuide = lazy(() => import("@/pages/EuCitizensGuide"));
+const LondonRentalsEurope = lazy(() => import("@/pages/LondonRentalsEurope"));
+const UkVisaRentalGuide = lazy(() => import("@/pages/UkVisaRentalGuide"));
 const Profile = lazy(() => import("@/pages/Profile"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 import { ChatProvider } from "@/contexts/ChatContext";
@@ -338,6 +345,12 @@ function AppRoutes() {
       <Route path="/rooms-to-let" component={RoomsToLet} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogArticle} />
+      {/* International SEO landing pages */}
+      <Route path="/international-students" component={InternationalStudents} />
+      <Route path="/move-to-uk" component={MoveToUK} />
+      <Route path="/eu-citizens-uk-rental-guide" component={EuCitizensGuide} />
+      <Route path="/london-rentals-for-europeans" component={LondonRentalsEurope} />
+      <Route path="/uk-visa-rental-guide" component={UkVisaRentalGuide} />
       <Route path="/valuation" component={Valuation} />
       <Route path="/contact" component={Contact} />
       <Route path="/privacy" component={Privacy} />

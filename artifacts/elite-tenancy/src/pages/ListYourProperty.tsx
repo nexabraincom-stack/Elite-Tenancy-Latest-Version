@@ -10,10 +10,16 @@ import { useToast } from "@/hooks/use-toast";
 import PublicLayout from "@/components/PublicLayout";
 import { useCreateListing } from "@workspace/api-client-react";
 import { useLocation } from "wouter";
+import { useSeo } from "@/hooks/use-seo";
 
 const STEPS = ["Property Details", "Pricing & Features", "Review & Submit"];
 
 export default function ListYourProperty() {
+  useSeo({
+    title: "List Your Property | Elite Tenancy for Landlords",
+    description: "List your UK rental property with Elite Tenancy for free. Reach thousands of pre-qualified tenants. Only pay on successful let.",
+    canonical: "https://www.elitetenancy.co.uk/list-your-property",
+  });
   const [step, setStep] = useState(0);
   const [, navigate] = useLocation();
   const { toast } = useToast();

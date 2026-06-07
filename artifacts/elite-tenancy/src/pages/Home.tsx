@@ -7,11 +7,17 @@ import { Badge } from "@/components/ui/badge";
 import PublicLayout from "@/components/PublicLayout";
 import PropertyCard from "@/components/PropertyCard";
 import { useGetFeaturedListings, useGetPlatformStats, useGetBlogArticles } from "@workspace/api-client-react";
+import { useSeo } from "@/hooks/use-seo";
 
 const SEARCH_CITIES = ["London", "Manchester", "Birmingham", "Leeds", "Bristol", "Sheffield", "Liverpool", "Edinburgh", "Cardiff", "Glasgow", "Harrogate"];
 const SEARCH_BUDGETS = [800, 1000, 1200, 1500, 2000, 2500, 3000];
 
 export default function Home() {
+  useSeo({
+    title: "Elite Tenancy — Premium UK Lettings Platform",
+    description: "Elite Tenancy connects high-quality tenants with premium UK rental properties. AI-powered tenant matching, transparent pricing, and dedicated support for landlords and renters.",
+    canonical: "https://www.elitetenancy.co.uk/",
+  });
   const { data: featured } = useGetFeaturedListings();
   const { data: stats } = useGetPlatformStats();
   const { data: articles } = useGetBlogArticles();

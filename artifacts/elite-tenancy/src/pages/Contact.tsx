@@ -7,8 +7,14 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import PublicLayout from "@/components/PublicLayout";
 import { useSubmitContact } from "@workspace/api-client-react";
+import { useSeo } from "@/hooks/use-seo";
 
 export default function Contact() {
+  useSeo({
+    title: "Contact Elite Tenancy | UK Lettings Help & Support",
+    description: "Contact Elite Tenancy for landlord or tenant support. Call, email, or submit a form — our team responds within one business day.",
+    canonical: "https://www.elitetenancy.co.uk/contact",
+  });
   const submitContact = useSubmitContact();
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);

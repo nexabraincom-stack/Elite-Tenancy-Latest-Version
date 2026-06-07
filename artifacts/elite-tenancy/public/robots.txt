@@ -9,6 +9,7 @@ Disallow: /sign-in
 Disallow: /sign-up
 Disallow: /profile
 Disallow: /dashboard
+Crawl-delay: 1
 
 # Sitemap
 Sitemap: https://www.elitetenancy.co.uk/sitemap.xml

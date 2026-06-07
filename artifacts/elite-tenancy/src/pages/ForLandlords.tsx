@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { CheckCircle2, Shield, TrendingUp, Users, Clock, Star, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PublicLayout from "@/components/PublicLayout";
+import { useSeo } from "@/hooks/use-seo";
 
 const benefits = [
   { icon: Shield, title: "Zero Upfront Risk", desc: "We only invoice on successful completion. If we don't let your property, you don't pay." },
@@ -23,6 +24,11 @@ const steps = [
 ];
 
 export default function ForLandlords() {
+  useSeo({
+    title: "Let Your Property with Elite Tenancy | For Landlords",
+    description: "Let your UK property with Elite Tenancy. Completion-only fees, 12-day average turnaround, six-stage tenant screening. Zero upfront cost.",
+    canonical: "https://www.elitetenancy.co.uk/for-landlords",
+  });
   return (
     <PublicLayout>
       {/* Hero */}

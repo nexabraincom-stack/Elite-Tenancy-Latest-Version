@@ -6,8 +6,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import PublicLayout from "@/components/PublicLayout";
 import PropertyCard from "@/components/PropertyCard";
 import { useGetListings } from "@workspace/api-client-react";
+import { useSeo } from "@/hooks/use-seo";
 
 export default function FindARoom() {
+  useSeo({
+    title: "Find a Room to Rent in the UK | Elite Tenancy",
+    description: "Find your perfect room or flat to rent across the UK. Verified listings, AI-powered matching, and zero agency fees for tenants.",
+    canonical: "https://www.elitetenancy.co.uk/find-a-room",
+  });
   const [city, setCity] = useState("");
   const [maxPrice, setMaxPrice] = useState<number | undefined>();
   const [bedrooms, setBedrooms] = useState<number | undefined>();

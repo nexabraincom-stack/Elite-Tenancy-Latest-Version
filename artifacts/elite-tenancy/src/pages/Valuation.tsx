@@ -8,8 +8,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import PublicLayout from "@/components/PublicLayout";
 import { useSubmitValuation } from "@workspace/api-client-react";
+import { useSeo } from "@/hooks/use-seo";
 
 export default function Valuation() {
+  useSeo({
+    title: "Free Rental Valuation | Elite Tenancy",
+    description: "Get a free, data-driven rental valuation for your UK property. Elite Tenancy's experts advise on achievable rent and presentation.",
+    canonical: "https://www.elitetenancy.co.uk/valuation",
+  });
   const submitValuation = useSubmitValuation();
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);

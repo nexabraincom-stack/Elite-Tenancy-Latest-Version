@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
@@ -10,25 +10,54 @@
     <meta name="keywords" content="premium lettings, luxury rentals UK, find a room London, property to rent, landlord platform, tenant matching, UK lettings agent" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Elite Tenancy Ltd" />
-    <!-- Canonical URL is set dynamically per-page by useSeo() in the React app -->
+
+    <!-- Canonical (homepage default; overridden per-route by prerender script and per-page by useSeo()) -->
+    <link rel="canonical" href="https://www.elitetenancy.co.uk/" />
+
+    <!-- hreflang — international targeting -->
+    <link rel="alternate" hreflang="en"       href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-GB"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-US"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-AU"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-CA"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-AE"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-SG"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-IN"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-NG"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-DE"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-FR"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-ES"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-IT"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-PL"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="en-NL"    href="https://www.elitetenancy.co.uk/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.elitetenancy.co.uk/" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Elite Tenancy" />
-    <meta property="og:title" content="Elite Tenancy — Premium UK Lettings Platform" />
+    <meta property="og:type"        content="website" />
+    <meta property="og:site_name"   content="Elite Tenancy" />
+    <meta property="og:title"       content="Elite Tenancy — Premium UK Lettings Platform" />
     <meta property="og:description" content="Find your perfect premium rental property in the UK. AI-powered matching, verified landlords, and a seamless letting experience." />
-    <meta property="og:url" content="https://www.elitetenancy.co.uk/" />
-    <meta property="og:image" content="https://www.elitetenancy.co.uk/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
+    <meta property="og:url"         content="https://www.elitetenancy.co.uk/" />
+    <meta property="og:image"       content="https://www.elitetenancy.co.uk/og-image.jpg" />
+    <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image:alt"    content="Elite Tenancy — Premium UK Lettings Platform" />
+    <meta property="og:locale"      content="en_GB" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@EliteTenancy" />
-    <meta name="twitter:title" content="Elite Tenancy — Premium UK Lettings Platform" />
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@EliteTenancy" />
+    <meta name="twitter:creator"     content="@EliteTenancy" />
+    <meta name="twitter:title"       content="Elite Tenancy — Premium UK Lettings Platform" />
     <meta name="twitter:description" content="Find your perfect premium rental property in the UK. AI-powered matching, verified landlords, and a seamless letting experience." />
-    <meta name="twitter:image" content="https://www.elitetenancy.co.uk/og-image.jpg" />
+    <meta name="twitter:image"       content="https://www.elitetenancy.co.uk/og-image.jpg" />
+    <meta name="twitter:image:alt"   content="Elite Tenancy — Premium UK Lettings Platform" />
+
+    <!-- Security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options"        content="DENY" />
+    <meta http-equiv="Referrer-Policy"        content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy"     content="camera=(), microphone=(), geolocation=()" />
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -41,7 +70,7 @@
     <!-- Plausible Analytics (GDPR-safe, no cookie banner needed) -->
     <script defer data-domain="elitetenancy.co.uk" src="https://plausible.io/js/script.js"></script>
 
-    <!-- Structured Data — Organisation -->
+    <!-- Structured Data — RealEstateAgent -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -50,6 +79,7 @@
       "legalName": "Elite Tenancy Ltd",
       "url": "https://www.elitetenancy.co.uk",
       "logo": "https://www.elitetenancy.co.uk/logo.svg",
+      "image": "https://www.elitetenancy.co.uk/og-image.jpg",
       "description": "Premium UK lettings platform connecting quality tenants with exceptional rental properties. Zero upfront fees, AI-powered matching, completion-only model.",
       "email": "info@elitetenancy.co.uk",
       "telephone": "+44-7446-192577",
@@ -66,11 +96,14 @@
         "name": "Companies House Number",
         "value": "17135665"
       },
-      "areaServed": {
-        "@type": "Country",
-        "name": "United Kingdom"
-      },
+      "areaServed": { "@type": "Country", "name": "United Kingdom" },
       "priceRange": "££",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
       "sameAs": [
         "https://twitter.com/EliteTenancy",
         "https://www.linkedin.com/company/elite-tenancy",
@@ -79,7 +112,7 @@
     }
     </script>
 
-    <!-- Structured Data — WebSite (enables Google Sitelinks Search Box) -->
+    <!-- Structured Data — WebSite + Sitelinks SearchBox -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -96,9 +129,44 @@
       }
     }
     </script>
+
+    <!-- Structured Data — BreadcrumbList (homepage) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.elitetenancy.co.uk/"
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Noscript fallback for crawlers and non-JS environments -->
+    <noscript>
+      <h1>Elite Tenancy — Premium UK Lettings Platform</h1>
+      <p>Elite Tenancy connects high-quality tenants with premium UK rental properties. AI-powered tenant matching, zero upfront fees, and dedicated support for landlords and renters across the UK.</p>
+      <nav aria-label="Site navigation">
+        <ul>
+          <li><a href="/listings">Browse Properties to Rent</a></li>
+          <li><a href="/for-landlords">For Landlords</a></li>
+          <li><a href="/find-a-room">Find a Room</a></li>
+          <li><a href="/renter-passport">Renter Passport</a></li>
+          <li><a href="/right-to-rent-check">Right to Rent Check</a></li>
+          <li><a href="/blog">UK Lettings Blog</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </nav>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
