@@ -92,7 +92,7 @@ export default function Contact() {
 
           <div className="space-y-5">
             {[
-              { icon: MapPin, title: "Office", lines: ["Office 18077, 182-184 High Street North", "East Ham, London, E6 2JA"] },
+              { icon: MapPin, title: "Registered office (correspondence only)", lines: ["Office 18077, 182-184 High Street North", "East Ham, London, E6 2JA"] },
               { icon: Phone, title: "Phone", lines: ["+44 7446 192577"] },
               { icon: Mail, title: "Email", lines: ["info@elitetenancy.co.uk"] },
               { icon: Clock, title: "Hours", lines: ["Mon–Fri: 9am–6pm", "Sat: 10am–4pm"] },

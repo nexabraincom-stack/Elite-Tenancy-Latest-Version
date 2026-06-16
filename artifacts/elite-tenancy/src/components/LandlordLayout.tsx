@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Building2, Users, PoundSterling, Wrench, UserCheck, MessageSquare, LogOut, Star, User, KeyRound } from "lucide-react";
+import { LayoutDashboard, Building2, Users, PoundSterling, Wrench, UserCheck, MessageSquare, LogOut, Star, User, KeyRound, Fingerprint, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useUser, useClerk } from "@clerk/react";
 import { useChatContext } from "@/contexts/ChatContext";
@@ -13,6 +13,8 @@ const navItems = [
   { label: "Finances", href: "/landlord/finances", icon: PoundSterling },
   { label: "Maintenance", href: "/landlord/maintenance", icon: Wrench },
   { label: "Leads", href: "/landlord/leads", icon: UserCheck },
+  { label: "Passports", href: "/landlord/passports", icon: Fingerprint },
+  { label: "Room Wanted", href: "/landlord/room-wanted", icon: Search },
   { label: "Managed", href: "/landlord/managed", icon: KeyRound },
   { label: "Messages", href: "/landlord/messages", icon: MessageSquare },
 ];
