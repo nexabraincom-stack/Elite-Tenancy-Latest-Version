@@ -4,3 +4,5 @@ export { setBaseUrl, setAuthTokenGetter } from "./custom-fetch";
 export type { AuthTokenGetter } from "./custom-fetch";
 export { useGetAuthMe } from "./hooks/useAuthMe";
 export type { AuthMe } from "./hooks/useAuthMe";
+export { useGetPassports } from "./hooks/useGetPassports";
+export type { PassportsResponse, RenterPassportSummary } from "./hooks/useGetPassports";
