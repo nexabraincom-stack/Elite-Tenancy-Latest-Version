@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import PublicLayout from "@/components/PublicLayout";
 import { useSeo } from "@/hooks/use-seo";
+import { useJsonLd } from "@/hooks/use-json-ld";
 
 const plans = [
   {
@@ -104,12 +105,26 @@ const faqs = [
   },
 ];
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(({ q, a }) => ({
+    "@type": "Question",
+    "name": q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": a,
+    },
+  })),
+};
+
 export default function Pricing() {
   useSeo({
     title: "Transparent Lettings Pricing | Elite Tenancy",
     description: "Honest, transparent lettings pricing. Elite Tenancy charges landlords only on successful completion. No hidden fees, no upfront costs.",
     canonical: "https://www.elitetenancy.co.uk/pricing",
   });
+  useJsonLd("pricing-faq", faqSchema);
   return (
     <PublicLayout>
       <section className="bg-gradient-to-br from-card to-background border-b border-border/50">

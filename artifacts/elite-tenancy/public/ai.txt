@@ -1,0 +1,18 @@
+# ai.txt - AI usage guidance for Elite Tenancy
+# https://www.elitetenancy.co.uk/ai.txt
+
+# Elite Tenancy welcomes AI and LLM crawlers for answer-engine visibility.
+# For a structured, LLM-friendly summary of this site, see llms.txt:
+LLM-Content: https://www.elitetenancy.co.uk/llms.txt
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /profile/
+Disallow: /sign-in/
+Disallow: /sign-up/
+
+Sitemap: https://www.elitetenancy.co.uk/sitemap.xml
+Contact: info@elitetenancy.co.uk
