@@ -1,3 +1,6 @@
+# Elite Tenancy - robots.txt
+# https://www.elitetenancy.co.uk
+
 User-agent: *
 Allow: /
 Disallow: /api/
@@ -11,4 +14,37 @@ Disallow: /profile/
 Disallow: /dashboard/
 Crawl-delay: 1
 
-Sitemap: https://elitetenancy.co.uk/sitemap.xml
+# AI / LLM crawlers - explicitly welcomed for answer-engine visibility (GEO/AEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# LLM-readable site summary: https://www.elitetenancy.co.uk/llms.txt
+
+Sitemap: https://www.elitetenancy.co.uk/sitemap.xml

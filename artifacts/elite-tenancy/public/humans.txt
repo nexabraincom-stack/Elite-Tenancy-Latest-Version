@@ -1,0 +1,13 @@
+/* TEAM */
+Company: Elite Tenancy Ltd
+Companies House: 17135665
+Site: https://www.elitetenancy.co.uk
+Contact: info [at] elitetenancy.co.uk
+Location: East Ham, London, United Kingdom
+
+/* SITE */
+Last update: 2026/06/16
+Language: English (UK)
+Standards: HTML5, CSS3
+Components: React, Vite, TypeScript, Tailwind CSS
+AI summary: https://www.elitetenancy.co.uk/llms.txt
