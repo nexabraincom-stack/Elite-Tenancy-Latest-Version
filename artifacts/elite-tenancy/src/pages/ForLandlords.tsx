@@ -15,12 +15,12 @@ const benefits = [
 ];
 
 const steps = [
-  { step: "01", title: "Free Valuation", desc: "We visit your property, advise on presentation and pricing, and give you a realistic assessment of achievable rent." },
-  { step: "02", title: "Professional Marketing", desc: "We produce professional photography, write compelling copy, and list on all major portals plus our own premium platform." },
+  { step: "01", title: "Free Valuation", desc: "We remotely assess your property using listing details, market data, and comparable lettings to provide a realistic rental valuation." },
+  { step: "02", title: "Professional Marketing", desc: "We arrange professional photography (via trusted local partners), write compelling copy, and list on all major portals plus our premium platform." },
   { step: "03", title: "Tenant Matching", desc: "We match applicants from our active tenant database before going to market, often letting within days." },
   { step: "04", title: "Rigorous Screening", desc: "Every applicant completes our six-stage screening process. We only progress those who meet your criteria." },
-  { step: "05", title: "Tenancy Setup", desc: "We prepare the AST, conduct the Right to Rent check, arrange deposit protection, and issue all prescribed information." },
-  { step: "06", title: "Completion & Payment", desc: "Once the tenancy commences, we issue our invoice. No let — no fee." },
+  { step: "05", title: "You approve the tenant", desc: "We present you with our recommendation and the full screening report. The final decision is always yours." },
+  { step: "06", title: "Tenancy Setup", desc: "We guide you through preparing the AST, conducting Right to Rent checks (using GOV.UK share codes), and arranging deposit protection. Once the tenant moves in, we invoice." },
 ];
 
 export default function ForLandlords() {

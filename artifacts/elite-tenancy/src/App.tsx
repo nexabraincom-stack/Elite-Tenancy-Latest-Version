@@ -39,6 +39,7 @@ const LandlordTenants = lazy(() => import("@/pages/landlord/Tenants"));
 const LandlordFinances = lazy(() => import("@/pages/landlord/Finances"));
 const LandlordMaintenance = lazy(() => import("@/pages/landlord/Maintenance"));
 const LandlordLeads = lazy(() => import("@/pages/landlord/Leads"));
+const LandlordPassports = lazy(() => import("@/pages/landlord/Passports"));
 const LandlordManaged = lazy(() => import("@/pages/landlord/Managed"));
 
 const AdminDashboard = lazy(() => import("@/pages/admin/Dashboard"));
@@ -437,6 +438,9 @@ function AppRoutes() {
       </Route>
       <Route path="/landlord/leads">
         {() => <ProtectedRoute component={LandlordLeads} requiredRole="landlord" />}
+      </Route>
+      <Route path="/landlord/passports">
+        {() => <ProtectedRoute component={LandlordPassports} requiredRole="landlord" />}
       </Route>
       <Route path="/landlord/managed">
         {() => <ProtectedRoute component={LandlordManaged} requiredRole="landlord" />}

@@ -222,7 +222,7 @@ export default function ListYourProperty() {
               <div className="bg-primary/5 border border-primary/15 rounded-lg p-4 mt-6">
                 <p className="text-sm text-foreground font-medium mb-1">No let, no fee</p>
                 <p className="text-xs text-muted-foreground">
-                  Once submitted, our team will contact you within 24 hours to arrange a valuation visit and discuss your requirements. You'll only pay our Introduction Only fee — equivalent to two weeks' rent — when a tenant successfully moves in.
+                  Once submitted, our team will contact you within 24 hours to discuss your requirements remotely. You'll only pay our Introduction Only fee — equivalent to two weeks' rent — when a tenant successfully moves in.
                 </p>
               </div>
             </div>

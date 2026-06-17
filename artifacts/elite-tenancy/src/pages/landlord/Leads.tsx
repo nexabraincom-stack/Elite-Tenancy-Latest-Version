@@ -28,7 +28,7 @@ export default function LandlordLeads() {
         <div className="bg-card border border-border/50 rounded-xl p-12 text-center">
           <p className="text-muted-foreground">No leads yet.</p>
         </div>
-      ) : (
+      ): (
         <div className="bg-card border border-border/50 rounded-xl overflow-hidden">
           <div className="grid grid-cols-[2fr_2fr_1fr_auto] gap-4 px-6 py-3 bg-muted/30 text-xs font-medium text-muted-foreground border-b border-border/50">
             <span>Contact</span>
@@ -37,7 +37,7 @@ export default function LandlordLeads() {
             <span>Status</span>
           </div>
           <div className="divide-y divide-border/30">
-            {leads.map((lead) => (
+            {leads!.map((lead) => (
               <div key={lead.id} className="grid grid-cols-[2fr_2fr_1fr_auto] gap-4 px-6 py-4 items-center text-sm hover:bg-muted/20 transition-colors">
                 <div>
                   <p className="text-foreground font-medium">{lead.name}</p>

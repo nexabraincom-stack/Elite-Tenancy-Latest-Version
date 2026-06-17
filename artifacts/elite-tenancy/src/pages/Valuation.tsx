@@ -50,7 +50,7 @@ export default function Valuation() {
           </div>
           <h1 className="font-serif text-4xl font-bold text-foreground mb-3">Request Received</h1>
           <p className="text-muted-foreground text-lg">
-            Thank you, {form.name}. A member of our valuation team will contact you within 24 hours to arrange a convenient time to visit your property.
+            Thank you, {form.name}. A member of our valuation team will contact you within 24 hours to discuss your property remotely.
           </p>
         </div>
       </PublicLayout>
@@ -64,7 +64,7 @@ export default function Valuation() {
           <p className="text-xs text-primary uppercase tracking-widest font-medium mb-3">Free of charge</p>
           <h1 className="font-serif text-5xl font-bold text-foreground mb-3">Free Rental Valuation</h1>
           <p className="text-muted-foreground max-w-xl">
-            Find out what your property could achieve on the rental market. Our team will visit and provide a detailed, data-backed assessment.
+            Find out what your property could achieve on the rental market. We provide a detailed, data-backed assessment using market insights.
           </p>
         </div>
       </div>

@@ -275,6 +275,8 @@ router.get("/passports", requireAuth(), requireRole("landlord", "admin"), async 
     .select({
       id: renterPassportsTable.id,
       name: renterPassportsTable.name,
+      email: renterPassportsTable.email,
+      phone: renterPassportsTable.phone,
       city: renterPassportsTable.city,
       minBudget: renterPassportsTable.minBudget,
       maxBudget: renterPassportsTable.maxBudget,

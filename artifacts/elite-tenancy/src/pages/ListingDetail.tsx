@@ -14,7 +14,7 @@ import { Link } from "wouter";
 export default function ListingDetail() {
   const params = useParams<{ id: string }>();
   const id = Number(params.id);
-  const { data: listing, isLoading } = useGetListingById(id, { query: { enabled: !!id } });
+  const { data: listing, isLoading } = useGetListingById(id, { query: { enabled: !!id, queryKey: [`/api/listings/${id}`] } });
   const submitLead = useSubmitLead();
   const { toast } = useToast();
   const [photoIndex, setPhotoIndex] = useState(0);

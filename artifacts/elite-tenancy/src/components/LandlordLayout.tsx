@@ -13,6 +13,7 @@ const navItems = [
   { label: "Finances", href: "/landlord/finances", icon: PoundSterling },
   { label: "Maintenance", href: "/landlord/maintenance", icon: Wrench },
   { label: "Leads", href: "/landlord/leads", icon: UserCheck },
+  { label: "Passports", href: "/landlord/passports", icon: Users },
   { label: "Managed", href: "/landlord/managed", icon: KeyRound },
   { label: "Messages", href: "/landlord/messages", icon: MessageSquare },
 ];

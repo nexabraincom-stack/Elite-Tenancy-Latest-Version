@@ -88,6 +88,7 @@ export const tenanciesTable = pgTable("tenancies", {
   tenancyType: text("tenancy_type").notNull().default("Assured Shorthold Tenancy"),
   status: tenancyStatusEnum("status").notNull().default("active"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
+  reviewRequestedAt: timestamp("review_requested_at"),
 });
 
 export const maintenanceRequestsTable = pgTable("maintenance_requests", {

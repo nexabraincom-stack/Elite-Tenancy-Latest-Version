@@ -5,12 +5,12 @@ import { Link } from "wouter";
 import { useSeo } from "@/hooks/use-seo";
 
 const landlordSteps = [
-  { step: "01", title: "Book your free valuation", desc: "A senior member of our team visits your property, assesses its condition and location, and provides a realistic, data-backed rental valuation." },
-  { step: "02", title: "We prepare your listing", desc: "We organise professional photography, write compelling copy, and prepare your listing for our premium platform and all major property portals." },
+  { step: "01", title: "Book your free valuation", desc: "We remotely assess your property using listing details, market data, and comparable lettings to provide a realistic, data-backed rental valuation." },
+  { step: "02", title: "We prepare your listing", desc: "We arrange professional photography (via trusted local partners), write compelling copy, and prepare your listing for our premium platform and all major property portals." },
   { step: "03", title: "Tenant matching begins", desc: "Before your property goes live, we search our active tenant database for pre-qualified applicants who match your requirements. Many properties let before they're publicly listed." },
-  { step: "04", title: "Viewings and screening", desc: "We arrange and conduct viewings on your behalf, then run every serious applicant through our six-stage screening process." },
+  { step: "04", title: "Viewings coordinated", desc: "We arrange viewings via trusted local viewing agents and run every serious applicant through our six-stage screening process." },
   { step: "05", title: "You approve the tenant", desc: "We present you with our recommendation and the full screening report. The final decision is always yours." },
-  { step: "06", title: "Tenancy setup and completion", desc: "We prepare the tenancy agreement, conduct Right to Rent checks, arrange deposit protection, and issue all prescribed information. Once the tenant moves in, we invoice." },
+  { step: "06", title: "Tenancy setup and completion", desc: "We guide you through preparing the tenancy agreement, conducting Right to Rent checks (using GOV.UK share codes), and arranging deposit protection. Once the tenant moves in, we invoice." },
 ];
 
 const tenantSteps = [

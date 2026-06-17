@@ -25,15 +25,16 @@ export default function CookieConsent() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") return undefined;
     if (!getCookieConsent()) {
       // small delay so it doesn't fight the cinematic intro on first load
       const t = setTimeout(() => setShow(true), 1200);
       return () => clearTimeout(t);
     }
+    return undefined;
   }, []);
 
-  function choose(choice: "all" | "essential") {
+  function choose(choice: "all" | "essential"): void {
     localStorage.setItem(STORAGE_KEY, choice);
     window.dispatchEvent(new CustomEvent("cookie-consent", { detail: choice }));
     setShow(false);

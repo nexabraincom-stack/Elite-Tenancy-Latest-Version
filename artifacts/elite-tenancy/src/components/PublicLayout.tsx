@@ -160,6 +160,8 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                 <li><Link href="/for-landlords" className="hover:text-primary transition-colors">For Landlords</Link></li>
                 <li><Link href="/for-agents" className="hover:text-primary transition-colors">For Agents</Link></li>
                 <li><Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
+                <li><Link href="/spareroom-alternative" className="hover:text-primary transition-colors">SpareRoom Alternative</Link></li>
+                <li><Link href="/rra-2025-checker" className="hover:text-primary transition-colors">RRA 2025 Checker</Link></li>
                 <li><Link href="/blog" className="hover:text-primary transition-colors">Blog</Link></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
               </ul>

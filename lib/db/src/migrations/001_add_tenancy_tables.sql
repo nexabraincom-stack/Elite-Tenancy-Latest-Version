@@ -21,6 +21,10 @@ END $$;
 ALTER TABLE listings
   ADD COLUMN IF NOT EXISTS landlord_id INTEGER REFERENCES users(id);
 
+-- Add review_requested_at column to existing tenancies table (for review automation)
+ALTER TABLE tenancies
+  ADD COLUMN IF NOT EXISTS review_requested_at TIMESTAMP;
+
 -- Tenancies: one active tenancy links a tenant user to a listing
 CREATE TABLE IF NOT EXISTS tenancies (
   id               SERIAL PRIMARY KEY,
@@ -33,7 +37,8 @@ CREATE TABLE IF NOT EXISTS tenancies (
   lease_end        TEXT NOT NULL,
   tenancy_type     TEXT NOT NULL DEFAULT 'Assured Shorthold Tenancy',
   status           tenancy_status NOT NULL DEFAULT 'active',
-  created_at       TIMESTAMP NOT NULL DEFAULT NOW()
+  created_at       TIMESTAMP NOT NULL DEFAULT NOW(),
+  review_requested_at TIMESTAMP
 );
 
 -- Maintenance requests: submitted by tenants, visible to landlords

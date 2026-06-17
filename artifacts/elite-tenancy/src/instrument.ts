@@ -6,7 +6,6 @@ Sentry.init({
   enabled: import.meta.env.PROD,
 
   sendDefaultPii: true,
-  enableLogs: true,
 
   integrations: [
     Sentry.browserTracingIntegration(),

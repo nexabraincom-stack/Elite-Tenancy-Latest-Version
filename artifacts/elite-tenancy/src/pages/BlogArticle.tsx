@@ -57,7 +57,7 @@ function ArticleSchema({
 export default function BlogArticle() {
   const params = useParams<{ slug: string }>();
   const { data: article, isLoading } = useGetBlogArticleBySlug(params.slug, {
-    query: { enabled: !!params.slug },
+    query: { enabled: !!params.slug, queryKey: [`/api/blog/${params.slug}`] },
   });
 
   // IMPORTANT: all hooks must run on every render, BEFORE any early return.
