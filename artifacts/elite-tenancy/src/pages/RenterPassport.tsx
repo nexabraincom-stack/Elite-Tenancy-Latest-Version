@@ -27,8 +27,8 @@ const STEPS = [
 
 export default function RenterPassport() {
   useSeo({
-    title: "Renter Passport — Get Shortlisted by UK Landlords First | Elite Tenancy",
-    description: "Build your free Renter Passport. Our AI turns your profile into a landlord-ready persona with a readiness score, surfaces your best-matching homes, and puts you at the top of landlords' shortlists. Two-way AI matching, only at Elite Tenancy.",
+    title: "Renter Passport — Verified Tenant Profile | Elite Tenancy",
+    description: "Get your free Renter Passport. A verified tenant profile that proves your identity, income, and rental history to landlords in seconds.",
     canonical: "https://www.elitetenancy.co.uk/renter-passport",
   });
 

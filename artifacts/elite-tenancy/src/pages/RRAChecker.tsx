@@ -38,8 +38,8 @@ const ITEMS: Item[] = [
 
 export default function RRAChecker() {
   useSeo({
-    title: "Free Renters' Rights Act 2025 Compliance Checker for UK Landlords",
-    description: "Check your RRA 2025 compliance in 2 minutes. Our free interactive checker covers Section 21 abolition, periodic tenancies, deposits, pets, rent in advance and more — with instant guidance.",
+    title: "Renters' Rights Act 2025 Checker | Free Compliance Tool",
+    description: "Free RRA 2025 compliance checker for UK landlords. Verify tenancy agreements, deposits, pets policy, and Right to Rent obligations in 2 minutes.",
     canonical: "https://www.elitetenancy.co.uk/rra-2025-checker",
   });
 

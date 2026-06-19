@@ -15,7 +15,7 @@ const SEARCH_BUDGETS = [800, 1000, 1200, 1500, 2000, 2500, 3000];
 export default function Home() {
   useSeo({
     title: "Elite Tenancy — Premium UK Lettings Platform",
-    description: "Elite Tenancy connects high-quality tenants with premium UK rental properties. AI-powered tenant matching, transparent pricing, and dedicated support for landlords and renters.",
+    description: "Elite Tenancy connects exceptional landlords with premium UK rental properties. Zero upfront fees — pay only on successful completion.",
     canonical: "https://www.elitetenancy.co.uk/",
   });
   const { data: featured } = useGetFeaturedListings();
@@ -56,8 +56,7 @@ export default function Home() {
             </Badge>
             <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] tracking-tight">
               Find your{" "}
-              <span className="text-accent italic">perfect</span>
-              <br />
+              <span className="text-accent italic">perfect</span>{" "}
               tenancy today
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-xl">

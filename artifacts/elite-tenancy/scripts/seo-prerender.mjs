@@ -53,7 +53,7 @@ const ROUTES = [
   {
     path: "/listings",
     title: "Premium UK Properties to Rent 2026 | Elite Tenancy",
-    desc: "Browse premium UK rental properties. AI-powered matching connects verified landlords with quality tenants. Zero agency fees for tenants.",
+    desc: "Find rooms, flats, and houses to rent across London, Manchester, Birmingham, Leeds, Bristol and more. AI-powered matching, verified landlords.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Listings", path: "/listings" }],
   },
   {
@@ -432,7 +432,7 @@ const BLOG_ARTICLES = [
   {
     slug: "assured-periodic-tenancy-explained",
     title: "Assured Periodic Tenancy Explained 2026 | Elite Tenancy",
-    desc: "All UK tenancies are now rolling assured periodic tenancies. What this means for landlords and tenants — rent increases, notice periods, and possession.",
+    desc: "All UK tenancies are now rolling periodic. What this means for landlords and tenants — rent increases, notice periods, and possession.",
   },
   {
     slug: "rent-in-advance-legal-2026-uk",
@@ -442,7 +442,7 @@ const BLOG_ARTICLES = [
   {
     slug: "hmo-licence-uk-2026-complete-guide",
     title: "HMO Licence UK 2026: Complete Guide for Landlords | Elite Tenancy",
-    desc: "Do you need an HMO licence? Complete guide to Houses in Multiple Occupation licences for UK landlords in 2026, including mandatory and additional licensing.",
+    desc: "Do you need an HMO licence? Complete guide to Houses in Multiple Occupation licences for UK landlords in 2026.",
   },
   {
     slug: "letting-agent-fees-uk-2026-landlord-guide",

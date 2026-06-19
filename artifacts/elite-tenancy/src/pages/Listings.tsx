@@ -12,7 +12,7 @@ import { useGetListings } from "@workspace/api-client-react";
 export default function Listings() {
   useSeo({
     title: "Browse Premium UK Rental Properties 2026",
-    description: "Find rooms, flats, and houses to rent across London, Manchester, Birmingham, Leeds, Bristol and more. AI-powered matching, verified landlords, zero tenant fees.",
+    description: "Find rooms, flats, and houses to rent across London, Manchester, Birmingham, Leeds, Bristol and more. AI-powered matching, verified landlords.",
     canonical: "https://www.elitetenancy.co.uk/listings",
   });
   const [city, setCity] = useState("");

@@ -25,8 +25,8 @@ const ROWS: Array<{ feature: string; elite: string; them: string; eliteWin: bool
 
 export default function SpareRoomAlternative() {
   useSeo({
-    title: "The SpareRoom Alternative That Only Charges When You Succeed",
-    description: "Paid to advertise and got no tenant? Elite Tenancy is the no-let-no-fee SpareRoom alternative — AI-matched tenants, full tenancy management, and RRA 2025 compliance. Pay only on success.",
+    title: "Best SpareRoom Alternative 2026 | Elite Tenancy",
+    description: "Looking for a SpareRoom alternative? Elite Tenancy offers AI-powered matching, verified landlords, and zero fees for tenants. Find your room today.",
     canonical: "https://www.elitetenancy.co.uk/spareroom-alternative",
   });
 
