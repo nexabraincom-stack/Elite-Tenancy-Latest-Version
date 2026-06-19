@@ -153,8 +153,8 @@ const ROUTES = [
   },
   {
     path: "/rra-2025-checker",
-    title: "Renters' Rights Act 2025 Compliance Checker | Elite Tenancy",
-    desc: "Check your compliance with the Renters' Rights Act 2025. Free tool for UK landlords to verify tenancy agreements, deposits, and legal obligations.",
+    title: "Renters' Rights Act 2025 Checker | Free Compliance Tool",
+    desc: "Free RRA 2025 compliance checker for UK landlords. Verify tenancy agreements, deposits, pets policy, and Right to Rent obligations in 2 minutes.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "RRA 2025 Checker", path: "/rra-2025-checker" }],
     schema: {
       "@context": "https://schema.org",
