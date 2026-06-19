@@ -59,7 +59,7 @@ const ROUTES = [
   {
     path: "/for-landlords",
     title: "Let Your Property with Elite Tenancy | For Landlords",
-    desc: "Let your UK property with Elite Tenancy. Completion-only fees, 12-day average turnaround, six-stage tenant screening. Zero upfront cost.",
+    desc: "Let your UK property with Elite Tenancy. Completion-only fees, 12-day average turnaround, and six-stage tenant screening. Zero upfront cost.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "For Landlords", path: "/for-landlords" }],
     schema: {
       "@context": "https://schema.org",
