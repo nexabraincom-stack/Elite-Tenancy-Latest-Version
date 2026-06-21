@@ -126,6 +126,11 @@ app.use("/api/rtr/check", aiLimiter);
 // ── Routes ───────────────────────────────────────────────────────────────────
 app.use("/api", router);
 
+// ── 404 catch-all — must be after all routes, before error handlers ──────────
+app.use((_req, res) => {
+  res.status(404).json({ error: "Not found" });
+});
+
 // ── Sentry error handler — must be after all routes ──────────────────────────
 // Captures unhandled Express errors and sends them to Sentry before the
 // generic error handler runs. Must come before any other error middleware.
