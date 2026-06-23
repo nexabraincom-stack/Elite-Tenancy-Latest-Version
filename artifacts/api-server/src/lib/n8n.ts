@@ -25,6 +25,8 @@ import { logger } from "./logger";
 import * as https from "node:https";
 import * as http from "node:http";
 import { URL } from "node:url";
+import { sendWhatsAppText, toWhatsAppNumber, isWhatsAppConfigured } from "./whatsapp";
+import { sendEmail, getAdminEmail, isEmailConfigured, adminDisputeEmail, landlordSubscriptionEmail } from "./email";
 
 // ── Config helpers ─────────────────────────────────────────────────────────────
 
@@ -274,10 +276,21 @@ export async function fireWebhook(
   });
 }
 
-// ── Convenience wrappers for Elite Tenancy event types ────────────────────────
+// ── Native automation engine — replaces N8N webhooks ─────────────────────────
+//
+// Same exported interface as before so no routes need changing.
+// Automations run natively via WhatsApp (Meta Graph API) + Resend email.
+// N8N REST API client above is kept for future use / re-integration.
+//
+// New env var required for admin alerts:
+//   ADMIN_WHATSAPP_NUMBER  — your business WhatsApp in international format, e.g. "447700900000"
+
+function adminWa(): string | null {
+  return process.env.ADMIN_WHATSAPP_NUMBER ?? null;
+}
 
 export const N8N_EVENTS = {
-  /** WF-01: New enquiry / lead — triggers WhatsApp welcome via Ellie */
+  /** WF-01: New enquiry / lead — WhatsApp alert to admin + welcome to customer */
   async newEnquiry(payload: {
     id: number;
     name: string;
@@ -288,12 +301,42 @@ export const N8N_EVENTS = {
     listingTitle?: string | null;
     source: "lead" | "contact" | "valuation";
   }): Promise<void> {
-    const path = process.env.N8N_WEBHOOK_NEW_ENQUIRY;
-    if (!path) return;
-    await fireWebhook(path, { event: "new_enquiry", timestamp: new Date().toISOString(), ...payload });
+    const admin = adminWa();
+    const sourceLabel = payload.source === "valuation" ? "valuation" : payload.source === "contact" ? "contact" : "lead";
+
+    // Admin WhatsApp alert
+    if (admin && isWhatsAppConfigured()) {
+      sendWhatsAppText(admin, [
+        `🔔 *New ${sourceLabel} enquiry*`,
+        `👤 ${payload.name}`,
+        `📧 ${payload.email}`,
+        `📞 ${payload.phone ?? "—"}`,
+        `🏠 ${payload.listingTitle ?? "General enquiry"}`,
+        payload.message ? `💬 ${payload.message.slice(0, 200)}` : "",
+        `\nhttps://www.elitetenancy.co.uk/admin`,
+      ].filter(Boolean).join("\n")).catch(() => {});
+    }
+
+    // WhatsApp welcome to the customer (Ellie introduction)
+    if (payload.phone && isWhatsAppConfigured()) {
+      const to = toWhatsAppNumber(payload.phone);
+      if (to) {
+        sendWhatsAppText(to, [
+          `Hi ${payload.name} 👋`,
+          ``,
+          `Thanks for reaching out to *Elite Tenancy*! I'm Ellie, your personal lettings assistant.`,
+          ``,
+          `Your enquiry is with us and a specialist will be in touch within 24 hours.`,
+          ``,
+          `In the meantime, I'm here 24/7 — just reply to this message with any questions about our premium homes!`,
+          ``,
+          `https://www.elitetenancy.co.uk/listings`,
+        ].join("\n")).catch(() => {});
+      }
+    }
   },
 
-  /** WF-02: Tenant application — triggers referencing pipeline + WhatsApp confirmation */
+  /** WF-02: Tenant application — WhatsApp alert to admin */
   async tenantApplication(payload: {
     applicationId: number;
     tenantId: string;
@@ -302,12 +345,21 @@ export const N8N_EVENTS = {
     listingId: number;
     listingTitle?: string;
   }): Promise<void> {
-    const path = process.env.N8N_WEBHOOK_NEW_APPLICATION;
-    if (!path) return;
-    await fireWebhook(path, { event: "tenant_application", timestamp: new Date().toISOString(), ...payload });
+    const admin = adminWa();
+    if (admin && isWhatsAppConfigured()) {
+      sendWhatsAppText(admin, [
+        `⭐ *High-intent tenant application*`,
+        ``,
+        `🏠 Listing: ${payload.listingTitle ?? `#${payload.listingId}`}`,
+        `👤 Tenant: ${payload.tenantName}`,
+        `📧 ${payload.tenantEmail}`,
+        ``,
+        `Review their profile: https://www.elitetenancy.co.uk/admin/listings/${payload.listingId}`,
+      ].join("\n")).catch(() => {});
+    }
   },
 
-  /** WF-03: Viewing scheduled — triggers Calendly + WhatsApp reminders */
+  /** WF-03: Viewing scheduled — placeholder for future Vercel Workflow reminder sequence */
   async viewingScheduled(payload: {
     viewingId: number;
     tenantId: string;
@@ -315,24 +367,38 @@ export const N8N_EVENTS = {
     listingId: number;
     viewingDate: string;
   }): Promise<void> {
-    const path = process.env.N8N_WEBHOOK_VIEWING;
-    if (!path) return;
-    await fireWebhook(path, { event: "viewing_scheduled", timestamp: new Date().toISOString(), ...payload });
+    logger.info({ payload }, "Viewing scheduled — reminder automation not yet implemented");
   },
 
-  /** Subscription plan change — triggers CRM update + onboarding sequences */
+  /** Subscription plan change — WhatsApp admin alert + onboarding email to landlord */
   async subscriptionEvent(payload: {
     landlordId: string;
     planId: string;
     status: string;
     subscriptionId: string;
+    landlordEmail?: string;
+    landlordName?: string;
   }): Promise<void> {
-    const path = process.env.N8N_WEBHOOK_SUBSCRIPTION;
-    if (!path) return;
-    await fireWebhook(path, { event: "subscription_change", timestamp: new Date().toISOString(), ...payload });
+    const admin = adminWa();
+    if (admin && isWhatsAppConfigured()) {
+      sendWhatsAppText(admin, [
+        `💼 *Subscription ${payload.status}*`,
+        ``,
+        `👤 Landlord ID: ${payload.landlordId}`,
+        `📋 Plan: ${payload.planId}`,
+        `🔄 Status: ${payload.status}`,
+        `🆔 ${payload.subscriptionId}`,
+      ].join("\n")).catch(() => {});
+    }
+
+    // Onboarding email to landlord (caller can optionally pass email/name)
+    if (payload.landlordEmail && payload.status === "active" && isEmailConfigured()) {
+      const { subject, html } = landlordSubscriptionEmail(payload.landlordName ?? "Landlord", payload.planId);
+      sendEmail({ to: payload.landlordEmail, subject, html }).catch(() => {});
+    }
   },
 
-  /** Payment event (success / failure / refund / dispute) */
+  /** Payment event — WhatsApp + email admin alert for disputes */
   async paymentEvent(payload: {
     type: "payment_succeeded" | "payment_failed" | "refund" | "dispute";
     amount: number;
@@ -341,21 +407,41 @@ export const N8N_EVENTS = {
     tenantId?: string;
     referenceId?: string;
   }): Promise<void> {
-    const path = process.env.N8N_WEBHOOK_PAYMENT;
-    if (!path) return;
-    await fireWebhook(path, { event: "payment_event", timestamp: new Date().toISOString(), ...payload });
+    if (payload.type !== "dispute") return; // Only disputes need immediate alerting
+
+    const admin = adminWa();
+    const amountStr = `£${(payload.amount / 100).toFixed(2)} ${payload.currency.toUpperCase()}`;
+
+    if (admin && isWhatsAppConfigured()) {
+      sendWhatsAppText(admin, [
+        `⚠️ *PAYMENT DISPUTE OPENED*`,
+        ``,
+        `💷 Amount: ${amountStr}`,
+        `🆔 Dispute: ${payload.referenceId ?? "—"}`,
+        ``,
+        `*Submit evidence immediately or funds will be returned automatically.*`,
+        ``,
+        `https://dashboard.stripe.com/disputes`,
+      ].join("\n")).catch(() => {});
+    }
+
+    if (isEmailConfigured()) {
+      sendEmail({
+        to: getAdminEmail(),
+        subject: `⚠️ Payment dispute opened — ${amountStr}`,
+        html: adminDisputeEmail(payload),
+      }).catch(() => {});
+    }
   },
 
-  /** Tenancy lifecycle event */
+  /** Tenancy lifecycle event — placeholder for future Vercel Workflow sequences */
   async tenancyEvent(payload: {
     tenancyId: number;
     type: "created" | "signed" | "ended" | "renewed";
     landlordId?: string;
     tenantId?: string;
   }): Promise<void> {
-    const path = process.env.N8N_WEBHOOK_TENANCY;
-    if (!path) return;
-    await fireWebhook(path, { event: "tenancy_event", timestamp: new Date().toISOString(), ...payload });
+    logger.info({ payload }, "Tenancy event — automation not yet implemented");
   },
 };
 

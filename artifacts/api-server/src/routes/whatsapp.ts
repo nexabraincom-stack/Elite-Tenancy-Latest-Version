@@ -21,66 +21,20 @@
  */
 
 import { Router, type IRouter, type Request, type Response } from "express";
-import https from "node:https";
+import { sendWhatsAppText, isWhatsAppConfigured } from "../lib/whatsapp";
 import { askEllie } from "./ellie";
 
 const router: IRouter = Router();
 
 function whatsappConfigured(): boolean {
-  return Boolean(
-    process.env.WHATSAPP_ACCESS_TOKEN &&
-    process.env.WHATSAPP_PHONE_NUMBER_ID &&
-    process.env.WHATSAPP_VERIFY_TOKEN,
-  );
+  return isWhatsAppConfigured() && Boolean(process.env.WHATSAPP_VERIFY_TOKEN);
 }
 
 /** Convert Ellie's web markdown to WhatsApp formatting + tappable links. */
 function toWhatsApp(text: string): string {
   return text
-    // **bold** -> *bold* (WhatsApp uses single asterisk for bold)
     .replace(/\*\*(.*?)\*\*/g, "*$1*")
-    // internal /paths -> full tappable URLs
     .replace(/(^|[\s(])(\/[a-z][a-z0-9/-]*)/g, "$1https://www.elitetenancy.co.uk$2");
-}
-
-/** Send a WhatsApp text message via Meta Graph API (node:https — bundles cleanly). */
-function sendWhatsAppText(to: string, body: string): Promise<{ statusCode: number; body: string }> {
-  return new Promise((resolve, reject) => {
-    const version = process.env.WHATSAPP_GRAPH_VERSION || "v21.0";
-    const phoneId = process.env.WHATSAPP_PHONE_NUMBER_ID;
-    const token = process.env.WHATSAPP_ACCESS_TOKEN;
-    const payload = JSON.stringify({
-      messaging_product: "whatsapp",
-      recipient_type: "individual",
-      to,
-      type: "text",
-      text: { preview_url: true, body: body.slice(0, 4096) },
-    });
-
-    const req = https.request(
-      {
-        hostname: "graph.facebook.com",
-        path: `/${version}/${phoneId}/messages`,
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-          "Content-Length": Buffer.byteLength(payload),
-        },
-      },
-      (res) => {
-        const chunks: Buffer[] = [];
-        res.on("data", (c: Buffer) => chunks.push(c));
-        res.on("end", () =>
-          resolve({ statusCode: res.statusCode ?? 0, body: Buffer.concat(chunks).toString("utf8") }),
-        );
-      },
-    );
-    req.on("error", reject);
-    req.setTimeout(15_000, () => req.destroy(new Error("WhatsApp send timed out")));
-    req.write(payload);
-    req.end();
-  });
 }
 
 // ── GET: Meta webhook verification handshake ──────────────────────────────────
@@ -125,8 +79,8 @@ router.post("/whatsapp/webhook", async (req: Request, res: Response): Promise<vo
     const reply = toWhatsApp(result.reply);
 
     const send = await sendWhatsAppText(from, reply);
-    if (send.statusCode < 200 || send.statusCode >= 300) {
-      console.error("[whatsapp] send failed:", send.statusCode, send.body.slice(0, 200));
+    if (!send.ok) {
+      console.error("[whatsapp] send failed:", send.statusCode, send.body?.slice(0, 200));
     }
 
     res.sendStatus(200);

@@ -192,6 +192,39 @@ export function customerAckEmail(name: string): { subject: string; html: string 
   };
 }
 
+/** Admin alert when a Stripe payment dispute is opened. */
+export function adminDisputeEmail(data: {
+  amount: number;
+  currency: string;
+  referenceId?: string;
+}): string {
+  const amount = `£${(data.amount / 100).toFixed(2)} ${data.currency.toUpperCase()}`;
+  return shell(
+    "⚠️ Payment Dispute Opened — Action Required",
+    `<p style="font-size:14px;line-height:1.7;margin:0 0 16px;color:#b91c1c;font-weight:600;">A payment dispute has been raised. You must submit evidence before the deadline or the funds will be automatically returned.</p>
+     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #fee2e2;border-radius:8px;overflow:hidden;margin-bottom:22px;">
+       <tr><td style="padding:7px 12px;background:#fef2f2;font-weight:600;font-size:13px;width:100px;">Amount</td><td style="padding:7px 12px;font-size:13px;border-bottom:1px solid #fee2e2;">${esc(amount)}</td></tr>
+       <tr><td style="padding:7px 12px;background:#fef2f2;font-weight:600;font-size:13px;">Dispute ID</td><td style="padding:7px 12px;font-size:13px;">${esc(data.referenceId ?? "—")}</td></tr>
+     </table>
+     ${btn("https://dashboard.stripe.com/disputes", "View in Stripe Dashboard →")}`,
+  );
+}
+
+/** Landlord onboarding email after subscription change. */
+export function landlordSubscriptionEmail(name: string, planId: string): { subject: string; html: string } {
+  const planLabel = planId.charAt(0).toUpperCase() + planId.slice(1);
+  return {
+    subject: `Your Elite Tenancy ${planLabel} plan is now active`,
+    html: shell(
+      `Welcome to the ${planLabel} plan, ${esc(name)}`,
+      `<p style="font-size:14px;line-height:1.7;margin:0 0 16px;">Your <strong>${planLabel}</strong> subscription is now active. You can start listing premium properties and connecting with verified tenants immediately.</p>
+       <p style="font-size:14px;line-height:1.7;margin:0 0 22px;">Head to your landlord dashboard to create your first listing and explore all the tools available to you.</p>
+       <p style="margin:0 0 24px;">${btn("https://www.elitetenancy.co.uk/landlord/dashboard", "Go to my dashboard")}</p>
+       <p style="font-size:13px;color:#6b6256;line-height:1.6;margin:0;">Questions? Our team is here to help — reply to this email any time.<br/>The Elite Tenancy Team</p>`,
+    ),
+  };
+}
+
 /** Post-placement review request (needs verified domain). */
 export function reviewRequestEmail(name: string, reviewUrl: string): { subject: string; html: string } {
   return {
