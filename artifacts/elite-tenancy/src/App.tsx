@@ -70,6 +70,7 @@ const UkVisaRentalGuide = lazy(() => import("@/pages/UkVisaRentalGuide"));
 const Profile = lazy(() => import("@/pages/Profile"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 import { ChatProvider } from "@/contexts/ChatContext";
+import { usePageTracking } from "@/hooks/use-page-tracking";
 
 // City SEO landing pages
 const London = lazy(() => import("@/pages/city/London"));
@@ -322,6 +323,7 @@ function PageLoader() {
 }
 
 function AppRoutes() {
+  usePageTracking();
   return (
     <Suspense fallback={<PageLoader />}>
     <Switch>
