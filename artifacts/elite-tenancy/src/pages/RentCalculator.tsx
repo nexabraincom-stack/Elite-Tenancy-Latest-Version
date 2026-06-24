@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Helmet } from "react-helmet";
+import { useState, useEffect } from "react";
+import { useSeo } from "@/hooks/use-seo";
 
 const NAV_TABS = [
   { id: "affordability", label: "Affordability" },
@@ -440,18 +440,24 @@ const SCHEMA = JSON.stringify({
 export default function RentCalculator() {
   const [tab, setTab] = useState<Tab>("affordability");
 
+  useSeo({
+    title: "UK Rent Calculator 2026 — Free Affordability, Yield & Deposit Tools",
+    description:
+      "Free UK rent calculator 2026. Check how much rent you can afford, rental yields for landlords, deposit limits, and compare rents across UK cities and globally.",
+    canonical: "https://www.elitetenancy.co.uk/rent-calculator",
+  });
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = "rent-calculator-jsonld";
+    script.text = SCHEMA;
+    document.head.appendChild(script);
+    return () => { document.getElementById("rent-calculator-jsonld")?.remove(); };
+  }, []);
+
   return (
     <>
-      <Helmet>
-        <title>UK Rent Calculator 2026 — Free Affordability, Yield & Deposit Tools</title>
-        <meta
-          name="description"
-          content="Free UK rent calculator 2026. Check how much rent you can afford, rental yields for landlords, deposit limits, and compare rents across UK cities and globally."
-        />
-        <link rel="canonical" href="https://www.elitetenancy.co.uk/rent-calculator" />
-        <script type="application/ld+json">{SCHEMA}</script>
-      </Helmet>
-
       <main className="min-h-screen bg-background">
         {/* Hero */}
         <section className="bg-gradient-to-b from-primary/5 to-background pt-12 pb-8 px-4">
