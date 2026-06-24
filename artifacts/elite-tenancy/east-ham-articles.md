@@ -1,5 +1,6 @@
-# 7 East Ham SEO Articles — Ready to Publish
+# 12 Elite Tenancy SEO Articles — Ready to Publish
 ## Data updated 24 Jun 2026 — ONS Feb 2026 figures used throughout
+## Articles 8–12 added 24 Jun 2026 — international + regulatory content tier
 ## For Admin > Articles > New Article
 
 ---
@@ -368,3 +369,354 @@
    - Renters' Rights Act 2026 compliance built into every tenancy (link: /blog/renters-rights-act-2026-landlord-guide)
 
 **CTA:** List your Newham property with full compliance support → /for-landlords
+
+---
+
+## ARTICLE 8 — INTERNATIONAL TENANT GUIDE (Global search traffic)
+
+**Title:** Renting in London as an International Tenant 2026: The Complete Guide
+**Slug:** renting-london-international-tenant-2026
+**Meta (155 chars):** Renting in London as an international tenant? 2026 guide to Right to Rent, share codes, income proof, guarantors, and finding an East London flat without UK history.
+**Category:** Tenant Advice
+**Primary keyword:** renting in London as an international tenant
+**Secondary keywords:** right to rent UK 2026, share code London renting, renting London no UK credit history, international tenant London guide, moving to London from abroad renting
+**Word count:** 2,400
+**Search intent:** Informational — high intent from US, India, Nigeria, Australia, UAE, EU
+**Competition:** MEDIUM — generic guides exist but no dedicated East London agent article
+
+### H1: Renting in London as an International Tenant in 2026
+
+### H2 Structure:
+1. **Why London — and Why East London Specifically?**
+   - London average rent £2,280/month (Jan 2026) — East Ham (E6) averages £1,910/month — 16% cheaper
+   - E6 is one of only 5 London postcodes where rooms still average under £800/month
+   - Elizabeth line to Heathrow in 50 minutes — fastest airport link from affordable East London
+   - Established global communities: largest Nigerian, South Asian, EU migrant populations in E6/E7/E12
+
+2. **Step 1: Right to Rent — The Check Every Landlord Must Do**
+   - Mandatory under the Immigration Act 2014 (applies to ALL tenants, including UK nationals)
+   - Non-UK nationals: generate a 9-character digital share code at gov.uk/prove-right-to-rent
+   - Share code valid for 90 days — generate it just before you apply
+   - Link: /right-to-rent-check — Elite Tenancy's free check tool
+   - Settled/Pre-settled EU status holders: use EUSS share code
+   - Students on Tier 4/Student visa: time-limited right to rent, landlord must re-check at expiry
+   - Work visa holders (Skilled Worker, BNO, etc.): generate from UKVI online service
+
+3. **Step 2: Proving Income Without UK History**
+   - Standard UK requirement: 30–33× monthly rent in annual income
+   - Example: £1,200/month flat → need to earn £36,000–£39,600/year
+   - No UK payslips? Use: employer letter on company letterhead + 3 months bank statements from home country (translated if needed)
+   - Self-employed or new job: last 6 months bank statements + accountant letter
+   - International students: university offer letter + funding letter (sponsor/student loan)
+   - Renters' Rights Act 2026: landlords CANNOT demand more than 1 month rent in advance
+
+4. **Step 3: The Guarantor Question**
+   - If you don't meet income threshold or have no UK credit history, landlords often ask for a guarantor
+   - UK guarantor: must earn 36× monthly rent annually
+   - No UK guarantor? Use a professional guarantor service: Guarantor My Rent, Housing Hand, UK Guarantor
+   - Cost: typically 3–8% of annual rent one-off fee
+   - Note: Renters' Rights Act 2026 bans landlords demanding more than 5 weeks deposit — professional guarantors are now the main alternative to large upfront payments
+
+5. **Step 4: What Documents to Prepare Before You Apply**
+   - Passport / Biometric Residence Permit (BRP)
+   - Share code (generated from gov.uk)
+   - Proof of income (payslips, employer letter, bank statements)
+   - Proof of current address (utility bill, bank statement — 3 months)
+   - Landlord reference letter (if previous tenancy)
+   - Student: university offer letter + funding proof
+   - Create a Renter Passport at /renter-passport — upload once, use for every application
+
+6. **Country-Specific Guidance for International Tenants**
+   - **Americans**: US credit history not transferable to UK. Need UK bank account (try Monzo/Starling — open before arrival). Income: 30–33× monthly rent. Average London rent £2,280/month means ~£75,000+/year income needed for London average; East London (E6) = £1,910/month = £63,000+/year.
+   - **Indian nationals (Skilled Worker, Graduate visa)**: BRP is your Right to Rent document. Generate share code from UKVI. Large Indian community in East Ham/Ilford/Barking — ask Elite Tenancy for community landlord matches.
+   - **Nigerian nationals**: High demand from letting agents for additional references. Professional guarantor common. Share code from UKVI. Large Newham Nigerian community — strong established letting network in E6/E7.
+   - **Australians (Youth Mobility/Working Holiday)**: 2-year visa = time-limited Right to Rent. Landlord must record visa expiry date. Share code from gov.uk. Income requirements same as other international tenants.
+   - **UAE/Dubai expats (corporate relocation)**: Higher-budget tenants — typically looking for 2–3 bed in E15/E16 (Stratford/Canning Town) £1,800–£2,400/month. HSBC Expat account accepted. Corporate let available via Elite Tenancy on request.
+   - **EU nationals (settled/pre-settled status)**: Your EUSS status IS your Right to Rent. Generate share code from UKVI (different from Right to Work share code). If your settlement application is pending: show certificate of application as proof.
+
+7. **Finding a Flat Without Being There in Person**
+   - Video viewings: now standard post-pandemic — request from any agent
+   - Virtual Renter Passport (/renter-passport): apply before you arrive, landlord reviews before viewing
+   - Furnished short-term lets: bridge accommodation for 1–3 months while you find permanent (check /listings for furnished options)
+   - Avoid booking.com / Airbnb as a long-term rental solution — prohibited by most tenancy agreements and illegal if primary residence
+
+8. **How Elite Tenancy Supports International Tenants**
+   - Right to Rent check tool: free share code verification at /right-to-rent-check
+   - Renter Passport: upload all documents once, use across all listings (/renter-passport)
+   - WhatsApp support: +44 7446 192577 — international numbers welcome
+   - Video viewings available for all listings
+   - East Ham office: Office 18077, 182-184 High Street North, E6 2JA — walk-in welcome
+
+**CTA:** Create your Renter Passport → /renter-passport | Browse East London listings → /listings
+
+---
+
+## ARTICLE 9 — REGULATORY CONTENT (Renters' Rights Act — Tenant version)
+
+**Title:** Renters' Rights Act 2026: What It Means for Tenants in East London
+**Slug:** renters-rights-act-2026-tenant-guide
+**Meta (155 chars):** The Renters' Rights Act came into force May 2026. No more Section 21, periodic tenancies, pet rights, deposit caps. Full guide for tenants in East London.
+**Category:** Tenant Advice
+**Primary keyword:** Renters Rights Act 2026
+**Secondary keywords:** Section 21 abolished 2026, periodic tenancy UK 2026, tenant rights 2026 UK, renters rights act East London, renting rights UK 2026
+**Word count:** 2,000
+**Search intent:** Informational — extremely high volume right now (11 million UK renters affected)
+**Competition:** MEDIUM — Gov.uk and Shelter dominate; local agent content can rank for long-tails
+
+### H1: Renters' Rights Act 2026: What Every East London Tenant Must Know
+
+### H2 Structure:
+1. **What Is the Renters' Rights Act 2026?**
+   - Royal Assent: 2025. In force: 1 May 2026
+   - The biggest overhaul of private renting since the Housing Act 1988
+   - Affects 11 million renters and 2.3 million landlords across England
+   - Summary: shifts power significantly toward tenants
+
+2. **Section 21 Is Abolished — What This Means**
+   - From 1 May 2026: no more "no-fault" evictions
+   - Landlords cannot ask you to leave without a valid legal reason
+   - Valid grounds for eviction are now listed under Section 8 only (sold property, moving back in, rent arrears, etc.)
+   - Existing tenancies: Section 21 ended 1 May 2026 — you cannot be served one now
+   - If your landlord served a Section 21 before 1 May 2026: if it expired before that date, it is void
+
+3. **All New Tenancies Are Now Periodic**
+   - From 1 May 2026: no more fixed-term assured shorthold tenancies
+   - All tenancies run monthly (or weekly) on a rolling basis
+   - Existing fixed-term tenancies: automatically became periodic on 1 May 2026
+   - Your fixed-term end date no longer applies
+   - To leave: give 2 months' written notice — you can serve this at any time
+
+4. **Rent Increases: New Rules**
+   - Landlords can only increase rent once per year
+   - Must give you at least 2 months' written notice of any increase
+   - If you disagree: refer to the First-tier Tribunal (Residential Property) within 2 months — free to use
+   - Tribunal will assess whether the increase is above market rate
+   - Rent-review clauses in older tenancy agreements are no longer enforceable
+
+5. **Deposits and Advance Rent: Capped Hard**
+   - Tenancy deposit: maximum 5 weeks' rent
+   - Holding deposit: maximum 1 week's rent
+   - Rent in advance: MAXIMUM 1 MONTH — landlords cannot legally demand 2, 3, or 6 months upfront
+   - This is the biggest change for international tenants who were previously asked for 6–12 months upfront
+
+6. **New Rights: Pets, Benefits Tenants, Families**
+   - Pet rights: you can ask to keep a pet in writing — landlord must consider it fairly and give reasons if refused
+   - Discrimination banned: landlords cannot refuse you because you receive housing benefit or have children
+   - If a landlord refuses a benefits/family tenant without valid reason: fine up to £7,000
+
+7. **The Private Rented Sector Landlord Ombudsman**
+   - All private landlords must join the new PRS Ombudsman by June 2026
+   - Free service for tenants to raise complaints about landlords
+   - Ombudsman can award compensation and order landlords to fix issues
+   - Find it at: gov.uk/private-rented-sector-ombudsman
+
+8. **Practical: What Should East London Tenants Do Now?**
+   - Check your tenancy status: if you had a fixed-term AST that expired before 1 May 2026, you're now on a periodic tenancy — your landlord cannot issue Section 21
+   - Received a Section 21 notice? Contact Shelter or a local housing solicitor immediately
+   - Know your deposit is protected: check Deposit Protection Service / myDeposits / TDS
+   - Check your landlord is licensed: Newham Selective Licence required for all private rented properties
+   - Use Elite Tenancy's Right to Rent check: /right-to-rent-check
+
+**CTA:** Browse East London listings from licensed landlords → /listings | Know your rights: Right to Rent Check → /right-to-rent-check
+
+---
+
+## ARTICLE 10 — REGULATORY CONTENT (Renters' Rights Act — Landlord version)
+
+**Title:** Renters' Rights Act 2026: Landlord Compliance Guide for East London
+**Slug:** renters-rights-act-2026-landlord-guide
+**Meta (155 chars):** Renters' Rights Act 2026 compliance guide for East London landlords. Section 21 abolished, periodic tenancies, new notice rules, and what to do now.
+**Category:** Landlord Guide
+**Primary keyword:** Renters Rights Act 2026 landlord
+**Secondary keywords:** Section 21 abolished landlord, landlord rights 2026 UK, renters reform landlord guide, periodic tenancy landlord, East London landlord compliance
+**Word count:** 2,000
+**Search intent:** Informational — high commercial intent (landlords making compliance decisions)
+**Competition:** MEDIUM-HIGH — NRLA, Shelter, government sites. Local East London angle differentiates.
+
+### H1: Renters' Rights Act 2026 — What Every East London Landlord Must Do Now
+
+### H2 Structure:
+1. **The Act in Force: What Changed on 1 May 2026**
+   - Section 21 abolished — no more no-fault evictions
+   - All ASTs converted to assured periodic tenancies automatically
+   - New mandatory Information Sheet — landlords fined up to £7,000 if not provided by 31 May 2026
+   - Advance rent capped at 1 month — cannot demand more
+
+2. **Eviction: What You Can and Cannot Do Now**
+   - You must now use Section 8 grounds only
+   - Extended notice periods for some grounds (e.g., selling: 4 months notice)
+   - Grounds for eviction include: rent arrears (2 months+), anti-social behaviour, property sale, landlord moving in, property required for family member
+   - New ground: student accommodation (fixed-term for HMO student properties available in some cases)
+
+3. **The Mandatory Information Sheet — Did You Send It?**
+   - All landlords must provide gov.uk Information Sheet to all existing tenants by 31 May 2026
+   - New tenants: give Information Sheet at or before start of new tenancy
+   - Failure = fine up to £7,000
+   - Download: gov.uk/government/publications/the-renters-rights-act-information-sheet-2026
+
+4. **What the Periodic Tenancy Change Means for You**
+   - Your existing fixed-term tenancies: automatically periodic from 1 May 2026
+   - Fixed-term end dates: no longer enforceable
+   - Students cannot be asked to leave at academic year end under old fixed-term rules
+   - New exception for purpose-built student accommodation (separate rules apply)
+
+5. **Rent Increases: New Process**
+   - Only once per year
+   - Must use Section 13 notice (gov.uk form) — verbal or letter not valid
+   - 2 months' minimum notice
+   - Tenant can challenge at First-tier Tribunal — you need market rent evidence to justify increase
+
+6. **Newham-Specific Compliance Checklist for 2026**
+   - Selective Licence: required for ALL private rented properties in Newham (£750 / 5 years)
+   - Additional HMO Licence: required for 3-4 occupant shared houses in Newham
+   - Mandatory HMO Licence: 5+ occupants
+   - EPC rating C: required from 2028 (start planning now)
+   - Gas Safety Certificate: annually
+   - EICR (electrical): every 5 years
+   - Right to Rent checks: mandatory, must be documented
+   - Deposit protection: within 30 days of receiving deposit
+
+7. **How Elite Tenancy Manages Compliance for East London Landlords**
+   - We issue the Information Sheet to all tenants automatically
+   - Right to Rent checks included with all managed lets
+   - Periodic tenancy documentation updated to comply with 2026 Act
+   - HMO licence application support available
+   - Renters' Rights Act-compliant tenancy agreements as standard
+   - Landlord dashboard: track rent reviews, certificate renewals, licence dates
+
+**CTA:** List your property — full compliance handled by Elite Tenancy → /for-landlords
+
+---
+
+## ARTICLE 11 — RIGHT TO RENT GUIDE (High volume, international audience)
+
+**Title:** Right to Rent UK 2026: Complete Guide for International Tenants
+**Slug:** right-to-rent-uk-2026-guide
+**Meta (155 chars):** Right to Rent UK 2026 explained. How to get your share code, what documents landlords check, and what happens if your visa expires. Free check at Elite Tenancy.
+**Category:** Tenant Advice
+**Primary keyword:** right to rent UK 2026
+**Secondary keywords:** share code right to rent, how to get share code UK, right to rent check online free, right to rent EU settled status, right to rent student visa UK
+**Word count:** 1,800
+**Search intent:** Informational — massive search volume from all international nationalities
+**Competition:** MEDIUM — Gov.uk is top result; agent guide can rank for all the long-tails
+
+### H1: Right to Rent UK 2026: Everything International Tenants Must Know
+
+### H2 Structure:
+1. **What Is Right to Rent and Why Does It Exist?**
+   - Introduced by Immigration Act 2014, enforced by the Home Office
+   - All landlords in England must check every tenant's right to rent before signing a tenancy
+   - Failure to check: fine up to £20,000 per tenant; criminal charge for landlords who knowingly rent to illegal overstayers
+   - Applies to ALL tenants — UK citizens and foreign nationals alike
+
+2. **How to Generate Your Share Code (Step-by-Step)**
+   - Go to: gov.uk/prove-right-to-rent
+   - Enter: your date of birth + your BRP number, passport number, or eVisa reference
+   - Share code format: 9 characters (e.g., W2J 3SG K8R)
+   - Valid for: 90 days from generation
+   - Generate it JUST BEFORE applying — not weeks in advance
+   - Use Elite Tenancy's free Right to Rent check: /right-to-rent-check
+
+3. **Who Needs a Share Code vs Original Documents**
+   - **Digital share code route** (faster, preferred): EU/EEA settled/pre-settled status holders, BRP holders, eVisa holders, Skilled Worker / Graduate / Student visa via UKVI
+   - **Manual document check route**: British/Irish passport, UK driving licence + birth certificate, some older visa vignettes
+   - Note: BRP cards being replaced by eVisas from 2025 — most people now use digital share codes
+
+4. **Right to Rent by Visa Type — Quick Reference**
+   - Indefinite Leave to Remain (ILR): unlimited Right to Rent — no re-check needed
+   - EU Settled Status: unlimited — digital share code
+   - EU Pre-Settled Status: time-limited — landlord must re-check before expiry
+   - Skilled Worker visa: time-limited to visa expiry — landlord re-checks at end of permission
+   - Student visa (Tier 4): time-limited, usually tied to course end + extension
+   - Youth Mobility (Working Holiday): time-limited to visa expiry
+   - Visitor visa (Standard Visitor): NO Right to Rent — cannot rent long-term
+
+5. **What Happens When Your Visa Expires?**
+   - Landlord is required to do a follow-up check within 28 days of your visa expiry
+   - If your extension is pending (in-time application): you retain Right to Rent under section 3C leave
+   - Evidence: Home Office Employer Checking Service letter (or UKVI online status)
+   - You cannot be evicted solely because your extension is pending — Renters' Rights Act protects you
+   - Contact Elite Tenancy immediately if your landlord threatens eviction for a pending renewal
+
+6. **Common Right to Rent Mistakes to Avoid**
+   - Generating share code too early (expires in 90 days)
+   - Giving landlord the wrong reference number (Work share code ≠ Rent share code)
+   - Not updating Elite Tenancy when your visa is renewed (our system flags upcoming expiries)
+   - Using a photocopy of BRP instead of digital share code (not accepted since 2024)
+
+7. **Right to Rent for Specific Nationalities**
+   - **Americans**: US passport alone does NOT give Right to Rent — you need a valid UK visa in your passport + share code from UKVI. Tourist/Visitor visas: no right to rent.
+   - **Nigerians**: BRP or eVisa share code required. Large Newham community — Elite Tenancy has established verification flow.
+   - **Indians**: BRP card being phased out — check if you have an eVisa at gov.uk/eVisa instead. Generate share code from UKVI.
+   - **Australians**: Youth Mobility Scheme (WHV) gives time-limited right to rent. Generate share code from gov.uk.
+   - **Polish/Romanian (EU, EUSS)**: Use your Settled/Pre-Settled status share code from UKVI — NOT the Work share code (different URL).
+
+8. **Elite Tenancy's Free Right to Rent Check Tool**
+   - Tenants: verify your status before you apply — know your documents are correct
+   - Landlords: run a check in 60 seconds, audit-trail stored automatically
+   - Supports all digital share codes + manual document checks
+   - Link: /right-to-rent-check
+
+**CTA:** Run your Right to Rent check now — free → /right-to-rent-check | Browse East London listings → /listings
+
+---
+
+## ARTICLE 12 — CHEAPEST ROOMS LONDON (High intent, national volume)
+
+**Title:** Cheapest Rooms to Rent in London 2026: E6 East Ham Makes the Top 5
+**Slug:** cheapest-rooms-to-rent-london-2026
+**Meta (155 chars):** Only 5 London postcodes still have average room rents under £800/month in 2026. East Ham (E6) is one of them. Find cheap rooms in East London here.
+**Category:** Market Analysis
+**Primary keyword:** cheapest rooms to rent London 2026
+**Secondary keywords:** cheap rooms London under £800, cheapest postcodes London rent, rooms under 800 London, affordable rooms East London 2026, East Ham cheap rooms
+**Word count:** 1,600
+**Search intent:** Transactional + Informational — very high volume nationally
+**Competition:** MEDIUM — SpareRoom, Nestpick, MoveIQ rank. Local authority with real data can rank.
+**Key stat (use prominently):** London room average = £978/month. Only 5 postcodes beat £800: E6 (East Ham), E12 (Manor Park), E7 (Forest Gate), E4 (Chingford), N18 (Upper Edmonton).
+
+### H1: Cheapest Rooms to Rent in London 2026: The Only 5 Postcodes Under £800
+
+### H2 Structure:
+1. **Why Room Rents Have Surged — and What It Means**
+   - London average room rent: £978/month (2026) — up from £892 in 2024
+   - Only 5 postcodes remain under £800/month average
+   - Newham has TWO of those five: E6 (East Ham) and E7 (Forest Gate)
+   - E10 (Leyton) at £803 and E13 (Plaistow) at £804 are just above threshold
+
+2. **The 5 Cheapest Postcodes for London Rooms in 2026**
+   - Table: Postcode | Area | Average room rent | Underground line | Zone | 
+   - E6 East Ham | ~£770/month | District + H&C | Zone 3–4
+   - E12 Manor Park | ~£775/month | Elizabeth line | Zone 3–4
+   - E7 Forest Gate | ~£780/month | Elizabeth + Overground | Zone 3
+   - E4 Chingford | ~£785/month | Overground | Zone 4
+   - N18 Upper Edmonton | ~£790/month | Overground | Zone 4
+
+3. **East Ham E6 in Detail — What You Get Under £800**
+   - Typical: double room in 3–4 bed shared house, furnished, bills negotiable
+   - Near East Ham station (District/H&C): adds £50–100/month premium
+   - Some rooms include bills (electric, gas, water, broadband)
+   - Parking available in most E6 properties (unlike Zones 1–2)
+   - Strong South Asian, Nigerian, East African community — community support networks
+
+4. **What to Check Before Renting a Room in East Ham**
+   - HMO licence: any house with 3+ unrelated tenants sharing needs a Newham Additional HMO Licence. Ask for licence number before signing. (Link: /blog/hmo-licence-newham-east-ham-2026)
+   - Selective Licence: ALL private rented properties in Newham require this — ask to see it
+   - Right to Rent: use share code tool at /right-to-rent-check
+   - Deposit cap: 5 weeks maximum, must be registered in TDS / DPS / myDeposits
+
+5. **Rooms vs. Self-Contained Flat: Is It Worth Sharing?**
+   - Studio in East Ham: £950–£1,100/month
+   - 1-bed flat in East Ham: £1,100–£1,350/month
+   - Room in HMO: £700–£800/month
+   - Saving: £300–£550/month = £3,600–£6,600/year
+   - Downsides: shared kitchen/bathroom, house rules, landlord in property sometimes
+   - Best for: single professionals, students, international newcomers building UK credit
+
+6. **How to Find and Secure a Cheap Room in East Ham Fast**
+   - Create a Renter Passport (/renter-passport) — landlords move faster on pre-verified tenants
+   - Browse E6 room listings: /listings?type=room&city=east-ham
+   - Contact Elite Tenancy WhatsApp: +44 7446 192577 for off-market HMO rooms
+   - Mid-month moves: less competition than 1st/end of month
+   - View fast: East Ham rooms at under £800 typically let within 48–72 hours of listing
+
+**CTA:** Browse East Ham rooms → /listings | Create Renter Passport → /renter-passport
