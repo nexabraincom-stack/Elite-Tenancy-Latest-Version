@@ -60,6 +60,7 @@ const RenterPassport = lazy(() => import("@/pages/RenterPassport"));
 const RoomWanted = lazy(() => import("@/pages/RoomWanted"));
 const VerifyLandlord = lazy(() => import("@/pages/VerifyLandlord"));
 const RightToRentCheck = lazy(() => import("@/pages/RightToRentCheck"));
+const RentCalculator = lazy(() => import("@/pages/RentCalculator"));
 
 // International SEO landing pages
 const InternationalStudents = lazy(() => import("@/pages/InternationalStudents"));
@@ -334,6 +335,7 @@ function AppRoutes() {
       <Route path="/room-wanted" component={RoomWanted} />
       <Route path="/verify-landlord" component={VerifyLandlord} />
       <Route path="/right-to-rent-check" component={RightToRentCheck} />
+      <Route path="/rent-calculator" component={RentCalculator} />
       <Route path="/listings" component={Listings} />
       <Route path="/listings/:id" component={ListingDetail} />
       <Route path="/for-landlords" component={ForLandlords} />

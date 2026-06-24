@@ -1249,6 +1249,572 @@ const ARTICLES: Array<{
 <p>Elite Tenancy uses legally compliant, up-to-date tenancy agreements for all managed properties. <a href="/for-landlords">Learn more about our landlord services.</a></p>
     `.trim(),
   },
+
+  // ── NEW ARTICLES (Articles 1, 6, 7, 8, 9, 11, 12 + calculator supporting article) ──
+
+  {
+    slug: "cheapest-rooms-to-rent-london-2026",
+    title: "Cheapest Rooms to Rent in London 2026: The 5 Postcodes Under £800/Month",
+    excerpt:
+      "Only 5 London postcodes still have room rents under £800/month in 2026. East Ham E6 leads at ~£782/month. Here's where to find affordable rooms in London and what you get.",
+    category: "Rental Market",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 5,
+    tags: ["Cheap Rooms London", "Affordable Rent London", "East Ham", "E6", "2026"],
+    publishedAt: new Date("2026-03-15"),
+    imageUrl: null,
+    content: `
+<h2>The Truth About Cheap Rooms in London in 2026</h2>
+<p>London rents keep rising — but not everywhere. According to SpareRoom's Q1 2026 data, <strong>only 5 London postcodes still offer room rents averaging under £800 per month</strong>. If you know where to look, affordable London living is still possible.</p>
+
+<h2>The 5 Cheapest London Postcodes for Rooms (Q1 2026)</h2>
+<table>
+  <thead><tr><th>Postcode</th><th>Area</th><th>Average Room Rent</th></tr></thead>
+  <tbody>
+    <tr><td><strong>E6</strong></td><td>East Ham</td><td><strong>~£782/month</strong></td></tr>
+    <tr><td>E12</td><td>Manor Park</td><td>~£770/month</td></tr>
+    <tr><td>E7</td><td>Forest Gate</td><td>~£813/month</td></tr>
+    <tr><td>E4</td><td>Chingford</td><td>~£785/month</td></tr>
+    <tr><td>N18</td><td>Upper Edmonton</td><td>~£790/month</td></tr>
+  </tbody>
+</table>
+<p>Source: SpareRoom Q1 2026 London rent statistics.</p>
+
+<h2>Why East Ham E6 Is London's Best Value Postcode</h2>
+<p>East Ham isn't just cheap — it's <strong>cheap and well-connected</strong>. The District and Hammersmith &amp; City lines run directly from East Ham into central London in 25–30 minutes. The area has:</p>
+<ul>
+  <li>One of London's most diverse food scenes (East Ham High Street North spans South Asian, West African, and Middle Eastern cuisine)</li>
+  <li>Large Lidl, Asda, and local market for very low grocery bills</li>
+  <li>East Ham Leisure Centre for affordable fitness</li>
+  <li>Newham's average property rent of £1,910/month — <strong>16% below the London average of £2,273</strong> (ONS Feb 2026)</li>
+</ul>
+
+<h2>What Does a Room in East Ham Actually Get You?</h2>
+<p>At £750–850/month, a typical East Ham room includes:</p>
+<ul>
+  <li>Double room in a 3–5 bed shared house or flat</li>
+  <li>Shared kitchen and bathroom</li>
+  <li>Bills often included (or add £80–120 for utilities and broadband)</li>
+  <li>Furnished, close to local amenities and tube station</li>
+</ul>
+<p>Compare this to zone 2 Hackney or Islington where the same budget gets you a small single room in a shared flat.</p>
+
+<h2>Who Lives in East Ham? The Renter Profile</h2>
+<p>East Ham's rental market is dominated by:</p>
+<ul>
+  <li><strong>NHS workers</strong> — Newham University Hospital is a 5-minute drive; King George Hospital is in neighbouring Ilford</li>
+  <li><strong>International students and recent graduates</strong> — low cost of living, good transport, large South Asian and African community</li>
+  <li><strong>Young professionals</strong> working in Canary Wharf or the City (20–30 min commute)</li>
+  <li><strong>Healthcare and key workers</strong> — Newham has significant social care employment</li>
+</ul>
+
+<h2>How to Find a Room in East Ham</h2>
+<p>The most effective routes:</p>
+<ol>
+  <li><strong>Elite Tenancy</strong> — verified listings, AI-matched to your profile. Browse <a href="/listings">available East Ham rooms.</a></li>
+  <li>SpareRoom — largest flatshare platform in the UK</li>
+  <li>Rightmove and Zoopla — wider selection including direct landlords</li>
+  <li>Facebook groups — "East Ham rooms to let" and Newham housing groups have direct landlord listings, but always verify identity</li>
+</ol>
+
+<h2>Red Flags When Viewing East Ham Rooms</h2>
+<p>East Ham's affordability attracts some less reputable landlords. Watch for:</p>
+<ul>
+  <li>Overcrowded properties (more than one person per bedroom is a warning sign for unlicensed HMOs)</li>
+  <li>Landlords asking for more than 5 weeks' deposit + 1 month advance (illegal in 2026)</li>
+  <li>Properties with no gas safety certificate or EICR</li>
+  <li>Landlords who won't confirm they're registered on the PRS Database</li>
+</ul>
+<p>All Elite Tenancy properties are verified and compliant with 2026 regulations. <a href="/listings">Browse our East Ham listings.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "properties-to-rent-east-ham-2026",
+    title: "Properties to Rent in East Ham 2026: Complete Area Guide",
+    excerpt:
+      "Everything you need to know about renting in East Ham, London E6 in 2026 — average rents, best streets, transport, local amenities, and finding the right property.",
+    category: "Area Guides",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 6,
+    tags: ["East Ham", "E6", "East Ham Rentals", "London Property", "Newham"],
+    publishedAt: new Date("2026-03-20"),
+    imageUrl: null,
+    content: `
+<h2>Why Rent in East Ham in 2026?</h2>
+<p>East Ham (postcode E6, London Borough of Newham) is one of London's most compelling rental destinations in 2026 — offering genuine affordability in a zone 3 location with fast tube connections into the City and Canary Wharf.</p>
+<p>The Newham borough average rent is <strong>£1,910/month</strong> (ONS Feb 2026, +8.5% year-on-year) versus the London average of £2,273. That's a <strong>16% saving</strong> versus the capital average — making East Ham one of the best-value areas in Greater London.</p>
+
+<h2>Average Rents in East Ham 2026</h2>
+<ul>
+  <li><strong>Room in shared house:</strong> £750 – £850/month</li>
+  <li><strong>Studio flat:</strong> £950 – £1,150/month</li>
+  <li><strong>1-bedroom flat:</strong> £1,250 – £1,550/month</li>
+  <li><strong>2-bedroom flat:</strong> £1,600 – £1,950/month</li>
+  <li><strong>3-bedroom house:</strong> £1,900 – £2,400/month</li>
+</ul>
+<p>SpareRoom Q1 2026 data confirms E6 as one of only 5 London postcodes with average room rents under £800/month.</p>
+
+<h2>Transport Links from East Ham</h2>
+<p>East Ham's greatest asset is its transport connectivity:</p>
+<ul>
+  <li><strong>East Ham tube station</strong> — District line and Hammersmith &amp; City line. Liverpool Street: 22 minutes. Canary Wharf: 28 minutes (via Shadwell DLR). Westminster: 35 minutes.</li>
+  <li><strong>Upton Park</strong> (adjacent, also E6) — same lines, additional services</li>
+  <li><strong>East Ham overground</strong> — Fenchurch Street line (c2c) for City commuters</li>
+  <li><strong>Crossrail (Elizabeth line)</strong> — accessible via Stratford (5 minutes by bus or overground). Heathrow: under 50 minutes from Stratford.</li>
+</ul>
+
+<h2>Best Streets and Areas Within East Ham</h2>
+<p>East Ham covers a wide area with distinct micro-neighbourhoods:</p>
+<ul>
+  <li><strong>Central East Ham (near High Street North)</strong> — most amenities, busy, good for singles and young professionals</li>
+  <li><strong>Plashet / Plashet Grove</strong> — quieter, family-friendly Victorian terraces, good schools</li>
+  <li><strong>Rancliffe Road area</strong> — popular with NHS workers (close to Newham Hospital)</li>
+  <li><strong>Barking Road corridor</strong> — more affordable, good bus links</li>
+  <li><strong>Boundary with Forest Gate (E7)</strong> — slightly more gentrified feel, popular with young professionals</li>
+</ul>
+
+<h2>Local Amenities and Life in East Ham</h2>
+<ul>
+  <li><strong>Shopping:</strong> East Ham High Street North — one of the UK's most diverse high streets. Major chains plus specialist South Asian, West African, and Middle Eastern shops</li>
+  <li><strong>Supermarkets:</strong> Lidl (one of the cheapest in East London), Asda, Sainsbury's Local</li>
+  <li><strong>Green space:</strong> Central Park (East Ham), Plashet Park, Beckton District Park (15 min cycle)</li>
+  <li><strong>Leisure:</strong> East Ham Leisure Centre, Newham City Farm, multiple sports facilities</li>
+  <li><strong>Healthcare:</strong> Newham University Hospital (A&amp;E), multiple GP surgeries</li>
+  <li><strong>Schools:</strong> Several Outstanding-rated primaries; Sarah Bonnell School, Little Ilford School</li>
+</ul>
+
+<h2>Who Is East Ham Best For?</h2>
+<p>East Ham's combination of affordability and connectivity makes it ideal for:</p>
+<ul>
+  <li><strong>NHS, social care, and key workers</strong> — low cost of living near major healthcare employers</li>
+  <li><strong>City and Canary Wharf workers</strong> — fast tube connection, rent 35–45% below similar-commute west London equivalents</li>
+  <li><strong>International tenants</strong> — established South Asian and African communities, familiar food, culturally rich environment</li>
+  <li><strong>Families</strong> — spacious houses relative to cost, good state schools, green space</li>
+  <li><strong>First-time renters</strong> — affordable entry point to London living</li>
+</ul>
+
+<h2>Finding Your East Ham Property</h2>
+<p>Elite Tenancy specialises in East Ham and the wider Newham area. Our AI matching connects you with verified properties from reputable landlords — no agency fees, transparent pricing. <a href="/listings">Browse available East Ham properties.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "renter-passport-uk-2026-guide",
+    title: "What Is a Renter Passport? UK 2026 Guide",
+    excerpt:
+      "A renter passport lets you prove your tenancy history and identity to landlords before you apply. Here's how it works, who benefits, and how to get yours for free.",
+    category: "Tenant Guides",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 4,
+    tags: ["Renter Passport", "Tenant Referencing", "Digital Rental ID", "2026", "UK"],
+    publishedAt: new Date("2026-04-01"),
+    imageUrl: null,
+    content: `
+<h2>What Is a Renter Passport?</h2>
+<p>A renter passport (also called a digital rental identity or tenant passport) is a verified digital profile that holds your rental history, identity verification, and financial references — all pre-checked and ready to share with any landlord or letting agent. Instead of re-doing a full reference check every time you apply for a property, you present your renter passport and the landlord can make an instant, informed decision.</p>
+<p>Think of it like a LinkedIn profile for renters — it shows who you are, what your track record is, and why you're a trustworthy tenant.</p>
+
+<h2>What Does a Renter Passport Contain?</h2>
+<p>A full renter passport typically includes:</p>
+<ul>
+  <li><strong>Identity verification</strong> — government-issued ID checked against official databases</li>
+  <li><strong>Right to rent status</strong> — confirms you have the right to rent in the UK, removing the landlord's legal obligation to re-check</li>
+  <li><strong>Rental history</strong> — references from previous landlords, move-in/move-out dates, and tenancy conduct record</li>
+  <li><strong>Employment and income verification</strong> — salary, employer, and length of employment confirmed</li>
+  <li><strong>Credit check summary</strong> — pass/refer/fail against standard letting criteria (not a full credit report)</li>
+  <li><strong>AI match score</strong> — Elite Tenancy's system generates a compatibility score against specific properties</li>
+</ul>
+
+<h2>Who Benefits Most from a Renter Passport?</h2>
+<p>Renter passports are especially valuable for:</p>
+<ul>
+  <li><strong>People moving frequently</strong> — contractors, travelling professionals, international workers who rent multiple times</li>
+  <li><strong>International tenants</strong> — your overseas history is translated into a UK-verifiable format, addressing the main barrier overseas applicants face</li>
+  <li><strong>Recent graduates</strong> — build a rental track record from your first tenancy</li>
+  <li><strong>Anyone in a competitive market</strong> — presenting a verified passport gives you a significant advantage when multiple applicants want the same property</li>
+  <li><strong>Tenants who want privacy</strong> — you control what is shared and with whom</li>
+</ul>
+
+<h2>How Is It Different from Traditional Referencing?</h2>
+<p>Traditional tenant referencing happens after you've offered on a property, takes 3–7 working days, and must be repeated for every new property you apply for — often costing landlords £30–80 per check. A renter passport is:</p>
+<ul>
+  <li><strong>Done once, shared many times</strong> — verified once by a trusted provider, portable to any landlord</li>
+  <li><strong>Instant</strong> — no waiting for employers or previous landlords to respond</li>
+  <li><strong>Renter-controlled</strong> — you decide who sees your data and revoke access at any time</li>
+  <li><strong>Forward-looking</strong> — builds a positive track record proactively</li>
+</ul>
+
+<h2>How to Get Your Elite Tenancy Renter Passport</h2>
+<ol>
+  <li>Visit <a href="/renter-passport">elitetenancy.co.uk/renter-passport</a></li>
+  <li>Create a free account and complete the profile sections</li>
+  <li>Upload your identity documents (passport or driving licence)</li>
+  <li>Connect employment history and provide income evidence</li>
+  <li>Request references from previous landlords via the platform</li>
+  <li>Complete Right to Rent verification</li>
+  <li>Receive your verified passport and match score within 24 hours</li>
+</ol>
+
+<h2>Is a Renter Passport Free?</h2>
+<p>Elite Tenancy's Renter Passport is completely free for tenants. Landlords who want to run a full referencing check may pay a small fee, but this is never charged to tenants — in line with the Tenant Fees Act 2019. <a href="/renter-passport">Get your free Renter Passport.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "hmo-licence-newham-east-ham-2026",
+    title: "HMO Licence in Newham and East Ham 2026: Costs, Rules & How to Apply",
+    excerpt:
+      "Everything landlords need to know about HMO licensing in Newham (East Ham, Forest Gate, Stratford) in 2026 — selective licensing, mandatory HMO, costs, and application steps.",
+    category: "Landlord Guides",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 5,
+    tags: ["HMO Newham", "HMO East Ham", "Newham Licensing", "Landlord Guide", "2026"],
+    publishedAt: new Date("2026-04-05"),
+    imageUrl: null,
+    content: `
+<h2>HMO Licensing in Newham: What You Need to Know</h2>
+<p>Newham Council operates one of the most extensive private rented sector licensing schemes in England. As a landlord in East Ham, Forest Gate, Stratford, or anywhere else in the London Borough of Newham, you are very likely to need at least one licence — possibly more.</p>
+
+<h2>Newham's Three Licensing Schemes</h2>
+<h3>1. Mandatory HMO Licence</h3>
+<p>Required nationally for any property occupied by 5 or more people from 2 or more households sharing facilities. In Newham, this means a standard 5-year licence.</p>
+<ul>
+  <li><strong>Cost:</strong> Approximately £1,200–£1,600 for 5 years (varies by property size)</li>
+  <li><strong>Application:</strong> Online via Newham Council's licensing portal</li>
+  <li><strong>Penalty for non-compliance:</strong> Unlimited fine; civil penalty up to £30,000; rent repayment order</li>
+</ul>
+
+<h3>2. Additional HMO Licence</h3>
+<p>Newham also requires a licence for HMOs occupied by <strong>3 or 4 people</strong> from 2 or more households — smaller than the mandatory threshold.</p>
+<ul>
+  <li><strong>Cost:</strong> Approximately £750–£1,000 for 5 years</li>
+  <li><strong>Applies to:</strong> All shared houses and flats with 3+ occupants from multiple households across Newham</li>
+</ul>
+
+<h3>3. Selective Licensing</h3>
+<p>Newham has a borough-wide selective licensing scheme covering <strong>ALL privately rented properties</strong> — not just HMOs. This means a single-occupancy flat or a family home rented to one household also requires a licence in Newham.</p>
+<ul>
+  <li><strong>Cost:</strong> Approximately £750 for 5 years</li>
+  <li><strong>Renewal:</strong> Required every 5 years; must be renewed before expiry</li>
+  <li><strong>Documents required:</strong> Gas safety certificate, EICR, EPC, proof of identity</li>
+</ul>
+
+<h2>How to Apply for a Newham HMO or Selective Licence</h2>
+<ol>
+  <li>Go to Newham Council's online licensing portal (search "Newham private rented property licensing")</li>
+  <li>Register as a landlord and add the property</li>
+  <li>Select the correct licence type (mandatory HMO, additional, or selective)</li>
+  <li>Upload all required documents: gas safety certificate, EICR (valid within 5 years), EPC, floor plan, proof of ownership</li>
+  <li>Pay the licence fee</li>
+  <li>Await inspection and licence grant (allow 6–8 weeks)</li>
+</ol>
+
+<h2>Room Size Requirements for HMOs in Newham</h2>
+<p>All HMO rooms in Newham must meet minimum size standards:</p>
+<ul>
+  <li><strong>Single adult:</strong> Minimum 6.51 sq m</li>
+  <li><strong>Two adults sharing:</strong> Minimum 10.22 sq m</li>
+  <li><strong>Child under 10:</strong> Minimum 4.64 sq m</li>
+</ul>
+<p>Rooms below these sizes cannot be used as sleeping accommodation. Newham inspectors enforce this strictly.</p>
+
+<h2>Penalties for Unlicensed HMOs in Newham</h2>
+<p>Newham Council is one of the UK's most active enforcement authorities for private rented sector compliance:</p>
+<ul>
+  <li>Civil penalty up to <strong>£30,000</strong> per unlicensed property</li>
+  <li>Rent repayment orders — tenants can claim back up to 12 months' rent</li>
+  <li>Criminal prosecution with unlimited fines</li>
+  <li>Banning orders for repeat offenders</li>
+</ul>
+<p>Newham issues hundreds of penalties per year — do not assume non-compliance goes unnoticed.</p>
+
+<h2>Get Help with Newham Licensing Compliance</h2>
+<p>Elite Tenancy's managed service covers Newham licensing support — we check which licences your property requires, prepare the application documentation, and ensure ongoing compliance. <a href="/for-landlords">Talk to our landlord team.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "renting-london-international-tenant-2026",
+    title: "Renting in London as an International Tenant 2026: The Complete Guide",
+    excerpt:
+      "Moving to London from abroad? This complete guide covers Right to Rent checks, documents you need, how to pass referencing without UK credit history, guarantors, and the best areas for international renters.",
+    category: "Tenant Guides",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 8,
+    tags: ["International Tenant", "Moving to London", "Right to Rent", "UK Rental Guide", "2026"],
+    publishedAt: new Date("2026-04-10"),
+    imageUrl: null,
+    content: `
+<h2>Renting in London as an International Tenant: What's Different</h2>
+<p>Renting in London as someone who has moved from overseas involves a few extra steps compared to UK residents — but none of them are impossible. The key differences are: <strong>Right to Rent checks</strong>, limited UK credit history, and income proof in a foreign currency. This guide covers everything you need to navigate London's rental market successfully in 2026.</p>
+
+<h2>Right to Rent: Your Legal Starting Point</h2>
+<p>Every landlord in England must check that you have the legal right to rent before you move in. This is called a <strong>Right to Rent check</strong>. As an international tenant, you prove this using:</p>
+<ul>
+  <li><strong>EU/EEA nationals:</strong> Your digital status under the EU Settlement Scheme. Generate a 9-digit share code at <a href="https://www.gov.uk/prove-right-to-rent" target="_blank" rel="noopener noreferrer">gov.uk/prove-right-to-rent</a> to share with your landlord online. Valid for 90 days.</li>
+  <li><strong>Non-EEA nationals with a visa:</strong> Your passport plus visa/biometric residence permit (BRP). Your Right to Rent is time-limited to your visa expiry.</li>
+  <li><strong>Non-EEA nationals with a BRP:</strong> Use the Home Office online checking service to generate a share code — physical BRPs are no longer accepted in isolation.</li>
+  <li><strong>US and other non-visa-required nationals on short stays:</strong> Passport plus entry stamp/permission. Right to Rent is for 90 days maximum in this scenario.</li>
+</ul>
+
+<h2>What Documents Will You Need?</h2>
+<p>Beyond Right to Rent, standard referencing for international tenants includes:</p>
+<ul>
+  <li><strong>Passport</strong> (valid, with visa/entry documentation)</li>
+  <li><strong>Proof of income:</strong> 3 months' payslips or an employment contract with salary stated. If paid in foreign currency, provide a letter from your employer confirming UK equivalent salary.</li>
+  <li><strong>Bank statements:</strong> 3 months showing regular income and sufficient balance for deposit + first month's rent</li>
+  <li><strong>Previous landlord reference</strong> — from your home country in English, or translated</li>
+  <li><strong>Employer reference letter</strong> confirming position, salary, and that employment is ongoing</li>
+</ul>
+
+<h2>The Credit History Problem — and How to Solve It</h2>
+<p>Most international tenants have no UK credit history. This is the single biggest hurdle — landlords and agents typically run a UK credit check, which returns blank for new arrivals. Solutions:</p>
+<ol>
+  <li><strong>UK guarantor:</strong> A UK resident with good credit who agrees to cover rent if you default. This is the most common solution. Some referencing companies also offer professional guarantors for a fee (typically 2–4 weeks' rent).</li>
+  <li><strong>Higher deposit:</strong> Some landlords will accept a larger deposit — though note the 5-week cap under UK law. Ensure any extra is framed correctly (e.g. as advance rent, capped at 1 month).</li>
+  <li><strong>Renter Passport:</strong> Elite Tenancy's <a href="/renter-passport">Renter Passport</a> creates a verified international tenancy profile, including an overseas reference check — making your application significantly stronger.</li>
+  <li><strong>Employer letter of support:</strong> A letter from a major employer (multinational company, NHS, university) confirming your employment often substitutes for UK credit history for many landlords.</li>
+</ol>
+
+<h2>Country-Specific Tips</h2>
+<h3>Americans Moving to London</h3>
+<p>US tenants typically have strong income but no UK credit history. Focus on employer letters and use a professional guarantor service if needed. East Ham E6 offers some of the best value in London — at ~16% below the London average, your dollar goes much further than in zone 1 or 2.</p>
+
+<h3>Indian and South Asian Nationals</h3>
+<p>East Ham's South Asian community is one of the largest in London, with excellent Indian, Pakistani, and Bangladeshi food, cultural facilities, and community networks. Many landlords in E6 are familiar with international tenants from India, Pakistan, and Sri Lanka. A previous landlord reference from India in English carries weight.</p>
+
+<h3>Nigerian and West African Nationals</h3>
+<p>East Ham and Forest Gate (E7) have significant Nigerian and West African communities. Newham is one of the most diverse boroughs in the UK. Multiple money transfer services (Western Union, Remitly, Wise) operate on the high street for sending money home.</p>
+
+<h3>Australian and New Zealand Nationals</h3>
+<p>Youth Mobility Visa (Tier 5) holders have full Right to Rent for the visa duration. Bank statements showing Australian savings often satisfy landlords even without UK employment. Start with furnished rooms in E6 or E12 while building UK credit history.</p>
+
+<h3>EU Nationals (Post-Brexit)</h3>
+<p>If you arrived before 30 June 2021 with Settled or Pre-Settled Status under the EU Settlement Scheme, generate your share code at gov.uk/prove-right-to-rent. If arriving after that date, you'll need a relevant visa. Your Right to Rent is confirmed online — landlords cannot require you to show physical documents.</p>
+
+<h2>Best Areas for International Tenants in London 2026</h2>
+<p>These areas combine affordability with established international communities:</p>
+<ul>
+  <li><strong>East Ham E6</strong> — South Asian and West African communities, cheapest zone 3 rents (~£782/room). Our recommendation for best value.</li>
+  <li><strong>Stratford E15</strong> — Crossrail access, Westfield shopping, large international student population</li>
+  <li><strong>Whitechapel / Stepney Green E1</strong> — Bangladesh community, fast City access, strong international networks</li>
+  <li><strong>Hounslow TW3/TW4</strong> — Indian and West African communities, Heathrow proximity</li>
+  <li><strong>Southall UB1/UB2</strong> — Punjabi community hub, affordable, good West London links</li>
+</ul>
+
+<h2>How Elite Tenancy Helps International Tenants</h2>
+<p>Elite Tenancy's <a href="/renter-passport">Renter Passport</a> is designed specifically for international tenants — it verifies your identity and Right to Rent status, creates a portable reference that works for any UK landlord, and significantly improves your chances in a competitive London rental market. Our team understands international applications and will guide you through the process. <a href="/listings">Browse available properties.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "renters-rights-act-2026-tenant-guide",
+    title: "Renters' Rights Act 2026: Your Complete Tenant Guide",
+    excerpt:
+      "What does the Renters' Rights Act 2026 mean for you as a tenant? Section 21 abolished, stronger eviction protection, pet rights, rent increase limits, and what to do if your landlord ignores the new rules.",
+    category: "Tenant Guides",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 6,
+    tags: ["Renters Rights Act", "Tenant Rights", "Section 21", "UK Law", "2026"],
+    publishedAt: new Date("2026-05-01"),
+    imageUrl: null,
+    content: `
+<h2>The Renters' Rights Act 2026 — The Biggest Tenant Victory in a Generation</h2>
+<p>The Renters' Rights Act 2026 came into full effect on 1 May 2026. It is the most significant change to tenants' rights in England in over 30 years. If you rent privately in England, here is exactly what has changed and how it protects you.</p>
+
+<h2>1. Section 21 "No-Fault" Evictions — Abolished</h2>
+<p>The most important change: <strong>your landlord can no longer end your tenancy without a legal reason</strong>. Section 21 "no-fault" eviction notices — where landlords could simply issue a two-month notice to leave with no explanation — are gone.</p>
+<p>What this means in practice:</p>
+<ul>
+  <li>You cannot be evicted simply because your landlord wants to re-let at a higher rent</li>
+  <li>You cannot be evicted for complaining about repairs or contacting the council</li>
+  <li>Any Section 21 notice issued after 1 May 2026 is <strong>invalid</strong> — you can ignore it and do not have to leave</li>
+  <li>Your landlord must use specific <strong>Section 8 grounds</strong> and apply to court</li>
+</ul>
+
+<h2>2. All Tenancies Are Now Periodic</h2>
+<p>Fixed-term tenancies no longer exist for new lets. All tenancies are now <strong>periodic (rolling month-to-month)</strong>. This gives you:</p>
+<ul>
+  <li>The right to give <strong>two months' notice to leave at any time</strong> — no more being trapped until a fixed term ends</li>
+  <li>No landlord can end your tenancy at a set date by default — they need a legal reason</li>
+  <li>No "break fees" or exit penalties for leaving with proper notice</li>
+</ul>
+
+<h2>3. Rent Increases — Once a Year Maximum</h2>
+<p>Your landlord can only increase your rent <strong>once per year</strong> using a formal Section 13 notice with at least 2 months' written notice. Important tenant rights:</p>
+<ul>
+  <li>Any rent increase clause in your tenancy agreement that allows more frequent increases is <strong>void</strong></li>
+  <li>If you believe the proposed increase is above market rate, you can challenge it at the <strong>First-tier Tribunal (Property Chamber)</strong> — free to apply</li>
+  <li>Rent bidding wars are banned — landlords cannot advertise below market rent and then encourage applicants to bid above the listed price</li>
+</ul>
+
+<h2>4. Right to Keep Pets</h2>
+<p>Blanket "no pets" policies are now unenforceable. Your landlord must consider any written pet request within 28 days. They can only refuse for genuine, documented reasons. They can require you to have pet damage insurance — but cannot demand a higher deposit solely because of a pet.</p>
+
+<h2>5. Awaab's Law — Repairs Must Be Done</h2>
+<p>Extended from social housing, Awaab's Law now applies to private rentals:</p>
+<ul>
+  <li>Landlords must <strong>investigate reported hazards within 14 days</strong></li>
+  <li><strong>Emergency repairs within 24 hours</strong> — no more waiting weeks for a broken boiler or flooding</li>
+  <li>Damp and mould must be treated as urgent health hazards, not cosmetic issues</li>
+</ul>
+
+<h2>6. Upfront Cost Caps</h2>
+<ul>
+  <li><strong>Deposit:</strong> Maximum 5 weeks' rent (unchanged)</li>
+  <li><strong>Advance rent:</strong> Maximum 1 month — landlords can no longer demand 3 or 6 months in advance</li>
+  <li><strong>Total maximum upfront:</strong> Approximately 2.25 months' rent equivalent</li>
+</ul>
+
+<h2>7. The PRS Database — Landlord Register</h2>
+<p>All landlords must now register on the new <strong>Private Rented Sector Database</strong> before letting any property. You can search this database to verify your landlord is registered and compliant.</p>
+
+<h2>What to Do If Your Landlord Ignores the New Rules</h2>
+<ol>
+  <li><strong>If you receive a Section 21 notice:</strong> Do not leave. Contact Shelter or Citizens Advice. The notice is invalid.</li>
+  <li><strong>If repairs are not done within required timescales:</strong> Send a formal written request, then report to your local council's housing enforcement team</li>
+  <li><strong>If asked for excess advance rent:</strong> Refuse and report to Trading Standards</li>
+  <li><strong>If landlord threatens eviction for complaining:</strong> This is now a retaliatory eviction defence — document everything and contact Shelter</li>
+</ol>
+
+<h2>Find a Compliant, Quality Landlord</h2>
+<p>Elite Tenancy only lists properties from landlords who comply with 2026 regulations — verified documentation, compliant tenancy agreements, and transparent pricing. <a href="/listings">Browse our listings.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "right-to-rent-uk-2026-guide",
+    title: "Right to Rent UK 2026: Complete Guide for Tenants and Landlords",
+    excerpt:
+      "How Right to Rent works in 2026 — who needs to check, what documents count, share codes for EU nationals, penalties for landlords, and what tenants can do if checks are used discriminatorily.",
+    category: "Legal Guides",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 5,
+    tags: ["Right to Rent", "UK Immigration", "Tenant Check", "Share Code", "2026"],
+    publishedAt: new Date("2026-04-20"),
+    imageUrl: null,
+    content: `
+<h2>What Is Right to Rent?</h2>
+<p>Right to Rent is the UK government's mandatory immigration check for private landlords. Before starting a tenancy in England, landlords must verify that all adult occupants have the legal right to reside and rent in the UK. Failure to check — or to evict tenants found to be without the right to rent — can result in criminal prosecution.</p>
+
+<h2>Who Needs to Do a Right to Rent Check?</h2>
+<p>Right to Rent checks apply in <strong>England only</strong> (not Scotland, Wales, or Northern Ireland). All private landlords must check all adult tenants aged 18+ before the tenancy starts — including British and Irish nationals.</p>
+
+<h2>How Tenants Prove Right to Rent in 2026</h2>
+<h3>British and Irish nationals</h3>
+<p>Passport, or UK driving licence + birth certificate + HMRC tax letter. Physical document check by the landlord.</p>
+
+<h3>EU/EEA nationals with EU Settlement Scheme status</h3>
+<p>EU nationals must not be asked for physical EU ID cards or passports to prove Right to Rent. Instead:</p>
+<ol>
+  <li>Go to <a href="https://www.gov.uk/prove-right-to-rent" target="_blank" rel="noopener noreferrer">gov.uk/prove-right-to-rent</a></li>
+  <li>Sign in with Government Gateway or GOV.UK One Login</li>
+  <li>Generate a 9-digit <strong>share code</strong> (valid for 90 days)</li>
+  <li>Share the code and your date of birth with the landlord</li>
+  <li>The landlord checks at gov.uk/view-right-to-rent and sees a confirmation</li>
+</ol>
+<p>Landlords who ask EU nationals to provide physical passports or ID cards for Right to Rent are breaking the rules — and potentially committing race discrimination.</p>
+
+<h3>Non-EEA nationals with a visa or BRP</h3>
+<p>Use the Home Office online checking service to generate a share code showing your immigration status. Your Right to Rent is time-limited to your visa expiry — landlords must perform a follow-up check when your visa expires.</p>
+
+<h3>Nationals of the US, Canada, Australia, NZ, and other countries</h3>
+<p>Passport plus valid visa or entry clearance. If on a tourist/visitor visa, Right to Rent is limited to the permitted stay (typically 6 months).</p>
+
+<h2>Right to Rent Share Code: Step by Step</h2>
+<ol>
+  <li>Visit gov.uk/prove-right-to-rent on your phone or computer</li>
+  <li>Choose "EU settlement scheme" or "other immigration status" as appropriate</li>
+  <li>Sign in to your online immigration account</li>
+  <li>Select "Create a share code" — choose "rental" as the purpose</li>
+  <li>The 9-character code is displayed — share it with your landlord along with your date of birth</li>
+  <li>The code is valid for <strong>90 days</strong></li>
+</ol>
+
+<h2>Penalties for Landlords</h2>
+<p>Landlords who rent to someone without the Right to Rent face:</p>
+<ul>
+  <li><strong>Civil penalty:</strong> Up to £10,000 for a first offence; up to £20,000 for repeat offences</li>
+  <li><strong>Criminal prosecution</strong> (if knowingly renting to someone without right to rent): up to 5 years' imprisonment</li>
+</ul>
+
+<h2>Discrimination in Right to Rent Checks</h2>
+<p>The Equality and Human Rights Commission has found that Right to Rent schemes cause some landlords to discriminate against non-British tenants. This is <strong>unlawful</strong>. Landlords must:</p>
+<ul>
+  <li>Apply the same check to all tenants — not just those who "look foreign"</li>
+  <li>Accept digital share codes from EU nationals — not demand passports</li>
+  <li>Not refuse applications solely on nationality or ethnicity</li>
+</ul>
+<p>If you believe you've been discriminated against in a Right to Rent check, contact the Equality Advisory and Support Service (EASS) or Shelter.</p>
+
+<h2>Right to Rent and Elite Tenancy's Renter Passport</h2>
+<p>Elite Tenancy's <a href="/renter-passport">Renter Passport</a> includes a verified Right to Rent check — making it easy for landlords to confirm your status instantly and compliantly, with no risk of discriminatory application. <a href="/right-to-rent-check">Check your Right to Rent status now.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "rent-calculator-uk-2026-guide",
+    title: "How to Use a UK Rent Calculator in 2026: A Complete Guide",
+    excerpt:
+      "How to calculate how much rent you can afford in the UK in 2026 — the 30x rule explained, rental yield formulas for landlords, deposit caps, and the free tools you need.",
+    category: "Rental Market",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 4,
+    tags: ["Rent Calculator", "Rent Affordability", "UK Rent 2026", "How Much Rent Can I Afford"],
+    publishedAt: new Date("2026-04-25"),
+    imageUrl: null,
+    content: `
+<h2>How Much Rent Can I Afford? The UK 30× Rule</h2>
+<p>The standard UK affordability rule is simple: your <strong>annual gross income should be at least 30 times the monthly rent</strong>. This is the threshold most letting agents and landlords use when assessing applications.</p>
+<p>Formula: <code>Maximum monthly rent = Annual income ÷ 30</code></p>
+<p>Examples:</p>
+<ul>
+  <li>Annual income £30,000 → max rent £1,000/month</li>
+  <li>Annual income £36,000 → max rent £1,200/month</li>
+  <li>Annual income £45,000 → max rent £1,500/month</li>
+  <li>Annual income £60,000 → max rent £2,000/month</li>
+</ul>
+<p>Use our free <a href="/rent-calculator">UK Rent Calculator 2026</a> to find your personal maximum and comfortable range.</p>
+
+<h2>The 40% Take-Home Rule — What You Can Comfortably Afford</h2>
+<p>The 30× rule is a <em>qualification threshold</em>, not a guide to what you can actually afford comfortably. A better measure: keep rent below <strong>40% of your monthly take-home pay after tax</strong>.</p>
+<p>For a £36,000 salary, take-home is approximately £2,500/month after tax and NI. 40% of that is £1,000/month — the same as the 30× rule output. At £40,000 take-home ~£2,720 → comfortable rent up to ~£1,088/month.</p>
+
+<h2>Calculating Rental Yield for Landlords</h2>
+<p>Rental yield is the return on your property investment, expressed as a percentage of the property's value.</p>
+<p><strong>Gross yield formula:</strong> <code>(Annual rent ÷ Property value) × 100</code></p>
+<p>Example: Property worth £250,000, renting at £1,200/month (£14,400/year). Gross yield = (14,400 ÷ 250,000) × 100 = <strong>5.76%</strong>.</p>
+<p><strong>Net yield</strong> subtracts all costs (management fees, maintenance, insurance, voids). Typically 1–2.5 percentage points below gross. Our <a href="/rent-calculator#yield">rental yield calculator</a> automates this.</p>
+
+<h2>UK Deposit Calculation — Legal Caps in 2026</h2>
+<p>The Tenant Fees Act 2019 caps deposits at <strong>5 weeks' rent</strong> for most properties. The Renters' Rights Act 2026 caps advance rent at <strong>1 month</strong>.</p>
+<p>Formula: <code>Maximum deposit = (Monthly rent × 12) ÷ 52 × 5</code></p>
+<p>For rent of £1,200/month: weekly rent = £276.92; max deposit = £276.92 × 5 = £1,384.62.</p>
+<p>Use our <a href="/rent-calculator#deposit">deposit calculator</a> to find the exact cap for any rent level.</p>
+
+<h2>Average Rent Benchmarks UK 2026</h2>
+<p>Useful context when using any rent calculator:</p>
+<ul>
+  <li>UK national average (all property types): £1,383/month (ONS May 2026)</li>
+  <li>London average: £2,273/month (ONS Feb 2026)</li>
+  <li>Newham (East Ham / E6): £1,910/month — <strong>16% below London average</strong></li>
+  <li>E6 rooms: ~£782/month — one of only 5 London postcodes under £800/month</li>
+  <li>Manchester average: £1,170/month</li>
+  <li>Birmingham average: £1,050/month</li>
+</ul>
+
+<h2>Free UK Rent Calculator Tools</h2>
+<p>Use Elite Tenancy's free tools:</p>
+<ul>
+  <li><a href="/rent-calculator">Affordability calculator</a> — find your maximum and comfortable rent from income</li>
+  <li><a href="/rent-calculator">Rental yield calculator</a> — for landlords to calculate gross and net yield</li>
+  <li><a href="/rent-calculator">Deposit calculator</a> — exact deposit cap for any rent level</li>
+  <li><a href="/rent-calculator">UK city comparison</a> — compare rents across 10 major UK cities</li>
+  <li><a href="/rent-calculator">Global comparison</a> — how UK rents compare to EU and USA cities</li>
+</ul>
+    `.trim(),
+  },
 ];
 
 router.post("/seed-articles", async (req, res): Promise<void> => {

@@ -58,6 +58,17 @@ const PRIORITY_ROUTES = [
   "/london", "/manchester", "/birmingham", "/leeds", "/bristol",
   // International
   "/international-students", "/move-to-uk",
+  // Calculators & tools
+  "/rent-calculator",
+  // New East Ham / local articles
+  "/blog/cheapest-rooms-to-rent-london-2026",
+  "/blog/properties-to-rent-east-ham-2026",
+  "/blog/renter-passport-uk-2026-guide",
+  "/blog/hmo-licence-newham-east-ham-2026",
+  "/blog/renting-london-international-tenant-2026",
+  "/blog/renters-rights-act-2026-tenant-guide",
+  "/blog/right-to-rent-uk-2026-guide",
+  "/blog/rent-calculator-uk-2026-guide",
 ];
 
 const MIME = {
