@@ -1,4 +1,5 @@
-# 5 East Ham SEO Articles — Ready to Publish
+# 7 East Ham SEO Articles — Ready to Publish
+## Data updated 24 Jun 2026 — ONS Feb 2026 figures used throughout
 ## For Admin > Articles > New Article
 
 ---
@@ -18,7 +19,7 @@
 
 ### H2 Structure:
 1. **Why East Ham Is One of East London's Best-Value Rental Areas**
-   - £1,979 avg Newham rent (2026 data) vs £2,500+ central London
+   - £1,910 avg Newham rent (ONS Feb 2026, +8.5% YoY) vs £2,273 London avg
    - District and Hammersmith & City lines — 30 min to City
    - Growing tech and healthcare employment corridor (Stratford, Canary Wharf)
 
@@ -71,8 +72,8 @@
 
 ### H2 Structure:
 1. **East Ham Rental Market Overview 2026**
-   - Newham borough average: £1,979/month (2026)
-   - Annual increase: +2.4% (slowest pace in 5 years)
+   - Newham borough average: £1,910/month (ONS Feb 2026)
+   - Annual increase: +8.5% YoY (ONS Feb 2026 — above London's +1.7%)
    - Rent as % of median local wage: 41%
    - Rooms under £800 still possible — E6 is one of only 5 London postcodes
 
@@ -258,3 +259,112 @@
    - Deposit protected ✓
 
 **CTA:** Start your search → /find-a-room | Create Renter Passport → /renter-passport
+
+---
+
+## ARTICLE 6 — ZERO COMPETITION KEYWORD (Own your category)
+
+**Title:** What Is a Renter Passport UK? The 2026 Guide to Faster, Smarter Renting
+**Slug:** renter-passport-uk-2026-guide
+**Meta (155 chars):** A UK Renter Passport lets you prove your identity, income and rental history before you apply — so landlords say yes faster. Find out how it works in 2026.
+**Category:** Tenant Advice
+**Primary keyword:** renter passport UK
+**Secondary keywords:** renter passport 2026, digital renter passport, tenant passport UK, how to get a renter passport, tenant ID UK
+**Word count:** 1,400
+**Search intent:** Informational — zero strong competitor currently ranking
+**Competition:** LOW — Elite Tenancy invented this category. No competitor has a dedicated article.
+
+### H1: What Is a Renter Passport? The UK Tenant's Guide for 2026
+
+### H2 Structure:
+1. **What Is a Renter Passport and Why Does It Exist?**
+   - Traditional renting: submit documents after offer → 5–10 day wait → often rejected
+   - Renter Passport: verify once, apply instantly to any property
+   - Introduced to reduce discrimination and speed up the process
+
+2. **What Does a UK Renter Passport Contain?**
+   - Government-issued photo ID (passport/BRP/driving licence)
+   - Proof of income (payslips, employment letter, or self-assessment)
+   - Right to Rent status (linked to share code for non-UK nationals)
+   - Previous landlord reference (or employer reference for first-time renters)
+   - Credit check summary
+
+3. **How the Elite Tenancy Renter Passport Works**
+   - Step 1: Create account at /renter-passport
+   - Step 2: Upload ID, income proof, and Right to Rent documents
+   - Step 3: AI verification (usually under 24 hours)
+   - Step 4: Use your Passport number when applying to any Elite Tenancy listing
+   - Landlords see pre-verified status → faster decisions, fewer rejections
+
+4. **Renter Passport vs. Standard Application — Key Differences**
+   - Table: Application time / Documents needed / Rejection risk / Landlord response time
+   - Standard: 5–10 days, repeat docs each time, high rejection risk
+   - Passport: Same-day, one-time setup, significantly lower rejection rate
+
+5. **Is a Renter Passport Required by Law in 2026?**
+   - Not a legal requirement — but Renters' Rights Act 2026 encourages pre-vetting
+   - Landlords are legally required to check Right to Rent regardless
+   - Using a Passport simplifies compliance for landlords too
+
+6. **Who Should Get a Renter Passport in 2026?**
+   - First-time renters (no prior landlord reference)
+   - International students and workers (Right to Rent share code complexity)
+   - People with non-standard income (self-employed, benefits, zero-hours)
+   - Anyone in a competitive rental market (East London, Manchester, Birmingham)
+
+**CTA:** Create your free Renter Passport → /renter-passport
+
+---
+
+## ARTICLE 7 — HIGH LOCAL INTENT (Landlord-facing, Newham-specific)
+
+**Title:** HMO Licence in Newham 2026: Mandatory, Additional & Selective — East Ham Landlord Guide
+**Slug:** hmo-licence-newham-east-ham-2026
+**Meta (155 chars):** Do you need an HMO licence in Newham? 2026 guide to mandatory, additional and selective licences in East Ham E6. Costs, requirements, and how to apply.
+**Category:** Landlord Guide
+**Primary keyword:** HMO licence Newham 2026
+**Secondary keywords:** selective licence Newham, HMO licence East Ham E6, landlord licence Newham, additional HMO licence E6, mandatory HMO licence London
+**Word count:** 1,800
+**Search intent:** Informational — Landlords searching for compliance info
+**Competition:** MEDIUM — Newham Council, Lint Group, Highcastle currently rank. Local + detailed article can outrank them.
+
+### H1: HMO Licence in Newham 2026: The East Ham Landlord's Complete Guide
+
+### H2 Structure:
+1. **Does Your East Ham Property Need a Licence in 2026?**
+   - Three types: Mandatory HMO / Additional HMO / Selective Licence
+   - ALL privately rented properties in Newham require at least a Selective Licence
+   - Fines for unlicensed properties: up to £30,000 + rent repayment order
+
+2. **Mandatory HMO Licence — East Ham**
+   - Required for: 5+ people forming 2+ households
+   - Applies to large HMOs regardless of floors
+   - Fee: varies by property size (contact Newham Council)
+   - Documents: Gas Safety, EICR, EPC, floor plan, fire risk assessment, tenancy agreements
+
+3. **Additional HMO Licence — Newham**
+   - Required for: 3–4 people forming 2+ households
+   - Launched: 1 January 2023 — still active in 2026
+   - Common in East Ham for 3/4-bed shared houses
+   - Fee: similar to mandatory HMO — confirm at newham.gov.uk
+
+4. **Selective Licence — East Ham E6**
+   - Required for: ALL privately rented properties not covered by HMO licences
+   - Fee: £750 for 5 years
+   - Discount to £650 if: ARLA/NRLA member + EPC rating A–C
+   - The most common licence for standard 1/2-bed flats in E6
+
+5. **How to Apply for a Newham Landlord Licence**
+   - Apply online at newham.gov.uk
+   - Documents needed: Gas Safety cert, EICR, EPC, tenancy agreement, floor plan
+   - Licence holder must be a 'fit and proper person'
+   - Application processing: 4–8 weeks typically
+   - Link: (Newham Council licensing portal)
+
+6. **How Elite Tenancy Helps Newham Landlords Stay Compliant**
+   - We check licence status before listing any property
+   - HMO compliance support included with full management service
+   - Right to Rent checks handled automatically (link: /right-to-rent-check)
+   - Renters' Rights Act 2026 compliance built into every tenancy (link: /blog/renters-rights-act-2026-landlord-guide)
+
+**CTA:** List your Newham property with full compliance support → /for-landlords
