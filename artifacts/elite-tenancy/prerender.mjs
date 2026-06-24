@@ -117,10 +117,18 @@ async function prerender(routes) {
     return;
   }
 
-  const browser = await puppeteer.launch({
-    headless: "new",
-    args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
-  });
+  let browser;
+  try {
+    browser = await puppeteer.launch({
+      headless: "new",
+      args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+    });
+  } catch (err) {
+    console.warn("[prerender] Chrome could not be launched — skipping prerender.");
+    console.warn("            This is expected in Vercel/CI environments without Chrome.");
+    console.warn("           ", err.message);
+    return;
+  }
 
   const page = await browser.newPage();
   await page.setUserAgent("EliteTenancyPrerender/1.0 Googlebot-compatible");
@@ -188,6 +196,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error("[prerender] Fatal:", err);
-  process.exit(1);
+  // Prerender is an enhancement — never fail the Vercel build for it.
+  console.warn("[prerender] Skipped:", err.message);
 });
