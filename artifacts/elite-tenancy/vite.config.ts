@@ -47,6 +47,33 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // React core — loaded first, cached indefinitely
+          "vendor-react": ["react", "react-dom"],
+          // Clerk auth — large SDK, isolated so app pages don't block on it
+          "vendor-clerk": ["@clerk/react"],
+          // Tanstack Query
+          "vendor-query": ["@tanstack/react-query"],
+          // Routing + UI utilities
+          "vendor-ui": ["wouter", "lucide-react", "class-variance-authority", "clsx", "tailwind-merge"],
+          // Radix UI components (heavy but rarely change)
+          "vendor-radix": [
+            "@radix-ui/react-accordion", "@radix-ui/react-alert-dialog",
+            "@radix-ui/react-avatar", "@radix-ui/react-checkbox",
+            "@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu",
+            "@radix-ui/react-label", "@radix-ui/react-popover",
+            "@radix-ui/react-scroll-area", "@radix-ui/react-select",
+            "@radix-ui/react-separator", "@radix-ui/react-slider",
+            "@radix-ui/react-slot", "@radix-ui/react-switch",
+            "@radix-ui/react-tabs", "@radix-ui/react-toast",
+            "@radix-ui/react-tooltip",
+          ],
+        },
+      },
+    },
   },
   server: {
     port,
