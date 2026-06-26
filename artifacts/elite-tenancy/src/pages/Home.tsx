@@ -40,9 +40,20 @@ export default function Home() {
     <PublicLayout>
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[85vh] flex items-center">
+        {/* Base warm ivory gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,146,63,0.12),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(31,74,63,0.06),transparent_55%)]" />
+        {/* Amber/gold mesh glow — top right */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_92%_8%,rgba(184,146,63,0.26),transparent)]" />
+        {/* Deep green mesh glow — bottom left */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_55%_at_8%_92%,rgba(31,74,63,0.16),transparent)]" />
+        {/* Centre-bottom warm fill */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_35%_at_50%_100%,rgba(184,146,63,0.09),transparent)]" />
+        {/* Subtle dot grid */}
+        <div className="absolute inset-0 pointer-events-none" style={{backgroundImage:"radial-gradient(circle,rgba(31,74,63,0.13) 1px,transparent 1px)",backgroundSize:"30px 30px"}} />
+        {/* Decorative concentric rings */}
+        <div className="absolute -top-40 -right-40 w-[680px] h-[680px] rounded-full border border-accent/10 pointer-events-none" />
+        <div className="absolute -top-20 -right-20 w-[440px] h-[440px] rounded-full border border-primary/8 pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-[380px] h-[380px] rounded-full border border-primary/6 pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24 grid lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
           <motion.div
@@ -352,22 +363,31 @@ export default function Home() {
       )}
 
       {/* CTA */}
-      <section className="bg-primary/5 border-t border-primary/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <h2 className="font-serif text-4xl font-bold text-foreground mb-4">
+      <section className="relative overflow-hidden bg-primary">
+        {/* Gold radial highlight — top left */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_65%_at_0%_0%,rgba(184,146,63,0.32),transparent)] pointer-events-none" />
+        {/* Dark vignette — bottom right */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_70%_at_100%_100%,rgba(0,0,0,0.22),transparent)] pointer-events-none" />
+        {/* White dot grid */}
+        <div className="absolute inset-0 pointer-events-none" style={{backgroundImage:"radial-gradient(circle,rgba(255,255,255,0.07) 1px,transparent 1px)",backgroundSize:"28px 28px"}} />
+        {/* Decorative ring */}
+        <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full border border-white/8 pointer-events-none" />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+          <p className="text-accent text-xs font-semibold uppercase tracking-widest mb-4">Get started today</p>
+          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-primary-foreground mb-5">
             Ready to let with confidence?
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-            Join over 300 landlords who trust Elite Tenancy to find and manage exceptional tenants.
+          <p className="text-primary-foreground/70 mb-10 max-w-xl mx-auto text-lg leading-relaxed">
+            Join over 300 landlords who trust Elite Tenancy to find and manage exceptional tenants — completion fee only.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <Link href="/valuation">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8">
+              <Button size="lg" className="bg-accent text-white hover:bg-accent/90 px-8 shadow-lg shadow-black/20">
                 Get a Free Valuation
               </Button>
             </Link>
             <Link href="/how-it-works">
-              <Button size="lg" variant="outline" className="px-8 border-border/60">
+              <Button size="lg" variant="outline" className="px-8 border-white/25 text-primary-foreground hover:bg-white/10 hover:border-white/40">
                 See How It Works
               </Button>
             </Link>
