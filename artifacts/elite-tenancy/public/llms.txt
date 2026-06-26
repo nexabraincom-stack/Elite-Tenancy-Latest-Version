@@ -32,6 +32,7 @@
 - [Renters' Rights Act 2025 Checker](https://www.elitetenancy.co.uk/rra-2025-checker): assess compliance with the new Act.
 - [Listings](https://www.elitetenancy.co.uk/listings): browse available premium rental properties.
 - [Blog](https://www.elitetenancy.co.uk/blog): guides on UK renting, landlord law, and the rental market.
+- [FAQ](https://www.elitetenancy.co.uk/faq): 25+ answers covering UK lettings law, Renters' Rights Act 2025, Right to Rent, deposit caps, HMO licences, East Ham rents, and how Elite Tenancy works.
 
 ## Common questions
 
