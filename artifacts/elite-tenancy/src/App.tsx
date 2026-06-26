@@ -65,6 +65,7 @@ const Faq = lazy(() => import("@/pages/Faq"));
 const About = lazy(() => import("@/pages/About"));
 const RentersRightsAct2025 = lazy(() => import("@/pages/RentersRightsAct2025"));
 const TenantIntroductionService = lazy(() => import("@/pages/TenantIntroductionService"));
+const DepositProtection = lazy(() => import("@/pages/DepositProtection"));
 
 // International SEO landing pages
 const InternationalStudents = lazy(() => import("@/pages/InternationalStudents"));
@@ -344,6 +345,7 @@ function AppRoutes() {
       <Route path="/about" component={About} />
       <Route path="/renters-rights-act-2025" component={RentersRightsAct2025} />
       <Route path="/tenant-introduction-service" component={TenantIntroductionService} />
+      <Route path="/deposit-protection" component={DepositProtection} />
       <Route path="/listings" component={Listings} />
       <Route path="/listings/:id" component={ListingDetail} />
       <Route path="/for-landlords" component={ForLandlords} />
