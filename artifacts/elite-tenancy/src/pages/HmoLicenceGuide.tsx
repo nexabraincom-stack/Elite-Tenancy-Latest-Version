@@ -100,7 +100,7 @@ const faqSchema = {
       name: "What happens if I let an unlicensed HMO?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Operating an unlicensed HMO is a criminal offence under the Housing Act 2004. The council can impose a civil penalty of up to £30,000 per breach. Tenants can also apply to the First-tier Tribunal (Property Chamber) for a Rent Repayment Order, requiring the landlord to repay up to 12 months of rent. In addition, an unlicensed HMO landlord cannot serve a valid Section 8 notice for rent arrears.",
+        text: "Operating an unlicensed HMO is a criminal offence under the Housing Act 2004. The council can impose a civil penalty of up to £40,000 per breach (raised from £30,000 by the Renters' Rights Act 2025, effective 1 May 2026). Tenants can also apply to the First-tier Tribunal (Property Chamber) for a Rent Repayment Order, requiring the landlord to repay up to 24 months of rent (doubled from 12 months by the Renters' Rights Act 2025). In addition, an unlicensed HMO landlord cannot serve a valid Section 8 notice for rent arrears.",
       },
     },
     {
@@ -459,17 +459,17 @@ export default function HmoLicenceGuide() {
                 </div>
                 <div className="grid sm:grid-cols-3 gap-4 mb-4">
                   <div className="bg-white rounded-lg border border-red-100 p-4 text-center">
-                    <p className="text-3xl font-bold text-red-700 mb-1">£30,000</p>
+                    <p className="text-3xl font-bold text-red-700 mb-1">£40,000</p>
                     <p className="text-sm text-red-800 font-semibold">civil penalty</p>
                     <p className="text-xs text-red-600 mt-1">
-                      Per breach — council-issued
+                      Per breach — council-issued (raised May 2026)
                     </p>
                   </div>
                   <div className="bg-white rounded-lg border border-red-100 p-4 text-center">
-                    <p className="text-3xl font-bold text-red-700 mb-1">12 mo</p>
+                    <p className="text-3xl font-bold text-red-700 mb-1">24 mo</p>
                     <p className="text-sm text-red-800 font-semibold">rent repayment</p>
                     <p className="text-xs text-red-600 mt-1">
-                      Tenants can apply to tribunal
+                      Tenants can apply to tribunal (doubled May 2026)
                     </p>
                   </div>
                   <div className="bg-white rounded-lg border border-red-100 p-4 text-center">
@@ -578,7 +578,7 @@ export default function HmoLicenceGuide() {
                 </li>
                 <li className="flex items-start gap-2">
                   <AlertTriangle className="h-4 w-4 text-red-500 flex-shrink-0 mt-0.5" />
-                  Unlicensed = up to £30,000 penalty
+                  Unlicensed = up to £40,000 penalty
                 </li>
               </ul>
             </div>

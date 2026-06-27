@@ -103,7 +103,7 @@ const faqSchema = {
       name: "What happens if a landlord does not use the prescribed Section 8 form?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A Section 8 notice must be served on the prescribed form (Form 3, updated periodically by the government). Using an outdated or incorrect form may invalidate the notice, meaning the court will dismiss the claim and the landlord must start again. As of 2026, landlords should use the most current version of Form 3 available from GOV.UK and include the specific ground(s) and particulars of the ground clearly.",
+        text: "A Section 8 notice must be served on the correct prescribed form. For tenancies where proceedings began on or after 1 May 2026, use Form 3A (the updated form introduced by the Renters' Rights Act 2025). For proceedings on pre-existing tenancies started before 1 May 2026, Form 3 still applies. Using an outdated or incorrect form may invalidate the notice, meaning the court will dismiss the claim and the landlord must start again. Always download the most current version from GOV.UK.",
       },
     },
     {
@@ -119,7 +119,7 @@ const faqSchema = {
       name: "How do I serve a Section 8 notice correctly in England?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "To serve a valid Section 8 notice: (1) Use the current prescribed Form 3. (2) State the ground(s) clearly and give full particulars — for rent arrears, specify the amount owed and the dates of arrears. (3) State the date on which the tenancy will end (must be at least the minimum notice period after service). (4) Serve by hand, first-class post, or an agreed method in the tenancy agreement. Keep proof of service — a completed Certificate of Service (N215) is advisable. For postal service, allow at least 2 working days for delivery.",
+        text: "To serve a valid Section 8 notice: (1) Use the correct prescribed form — Form 3A for proceedings on or after 1 May 2026, Form 3 for proceedings on older tenancies before that date. (2) State the ground(s) clearly and give full particulars — for rent arrears, specify the amount owed and the dates of arrears. (3) State the date on which the tenancy will end (must be at least the minimum notice period after service). (4) Serve by hand, first-class post, or an agreed method in the tenancy agreement. Keep proof of service — a completed Certificate of Service (N215) is advisable. For postal service, allow at least 2 working days for delivery.",
       },
     },
   ],
@@ -250,9 +250,9 @@ const PROCESS_STEPS = [
   },
   {
     step: "2",
-    title: "Obtain the current Form 3",
+    title: "Obtain the correct prescribed form",
     detail:
-      'Download the latest prescribed Form 3 (Notice Seeking Possession of a Property Let on an Assured Tenancy or an Assured Agricultural Occupancy) from GOV.UK. Do not use old versions — the form is periodically updated.',
+      'For Section 8 proceedings commenced on or after 1 May 2026, download Form 3A (Notice Seeking Possession of a Property Let on an Assured Tenancy) from GOV.UK — this is the updated form introduced by the Renters’ Rights Act 2025. For proceedings on tenancies where notice was served before 1 May 2026, Form 3 still applies. Never use outdated versions — courts have dismissed claims for use of superseded forms.',
   },
   {
     step: "3",
@@ -309,11 +309,11 @@ const FAQS = [
   },
   {
     q: "How do I serve a Section 8 notice correctly in England?",
-    a: "Use the current prescribed Form 3. State the ground(s) clearly with full particulars — for rent arrears, specify the amount owed and the dates of arrears. State the notice expiry date. Serve by hand, first-class post, or an agreed method in the tenancy agreement. Keep proof of service. For postal service, allow at least 2 working days for delivery.",
+    a: "Use the correct prescribed form — Form 3A for proceedings on or after 1 May 2026 (as updated by the Renters' Rights Act 2025), or Form 3 for notices served on older tenancies before that date. State the ground(s) clearly with full particulars — for rent arrears, specify the amount owed and the dates of arrears. State the notice expiry date. Serve by hand, first-class post, or an agreed method in the tenancy agreement. Keep proof of service. For postal service, allow at least 2 working days for delivery.",
   },
   {
     q: "What happens if a landlord does not use the prescribed Section 8 form?",
-    a: "A Section 8 notice must be served on the current prescribed Form 3. Using an outdated or incorrect form may invalidate the notice, and the court may dismiss the claim. Landlords must use the most current version of Form 3 available from GOV.UK and include the specific ground(s) and particulars clearly.",
+    a: "A Section 8 notice must be served on the correct prescribed form. For proceedings on or after 1 May 2026, use Form 3A (introduced by the Renters' Rights Act 2025). For proceedings on older tenancies where notice pre-dates 1 May 2026, Form 3 applies. Using the wrong version may invalidate the notice and the court may dismiss the claim. Always download the latest version from GOV.UK.",
   },
 ];
 
@@ -613,8 +613,8 @@ export default function Section8NoticeGuide() {
           <div className="grid sm:grid-cols-2 gap-4">
             {[
               {
-                title: "Using an outdated Form 3",
-                detail: "Always download the latest Form 3 from GOV.UK. Courts have dismissed claims for use of superseded forms.",
+                title: "Using the wrong prescribed form",
+                detail: "For proceedings on or after 1 May 2026 use Form 3A; for older tenancies use Form 3. Always download from GOV.UK. Courts have dismissed claims for use of superseded forms.",
               },
               {
                 title: "Insufficient particulars of arrears",
