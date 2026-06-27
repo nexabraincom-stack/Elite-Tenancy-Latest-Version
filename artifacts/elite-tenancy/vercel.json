@@ -5,6 +5,11 @@
   "framework": null,
   "redirects": [
     {
+      "source": "/%20:rest*",
+      "destination": "https://www.elitetenancy.co.uk/",
+      "statusCode": 308
+    },
+    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "elitetenancy.co.uk" }],
       "destination": "https://www.elitetenancy.co.uk/$1",
