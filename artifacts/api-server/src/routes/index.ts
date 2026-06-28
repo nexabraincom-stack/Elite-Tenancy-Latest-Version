@@ -22,6 +22,7 @@ import verifyRouter from "./verify";
 import rtrRouter from "./rtr";
 import integrationsRouter from "./integrations";
 import automationsRouter from "./automations";
+import reputationRouter from "./reputation";
 // ── Module 2-4: Portal Architecture ──────────────────────────────────────────
 import takeoverRouter from "./takeover";
 import interestRouter from "./interest";
@@ -43,6 +44,7 @@ router.use(passportRouter);
 router.use(verifyRouter);
 router.use(rtrRouter);
 router.use(automationsRouter);
+router.use(reputationRouter);
 router.use(integrationsRouter);
 router.use(healthRouter);
 router.use(listingsRouter);
