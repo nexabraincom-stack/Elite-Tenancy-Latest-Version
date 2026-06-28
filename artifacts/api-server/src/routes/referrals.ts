@@ -21,8 +21,7 @@
 
 import { Router, type IRouter, type Request, type Response } from "express";
 import { pool } from "@workspace/db";
-import { requireAuth } from "../middlewares/requireAuth";
-import { requireRole } from "../middlewares/requireRole";
+import { requireAuth, requireRole } from "../middlewares/requireAuth";
 import { randomBytes } from "crypto";
 import { logger } from "../lib/logger";
 

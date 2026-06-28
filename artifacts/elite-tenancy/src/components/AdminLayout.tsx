@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Building2, UserCheck, BookOpen, Users, LogOut, ShieldCheck, User, Star } from "lucide-react";
+import { LayoutDashboard, Building2, UserCheck, BookOpen, Users, LogOut, ShieldCheck, User, Star, Gift } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useUser, useClerk } from "@clerk/react";
 
@@ -12,6 +12,7 @@ const navItems = [
   { label: "Articles", href: "/admin/articles", icon: BookOpen },
   { label: "Users", href: "/admin/users", icon: Users },
   { label: "Reputation", href: "/admin/reputation", icon: Star },
+  { label: "Referrals", href: "/admin/referrals", icon: Gift },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

@@ -51,6 +51,8 @@ const AdminSeoDashboard = lazy(() => import("@/pages/admin/SeoDashboard"));
 const AdminReputation = lazy(() => import("@/pages/admin/Reputation"));
 const TenantReferral = lazy(() => import("@/pages/tenant/Referral"));
 const LandlordReferral = lazy(() => import("@/pages/landlord/Referral"));
+const AdminReferrals = lazy(() => import("@/pages/admin/Referrals"));
+const Features = lazy(() => import("@/pages/Features"));
 
 const TenantMessages = lazy(() => import("@/pages/tenant/Messages"));
 const LandlordMessages = lazy(() => import("@/pages/landlord/Messages"));
@@ -358,6 +360,7 @@ function AppRoutes() {
       <Route path="/listings" component={Listings} />
       <Route path="/listings/:id" component={ListingDetail} />
       <Route path="/for-landlords" component={ForLandlords} />
+      <Route path="/features" component={Features} />
       <Route path="/for-agents" component={ForAgents} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/how-it-works" component={HowItWorks} />
@@ -499,6 +502,9 @@ function AppRoutes() {
       </Route>
       <Route path="/admin/reputation">
         {() => <ProtectedRoute component={AdminReputation} requiredRole="admin" />}
+      </Route>
+      <Route path="/admin/referrals">
+        {() => <ProtectedRoute component={AdminReferrals} requiredRole="admin" />}
       </Route>
 
       <Route component={NotFound} />
