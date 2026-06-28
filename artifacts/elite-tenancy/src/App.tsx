@@ -48,6 +48,7 @@ const AdminLeads = lazy(() => import("@/pages/admin/Leads"));
 const AdminArticles = lazy(() => import("@/pages/admin/Articles"));
 const AdminUsers = lazy(() => import("@/pages/admin/Users"));
 const AdminSeoDashboard = lazy(() => import("@/pages/admin/SeoDashboard"));
+const AdminReputation = lazy(() => import("@/pages/admin/Reputation"));
 
 const TenantMessages = lazy(() => import("@/pages/tenant/Messages"));
 const LandlordMessages = lazy(() => import("@/pages/landlord/Messages"));
@@ -487,6 +488,9 @@ function AppRoutes() {
       </Route>
       <Route path="/admin/seo-dashboard">
         {() => <ProtectedRoute component={AdminSeoDashboard} requiredRole="admin" />}
+      </Route>
+      <Route path="/admin/reputation">
+        {() => <ProtectedRoute component={AdminReputation} requiredRole="admin" />}
       </Route>
 
       <Route component={NotFound} />
