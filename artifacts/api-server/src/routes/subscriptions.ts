@@ -165,7 +165,7 @@ router.post("/subscriptions/checkout", requireAuth(), async (req: Request, res: 
         metadata: { eliteUserId: String(user.id), planId },
         subscription_data: {
           metadata: { eliteUserId: String(user.id), planId },
-          trial_period_days: planId === "starter" ? 0 : 7, // 7-day free trial on paid plans
+          trial_period_days: planId === "starter" ? 0 : 14, // 14-day free trial on paid plans
         },
       };
     } else {

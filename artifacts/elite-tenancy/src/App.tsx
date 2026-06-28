@@ -49,6 +49,8 @@ const AdminArticles = lazy(() => import("@/pages/admin/Articles"));
 const AdminUsers = lazy(() => import("@/pages/admin/Users"));
 const AdminSeoDashboard = lazy(() => import("@/pages/admin/SeoDashboard"));
 const AdminReputation = lazy(() => import("@/pages/admin/Reputation"));
+const TenantReferral = lazy(() => import("@/pages/tenant/Referral"));
+const LandlordReferral = lazy(() => import("@/pages/landlord/Referral"));
 
 const TenantMessages = lazy(() => import("@/pages/tenant/Messages"));
 const LandlordMessages = lazy(() => import("@/pages/landlord/Messages"));
@@ -440,6 +442,9 @@ function AppRoutes() {
       <Route path="/tenant/messages">
         {() => <ProtectedRoute component={TenantMessages} />}
       </Route>
+      <Route path="/tenant/referral">
+        {() => <ProtectedRoute component={TenantReferral} />}
+      </Route>
 
       {/* Landlord portal — landlord role required */}
       <Route path="/landlord/dashboard">
@@ -468,6 +473,9 @@ function AppRoutes() {
       </Route>
       <Route path="/landlord/messages">
         {() => <ProtectedRoute component={LandlordMessages} requiredRole="landlord" />}
+      </Route>
+      <Route path="/landlord/referral">
+        {() => <ProtectedRoute component={LandlordReferral} requiredRole="landlord" />}
       </Route>
 
       {/* Admin portal — admin role required */}

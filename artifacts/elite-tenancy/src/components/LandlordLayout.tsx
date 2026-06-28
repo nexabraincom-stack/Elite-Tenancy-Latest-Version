@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Building2, Users, PoundSterling, Wrench, UserCheck, MessageSquare, LogOut, Star, User, KeyRound } from "lucide-react";
+import { LayoutDashboard, Building2, Users, PoundSterling, Wrench, UserCheck, MessageSquare, LogOut, Star, User, KeyRound, Gift } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useUser, useClerk } from "@clerk/react";
 import { useChatContext } from "@/contexts/ChatContext";
@@ -16,6 +16,7 @@ const navItems = [
   { label: "Passports", href: "/landlord/passports", icon: Users },
   { label: "Managed", href: "/landlord/managed", icon: KeyRound },
   { label: "Messages", href: "/landlord/messages", icon: MessageSquare },
+  { label: "Refer & Earn", href: "/landlord/referral", icon: Gift },
 ];
 
 export default function LandlordLayout({ children }: { children: React.ReactNode }) {

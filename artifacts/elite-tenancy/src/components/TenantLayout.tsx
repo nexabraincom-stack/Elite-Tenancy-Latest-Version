@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Home, FileText, CreditCard, Wrench, FolderOpen, MessageSquare, LogOut, User } from "lucide-react";
+import { Home, FileText, CreditCard, Wrench, FolderOpen, MessageSquare, LogOut, User, Gift } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useUser, useClerk } from "@clerk/react";
 import { useChatContext } from "@/contexts/ChatContext";
@@ -13,6 +13,7 @@ const navItems = [
   { label: "Maintenance", href: "/tenant/maintenance", icon: Wrench },
   { label: "Documents", href: "/tenant/documents", icon: FolderOpen },
   { label: "Messages", href: "/tenant/messages", icon: MessageSquare },
+  { label: "Refer & Earn", href: "/tenant/referral", icon: Gift },
 ];
 
 export default function TenantLayout({ children }: { children: React.ReactNode }) {
