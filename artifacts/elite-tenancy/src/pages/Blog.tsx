@@ -12,44 +12,47 @@ export default function Blog() {
     canonical: "https://www.elitetenancy.co.uk/blog",
   });
 
-  const { data: articles, isLoading } = useGetBlogArticles();
+  const { data: rawArticles, isLoading } = useGetBlogArticles();
+  const articles = Array.isArray(rawArticles) ? rawArticles : [];
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const categories = articles
+  const categories = articles.length
     ? ["All", ...Array.from(new Set(articles.map((a) => a.category)))]
     : ["All"];
 
   const displayed =
     activeCategory === "All"
       ? articles
-      : articles?.filter((a) => a.category === activeCategory);
+      : articles.filter((a) => a.category === activeCategory);
 
-  const featured = activeCategory === "All" ? displayed?.[0] : null;
-  const rest = activeCategory === "All" ? displayed?.slice(1) : displayed;
+  const featured = activeCategory === "All" ? displayed[0] : null;
+  const rest = activeCategory === "All" ? displayed.slice(1) : displayed;
 
   return (
     <PublicLayout>
-      {/* Hero — amber brand gradient matching other content pages */}
-      <div className="bg-gradient-to-b from-amber-50 to-white border-b border-amber-100/60">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <p className="text-amber-700 text-xs font-semibold tracking-widest uppercase mb-3">Expert insights</p>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4">The Elite Tenancy Blog</h1>
-          <p className="text-gray-500 max-w-xl text-base leading-relaxed">
+      {/* Hero — navy */}
+      <section className="relative overflow-hidden bg-primary">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,162,74,0.2),transparent_60%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 text-accent text-[11px] font-semibold uppercase tracking-[0.14em] px-4 py-2 rounded-full mb-6">
+            Expert insights
+          </span>
+          <h1 className="font-display text-4xl md:text-5xl font-semibold text-white tracking-tight">The Elite Tenancy Blog</h1>
+          <p className="text-white/70 max-w-xl text-base leading-relaxed mt-4">
             Property market analysis, landlord guidance, and tenant advice — keeping you ahead of the UK rental market.
           </p>
         </div>
-      </div>
+      </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="bg-gray-100 rounded-xl h-64 animate-pulse" />
+              <div key={i} className="bg-muted rounded-xl h-64 animate-pulse" />
             ))}
           </div>
         ) : (
           <>
-            {/* Category filter chips */}
             {categories.length > 1 && (
               <div className="flex flex-wrap gap-2 mb-8">
                 {categories.map((cat) => (
@@ -58,8 +61,8 @@ export default function Blog() {
                     onClick={() => setActiveCategory(cat)}
                     className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                       activeCategory === cat
-                        ? "bg-amber-600 text-white shadow-sm"
-                        : "bg-gray-100 text-gray-600 hover:bg-amber-50 hover:text-amber-700"
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "bg-muted text-muted-foreground hover:bg-accent/10 hover:text-accent"
                     }`}
                   >
                     {cat}
@@ -68,10 +71,9 @@ export default function Blog() {
               </div>
             )}
 
-            {/* Featured article (All view only) */}
             {featured && (
               <Link href={`/blog/${featured.slug}`}>
-                <article className="group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-amber-300 hover:shadow-lg transition-all duration-300 mb-8 cursor-pointer shadow-sm">
+                <article className="group bg-card border border-border/50 rounded-xl overflow-hidden hover:border-accent/40 hover:shadow-md transition-all duration-300 mb-8 cursor-pointer shadow-sm">
                   <div className="grid grid-cols-1 md:grid-cols-2">
                     {featured.imageUrl && (
                       <div className="overflow-hidden aspect-video md:aspect-auto">
@@ -84,18 +86,18 @@ export default function Blog() {
                     )}
                     <div className="p-8 flex flex-col justify-center">
                       <div className="flex items-center gap-2 mb-4">
-                        <span className="text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-100 rounded-full px-3 py-1">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-accent bg-accent/10 border border-accent/20 rounded-full px-3 py-1">
                           Featured
                         </span>
-                        <span className="text-xs font-medium text-gray-500 bg-gray-100 rounded-full px-3 py-1">
+                        <span className="text-[10px] font-medium text-muted-foreground bg-muted rounded-full px-3 py-1">
                           {featured.category}
                         </span>
                       </div>
-                      <h2 className="font-serif text-2xl font-bold text-gray-900 group-hover:text-amber-700 transition-colors leading-snug mb-3">
+                      <h2 className="font-display text-2xl font-semibold text-foreground group-hover:text-accent transition-colors leading-snug mb-3 tracking-tight">
                         {featured.title}
                       </h2>
-                      <p className="text-sm text-gray-500 leading-relaxed mb-5">{featured.excerpt}</p>
-                      <div className="flex items-center gap-3 text-xs text-gray-400">
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-5">{featured.excerpt}</p>
+                      <div className="flex items-center gap-3 text-xs text-muted-foreground/70">
                         <span>{featured.author}</span>
                         <span>·</span>
                         <span className="flex items-center gap-1">
@@ -117,11 +119,10 @@ export default function Blog() {
               </Link>
             )}
 
-            {/* Card grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {rest?.map((article) => (
                 <Link key={article.id} href={`/blog/${article.slug}`}>
-                  <article className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-amber-300 hover:shadow-md transition-all duration-300 cursor-pointer h-full flex flex-col shadow-sm">
+                  <article className="group bg-card border border-border/40 rounded-xl overflow-hidden hover:border-accent/40 hover:shadow-md transition-all duration-300 cursor-pointer h-full flex flex-col shadow-sm">
                     {article.imageUrl && (
                       <div className="overflow-hidden aspect-video">
                         <img
@@ -133,14 +134,14 @@ export default function Blog() {
                       </div>
                     )}
                     <div className="p-5 flex flex-col flex-1">
-                      <span className="text-xs font-medium text-amber-700 bg-amber-50 border border-amber-100 rounded-full px-2.5 py-0.5 w-fit mb-3">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-accent bg-accent/10 border border-accent/20 rounded-full px-2.5 py-0.5 w-fit mb-3">
                         {article.category}
                       </span>
-                      <h3 className="font-serif text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors leading-snug mb-2 flex-1">
+                      <h3 className="font-display text-base font-semibold text-foreground group-hover:text-accent transition-colors leading-snug mb-2 flex-1 tracking-tight">
                         {article.title}
                       </h3>
-                      <p className="text-xs text-gray-400 line-clamp-2 mb-3">{article.excerpt}</p>
-                      <div className="flex items-center gap-2 text-xs text-gray-400 mt-auto pt-3 border-t border-gray-100">
+                      <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{article.excerpt}</p>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground/70 mt-auto pt-3 border-t border-border/40">
                         <Clock size={10} />
                         {article.readTimeMinutes} min read
                         <span className="ml-auto">
@@ -156,8 +157,8 @@ export default function Blog() {
               ))}
             </div>
 
-            {displayed?.length === 0 && (
-              <p className="text-center text-gray-400 py-16 text-sm">No articles in this category yet.</p>
+            {displayed.length === 0 && (
+              <p className="text-center text-muted-foreground py-16 text-sm">No articles in this category yet.</p>
             )}
           </>
         )}

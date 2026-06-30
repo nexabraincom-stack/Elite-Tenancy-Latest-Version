@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams, Link } from "wouter";
 import { ChevronLeft, Clock, Tag, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+
 import PublicLayout from "@/components/PublicLayout";
 import { useGetBlogArticleBySlug } from "@workspace/api-client-react";
 import { useSeo } from "@/hooks/use-seo";
@@ -84,7 +85,7 @@ export default function BlogArticle() {
     return (
       <PublicLayout>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <h1 className="font-serif text-3xl text-foreground mb-4">Article not found</h1>
+          <h1 className="font-display text-3xl font-semibold text-foreground mb-4 tracking-tight">Article not found</h1>
           <Link href="/blog" className="text-primary hover:underline text-sm">Back to Blog</Link>
         </div>
       </PublicLayout>
@@ -101,8 +102,8 @@ export default function BlogArticle() {
           <ChevronLeft size={14} /> Back to Blog
         </Link>
 
-        <Badge className="bg-primary/10 text-primary border-primary/20 text-xs mb-5">{article.category}</Badge>
-        <h1 className="font-serif text-4xl font-bold text-foreground leading-tight mb-4">{article.title}</h1>
+        <span className="inline-block text-[10px] font-semibold uppercase tracking-wider text-accent bg-accent/10 border border-accent/20 rounded-full px-3 py-1 mb-5">{article.category}</span>
+        <h1 className="font-display text-4xl font-semibold text-foreground leading-tight mb-4 tracking-tight">{article.title}</h1>
 
         <div className="flex items-center gap-4 text-sm text-muted-foreground mb-8 pb-8 border-b border-border/50">
           <span className="font-medium text-foreground">{article.author}</span>
@@ -119,7 +120,7 @@ export default function BlogArticle() {
         )}
 
         <div
-          className="prose prose-invert prose-sm sm:prose-base max-w-none prose-headings:font-serif prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-a:text-primary prose-strong:text-foreground prose-li:text-muted-foreground prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4"
+          className="prose prose-sm sm:prose-base max-w-none prose-headings:font-display prose-headings:text-foreground prose-headings:tracking-tight prose-p:text-muted-foreground prose-p:leading-relaxed prose-a:text-accent prose-strong:text-foreground prose-li:text-muted-foreground prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
 
@@ -135,7 +136,7 @@ export default function BlogArticle() {
         {/* Related guides — internal linking for SEO + reader retention */}
         {related.length > 0 && (
           <div className="mt-12 pt-8 border-t border-border/50">
-            <h2 className="font-serif text-xl font-bold text-foreground mb-5">Related guides</h2>
+            <h2 className="font-display text-xl font-semibold text-foreground mb-5 tracking-tight">Related guides</h2>
             <div className="space-y-3">
               {related.map((g) => (
                 <Link
@@ -153,7 +154,7 @@ export default function BlogArticle() {
 
         {/* Conversion CTA — also internal links to key pages */}
         <div className="mt-10 rounded-xl border border-primary/25 bg-primary/5 p-6 sm:p-8 text-center">
-          <h2 className="font-serif text-2xl font-bold text-foreground mb-2">Looking for your next home?</h2>
+          <h2 className="font-display text-2xl font-semibold text-foreground mb-2 tracking-tight">Looking for your next home?</h2>
           <p className="text-sm text-muted-foreground mb-5 max-w-xl mx-auto">
             Browse premium UK rentals or let our AI match you to the right property in seconds — free for tenants, always.
           </p>

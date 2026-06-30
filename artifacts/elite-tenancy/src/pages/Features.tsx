@@ -58,73 +58,86 @@ export default function Features() {
 
   return (
     <PublicLayout>
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-card to-background border-b border-border/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <Badge className="bg-primary/10 text-primary border-primary/20 mb-5">
-            <Zap size={11} className="mr-1" /> One platform · everything lettings
-          </Badge>
-          <h1 className="font-serif text-5xl font-bold text-foreground leading-tight max-w-3xl mx-auto">
-            Modern letting for smart landlords &amp; renters
+      {/* Hero — navy */}
+      <section className="relative overflow-hidden bg-primary">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,162,74,0.2),transparent_60%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+          <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 text-accent text-[11px] font-semibold uppercase tracking-[0.14em] px-4 py-2 rounded-full">
+            <Zap size={12} /> One platform · everything lettings
+          </span>
+          <h1 className="font-display text-5xl md:text-6xl font-semibold text-white leading-[1.05] tracking-tight mt-7 max-w-3xl mx-auto">
+            Modern letting for <em className="text-accent not-italic">smart</em> landlords &amp; renters
           </h1>
-          <p className="mt-5 text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-6 text-lg text-white/75 leading-relaxed max-w-2xl mx-auto">
             AI-powered tenant matching, automated review management, built-in compliance tools,
             and a full property management portal — all in one place.
           </p>
-          <div className="flex flex-wrap gap-4 mt-8 justify-center">
+          <div className="flex flex-wrap gap-4 mt-9 justify-center">
             <Link href="/listings">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2">
+              <Button size="lg" className="bg-accent text-white hover:bg-accent/90 gap-2 shadow-lg shadow-accent/30 font-semibold">
                 Browse Properties <ArrowRight size={16} />
               </Button>
             </Link>
             <Link href="/for-landlords">
-              <Button size="lg" variant="outline" className="border-border/60">For Landlords</Button>
+              <Button size="lg" variant="outline" className="border-white/25 text-white hover:bg-white/10 hover:border-white/40 font-semibold">
+                For Landlords
+              </Button>
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-3xl mx-auto pt-10 border-t border-border/50">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 max-w-3xl mx-auto pt-10 border-t border-white/15">
             {stats.map(({ num, label }) => (
               <div key={label}>
-                <p className="font-serif text-3xl font-bold text-primary">{num}</p>
-                <p className="text-xs text-muted-foreground mt-1">{label}</p>
+                <p className="font-display text-3xl font-semibold text-accent tracking-tight">{num}</p>
+                <p className="text-xs text-white/55 mt-2 tracking-wide">{label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center mb-14">
-          <p className="text-xs text-primary uppercase tracking-widest font-medium mb-2">Platform overview</p>
-          <h2 className="font-serif text-4xl font-bold text-foreground">Everything in one place</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map(({ icon: Icon, title, desc }) => (
-            <motion.div
-              key={title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-              className="bg-card border border-border/50 rounded-xl p-6 hover:border-primary/30 transition-colors"
-            >
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <Icon size={18} className="text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">{title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
-            </motion.div>
-          ))}
+      {/* Features grid — Housebox cards */}
+      <section className="bg-background py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <span className="inline-flex items-center gap-2 bg-accent/10 text-accent text-[11px] font-semibold uppercase tracking-[0.14em] px-4 py-1.5 rounded-full">
+              Platform overview
+            </span>
+            <h2 className="font-display text-4xl font-semibold text-foreground mt-4 tracking-tight">
+              Everything in <em className="text-accent not-italic">one place</em>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {features.map(({ icon: Icon, title, desc }, i) => (
+              <motion.div
+                key={title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="relative bg-card rounded-xl p-7 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200 border border-border/40"
+              >
+                <div className="w-[54px] h-[54px] rounded-[14px] bg-primary text-accent flex items-center justify-center mb-5">
+                  <Icon size={24} />
+                </div>
+                <h3 className="font-display text-lg font-semibold text-foreground mb-2 tracking-tight">{title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Ellie demo */}
-      <section className="bg-card/50 border-y border-border/50">
+      <section className="bg-card border-y border-border/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-xs text-primary uppercase tracking-widest font-medium mb-2">Ellie intelligence</p>
-            <h2 className="font-serif text-4xl font-bold text-foreground mb-4">Your AI letting agent — works while you sleep</h2>
+            <span className="inline-flex items-center gap-2 bg-accent/10 text-accent text-[11px] font-semibold uppercase tracking-[0.14em] px-4 py-1.5 rounded-full mb-4">
+              Ellie intelligence
+            </span>
+            <h2 className="font-display text-4xl font-semibold text-foreground mb-4 tracking-tight">
+              Your AI letting agent — works while you <em className="text-accent not-italic">sleep</em>
+            </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
               Ellie runs on a free AI provider chain (Groq, Gemini, Cerebras, OpenRouter) with a paid fallback.
               She lives on your website and WhatsApp — same brain, same context.
@@ -137,30 +150,30 @@ export default function Features() {
                 "AI-drafts replies to your reviews using free providers",
               ].map((t) => (
                 <li key={t} className="flex items-start gap-3 text-sm text-muted-foreground">
-                  <CheckCircle2 size={16} className="text-primary shrink-0 mt-0.5" />
+                  <CheckCircle2 size={16} className="text-accent shrink-0 mt-0.5" />
                   {t}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="bg-card border border-border/50 rounded-xl overflow-hidden">
-            <div className="bg-muted/40 border-b border-border/50 px-4 py-2.5 flex items-center gap-2">
-              <MessageSquare size={14} className="text-primary" />
-              <span className="text-xs text-muted-foreground">Ellie Chat — Elite Tenancy</span>
+          <div className="bg-background border border-border/50 rounded-xl overflow-hidden shadow-sm">
+            <div className="bg-primary px-4 py-3 flex items-center gap-2">
+              <MessageSquare size={14} className="text-accent" />
+              <span className="text-xs text-white/80 font-medium">Ellie Chat — Elite Tenancy</span>
             </div>
-            <div className="p-5 flex flex-col gap-3">
-              <div className="self-end max-w-[85%] bg-muted/50 border border-border/40 rounded-xl px-3.5 py-2.5 text-sm text-foreground">
+            <div className="p-5 flex flex-col gap-3 bg-background">
+              <div className="self-end max-w-[85%] bg-primary text-white rounded-xl rounded-br-md px-3.5 py-2.5 text-sm">
                 Hi, any 2-bed flats near East Ham station?
               </div>
-              <div className="self-start max-w-[85%] bg-primary/10 border border-primary/20 rounded-xl px-3.5 py-2.5 text-sm text-foreground">
+              <div className="self-start max-w-[85%] bg-card border border-border/40 rounded-xl rounded-bl-md px-3.5 py-2.5 text-sm text-foreground">
                 Yes — a refurbished 2-bed on Barking Road, E6, 4 mins from the station. £1,400/month, available 1 July. Want to arrange a viewing?
               </div>
-              <div className="self-end max-w-[85%] bg-muted/50 border border-border/40 rounded-xl px-3.5 py-2.5 text-sm text-foreground">
+              <div className="self-end max-w-[85%] bg-primary text-white rounded-xl rounded-br-md px-3.5 py-2.5 text-sm">
                 That's great, you've been really helpful!
               </div>
-              <div className="self-start max-w-[85%] bg-primary/10 border border-primary/20 rounded-xl px-3.5 py-2.5 text-sm text-foreground">
-                So kind — thank you! If you have a moment, a quick Google review would mean a lot to us. Here's the link 🙏
+              <div className="self-start max-w-[85%] bg-card border border-border/40 rounded-xl rounded-bl-md px-3.5 py-2.5 text-sm text-foreground">
+                So kind — thank you! If you have a moment, a quick Google review would mean a lot to us. Here's the link
               </div>
             </div>
           </div>
@@ -168,60 +181,72 @@ export default function Features() {
       </section>
 
       {/* Reputation savings */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center mb-12">
-          <p className="text-xs text-primary uppercase tracking-widest font-medium mb-2">Reputation intelligence</p>
-          <h2 className="font-serif text-4xl font-bold text-foreground">Replaces £111/month of paid tools</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {[
-            { icon: MessageSquare, tool: "NiceJob — £60/mo", does: "Review emails + WhatsApp follow-ups" },
-            { icon: Star, tool: "Cloutly — £22/mo", does: "GBP review monitoring + AI replies" },
-            { icon: MapPin, tool: "BrightLocal — £29/mo", does: "18-directory NAP audit" },
-          ].map(({ icon: Icon, tool, does }) => (
-            <div key={tool} className="bg-card border border-border/50 rounded-xl p-6">
-              <Icon size={18} className="text-primary mb-3" />
-              <p className="text-sm line-through text-muted-foreground">{tool}</p>
-              <p className="text-sm text-foreground font-medium mt-1 flex items-center gap-1.5">
-                <CheckCircle2 size={13} className="text-primary" /> {does}
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="bg-primary/5 border border-primary/15 rounded-2xl p-8 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <Megaphone size={20} className="text-primary" />
-            <p className="text-foreground font-medium">All built into your admin dashboard — using your existing stack</p>
+      <section className="bg-background py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="inline-flex items-center gap-2 bg-accent/10 text-accent text-[11px] font-semibold uppercase tracking-[0.14em] px-4 py-1.5 rounded-full">
+              Reputation intelligence
+            </span>
+            <h2 className="font-display text-4xl font-semibold text-foreground mt-4 tracking-tight">
+              Replaces <em className="text-accent not-italic">£111/month</em> of paid tools
+            </h2>
           </div>
-          <p className="font-serif text-3xl font-bold text-primary">£111 saved /mo</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+            {[
+              { icon: MessageSquare, tool: "NiceJob — £60/mo", does: "Review emails + WhatsApp follow-ups" },
+              { icon: Star, tool: "Cloutly — £22/mo", does: "GBP review monitoring + AI replies" },
+              { icon: MapPin, tool: "BrightLocal — £29/mo", does: "18-directory NAP audit" },
+            ].map(({ icon: Icon, tool, does }) => (
+              <div key={tool} className="bg-card border border-border/40 rounded-xl p-6 shadow-sm">
+                <div className="w-10 h-10 rounded-lg bg-primary text-accent flex items-center justify-center mb-4">
+                  <Icon size={18} />
+                </div>
+                <p className="text-sm line-through text-muted-foreground">{tool}</p>
+                <p className="text-sm text-foreground font-medium mt-1 flex items-center gap-1.5">
+                  <CheckCircle2 size={13} className="text-accent" /> {does}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="bg-primary rounded-xl p-6 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <Megaphone size={20} className="text-accent" />
+              <p className="text-white font-medium">All built into your admin dashboard — using your existing stack</p>
+            </div>
+            <p className="font-display text-3xl font-semibold text-accent">£111 saved /mo</p>
+          </div>
         </div>
       </section>
 
       {/* Portals */}
-      <section className="bg-card/50 border-y border-border/50">
+      <section className="bg-card border-y border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-14">
-            <p className="text-xs text-primary uppercase tracking-widest font-medium mb-2">User portals</p>
-            <h2 className="font-serif text-4xl font-bold text-foreground">Tailored for every user type</h2>
+            <span className="inline-flex items-center gap-2 bg-accent/10 text-accent text-[11px] font-semibold uppercase tracking-[0.14em] px-4 py-1.5 rounded-full">
+              User portals
+            </span>
+            <h2 className="font-display text-4xl font-semibold text-foreground mt-4 tracking-tight">
+              Tailored for every <em className="text-accent not-italic">user type</em>
+            </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {portals.map(({ icon: Icon, name, reward, points }) => (
-              <div key={name} className="bg-card border border-border/50 rounded-xl p-6">
+              <div key={name} className="bg-background border border-border/40 rounded-xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Icon size={18} className="text-primary" />
+                  <div className="w-[46px] h-[46px] rounded-[12px] bg-primary text-accent flex items-center justify-center">
+                    <Icon size={20} />
                   </div>
                   {reward && (
-                    <Badge className="bg-amber-500/10 text-amber-600 border-amber-500/20 text-xs">
+                    <Badge className="bg-accent/15 text-accent border-accent/30 text-[10px] font-semibold uppercase tracking-wider">
                       <Gift size={10} className="mr-1" /> {reward}
                     </Badge>
                   )}
                 </div>
-                <h3 className="font-semibold text-foreground mb-3">{name}</h3>
+                <h3 className="font-display font-semibold text-foreground mb-3 tracking-tight">{name}</h3>
                 <ul className="space-y-2">
                   {points.map((p) => (
                     <li key={p} className="flex items-start gap-2 text-xs text-muted-foreground">
-                      <CheckCircle2 size={12} className="text-primary shrink-0 mt-0.5" />
+                      <CheckCircle2 size={12} className="text-accent shrink-0 mt-0.5" />
                       {p}
                     </li>
                   ))}
@@ -233,69 +258,79 @@ export default function Features() {
       </section>
 
       {/* Referral programme */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center mb-14">
-          <p className="text-xs text-primary uppercase tracking-widest font-medium mb-2">Referral programme</p>
-          <h2 className="font-serif text-4xl font-bold text-foreground">Earn cash, unlock trials</h2>
-          <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
-            Every user type has its own referral reward and a 14-day free trial to give away.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {referrals.map(({ tier, reward, desc, trial }) => (
-            <motion.div
-              key={tier}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-              className="bg-card border border-border/50 rounded-xl p-6"
-            >
-              <Badge className="bg-amber-500/10 text-amber-600 border-amber-500/20 mb-3">
-                {tier} — {reward}
-              </Badge>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">{desc}</p>
-              <p className="flex items-center gap-2 text-xs text-primary font-medium">
-                <CheckCircle2 size={13} /> {trial}
-              </p>
-            </motion.div>
-          ))}
+      <section className="bg-background py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <span className="inline-flex items-center gap-2 bg-accent/10 text-accent text-[11px] font-semibold uppercase tracking-[0.14em] px-4 py-1.5 rounded-full">
+              <Gift size={12} /> Referral programme
+            </span>
+            <h2 className="font-display text-4xl font-semibold text-foreground mt-4 tracking-tight">
+              Earn cash, unlock <em className="text-accent not-italic">trials</em>
+            </h2>
+            <p className="text-muted-foreground mt-3 max-w-xl mx-auto">
+              Every user type has its own referral reward and a 14-day free trial to give away.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {referrals.map(({ tier, reward, desc, trial }, i) => (
+              <motion.div
+                key={tier}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className="bg-card border border-border/40 rounded-xl p-7 shadow-sm"
+              >
+                <Badge className="bg-accent/15 text-accent border-accent/30 text-[10px] font-semibold uppercase tracking-wider mb-4">
+                  {tier} — {reward}
+                </Badge>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{desc}</p>
+                <p className="flex items-center gap-2 text-xs text-accent font-semibold">
+                  <CheckCircle2 size={13} /> {trial}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Pricing */}
-      <section className="bg-card/50 border-y border-border/50">
+      <section className="bg-card border-y border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-14">
-            <p className="text-xs text-primary uppercase tracking-widest font-medium mb-2">Pricing</p>
-            <h2 className="font-serif text-4xl font-bold text-foreground">Simple, transparent pricing</h2>
+            <span className="inline-flex items-center gap-2 bg-accent/10 text-accent text-[11px] font-semibold uppercase tracking-[0.14em] px-4 py-1.5 rounded-full">
+              Pricing
+            </span>
+            <h2 className="font-display text-4xl font-semibold text-foreground mt-4 tracking-tight">
+              Simple, transparent <em className="text-accent not-italic">pricing</em>
+            </h2>
             <p className="text-muted-foreground mt-3">Tenant features are free. All paid plans include a 14-day free trial.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {plans.map(({ name, price, badge, featured, features: pf }) => (
               <div
                 key={name}
-                className={`bg-card border rounded-xl p-6 flex flex-col ${featured ? "border-primary shadow-lg shadow-primary/5" : "border-border/50"}`}
+                className={`bg-background border rounded-xl p-6 flex flex-col shadow-sm ${featured ? "border-2 border-accent ring-1 ring-accent/20" : "border-border/40"}`}
               >
                 {badge && (
-                  <Badge className={`mb-3 self-start text-xs ${featured ? "bg-primary text-primary-foreground" : "bg-muted/50 text-muted-foreground border-border/40"}`}>
+                  <Badge className={`mb-3 self-start text-[10px] font-semibold uppercase tracking-wider ${featured ? "bg-accent text-white" : "bg-accent/15 text-accent border-accent/30"}`}>
                     {badge}
                   </Badge>
                 )}
                 <p className="text-sm text-muted-foreground">{name}</p>
-                <p className="font-serif text-3xl font-bold text-foreground mt-1">
+                <p className="font-display text-3xl font-semibold text-foreground mt-1 tracking-tight">
                   {price}<span className="text-sm text-muted-foreground font-sans font-normal">/mo</span>
                 </p>
                 <ul className="space-y-2 mt-5 flex-1">
                   {pf.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <CheckCircle2 size={13} className="text-primary shrink-0 mt-0.5" />
+                      <CheckCircle2 size={13} className="text-accent shrink-0 mt-0.5" />
                       {f}
                     </li>
                   ))}
                 </ul>
                 <Link href="/pricing">
-                  <Button className={`w-full mt-6 ${featured ? "bg-primary text-primary-foreground hover:bg-primary/90" : ""}`} variant={featured ? "default" : "outline"}>
+                  <Button className={`w-full mt-6 font-semibold ${featured ? "bg-accent text-white hover:bg-accent/90 shadow-lg shadow-accent/25" : "bg-primary text-primary-foreground hover:bg-primary/90"}`}>
                     {name === "Starter" ? "Get Started" : "Start Free Trial"}
                   </Button>
                 </Link>
@@ -305,24 +340,26 @@ export default function Features() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-primary/5 border-t border-primary/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <PoundSterling size={28} className="text-primary mx-auto mb-4" />
-          <h2 className="font-serif text-4xl font-bold text-foreground mb-4">
+      {/* CTA — navy */}
+      <section className="bg-primary">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+          <PoundSterling size={28} className="text-accent mx-auto mb-4" />
+          <h2 className="font-display text-4xl font-semibold text-white mb-4 tracking-tight">
             One platform. Zero hidden fees.
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+          <p className="text-white/70 mb-9 max-w-xl mx-auto">
             Whether you're letting a property or looking for your next home — Elite Tenancy has the tools.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/valuation">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-10">
+              <Button size="lg" className="bg-accent text-white hover:bg-accent/90 px-10 font-semibold shadow-lg shadow-accent/30">
                 Book a Free Valuation
               </Button>
             </Link>
             <Link href="/listings">
-              <Button size="lg" variant="outline" className="border-border/60 px-10">Browse Properties</Button>
+              <Button size="lg" variant="outline" className="border-white/25 text-white hover:bg-white/10 hover:border-white/40 px-10 font-semibold">
+                Browse Properties
+              </Button>
             </Link>
           </div>
         </div>

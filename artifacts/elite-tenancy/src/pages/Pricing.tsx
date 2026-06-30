@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { CheckCircle2, X, ArrowRight } from "lucide-react";
+import { CheckCircle2, X, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import PublicLayout from "@/components/PublicLayout";
@@ -55,7 +55,7 @@ const plans = [
       "Maintenance coordination",
       "Quarterly property inspections",
     ],
-    cta: "Get a tailored quote",
+    cta: "Get a Tailored Quote",
     href: "/contact",
   },
   {
@@ -127,87 +127,132 @@ export default function Pricing() {
   useJsonLd("pricing-faq", faqSchema);
   return (
     <PublicLayout>
-      <section className="bg-gradient-to-br from-card to-background border-b border-border/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <p className="text-xs text-primary uppercase tracking-widest font-medium mb-3">Simple, honest pricing</p>
-          <h1 className="font-serif text-5xl font-bold text-foreground mb-4">No let, no fee. Always.</h1>
-          <p className="text-muted-foreground max-w-xl mx-auto">
+      {/* Hero — navy */}
+      <section className="relative overflow-hidden bg-primary">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,162,74,0.2),transparent_60%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+          <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 text-accent text-[11px] font-semibold uppercase tracking-[0.14em] px-4 py-2 rounded-full">
+            Simple, honest pricing
+          </span>
+          <h1 className="font-display text-5xl md:text-6xl font-semibold text-white mt-6 tracking-tight leading-[1.05]">
+            No let, no fee. <em className="text-accent not-italic">Always</em>.
+          </h1>
+          <p className="text-white/70 max-w-xl mx-auto mt-5 text-lg">
             Three plans. No hidden charges. We only earn when you do.
           </p>
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative bg-card border rounded-2xl p-8 flex flex-col ${
-                plan.popular
-                  ? "border-primary/50 ring-1 ring-primary/20"
-                  : "border-border/50"
-              }`}
-            >
-              {plan.popular && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4">
-                  Most Popular
-                </Badge>
-              )}
-              {!plan.popular && (plan as { badge?: string }).badge && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground px-4">
-                  {(plan as { badge?: string }).badge}
-                </Badge>
-              )}
-              <div className="mb-6">
-                <h2 className="font-serif text-2xl font-bold text-foreground">{plan.name}</h2>
-                <div className="mt-3 flex items-end gap-2">
-                  <span className="font-serif text-4xl font-bold text-primary">{plan.price}</span>
-                  <span className="text-sm text-muted-foreground mb-1">{plan.period}</span>
+      {/* Pricing cards */}
+      <section className="bg-background py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {plans.map((plan) => (
+              <div
+                key={plan.name}
+                className={`relative bg-card rounded-xl flex flex-col overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 ${
+                  plan.popular
+                    ? "border-2 border-accent ring-1 ring-accent/20"
+                    : "border border-border/50"
+                }`}
+              >
+                {plan.popular && (
+                  <div className="bg-accent text-white text-center text-[11px] font-semibold uppercase tracking-[0.12em] py-2">
+                    <Sparkles size={12} className="inline mr-1.5 -mt-0.5" />
+                    Most Popular
+                  </div>
+                )}
+                {!plan.popular && (plan as { badge?: string }).badge && (
+                  <Badge className="absolute top-4 right-4 bg-accent/15 text-accent border-accent/30 text-[10px] font-semibold uppercase tracking-wider">
+                    {(plan as { badge?: string }).badge}
+                  </Badge>
+                )}
+                <div className="p-8 flex-1 flex flex-col">
+                  <h2 className="font-display text-xl font-semibold text-foreground tracking-tight">{plan.name}</h2>
+                  <div className="mt-4 flex items-end gap-2">
+                    <span className="font-display text-4xl font-semibold text-primary tracking-tight">{plan.price}</span>
+                    <span className="text-sm text-muted-foreground mb-1.5">{plan.period}</span>
+                  </div>
+                  <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{plan.description}</p>
+
+                  <div className="mt-7 pt-7 border-t border-border/50 flex-1">
+                    <ul className="space-y-3">
+                      {plan.includes.map((item) => (
+                        <li key={item} className="flex items-start gap-2.5 text-sm text-foreground">
+                          <CheckCircle2 size={14} className="text-accent mt-0.5 shrink-0" />
+                          {item}
+                        </li>
+                      ))}
+                      {plan.excludes.map((item) => (
+                        <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground/50 line-through">
+                          <X size={14} className="mt-0.5 shrink-0" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Link href={plan.href} className="mt-8 block">
+                    <Button
+                      size="lg"
+                      className={`w-full gap-2 font-semibold ${
+                        plan.popular
+                          ? "bg-accent text-white hover:bg-accent/90 shadow-lg shadow-accent/25"
+                          : "bg-primary text-primary-foreground hover:bg-primary/90"
+                      }`}
+                    >
+                      {plan.cta} <ArrowRight size={14} />
+                    </Button>
+                  </Link>
                 </div>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{plan.description}</p>
               </div>
-
-              <ul className="space-y-3 flex-1">
-                {plan.includes.map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-sm text-foreground">
-                    <CheckCircle2 size={14} className="text-primary mt-0.5 shrink-0" />
-                    {item}
-                  </li>
-                ))}
-                {plan.excludes.map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground/60 line-through">
-                    <X size={14} className="mt-0.5 shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <Link href={plan.href} className="mt-8 block">
-                <Button
-                  size="lg"
-                  className={`w-full gap-2 ${
-                    plan.popular
-                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                      : "bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-primary-foreground"
-                  }`}
-                >
-                  {plan.cta} <ArrowRight size={14} />
-                </Button>
-              </Link>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* FAQs */}
-        <div className="mt-20">
-          <h2 className="font-serif text-3xl font-bold text-foreground text-center mb-10">Frequently Asked Questions</h2>
+      {/* FAQs */}
+      <section className="bg-card border-t border-border/50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center mb-12">
+            <span className="inline-flex items-center gap-2 bg-accent/10 text-accent text-[11px] font-semibold uppercase tracking-[0.14em] px-4 py-1.5 rounded-full">
+              FAQs
+            </span>
+            <h2 className="font-display text-3xl font-semibold text-foreground mt-4 tracking-tight">
+              Frequently Asked Questions
+            </h2>
+          </div>
           <div className="space-y-4">
             {faqs.map(({ q, a }) => (
-              <div key={q} className="bg-card border border-border/50 rounded-xl p-6">
-                <h3 className="font-semibold text-foreground mb-2">{q}</h3>
+              <div key={q} className="bg-background border border-border/40 rounded-xl p-6 shadow-sm">
+                <h3 className="font-display font-semibold text-foreground mb-2 tracking-tight">{q}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{a}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="bg-primary">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+          <h2 className="font-display text-3xl font-semibold text-white tracking-tight mb-4">
+            Still have questions?
+          </h2>
+          <p className="text-white/70 mb-8 max-w-lg mx-auto">
+            Our team is here to help. Get in touch and we'll find the right plan for your portfolio.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link href="/contact">
+              <Button size="lg" className="bg-accent text-white hover:bg-accent/90 px-8 font-semibold shadow-lg shadow-accent/30">
+                Contact Us
+              </Button>
+            </Link>
+            <Link href="/valuation">
+              <Button size="lg" variant="outline" className="border-white/25 text-white hover:bg-white/10 hover:border-white/40 px-8 font-semibold">
+                Free Valuation
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

@@ -73,18 +73,17 @@ export default function RRAChecker() {
 
   return (
     <PublicLayout>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,162,74,0.10),transparent_60%)]" />
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <span className="inline-flex items-center gap-2 bg-primary/8 border border-primary/25 text-primary text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+      {/* Hero — navy */}
+      <section className="relative overflow-hidden bg-primary">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,162,74,0.2),transparent_60%)]" />
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+          <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 text-accent text-[11px] font-semibold uppercase tracking-[0.14em] px-4 py-2 rounded-full">
             <ShieldCheck size={14} /> Free Compliance Tool
           </span>
-          <h1 className="font-serif text-5xl font-bold text-foreground leading-tight mt-6">
-            Are you <span className="text-accent italic">RRA 2025</span> compliant?
+          <h1 className="font-display text-5xl font-semibold text-white leading-[1.05] tracking-tight mt-7">
+            Are you <em className="text-accent not-italic">RRA 2025</em> compliant?
           </h1>
-          <p className="mt-5 text-lg text-muted-foreground">
+          <p className="mt-5 text-lg text-white/75">
             The Renters' Rights Act 2025 is the biggest change to UK renting in 40 years. Answer 10 quick questions to check your compliance and get instant, actionable guidance — free, no signup.
           </p>
         </div>
@@ -163,7 +162,7 @@ export default function RRAChecker() {
             animate={{ opacity: 1, y: 0 }}
             className="rounded-2xl border border-border bg-card p-7 mt-4 text-center"
           >
-            <div className={`text-5xl font-serif font-bold ${score >= 90 ? "text-primary" : score >= 60 ? "text-accent" : "text-destructive"}`}>{score}%</div>
+            <div className={`text-5xl font-display font-semibold ${score >= 90 ? "text-primary" : score >= 60 ? "text-accent" : "text-destructive"}`}>{score}%</div>
             <p className="text-sm text-muted-foreground mt-1">RRA 2025 compliance</p>
             <div className="grid grid-cols-2 gap-4 mt-6 text-left">
               <div className="rounded-lg bg-primary/5 border border-primary/20 p-4">
