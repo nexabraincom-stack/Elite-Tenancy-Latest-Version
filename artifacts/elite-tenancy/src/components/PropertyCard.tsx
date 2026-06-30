@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Link } from "wouter";
-import { Bed, Bath, CheckCircle2, Tag } from "lucide-react";
+import { Bed, Bath, CheckCircle2, Heart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -13,6 +14,7 @@ export default function PropertyCard({ listing }: PropertyCardProps) {
   const photo = listing.photos?.[0] ?? "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600";
   const price = listing.price?.toLocaleString("en-GB") ?? "0";
   const aiScore = (listing as { aiMatchScore?: number | null }).aiMatchScore ?? null;
+  const [liked, setLiked] = useState(false);
 
   return (
     <motion.div
@@ -28,26 +30,28 @@ export default function PropertyCard({ listing }: PropertyCardProps) {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         {listing.isPremium && (
           <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs font-semibold">
             Premium
           </Badge>
         )}
-        {aiScore != null ? (
-          <Badge className="absolute top-3 right-3 bg-background/90 backdrop-blur text-accent text-xs font-bold border border-accent/40">
-            ✦ {aiScore}% match
+        <button
+          onClick={(e) => { e.preventDefault(); e.stopPropagation(); setLiked(!liked); }}
+          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center hover:bg-white transition-colors"
+        >
+          <Heart size={15} className={liked ? "fill-accent text-accent" : "text-muted-foreground"} />
+        </button>
+        {aiScore != null && (
+          <Badge className="absolute top-12 right-3 bg-background/90 backdrop-blur text-accent text-xs font-bold border border-accent/40">
+            {aiScore}% match
           </Badge>
-        ) : listing.isFeatured ? (
-          <Badge className="absolute top-3 right-3 bg-background/80 backdrop-blur text-foreground text-xs border border-border/50">
-            Featured
-          </Badge>
-        ) : null}
+        )}
         <div className="absolute bottom-3 left-3">
-          <p className="text-white text-xl font-bold">
+          <span className="inline-flex items-baseline gap-1 bg-accent text-white text-lg font-bold px-3 py-1 rounded-lg shadow-md">
             £{price}
-            <span className="text-sm font-normal text-white/80">/{listing.pricePeriod ?? "month"}</span>
-          </p>
+            <span className="text-xs font-normal opacity-80">/{listing.pricePeriod ?? "mo"}</span>
+          </span>
         </div>
       </div>
 

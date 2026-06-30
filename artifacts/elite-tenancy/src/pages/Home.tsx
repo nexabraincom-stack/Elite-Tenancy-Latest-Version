@@ -42,14 +42,14 @@ export default function Home() {
       <section className="relative overflow-hidden min-h-[85vh] flex items-center">
         {/* Base warm ivory gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary to-background" />
-        {/* Amber/gold mesh glow — top right */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_92%_8%,rgba(184,146,63,0.26),transparent)]" />
-        {/* Deep green mesh glow — bottom left */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_55%_at_8%_92%,rgba(31,74,63,0.16),transparent)]" />
+        {/* Gold mesh glow — top right */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_92%_8%,rgba(212,162,74,0.22),transparent)]" />
+        {/* Navy mesh glow — bottom left */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_55%_at_8%_92%,rgba(22,58,74,0.14),transparent)]" />
         {/* Centre-bottom warm fill */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_35%_at_50%_100%,rgba(184,146,63,0.09),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_35%_at_50%_100%,rgba(212,162,74,0.08),transparent)]" />
         {/* Subtle dot grid */}
-        <div className="absolute inset-0 pointer-events-none" style={{backgroundImage:"radial-gradient(circle,rgba(31,74,63,0.13) 1px,transparent 1px)",backgroundSize:"30px 30px"}} />
+        <div className="absolute inset-0 pointer-events-none" style={{backgroundImage:"radial-gradient(circle,rgba(22,58,74,0.10) 1px,transparent 1px)",backgroundSize:"30px 30px"}} />
         {/* Decorative concentric rings */}
         <div className="absolute -top-40 -right-40 w-[680px] h-[680px] rounded-full border border-accent/10 pointer-events-none" />
         <div className="absolute -top-20 -right-20 w-[440px] h-[440px] rounded-full border border-primary/8 pointer-events-none" />
@@ -165,9 +165,8 @@ export default function Home() {
                 className="absolute inset-0 w-full h-full object-cover"
                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
               />
-              {/* brand-tone overlays so any image harmonises with the ivory/green/gold palette */}
               <div className="absolute inset-0 bg-gradient-to-t from-primary/55 via-primary/10 to-transparent" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,146,63,0.22),transparent_60%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,162,74,0.22),transparent_60%)]" />
 
               {/* top-right floating badge */}
               <div className="absolute top-5 right-5 flex items-center gap-2 bg-background/85 backdrop-blur-md border border-accent/30 rounded-full px-4 py-2 shadow-lg">
@@ -365,7 +364,7 @@ export default function Home() {
       {/* CTA */}
       <section className="relative overflow-hidden bg-primary">
         {/* Gold radial highlight — top left */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_65%_at_0%_0%,rgba(184,146,63,0.32),transparent)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_65%_at_0%_0%,rgba(212,162,74,0.28),transparent)] pointer-events-none" />
         {/* Dark vignette — bottom right */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_70%_at_100%_100%,rgba(0,0,0,0.22),transparent)] pointer-events-none" />
         {/* White dot grid */}

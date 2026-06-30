@@ -92,7 +92,7 @@ export default function RenterPassport() {
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border/50">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(184,146,63,0.12),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,162,74,0.12),transparent_60%)]" />
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
           <span className="inline-flex items-center gap-2 bg-primary/10 border border-primary/25 text-primary text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
             <Sparkles size={13} /> AI-Powered · Two-Way Matching
@@ -182,7 +182,7 @@ export default function RenterPassport() {
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             {/* Passport card */}
             <div className="relative overflow-hidden rounded-2xl border border-accent/30 bg-gradient-to-br from-primary/8 to-accent/8 p-7 mb-10">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-[radial-gradient(circle,rgba(184,146,63,0.18),transparent_70%)]" />
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[radial-gradient(circle,rgba(212,162,74,0.18),transparent_70%)]" />
               <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
                 <div className="text-center shrink-0">
                   <div className="w-24 h-24 rounded-2xl bg-card border border-accent/30 flex flex-col items-center justify-center shadow-sm">

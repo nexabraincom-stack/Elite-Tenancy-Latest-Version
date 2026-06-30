@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
  * must be as easy as accept. Dispatches a `cookie-consent` window event so
  * analytics/marketing scripts can gate themselves on the user's choice.
  *
- * On-brand: navy surface, gold accents, Plus Jakarta Sans. Fully responsive,
+ * On-brand: navy surface, gold accents, Inter. Fully responsive,
  * keyboard-accessible, and unobtrusive (bottom sheet).
  */
 
@@ -94,25 +94,25 @@ const CSS = `
   width:100%;max-width:1080px;
   display:flex;align-items:center;gap:20px;flex-wrap:wrap;
   background:rgba(13,27,42,.97);backdrop-filter:blur(10px);
-  border:1px solid rgba(201,162,39,.35);border-radius:14px;
+  border:1px solid rgba(212,162,74,.35);border-radius:14px;
   box-shadow:0 18px 50px rgba(0,0,0,.5);
   padding:18px 22px;
 }
 .et-cookie__text{flex:1;min-width:260px;}
 .et-cookie__title{
-  font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:14px;
-  color:#c9a227;letter-spacing:.02em;margin:0 0 4px;
+  font-family:'Inter',sans-serif;font-weight:600;font-size:14px;
+  color:#D4A24A;letter-spacing:.02em;margin:0 0 4px;
 }
 .et-cookie__body{
-  font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;font-size:13px;line-height:1.6;
+  font-family:'Inter',sans-serif;font-weight:400;font-size:13px;line-height:1.6;
   color:#cabfa6;margin:0;
 }
-.et-cookie__body a{color:#e6c45a;text-decoration:underline;text-underline-offset:2px;}
-.et-cookie__body a:hover{color:#f1e0a8;}
+.et-cookie__body a{color:#D4A24A;text-decoration:underline;text-underline-offset:2px;}
+.et-cookie__body a:hover{color:#F0D89A;}
 
 .et-cookie__actions{display:flex;gap:10px;flex-shrink:0;}
 .et-cookie__btn{
-  font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:13px;
+  font-family:'Inter',sans-serif;font-weight:600;font-size:13px;
   padding:11px 20px;border-radius:9px;cursor:pointer;border:1px solid transparent;
   transition:all .18s ease;white-space:nowrap;
 }
@@ -121,9 +121,9 @@ const CSS = `
 }
 .et-cookie__btn--ghost:hover{border-color:rgba(241,236,225,.6);background:rgba(255,255,255,.04);}
 .et-cookie__btn--gold{
-  background:#c9a227;color:#0d1b2a;
+  background:#D4A24A;color:#0d1b2a;
 }
-.et-cookie__btn--gold:hover{background:#e6c45a;}
+.et-cookie__btn--gold:hover{background:#D4A24A;}
 
 @media (max-width:640px){
   .et-cookie{padding:12px;}

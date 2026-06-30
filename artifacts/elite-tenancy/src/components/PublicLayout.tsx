@@ -27,10 +27,10 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
               <svg viewBox="0 0 120 150" className="h-9 w-auto shrink-0" fill="none" aria-hidden="true">
                 <defs>
                   <linearGradient id="etHeaderGold" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stopColor="#f1e0a8" />
-                    <stop offset="0.4" stopColor="#e6c45a" />
-                    <stop offset="0.75" stopColor="#c9a227" />
-                    <stop offset="1" stopColor="#9c7c1c" />
+                    <stop offset="0" stopColor="#F0D89A" />
+                    <stop offset="0.4" stopColor="#D4A24A" />
+                    <stop offset="0.75" stopColor="#B8862A" />
+                    <stop offset="1" stopColor="#8C6518" />
                   </linearGradient>
                 </defs>
                 <path d="M60 4 L108 24 L108 88 L60 146 L12 88 L12 24 Z" stroke="url(#etHeaderGold)" strokeWidth="4" strokeLinejoin="round" opacity="0.9" />

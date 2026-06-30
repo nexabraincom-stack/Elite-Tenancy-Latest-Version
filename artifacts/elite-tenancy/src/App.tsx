@@ -129,15 +129,7 @@ if (!clerkPubKey) {
   throw new Error("Missing VITE_CLERK_PUBLISHABLE_KEY");
 }
 
-// Clerk sign-in/sign-up card — matches the site's light ivory theme exactly.
-// Colors sourced from index.css :root variables:
-//   --background: 40 33% 96%  → #f5f0e8 (warm ivory)
-//   --foreground: 167 39% 14% → #0f2920 (dark forest green)
-//   --primary:    165 41% 21% → #1f4a3a (deep green — buttons)
-//   --accent:     41  49% 48% → #b5862a (gold — links/accents)
-//   --input:      150 15% 84% → #d0ddd6 (light grey-green)
-//   --border:     150 18% 88% → #d8e6dc
-//   --muted-foreground: 34 11% 40% → #6b6054
+// Clerk sign-in/sign-up card — Housebox theme (navy/gold/cream).
 const clerkAppearance = {
   theme: shadcn,
   cssLayerName: "clerk",
@@ -147,41 +139,41 @@ const clerkAppearance = {
     logoImageUrl: `${window.location.origin}${basePath}/logo.svg`,
   },
   variables: {
-    colorPrimary: "#1f4a3a",
-    colorForeground: "#0f2920",
-    colorMutedForeground: "#6b6054",
+    colorPrimary: "#163A4A",
+    colorForeground: "#163A4A",
+    colorMutedForeground: "#5E7A84",
     colorDanger: "#ef4444",
-    colorBackground: "#f5f0e8",
-    colorInput: "#d0ddd6",
-    colorInputForeground: "#0f2920",
-    colorNeutral: "#6b6054",
-    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    colorBackground: "#FAF8F4",
+    colorInput: "#C8D4D8",
+    colorInputForeground: "#163A4A",
+    colorNeutral: "#5E7A84",
+    fontFamily: "'Inter', sans-serif",
     borderRadius: "0.75rem",
   },
   elements: {
     rootBox: "w-full flex justify-center",
-    cardBox: "bg-white border border-[#d8e6dc] rounded-2xl w-[440px] max-w-full overflow-hidden shadow-xl",
+    cardBox: "bg-white border border-[#E8E4DE] rounded-2xl w-[440px] max-w-full overflow-hidden shadow-xl",
     card: "!shadow-none !border-0 !bg-transparent !rounded-none",
     footer: "!shadow-none !border-0 !bg-transparent !rounded-none",
-    headerTitle: "text-[#0f2920] font-serif",
-    headerSubtitle: "text-[#6b6054]",
-    socialButtonsBlockButtonText: "text-[#0f2920]",
-    formFieldLabel: "text-[#6b6054] text-xs",
-    footerActionLink: "text-[#1f4a3a] hover:text-[#b5862a]",
-    footerActionText: "text-[#6b6054]",
-    dividerText: "text-[#6b6054]",
-    identityPreviewEditButton: "text-[#1f4a3a]",
+    headerTitle: "text-[#163A4A] font-serif",
+    headerSubtitle: "text-[#5E7A84]",
+    socialButtonsBlockButtonText: "text-[#163A4A]",
+    formFieldLabel: "text-[#5E7A84] text-xs",
+    footerActionLink: "text-[#163A4A] hover:text-[#D4A24A]",
+    footerActionText: "text-[#5E7A84]",
+    dividerText: "text-[#5E7A84]",
+    identityPreviewEditButton: "text-[#163A4A]",
     formFieldSuccessText: "text-green-700",
-    alertText: "text-[#0f2920]",
+    alertText: "text-[#163A4A]",
     logoBox: "flex justify-center py-2",
     logoImage: "h-10 w-auto",
-    socialButtonsBlockButton: "bg-white border border-[#d8e6dc] hover:bg-[#f5f0e8] text-[#0f2920]",
-    formButtonPrimary: "bg-[#1f4a3a] hover:bg-[#2a6150] text-[#f5f0e8] font-semibold",
-    formFieldInput: "bg-white border-[#d8e6dc] text-[#0f2920]",
-    footerAction: "border-t border-[#d8e6dc] bg-[#f5f0e8]",
-    dividerLine: "bg-[#d8e6dc]",
-    alert: "bg-[#f5f0e8] border border-[#d8e6dc]",
-    otpCodeFieldInput: "bg-white border-[#d8e6dc] text-[#0f2920]",
+    socialButtonsBlockButton: "bg-white border border-[#E8E4DE] hover:bg-[#FAF8F4] text-[#163A4A]",
+    formButtonPrimary: "bg-[#163A4A] hover:bg-[#1E4D60] text-[#FAF8F4] font-semibold",
+    formFieldInput: "bg-white border-[#E8E4DE] text-[#163A4A]",
+    footerAction: "border-t border-[#E8E4DE] bg-[#FAF8F4]",
+    dividerLine: "bg-[#E8E4DE]",
+    alert: "bg-[#FAF8F4] border border-[#E8E4DE]",
+    otpCodeFieldInput: "bg-white border-[#E8E4DE] text-[#163A4A]",
     formFieldRow: "gap-2",
     main: "gap-4",
   },
