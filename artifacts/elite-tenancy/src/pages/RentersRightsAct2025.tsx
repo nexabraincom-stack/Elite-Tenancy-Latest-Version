@@ -118,20 +118,20 @@ const FAQS = [
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-gray-100 last:border-0">
+    <div className="border-b border-border/40 last:border-0">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-4 text-left gap-4 hover:text-amber-700 transition-colors"
+        className="w-full flex items-center justify-between py-4 text-left gap-4 hover:text-accent transition-colors"
         aria-expanded={open}
       >
-        <span className="font-medium text-gray-900 text-sm">{q}</span>
+        <span className="font-medium text-foreground text-sm">{q}</span>
         {open ? (
-          <ChevronUp className="w-4 h-4 flex-shrink-0 text-amber-600" />
+          <ChevronUp className="w-4 h-4 flex-shrink-0 text-accent" />
         ) : (
-          <ChevronDown className="w-4 h-4 flex-shrink-0 text-gray-400" />
+          <ChevronDown className="w-4 h-4 flex-shrink-0 text-muted-foreground" />
         )}
       </button>
-      {open && <p className="pb-5 text-gray-600 text-sm leading-relaxed">{a}</p>}
+      {open && <p className="pb-5 text-muted-foreground text-sm leading-relaxed">{a}</p>}
     </div>
   );
 }
@@ -190,19 +190,19 @@ export default function RentersRightsAct2025() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      <div className="bg-gradient-to-b from-amber-50 to-white py-16 px-4">
+      <div className="bg-primary py-16 px-4">
         <div className="max-w-3xl mx-auto">
-          <p className="text-amber-700 text-sm font-semibold tracking-wide uppercase mb-3">UK Lettings Law</p>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <p className="text-accent text-sm font-semibold tracking-wide uppercase mb-3">UK Lettings Law</p>
+          <h1 className="font-display text-3xl md:text-4xl font-semibold text-white tracking-tight mb-4">
             Renters' Rights Act 2025: Complete Guide
           </h1>
-          <p className="text-gray-600 text-base md:text-lg">
+          <p className="text-white/70 text-base md:text-lg">
             The most significant reform to England's private rented sector since 1988 — what it means for landlords,
             tenants, and how to stay compliant.
           </p>
           <div className="flex flex-wrap gap-2 mt-4">
             {["Section 21 abolished", "No fixed-term ASTs", "Rent increase limits", "Pets rights", "PRS Database"].map((tag) => (
-              <span key={tag} className="text-xs bg-white border border-gray-200 text-gray-600 px-3 py-1 rounded-full">{tag}</span>
+              <span key={tag} className="text-xs bg-white border border-border text-muted-foreground px-3 py-1 rounded-full">{tag}</span>
             ))}
           </div>
         </div>
@@ -210,12 +210,12 @@ export default function RentersRightsAct2025() {
 
       <div className="max-w-3xl mx-auto px-4 pb-20">
         {/* Table of contents */}
-        <div className="bg-gray-50 rounded-xl border border-gray-100 p-5 my-8">
-          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Contents</p>
+        <div className="bg-muted rounded-xl border border-border/40 p-5 my-8">
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Contents</p>
           <ul className="space-y-1.5">
             {SECTIONS.map(({ id, title }) => (
               <li key={id}>
-                <a href={`#${id}`} className="text-sm text-amber-700 hover:underline">{title}</a>
+                <a href={`#${id}`} className="text-sm text-accent hover:underline">{title}</a>
               </li>
             ))}
           </ul>
@@ -225,8 +225,8 @@ export default function RentersRightsAct2025() {
         <div className="space-y-10">
           {SECTIONS.map(({ id, title, content }) => (
             <section key={id} id={id}>
-              <h2 className="text-xl font-bold text-gray-900 mb-3">{title}</h2>
-              <div className="text-gray-700 text-sm md:text-base leading-relaxed space-y-3">
+              <h2 className="font-display text-2xl font-semibold text-foreground tracking-tight mb-3">{title}</h2>
+              <div className="text-foreground text-sm md:text-base leading-relaxed space-y-3">
                 {content.split("\n\n").map((para, i) => (
                   <p key={i} dangerouslySetInnerHTML={{
                     __html: para.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
@@ -239,9 +239,9 @@ export default function RentersRightsAct2025() {
 
         {/* FAQ section */}
         <div className="mt-14">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Frequently asked questions</h2>
-          <p className="text-gray-500 text-sm mb-6">Common questions about the Renters' Rights Act 2025.</p>
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6">
+          <h2 className="font-display text-2xl font-semibold text-foreground tracking-tight mb-2">Frequently asked questions</h2>
+          <p className="text-muted-foreground text-sm mb-6">Common questions about the Renters' Rights Act 2025.</p>
+          <div className="bg-white rounded-2xl border border-border/40 shadow-sm px-6">
             {FAQS.map(({ q, a }, i) => (
               <FaqItem key={i} q={q} a={a} />
             ))}
@@ -249,17 +249,17 @@ export default function RentersRightsAct2025() {
         </div>
 
         {/* CTA */}
-        <div className="mt-12 bg-amber-50 border border-amber-100 rounded-2xl p-6 md:p-8 text-center">
-          <h3 className="text-lg font-bold text-gray-900 mb-2">Letting a property in 2026?</h3>
-          <p className="text-gray-600 text-sm mb-5">
+        <div className="mt-12 bg-accent/10 border border-accent/20 rounded-2xl p-6 md:p-8 text-center">
+          <h3 className="text-lg font-semibold text-white tracking-tight mb-2">Letting a property in 2026?</h3>
+          <p className="text-muted-foreground text-sm mb-5">
             Elite Tenancy ensures every introduction is fully compliant — Right to Rent checks, PRS-ready referencing,
             and Renters' Rights Act–compliant tenancy terms.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
-            <a href="/for-landlords" className="px-5 py-2.5 bg-amber-600 text-white text-sm font-semibold rounded-xl hover:bg-amber-700 transition-colors">
+            <a href="/for-landlords" className="px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary/90 transition-colors">
               I'm a landlord
             </a>
-            <a href="/rra-2025-checker" className="px-5 py-2.5 border border-gray-200 text-gray-700 text-sm font-medium rounded-xl hover:bg-gray-50 transition-colors">
+            <a href="/rra-2025-checker" className="px-5 py-2.5 border border-border text-foreground text-sm font-medium rounded-xl hover:bg-muted transition-colors">
               Check compliance
             </a>
           </div>

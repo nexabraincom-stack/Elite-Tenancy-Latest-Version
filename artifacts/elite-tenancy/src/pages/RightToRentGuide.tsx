@@ -257,22 +257,22 @@ export default function RightToRentGuide() {
       />
 
       {/* Hero */}
-      <div className="bg-gradient-to-b from-amber-50 to-white border-b border-amber-100/60">
+      <div className="bg-primary border-b border-accent/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <nav className="text-xs text-gray-400 mb-4 flex gap-1.5">
-            <Link href="/" className="hover:text-amber-600 transition-colors">
+          <nav className="text-xs text-muted-foreground mb-4 flex gap-1.5">
+            <Link href="/" className="hover:text-accent transition-colors">
               Home
             </Link>
             <span>/</span>
-            <span className="text-gray-600">Right to Rent Guide</span>
+            <span className="text-muted-foreground">Right to Rent Guide</span>
           </nav>
-          <p className="text-amber-700 text-xs font-semibold tracking-widest uppercase mb-3">
+          <p className="text-accent text-xs font-semibold tracking-widest uppercase mb-3">
             Immigration Act 2014 — England
           </p>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4 max-w-3xl">
+          <h1 className="font-display text-4xl md:text-5xl font-semibold text-white tracking-tight mb-4 max-w-3xl">
             Right to Rent Check UK 2026
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mb-8">
+          <p className="text-lg text-muted-foreground max-w-2xl mb-8">
             Every private landlord in England must check that all adult
             occupants have the legal right to rent — before the tenancy starts.
             Here is exactly what to check, which documents to accept, and how
@@ -280,7 +280,7 @@ export default function RightToRentGuide() {
           </p>
           <Link
             href="/right-to-rent-check"
-            className="inline-flex items-center gap-2 bg-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-sm"
           >
             Run a Share Code Check <ArrowRight className="h-4 w-4" />
           </Link>
@@ -294,10 +294,10 @@ export default function RightToRentGuide() {
 
             {/* What is Right to Rent */}
             <section>
-              <h2 className="font-serif text-2xl font-bold text-gray-900 mb-4">
+              <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-4">
                 What is Right to Rent?
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-muted-foreground leading-relaxed mb-4">
                 Right to Rent is a legal duty introduced by the{" "}
                 <strong>Immigration Act 2014</strong> and strengthened by the{" "}
                 <strong>Immigration Act 2016</strong>. It applies to{" "}
@@ -307,7 +307,7 @@ export default function RightToRentGuide() {
                 has the right to reside in the UK — and therefore the right to
                 rent.
               </p>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 Right to Rent does <strong>not</strong> apply in Scotland,
                 Wales, or Northern Ireland. It covers all new tenancy agreements
                 and renewals — including licences to occupy.
@@ -316,23 +316,23 @@ export default function RightToRentGuide() {
 
             {/* How to carry out a check */}
             <section>
-              <h2 className="font-serif text-2xl font-bold text-gray-900 mb-6">
+              <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-6">
                 How to carry out a Right to Rent check
               </h2>
               <div className="space-y-4">
                 {STEPS.map((s) => (
                   <div
                     key={s.n}
-                    className="flex gap-4 bg-white border border-gray-200 rounded-xl p-5 shadow-sm"
+                    className="flex gap-4 bg-white border border-border rounded-xl p-5 shadow-sm"
                   >
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 text-amber-700 font-bold text-sm flex items-center justify-center">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 text-accent font-bold text-sm flex items-center justify-center">
                       {s.n}
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">
+                      <h3 className="font-semibold text-foreground mb-1">
                         {s.title}
                       </h3>
-                      <p className="text-sm text-gray-600">{s.body}</p>
+                      <p className="text-sm text-muted-foreground">{s.body}</p>
                     </div>
                   </div>
                 ))}
@@ -341,38 +341,38 @@ export default function RightToRentGuide() {
 
             {/* Documents */}
             <section>
-              <h2 className="font-serif text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-2">
                 Accepted documents
               </h2>
-              <p className="text-gray-600 mb-6 text-sm">
+              <p className="text-muted-foreground mb-6 text-sm">
                 Documents fall into two lists. List A confers an{" "}
                 <strong>unlimited</strong> right to rent — no follow-up check
                 required. List B is <strong>time-limited</strong> — you must
                 re-check before the leave expires.
               </p>
 
-              <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
                 <span className="inline-flex items-center gap-1 bg-green-100 text-green-800 text-xs font-bold px-2.5 py-1 rounded-full">
                   <CheckCircle2 className="h-3.5 w-3.5" /> List A — Unlimited
                 </span>
               </h3>
-              <div className="overflow-hidden rounded-xl border border-gray-200 mb-8">
+              <div className="overflow-hidden rounded-xl border border-border mb-8">
                 <table className="w-full text-sm">
-                  <thead className="bg-gray-50 border-b border-gray-200">
+                  <thead className="bg-muted border-b border-border">
                     <tr>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-700">
+                      <th className="text-left px-4 py-3 font-semibold text-foreground">
                         Document
                       </th>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-700 hidden sm:table-cell">
+                      <th className="text-left px-4 py-3 font-semibold text-foreground hidden sm:table-cell">
                         Notes
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
                     {LIST_A.map((d, i) => (
-                      <tr key={i} className="bg-white hover:bg-gray-50/50">
-                        <td className="px-4 py-3 text-gray-800">{d.doc}</td>
-                        <td className="px-4 py-3 text-gray-500 hidden sm:table-cell">
+                      <tr key={i} className="bg-white hover:bg-muted/50">
+                        <td className="px-4 py-3 text-foreground">{d.doc}</td>
+                        <td className="px-4 py-3 text-muted-foreground hidden sm:table-cell">
                           {d.notes}
                         </td>
                       </tr>
@@ -381,28 +381,28 @@ export default function RightToRentGuide() {
                 </table>
               </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
                 <span className="inline-flex items-center gap-1 bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-full">
                   <Clock className="h-3.5 w-3.5" /> List B — Time-limited
                 </span>
               </h3>
-              <div className="overflow-hidden rounded-xl border border-gray-200">
+              <div className="overflow-hidden rounded-xl border border-border">
                 <table className="w-full text-sm">
-                  <thead className="bg-gray-50 border-b border-gray-200">
+                  <thead className="bg-muted border-b border-border">
                     <tr>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-700">
+                      <th className="text-left px-4 py-3 font-semibold text-foreground">
                         Document
                       </th>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-700 hidden sm:table-cell">
+                      <th className="text-left px-4 py-3 font-semibold text-foreground hidden sm:table-cell">
                         Notes
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
                     {LIST_B.map((d, i) => (
-                      <tr key={i} className="bg-white hover:bg-gray-50/50">
-                        <td className="px-4 py-3 text-gray-800">{d.doc}</td>
-                        <td className="px-4 py-3 text-gray-500 hidden sm:table-cell">
+                      <tr key={i} className="bg-white hover:bg-muted/50">
+                        <td className="px-4 py-3 text-foreground">{d.doc}</td>
+                        <td className="px-4 py-3 text-muted-foreground hidden sm:table-cell">
                           {d.notes}
                         </td>
                       </tr>
@@ -414,10 +414,10 @@ export default function RightToRentGuide() {
 
             {/* Share codes */}
             <section>
-              <h2 className="font-serif text-2xl font-bold text-gray-900 mb-4">
+              <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-4">
                 Checking a share code
               </h2>
-              <p className="text-gray-600 mb-4 leading-relaxed">
+              <p className="text-muted-foreground mb-4 leading-relaxed">
                 EEA nationals with EU Settlement Scheme status (and some
                 non-EEA nationals with digital immigration status) no longer
                 have a physical document. Instead, they generate a{" "}
@@ -426,14 +426,14 @@ export default function RightToRentGuide() {
                   href="https://www.gov.uk/prove-right-to-rent"
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="text-amber-700 underline hover:text-amber-800"
+                  className="text-accent underline hover:text-amber-800"
                 >
                   gov.uk/prove-right-to-rent
                 </a>
                 . The code is valid for 90 days.
               </p>
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 space-y-3">
-                <p className="text-sm font-semibold text-amber-900">
+              <div className="bg-accent/10 border border-accent/20 rounded-xl p-5 space-y-3">
+                <p className="text-sm font-semibold text-foreground">
                   To check a share code:
                 </p>
                 <ol className="text-sm text-amber-800 space-y-1.5 list-decimal list-inside">
@@ -462,7 +462,7 @@ export default function RightToRentGuide() {
               <div className="bg-red-50 border border-red-200 rounded-xl p-6">
                 <div className="flex items-start gap-3 mb-4">
                   <AlertTriangle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <h2 className="font-serif text-xl font-bold text-red-900">
+                  <h2 className="font-display text-xl font-bold text-red-900">
                     Civil penalties for non-compliance
                   </h2>
                 </div>
@@ -501,31 +501,31 @@ export default function RightToRentGuide() {
 
             {/* FAQs */}
             <section>
-              <h2 className="font-serif text-2xl font-bold text-gray-900 mb-6">
+              <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-6">
                 Common questions
               </h2>
               <div className="space-y-2">
                 {faqSchema.mainEntity.map((faq, i) => (
                   <div
                     key={i}
-                    className="bg-white border border-gray-200 rounded-xl overflow-hidden"
+                    className="bg-white border border-border rounded-xl overflow-hidden"
                   >
                     <button
-                      className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors"
+                      className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-muted transition-colors"
                       onClick={() => setOpenFaq(openFaq === i ? null : i)}
                       aria-expanded={openFaq === i}
                     >
-                      <span className="font-semibold text-gray-900 pr-4 text-sm">
+                      <span className="font-semibold text-foreground pr-4 text-sm">
                         {faq.name}
                       </span>
                       {openFaq === i ? (
-                        <ChevronUp className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                        <ChevronUp className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                       ) : (
-                        <ChevronDown className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                        <ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                       )}
                     </button>
                     {openFaq === i && (
-                      <div className="px-5 pb-5 text-sm text-gray-600 leading-relaxed border-t border-gray-100">
+                      <div className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-border/40">
                         <p className="pt-4">{faq.acceptedAnswer.text}</p>
                       </div>
                     )}
@@ -539,32 +539,32 @@ export default function RightToRentGuide() {
           {/* Sidebar */}
           <aside className="space-y-6">
             {/* Quick check CTA */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 sticky top-6">
-              <p className="text-xs font-semibold text-amber-700 uppercase tracking-widest mb-2">
+            <div className="bg-accent/10 border border-accent/20 rounded-xl p-6 sticky top-6">
+              <p className="text-xs font-semibold text-accent uppercase tracking-widest mb-2">
                 Quick check
               </p>
-              <h3 className="font-serif text-lg font-bold text-gray-900 mb-2">
+              <h3 className="font-display text-lg font-semibold text-white tracking-tight mb-2">
                 Check a share code now
               </h3>
-              <p className="text-sm text-gray-600 mb-4">
+              <p className="text-sm text-muted-foreground mb-4">
                 Use Elite Tenancy's free Right to Rent share code checker —
                 instant results with built-in reminder setting.
               </p>
               <Link
                 href="/right-to-rent-check"
-                className="w-full inline-flex items-center justify-center gap-2 bg-amber-600 text-white px-4 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors text-sm shadow-sm"
+                className="w-full inline-flex items-center justify-center gap-2 bg-primary text-white px-4 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors text-sm shadow-sm"
               >
                 Check Share Code <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
 
             {/* Key facts */}
-            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <FileText className="h-4 w-4 text-amber-600" /> Key facts at a
+            <div className="bg-white border border-border rounded-xl p-6 shadow-sm">
+              <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+                <FileText className="h-4 w-4 text-accent" /> Key facts at a
                 glance
               </h3>
-              <ul className="space-y-3 text-sm text-gray-600">
+              <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
                   Applies to all private landlords in England
@@ -593,18 +593,18 @@ export default function RightToRentGuide() {
             </div>
 
             {/* RRA 2025 note */}
-            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-2">
+            <div className="bg-white border border-border rounded-xl p-6 shadow-sm">
+              <h3 className="font-semibold text-foreground mb-2">
                 RRA 2025 &amp; Right to Rent
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-muted-foreground mb-3">
                 The Renters' Rights Act 2025 abolishes Section 21 and changes
                 tenancy structure — but it does <strong>not</strong> change
                 Right to Rent rules.
               </p>
               <Link
                 href="/renters-rights-act-2025"
-                className="text-sm text-amber-700 font-medium hover:text-amber-800 inline-flex items-center gap-1"
+                className="text-sm text-accent font-medium hover:text-amber-800 inline-flex items-center gap-1"
               >
                 Full RRA 2025 guide <ArrowRight className="h-3.5 w-3.5" />
               </Link>
@@ -612,7 +612,7 @@ export default function RightToRentGuide() {
 
             {/* Landlord CTA */}
             <div className="bg-gray-900 rounded-xl p-6 text-white">
-              <h3 className="font-serif font-bold text-lg mb-2">
+              <h3 className="font-display font-bold text-lg mb-2">
                 Stress-free landlord?
               </h3>
               <p className="text-sm text-gray-300 mb-4">
@@ -621,7 +621,7 @@ export default function RightToRentGuide() {
               </p>
               <Link
                 href="/list-your-property"
-                className="w-full inline-flex items-center justify-center gap-2 bg-amber-500 text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-amber-400 transition-colors text-sm"
+                className="w-full inline-flex items-center justify-center gap-2 bg-accent/100 text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-amber-400 transition-colors text-sm"
               >
                 List Your Property <ArrowRight className="h-4 w-4" />
               </Link>

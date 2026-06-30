@@ -148,7 +148,7 @@ const LICENSING_TIERS = [
   {
     label: "Additional",
     badge: "bg-amber-100 text-amber-800",
-    dot: "bg-amber-500",
+    dot: "bg-accent/100",
     trigger: "3–4 occupants (where the scheme is in force)",
     applies: "Councils that have adopted it — including Newham",
     fee: "Varies by council (~£500–£1,500)",
@@ -233,22 +233,22 @@ export default function HmoLicenceGuide() {
       />
 
       {/* Hero */}
-      <div className="bg-gradient-to-b from-amber-50 to-white border-b border-amber-100/60">
+      <div className="bg-primary border-b border-accent/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <nav className="text-xs text-gray-400 mb-4 flex gap-1.5">
-            <Link href="/" className="hover:text-amber-600 transition-colors">
+          <nav className="text-xs text-muted-foreground mb-4 flex gap-1.5">
+            <Link href="/" className="hover:text-accent transition-colors">
               Home
             </Link>
             <span>/</span>
-            <span className="text-gray-600">HMO Licence Guide</span>
+            <span className="text-muted-foreground">HMO Licence Guide</span>
           </nav>
-          <p className="text-amber-700 text-xs font-semibold tracking-widest uppercase mb-3">
+          <p className="text-accent text-xs font-semibold tracking-widest uppercase mb-3">
             Housing Act 2004 — England
           </p>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4 max-w-3xl">
+          <h1 className="font-display text-4xl md:text-5xl font-semibold text-white tracking-tight mb-4 max-w-3xl">
             HMO Licence UK 2026
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mb-8">
+          <p className="text-lg text-muted-foreground max-w-2xl mb-8">
             If you let a property to three or more unrelated tenants in England,
             you may need an HMO licence — and in boroughs like Newham, the rules
             go further than the national minimum. Here is every tier explained,
@@ -256,7 +256,7 @@ export default function HmoLicenceGuide() {
           </p>
           <Link
             href="/for-landlords"
-            className="inline-flex items-center gap-2 bg-amber-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-sm"
           >
             Landlord services <ArrowRight className="h-4 w-4" />
           </Link>
@@ -270,13 +270,13 @@ export default function HmoLicenceGuide() {
 
             {/* Definition */}
             <section>
-              <h2 className="font-serif text-2xl font-bold text-gray-900 mb-4">
+              <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-4">
                 What is an HMO?
               </h2>
-              <div className="bg-amber-50 border border-amber-100 rounded-xl p-5 mb-4">
+              <div className="bg-accent/10 border border-accent/20 rounded-xl p-5 mb-4">
                 <div className="flex items-start gap-3">
-                  <Building2 className="h-5 w-5 text-amber-700 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-gray-700 leading-relaxed">
+                  <Building2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-foreground leading-relaxed">
                     <strong>House in Multiple Occupation (HMO)</strong> — a
                     property rented by at least 3 tenants from more than one
                     household who share facilities (kitchen or bathroom). Defined
@@ -286,13 +286,13 @@ export default function HmoLicenceGuide() {
                   </p>
                 </div>
               </div>
-              <p className="text-gray-600 leading-relaxed mb-3">
+              <p className="text-muted-foreground leading-relaxed mb-3">
                 A household is a single person, a couple, or a family (including
                 extended family). Three friends sharing a house are three
                 households. A couple and a lodger are two households — and if
                 they share a kitchen, the property is an HMO.
               </p>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 HMOs include shared houses, bedsits, some purpose-built student
                 blocks, and converted buildings where self-contained flats are
                 poorly converted. Licences are not transferable — they belong to
@@ -302,10 +302,10 @@ export default function HmoLicenceGuide() {
 
             {/* Three tiers */}
             <section>
-              <h2 className="font-serif text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-2">
                 The three licensing tiers
               </h2>
-              <p className="text-gray-600 text-sm mb-6">
+              <p className="text-muted-foreground text-sm mb-6">
                 HMO licensing operates on three tiers. You may be subject to
                 more than one — Newham landlords often need to consider all
                 three.
@@ -314,7 +314,7 @@ export default function HmoLicenceGuide() {
                 {LICENSING_TIERS.map((tier) => (
                   <div
                     key={tier.label}
-                    className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm"
+                    className="bg-white border border-border rounded-xl p-5 shadow-sm"
                   >
                     <div className="flex items-center gap-2 mb-3">
                       <span
@@ -323,27 +323,27 @@ export default function HmoLicenceGuide() {
                         {tier.label} Licensing
                       </span>
                     </div>
-                    <p className="text-sm text-gray-700 mb-4 leading-relaxed">
+                    <p className="text-sm text-foreground mb-4 leading-relaxed">
                       {tier.detail}
                     </p>
                     <div className="grid sm:grid-cols-3 gap-3 text-xs">
-                      <div className="bg-gray-50 rounded-lg p-3">
-                        <p className="text-gray-400 font-semibold uppercase tracking-wide mb-1">
+                      <div className="bg-muted rounded-lg p-3">
+                        <p className="text-muted-foreground font-semibold uppercase tracking-wide mb-1">
                           Trigger
                         </p>
-                        <p className="text-gray-700">{tier.trigger}</p>
+                        <p className="text-foreground">{tier.trigger}</p>
                       </div>
-                      <div className="bg-gray-50 rounded-lg p-3">
-                        <p className="text-gray-400 font-semibold uppercase tracking-wide mb-1">
+                      <div className="bg-muted rounded-lg p-3">
+                        <p className="text-muted-foreground font-semibold uppercase tracking-wide mb-1">
                           Applies to
                         </p>
-                        <p className="text-gray-700">{tier.applies}</p>
+                        <p className="text-foreground">{tier.applies}</p>
                       </div>
-                      <div className="bg-gray-50 rounded-lg p-3">
-                        <p className="text-gray-400 font-semibold uppercase tracking-wide mb-1">
+                      <div className="bg-muted rounded-lg p-3">
+                        <p className="text-muted-foreground font-semibold uppercase tracking-wide mb-1">
                           Licence duration
                         </p>
-                        <p className="text-gray-700">{tier.duration}</p>
+                        <p className="text-foreground">{tier.duration}</p>
                       </div>
                     </div>
                   </div>
@@ -356,7 +356,7 @@ export default function HmoLicenceGuide() {
               <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
                 <div className="flex items-start gap-3 mb-3">
                   <Home className="h-5 w-5 text-blue-700 flex-shrink-0 mt-0.5" />
-                  <h2 className="font-serif text-lg font-bold text-blue-900">
+                  <h2 className="font-display text-lg font-bold text-blue-900">
                     Newham (East Ham) — all three tiers apply
                   </h2>
                 </div>
@@ -378,37 +378,37 @@ export default function HmoLicenceGuide() {
 
             {/* Minimum room sizes */}
             <section>
-              <h2 className="font-serif text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-2">
                 Minimum bedroom sizes (from October 2018)
               </h2>
-              <p className="text-gray-600 text-sm mb-4">
+              <p className="text-muted-foreground text-sm mb-4">
                 The Housing (Amendment) Act 2018 introduced minimum room size
                 requirements for all licensed HMOs in England. Rooms below these
                 thresholds cannot lawfully be used as sleeping accommodation.
               </p>
-              <div className="overflow-hidden rounded-xl border border-gray-200">
+              <div className="overflow-hidden rounded-xl border border-border">
                 <table className="w-full text-sm">
-                  <thead className="bg-gray-50 border-b border-gray-200">
+                  <thead className="bg-muted border-b border-border">
                     <tr>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-700">
+                      <th className="text-left px-4 py-3 font-semibold text-foreground">
                         Occupant type
                       </th>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-700">
+                      <th className="text-left px-4 py-3 font-semibold text-foreground">
                         Minimum size
                       </th>
-                      <th className="text-left px-4 py-3 font-semibold text-gray-700 hidden sm:table-cell">
+                      <th className="text-left px-4 py-3 font-semibold text-foreground hidden sm:table-cell">
                         Notes
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
                     {ROOM_SIZES.map((r, i) => (
-                      <tr key={i} className="bg-white hover:bg-gray-50/50">
-                        <td className="px-4 py-3 text-gray-800">{r.use}</td>
-                        <td className="px-4 py-3 font-semibold text-amber-700">
+                      <tr key={i} className="bg-white hover:bg-muted/50">
+                        <td className="px-4 py-3 text-foreground">{r.use}</td>
+                        <td className="px-4 py-3 font-semibold text-accent">
                           {r.min}
                         </td>
-                        <td className="px-4 py-3 text-gray-500 hidden sm:table-cell">
+                        <td className="px-4 py-3 text-muted-foreground hidden sm:table-cell">
                           {r.note}
                         </td>
                       </tr>
@@ -416,7 +416,7 @@ export default function HmoLicenceGuide() {
                   </tbody>
                 </table>
               </div>
-              <p className="text-xs text-gray-400 mt-3">
+              <p className="text-xs text-muted-foreground mt-3">
                 Rooms between 4.64 m² and 6.51 m² may only be used for children
                 aged 1–9. The landlord must notify the council within 7 days if
                 a room is too small for its current use.
@@ -425,23 +425,23 @@ export default function HmoLicenceGuide() {
 
             {/* How to apply */}
             <section>
-              <h2 className="font-serif text-2xl font-bold text-gray-900 mb-6">
+              <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-6">
                 How to apply for an HMO licence
               </h2>
               <div className="space-y-4">
                 {APPLY_STEPS.map((s) => (
                   <div
                     key={s.n}
-                    className="flex gap-4 bg-white border border-gray-200 rounded-xl p-5 shadow-sm"
+                    className="flex gap-4 bg-white border border-border rounded-xl p-5 shadow-sm"
                   >
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 text-amber-700 font-bold text-sm flex items-center justify-center">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 text-accent font-bold text-sm flex items-center justify-center">
                       {s.n}
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">
+                      <h3 className="font-semibold text-foreground mb-1">
                         {s.title}
                       </h3>
-                      <p className="text-sm text-gray-600">{s.body}</p>
+                      <p className="text-sm text-muted-foreground">{s.body}</p>
                     </div>
                   </div>
                 ))}
@@ -453,7 +453,7 @@ export default function HmoLicenceGuide() {
               <div className="bg-red-50 border border-red-200 rounded-xl p-6">
                 <div className="flex items-start gap-3 mb-4">
                   <AlertTriangle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <h2 className="font-serif text-xl font-bold text-red-900">
+                  <h2 className="font-display text-xl font-bold text-red-900">
                     Penalties for operating an unlicensed HMO
                   </h2>
                 </div>
@@ -491,31 +491,31 @@ export default function HmoLicenceGuide() {
 
             {/* FAQs */}
             <section>
-              <h2 className="font-serif text-2xl font-bold text-gray-900 mb-6">
+              <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-6">
                 Common questions
               </h2>
               <div className="space-y-2">
                 {faqSchema.mainEntity.map((faq, i) => (
                   <div
                     key={i}
-                    className="bg-white border border-gray-200 rounded-xl overflow-hidden"
+                    className="bg-white border border-border rounded-xl overflow-hidden"
                   >
                     <button
-                      className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors"
+                      className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-muted transition-colors"
                       onClick={() => setOpenFaq(openFaq === i ? null : i)}
                       aria-expanded={openFaq === i}
                     >
-                      <span className="font-semibold text-gray-900 pr-4 text-sm">
+                      <span className="font-semibold text-foreground pr-4 text-sm">
                         {faq.name}
                       </span>
                       {openFaq === i ? (
-                        <ChevronUp className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                        <ChevronUp className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                       ) : (
-                        <ChevronDown className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                        <ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                       )}
                     </button>
                     {openFaq === i && (
-                      <div className="px-5 pb-5 text-sm text-gray-600 leading-relaxed border-t border-gray-100">
+                      <div className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-border/40">
                         <p className="pt-4">{faq.acceptedAnswer.text}</p>
                       </div>
                     )}
@@ -529,33 +529,33 @@ export default function HmoLicenceGuide() {
           {/* Sidebar */}
           <aside className="space-y-6">
             {/* Quick check CTA */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 sticky top-6">
-              <p className="text-xs font-semibold text-amber-700 uppercase tracking-widest mb-2">
+            <div className="bg-accent/10 border border-accent/20 rounded-xl p-6 sticky top-6">
+              <p className="text-xs font-semibold text-accent uppercase tracking-widest mb-2">
                 Landlord services
               </p>
-              <h3 className="font-serif text-lg font-bold text-gray-900 mb-2">
+              <h3 className="font-display text-lg font-semibold text-white tracking-tight mb-2">
                 HMO landlord? Elite Tenancy can help
               </h3>
-              <p className="text-sm text-gray-600 mb-4">
+              <p className="text-sm text-muted-foreground mb-4">
                 We introduce thoroughly referenced tenants for HMOs and shared
                 houses — one-off fee, no monthly commission. East Ham and Newham
                 specialists.
               </p>
               <Link
                 href="/list-your-property"
-                className="w-full inline-flex items-center justify-center gap-2 bg-amber-600 text-white px-4 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors text-sm shadow-sm"
+                className="w-full inline-flex items-center justify-center gap-2 bg-primary text-white px-4 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors text-sm shadow-sm"
               >
                 List Your Property <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
 
             {/* Key facts */}
-            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <FileText className="h-4 w-4 text-amber-600" /> Key facts at a
+            <div className="bg-white border border-border rounded-xl p-6 shadow-sm">
+              <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
+                <FileText className="h-4 w-4 text-accent" /> Key facts at a
                 glance
               </h3>
-              <ul className="space-y-3 text-sm text-gray-600">
+              <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
                   Mandatory: 5+ tenants, 2+ households
@@ -584,11 +584,11 @@ export default function HmoLicenceGuide() {
             </div>
 
             {/* Documents needed */}
-            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-3">
+            <div className="bg-white border border-border rounded-xl p-6 shadow-sm">
+              <h3 className="font-semibold text-foreground mb-3">
                 Documents for application
               </h3>
-              <ul className="space-y-2 text-xs text-gray-600">
+              <ul className="space-y-2 text-xs text-muted-foreground">
                 {[
                   "Gas Safety Certificate (within 12 months)",
                   "Electrical Installation Condition Report (within 5 years)",
@@ -598,7 +598,7 @@ export default function HmoLicenceGuide() {
                   "Details of managing agent (if applicable)",
                 ].map((doc) => (
                   <li key={doc} className="flex items-start gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-accent flex-shrink-0 mt-0.5" />
                     {doc}
                   </li>
                 ))}
@@ -606,18 +606,18 @@ export default function HmoLicenceGuide() {
             </div>
 
             {/* RRA 2025 note */}
-            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-2">
+            <div className="bg-white border border-border rounded-xl p-6 shadow-sm">
+              <h3 className="font-semibold text-foreground mb-2">
                 RRA 2025 &amp; HMOs
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-muted-foreground mb-3">
                 Section 21 is abolished under the Renters' Rights Act 2025 —
                 HMO landlords must use Section 8 grounds, which requires a valid
                 licence.
               </p>
               <Link
                 href="/renters-rights-act-2025"
-                className="text-sm text-amber-700 font-medium hover:text-amber-800 inline-flex items-center gap-1"
+                className="text-sm text-accent font-medium hover:text-amber-800 inline-flex items-center gap-1"
               >
                 Full RRA 2025 guide <ArrowRight className="h-3.5 w-3.5" />
               </Link>
@@ -625,7 +625,7 @@ export default function HmoLicenceGuide() {
 
             {/* Dark CTA */}
             <div className="bg-gray-900 rounded-xl p-6 text-white">
-              <h3 className="font-serif font-bold text-lg mb-2">
+              <h3 className="font-display font-bold text-lg mb-2">
                 Need HMO tenants?
               </h3>
               <p className="text-sm text-gray-300 mb-4">
@@ -634,7 +634,7 @@ export default function HmoLicenceGuide() {
               </p>
               <Link
                 href="/pricing"
-                className="w-full inline-flex items-center justify-center gap-2 bg-amber-500 text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-amber-400 transition-colors text-sm"
+                className="w-full inline-flex items-center justify-center gap-2 bg-accent/100 text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-amber-400 transition-colors text-sm"
               >
                 See pricing <ArrowRight className="h-4 w-4" />
               </Link>

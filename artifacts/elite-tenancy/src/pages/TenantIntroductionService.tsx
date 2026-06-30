@@ -158,13 +158,13 @@ export default function TenantIntroductionService() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Hero */}
-      <div className="bg-gradient-to-b from-amber-50 to-white py-16 px-4">
+      <div className="bg-primary py-16 px-4">
         <div className="max-w-3xl mx-auto">
-          <p className="text-amber-700 text-sm font-semibold tracking-wide uppercase mb-3">For Landlords</p>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <p className="text-accent text-sm font-semibold tracking-wide uppercase mb-3">For Landlords</p>
+          <h1 className="font-display text-3xl md:text-4xl font-semibold text-white tracking-tight mb-4">
             What is a tenant introduction service?
           </h1>
-          <p className="text-gray-600 text-base md:text-lg">
+          <p className="text-white/70 text-base md:text-lg">
             A tenant introduction service finds, references, and introduces tenants to landlords for a one-off fee —
             instead of an ongoing monthly management percentage. It is the cost-effective alternative to full letting
             agent management for landlords who prefer to run their own tenancies.
@@ -175,9 +175,9 @@ export default function TenantIntroductionService() {
       <div className="max-w-3xl mx-auto px-4 pb-20">
 
         {/* Definition callout */}
-        <div className="bg-amber-50 border border-amber-100 rounded-2xl p-6 my-8">
-          <h2 className="text-base font-bold text-gray-900 mb-2">Definition</h2>
-          <p className="text-gray-700 text-sm leading-relaxed">
+        <div className="bg-accent/10 border border-accent/20 rounded-2xl p-6 my-8">
+          <h2 className="font-display text-2xl font-semibold text-foreground tracking-tight mb-2">Definition</h2>
+          <p className="text-foreground text-sm leading-relaxed">
             A <strong>tenant introduction service</strong> is a letting agent service in which the agent advertises a property,
             finds and references suitable tenants, and introduces them to the landlord for a fixed, one-off fee.
             The agent's involvement ends at the point of introduction. Unlike a full management service,
@@ -187,16 +187,16 @@ export default function TenantIntroductionService() {
 
         {/* How it works */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">How Elite Tenancy's introduction service works</h2>
+          <h2 className="font-display text-2xl font-semibold text-foreground tracking-tight mb-6">How Elite Tenancy's introduction service works</h2>
           <div className="space-y-4">
             {STEPS.map(({ n, title, body }) => (
               <div key={n} className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-amber-600 text-white flex items-center justify-center text-sm font-bold">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold">
                   {n}
                 </div>
                 <div className="flex-1 pt-0.5">
-                  <p className="font-semibold text-gray-900 text-sm">{title}</p>
-                  <p className="text-gray-600 text-sm mt-0.5">{body}</p>
+                  <p className="font-semibold text-foreground text-sm">{title}</p>
+                  <p className="text-muted-foreground text-sm mt-0.5">{body}</p>
                 </div>
               </div>
             ))}
@@ -205,64 +205,64 @@ export default function TenantIntroductionService() {
 
         {/* Comparison table */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Introduction service vs full management</h2>
+          <h2 className="font-display text-2xl font-semibold text-foreground tracking-tight mb-4">Introduction service vs full management</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gray-200">
-                  <th className="text-left py-3 pr-4 font-semibold text-gray-600 w-1/3">Aspect</th>
-                  <th className="text-left py-3 pr-4 font-semibold text-amber-700">Introduction (Elite Tenancy)</th>
-                  <th className="text-left py-3 font-semibold text-gray-600">Full management</th>
+                <tr className="border-b border-border">
+                  <th className="text-left py-3 pr-4 font-semibold text-muted-foreground w-1/3">Aspect</th>
+                  <th className="text-left py-3 pr-4 font-semibold text-accent">Introduction (Elite Tenancy)</th>
+                  <th className="text-left py-3 font-semibold text-muted-foreground">Full management</th>
                 </tr>
               </thead>
               <tbody>
                 {INTRO_VS_FULL.map(({ aspect, intro, full }) => (
-                  <tr key={aspect} className="border-b border-gray-100 last:border-0">
-                    <td className="py-3 pr-4 font-medium text-gray-700">{aspect}</td>
-                    <td className="py-3 pr-4 text-gray-800">
+                  <tr key={aspect} className="border-b border-border/40 last:border-0">
+                    <td className="py-3 pr-4 font-medium text-foreground">{aspect}</td>
+                    <td className="py-3 pr-4 text-foreground">
                       <span className="flex items-start gap-1.5">
                         <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
                         {intro}
                       </span>
                     </td>
-                    <td className="py-3 text-gray-500">{full}</td>
+                    <td className="py-3 text-muted-foreground">{full}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-gray-400 mt-3">
+          <p className="text-xs text-muted-foreground mt-3">
             * On a £1,500/month property, a 10% management fee costs £1,800/year. Elite Tenancy's introduction fee is £750 (two weeks' rent) — once.
           </p>
         </section>
 
         {/* Who it suits */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Is an introduction service right for you?</h2>
-          <p className="text-gray-600 text-sm mb-4">A tenant introduction service works best for landlords who:</p>
+          <h2 className="font-display text-2xl font-semibold text-foreground tracking-tight mb-4">Is an introduction service right for you?</h2>
+          <p className="text-muted-foreground text-sm mb-4">A tenant introduction service works best for landlords who:</p>
           <ul className="space-y-2">
             {SUITS.map((item) => (
-              <li key={item} className="flex items-start gap-2 text-sm text-gray-700">
+              <li key={item} className="flex items-start gap-2 text-sm text-foreground">
                 <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
                 {item}
               </li>
             ))}
           </ul>
-          <div className="mt-4 flex items-start gap-2 text-sm text-gray-500 bg-gray-50 rounded-xl p-4 border border-gray-100">
-            <XCircle className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
+          <div className="mt-4 flex items-start gap-2 text-sm text-muted-foreground bg-muted rounded-xl p-4 border border-border/40">
+            <XCircle className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
             <span>If you want to be fully hands-off after the tenant moves in, consider a full-management agent instead. We can recommend alternatives.</span>
           </div>
         </section>
 
         {/* CTA */}
-        <div className="bg-amber-50 border border-amber-100 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-4">
+        <div className="bg-accent/10 border border-accent/20 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-4">
           <div className="flex-1">
-            <h3 className="text-lg font-bold text-gray-900 mb-1">Ready to find your next tenant?</h3>
-            <p className="text-gray-600 text-sm">Pay only two weeks' rent when a tenant moves in. No upfront fees.</p>
+            <h3 className="text-lg font-semibold text-white tracking-tight mb-1">Ready to find your next tenant?</h3>
+            <p className="text-muted-foreground text-sm">Pay only two weeks' rent when a tenant moves in. No upfront fees.</p>
           </div>
           <a
             href="/list-your-property"
-            className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 bg-amber-600 text-white text-sm font-semibold rounded-xl hover:bg-amber-700 transition-colors"
+            className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary/90 transition-colors"
           >
             List your property
             <ArrowRight className="w-4 h-4" />

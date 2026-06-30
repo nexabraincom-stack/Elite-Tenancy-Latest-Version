@@ -349,7 +349,7 @@ function GlobalComparison() {
               </div>
               <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
                 <div
-                  className={`h-full rounded-full ${isEastHam ? "bg-amber-500" : "bg-primary/60"}`}
+                  className={`h-full rounded-full ${isEastHam ? "bg-accent" : "bg-primary/60"}`}
                   style={{ width: `${pct}%` }}
                 />
               </div>
@@ -360,7 +360,7 @@ function GlobalComparison() {
           );
         })}
       </div>
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-sm text-amber-900">
+      <div className="bg-accent/10 border border-accent/20 rounded-xl p-3 text-sm text-foreground">
         <strong>East Ham E6 insight:</strong> At ~£1,450/mo for a 1-bed flat, East Ham is one of the most affordable postcodes in London — cheaper than Amsterdam, Paris, Dublin, and comparable to Madrid.
       </div>
       <p className="text-xs text-muted-foreground">
@@ -463,7 +463,7 @@ export default function RentCalculator() {
         <section className="bg-gradient-to-b from-primary/5 to-background pt-12 pb-8 px-4">
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-sm font-medium text-primary mb-2 uppercase tracking-wider">Free Tool — Updated June 2026</p>
-            <h1 className="text-3xl sm:text-4xl font-serif font-bold text-foreground mb-3">
+            <h1 className="text-3xl sm:text-4xl font-display font-semibold text-foreground mb-3 tracking-tight">
               UK Rent Calculator 2026
             </h1>
             <p className="text-muted-foreground text-base max-w-xl mx-auto">
@@ -504,7 +504,7 @@ export default function RentCalculator() {
 
         {/* FAQ — Featured Snippet bait */}
         <section className="max-w-3xl mx-auto px-4 pb-16">
-          <h2 className="text-xl font-serif font-semibold mb-4">Frequently Asked Questions</h2>
+          <h2 className="font-display text-xl font-semibold mb-4 tracking-tight">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {[
               {

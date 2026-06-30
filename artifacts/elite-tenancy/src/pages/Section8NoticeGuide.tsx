@@ -366,7 +366,7 @@ export default function Section8NoticeGuide() {
             <Scale className="w-3 h-3" />
             Housing Act 1988 · Updated for RRA 2025
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground leading-tight mb-5">
+          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground leading-tight mb-5">
             Section 8 Notice UK 2026:<br className="hidden sm:block" />
             <span className="text-accent"> Grounds, Notice Periods &amp; How to Serve</span>
           </h1>
@@ -401,7 +401,7 @@ export default function Section8NoticeGuide() {
           ].map((fact) => (
             <div key={fact.label} className="text-center">
               <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-0.5">{fact.label}</div>
-              <div className="text-sm font-bold text-foreground">{fact.value}</div>
+              <div className="text-sm font-semibold text-white tracking-tight">{fact.value}</div>
             </div>
           ))}
         </div>
@@ -411,7 +411,7 @@ export default function Section8NoticeGuide() {
 
         {/* What is Section 8 */}
         <section id="what-is-section-8">
-          <h2 className="font-serif text-2xl font-bold text-foreground mb-4">What is a Section 8 notice?</h2>
+          <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-4">What is a Section 8 notice?</h2>
           <div className="prose prose-sm max-w-none text-muted-foreground leading-relaxed space-y-4">
             <p>
               A <strong>Section 8 notice</strong> (formally a Notice Seeking Possession) is a written
@@ -431,9 +431,9 @@ export default function Section8NoticeGuide() {
               to recover possession on the basis of tenant fault or other specified circumstances.
             </p>
           </div>
-          <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-5 flex gap-3">
-            <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
-            <div className="text-sm text-amber-900">
+          <div className="mt-6 rounded-xl border border-accent/20 bg-accent/10 p-5 flex gap-3">
+            <AlertTriangle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+            <div className="text-sm text-foreground">
               <strong>Post-RRA 2025:</strong> Section 21 has been abolished for all tenancies
               falling within the Renters' Rights Act 2025 commencement. Any landlord relying on a
               Section 21 notice served after commencement risks court dismissal. Use Section 8 only.
@@ -443,7 +443,7 @@ export default function Section8NoticeGuide() {
 
         {/* Grounds table */}
         <section id="grounds">
-          <h2 className="font-serif text-2xl font-bold text-foreground mb-2">Section 8 grounds for possession</h2>
+          <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-2">Section 8 grounds for possession</h2>
           <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
             The most commonly used grounds are listed below. <span className="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-semibold px-2 py-0.5 rounded-full">RRA 2025</span> badges indicate grounds introduced or strengthened by the Renters' Rights Act 2025.
           </p>
@@ -454,7 +454,7 @@ export default function Section8NoticeGuide() {
                 className="rounded-xl border border-border bg-card p-5 flex flex-col sm:flex-row sm:items-start gap-4"
               >
                 <div className="flex-shrink-0 flex flex-col items-start sm:items-center gap-2 min-w-[130px]">
-                  <span className="font-serif font-bold text-foreground text-sm">{g.number}</span>
+                  <span className="font-display font-semibold text-white tracking-tight text-sm">{g.number}</span>
                   <span
                     className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
                       g.type === "mandatory"
@@ -491,7 +491,7 @@ export default function Section8NoticeGuide() {
 
         {/* Mandatory vs discretionary explainer */}
         <section id="mandatory-vs-discretionary">
-          <h2 className="font-serif text-2xl font-bold text-foreground mb-6">Mandatory vs discretionary: what landlords need to know</h2>
+          <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-6">Mandatory vs discretionary: what landlords need to know</h2>
           <div className="grid sm:grid-cols-2 gap-6">
             <div className="rounded-xl border border-red-200 bg-red-50 p-6">
               <div className="flex items-center gap-2 mb-3">
@@ -541,7 +541,7 @@ export default function Section8NoticeGuide() {
 
         {/* Step-by-step process */}
         <section id="how-to-serve">
-          <h2 className="font-serif text-2xl font-bold text-foreground mb-6">How to serve a Section 8 notice: step-by-step</h2>
+          <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-6">How to serve a Section 8 notice: step-by-step</h2>
           <div className="space-y-4">
             {PROCESS_STEPS.map((s) => (
               <div key={s.step} className="flex gap-4 rounded-xl border border-border bg-card p-5">
@@ -559,7 +559,7 @@ export default function Section8NoticeGuide() {
 
         {/* RRA 2025 changes callout */}
         <section id="rra-2025-changes" className="rounded-xl bg-primary/5 border border-primary/15 p-7">
-          <h2 className="font-serif text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="font-display text-xl font-semibold text-white tracking-tight mb-4 flex items-center gap-2">
             <Scale className="w-5 h-5 text-primary" />
             Renters' Rights Act 2025 — what changed for Section 8
           </h2>
@@ -609,7 +609,7 @@ export default function Section8NoticeGuide() {
 
         {/* Common mistakes */}
         <section id="common-mistakes">
-          <h2 className="font-serif text-2xl font-bold text-foreground mb-6">Common Section 8 mistakes landlords make</h2>
+          <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-6">Common Section 8 mistakes landlords make</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             {[
               {
@@ -650,7 +650,7 @@ export default function Section8NoticeGuide() {
 
         {/* East Ham / London local angle */}
         <section id="east-ham-landlords" className="rounded-xl bg-accent/8 border border-accent/15 p-7">
-          <h2 className="font-serif text-xl font-bold text-foreground mb-3 flex items-center gap-2">
+          <h2 className="font-display text-xl font-semibold text-white tracking-tight mb-3 flex items-center gap-2">
             <Home className="w-5 h-5 text-accent" />
             Section 8 advice for East Ham &amp; London landlords
           </h2>
@@ -688,7 +688,7 @@ export default function Section8NoticeGuide() {
 
         {/* FAQ accordion */}
         <section id="faq">
-          <h2 className="font-serif text-2xl font-bold text-foreground mb-6">Frequently asked questions</h2>
+          <h2 className="font-display text-2xl font-semibold text-white tracking-tight mb-6">Frequently asked questions</h2>
           <div className="space-y-3">
             {FAQS.map((item, i) => (
               <div key={i} className="rounded-xl border border-border bg-card overflow-hidden">
@@ -716,7 +716,7 @@ export default function Section8NoticeGuide() {
 
         {/* Related guides */}
         <section>
-          <h2 className="font-serif text-xl font-bold text-foreground mb-5">Related landlord guides</h2>
+          <h2 className="font-display text-xl font-semibold text-white tracking-tight mb-5">Related landlord guides</h2>
           <div className="grid sm:grid-cols-3 gap-4">
             {[
               {
@@ -752,7 +752,7 @@ export default function Section8NoticeGuide() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_0%,rgba(181,134,42,0.22),transparent)] pointer-events-none" />
           <div className="relative">
             <p className="text-accent text-xs font-semibold uppercase tracking-widest mb-3">Avoid Section 8 altogether</p>
-            <h2 className="font-serif text-2xl font-bold text-primary-foreground mb-3">
+            <h2 className="font-display text-2xl font-bold text-primary-foreground mb-3">
               Start with exceptional tenants
             </h2>
             <p className="text-primary-foreground/70 text-sm max-w-lg mx-auto mb-6 leading-relaxed">
