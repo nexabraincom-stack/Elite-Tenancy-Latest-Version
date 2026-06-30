@@ -155,7 +155,7 @@ const clerkAppearance = {
     cardBox: "bg-white border border-[#E8E4DE] rounded-2xl w-[440px] max-w-full overflow-hidden shadow-xl",
     card: "!shadow-none !border-0 !bg-transparent !rounded-none",
     footer: "!shadow-none !border-0 !bg-transparent !rounded-none",
-    headerTitle: "text-[#163A4A] font-serif",
+    headerTitle: "text-[#163A4A] font-display",
     headerSubtitle: "text-[#5E7A84]",
     socialButtonsBlockButtonText: "text-[#163A4A]",
     formFieldLabel: "text-[#5E7A84] text-xs",

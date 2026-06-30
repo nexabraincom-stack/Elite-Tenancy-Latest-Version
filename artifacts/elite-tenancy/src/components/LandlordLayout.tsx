@@ -34,7 +34,7 @@ export default function LandlordLayout({ children }: { children: React.ReactNode
       <aside className="w-60 shrink-0 bg-sidebar border-r border-sidebar-border flex flex-col">
         <div className="px-5 py-5 border-b border-sidebar-border">
           <Link href="/">
-            <span className="font-serif text-xl font-bold text-primary cursor-pointer">Elite Tenancy</span>
+            <span className="font-display text-xl font-bold text-primary cursor-pointer">Elite Tenancy</span>
           </Link>
           <p className="mt-1 text-xs text-muted-foreground">Landlord Portal</p>
           <Badge className="mt-2 bg-primary/20 text-primary border-primary/30 text-xs gap-1">

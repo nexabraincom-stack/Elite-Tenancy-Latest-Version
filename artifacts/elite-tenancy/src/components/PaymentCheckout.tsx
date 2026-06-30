@@ -133,7 +133,7 @@ export default function PaymentCheckout({ listingId, defaultTier = "standard", o
   return (
     <div className="max-w-4xl mx-auto">
       <div className="text-center mb-8">
-        <h2 className="font-serif text-3xl font-bold text-foreground mb-2">Choose Your Listing Package</h2>
+        <h2 className="font-display text-3xl font-bold text-foreground mb-2">Choose Your Listing Package</h2>
         <p className="text-muted-foreground">Pay once. Listed until let. Only pay completion fee when your tenancy completes.</p>
       </div>
 
@@ -160,7 +160,7 @@ export default function PaymentCheckout({ listingId, defaultTier = "standard", o
                 <span className="font-semibold text-foreground capitalize">{tier}</span>
                 {isSelected && <CheckCircle size={18} className="text-primary" />}
               </div>
-              <p className="font-serif text-3xl font-bold text-foreground mb-1">{info.price}</p>
+              <p className="font-display text-3xl font-bold text-foreground mb-1">{info.price}</p>
               <p className="text-xs text-muted-foreground mb-4">upfront, then {info.completion}</p>
               <ul className="space-y-2">
                 {info.features.map((f) => (

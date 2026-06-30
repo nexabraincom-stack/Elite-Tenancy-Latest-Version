@@ -15,7 +15,7 @@ createRoot(document.getElementById("root")!).render(
     fallback={
       <div className="min-h-screen flex items-center justify-center bg-background px-4">
         <div className="text-center max-w-sm">
-          <h2 className="font-serif text-2xl font-bold text-foreground mb-3">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-3">
             Something went wrong
           </h2>
           <p className="text-muted-foreground text-sm mb-6">

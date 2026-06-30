@@ -29,7 +29,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside className="w-56 shrink-0 bg-sidebar border-r border-sidebar-border flex flex-col">
         <div className="px-5 py-5 border-b border-sidebar-border">
           <Link href="/">
-            <span className="font-serif text-xl font-bold text-primary cursor-pointer">Elite Tenancy</span>
+            <span className="font-display text-xl font-bold text-primary cursor-pointer">Elite Tenancy</span>
           </Link>
           <Badge className="mt-2 bg-destructive/20 text-destructive border-destructive/30 text-xs gap-1">
             <ShieldCheck size={10} />

@@ -20,7 +20,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <header className="sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur-md">
+      <header className="sticky top-0 z-50 border-b border-border bg-white/95 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center gap-2.5">
@@ -43,18 +43,20 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                   <path d="M72 46 V104" />
                 </g>
               </svg>
-              <span className="font-serif text-2xl font-bold text-primary tracking-tight">
+              <span className="font-display text-2xl font-bold text-primary tracking-tight">
                 Elite Tenancy
               </span>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-7">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
-                    location === link.href ? "text-primary" : "text-muted-foreground"
+                  className={`text-sm font-medium py-1 border-b-2 transition-all ${
+                    location === link.href
+                      ? "text-primary border-accent"
+                      : "text-muted-foreground border-transparent hover:text-primary hover:border-accent"
                   }`}
                 >
                   {link.label}
@@ -127,11 +129,11 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       <main className="flex-1">{children}</main>
       <EllieChat />
 
-      <footer className="bg-card border-t border-border/50 mt-20">
+      <footer className="bg-card border-t border-border mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             <div className="md:col-span-1">
-              <span className="font-serif text-xl font-bold text-primary">Elite Tenancy</span>
+              <span className="font-display text-xl font-bold text-primary">Elite Tenancy</span>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
                 The UK's premier tenant introduction service. Connecting exceptional landlords with exceptional tenants.
               </p>
