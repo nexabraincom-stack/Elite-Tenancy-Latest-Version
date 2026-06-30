@@ -18,9 +18,11 @@ export default function Home() {
     description: "Elite Tenancy connects exceptional landlords with premium UK rental properties. Zero upfront fees — pay only on successful completion.",
     canonical: "https://www.elitetenancy.co.uk/",
   });
-  const { data: featured } = useGetFeaturedListings();
+  const { data: rawFeatured } = useGetFeaturedListings();
+  const featured = Array.isArray(rawFeatured) ? rawFeatured : [];
   const { data: stats } = useGetPlatformStats();
-  const { data: articles } = useGetBlogArticles();
+  const { data: rawArticles } = useGetBlogArticles();
+  const articles = Array.isArray(rawArticles) ? rawArticles : [];
   const [, navigate] = useLocation();
   const [city, setCity] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
