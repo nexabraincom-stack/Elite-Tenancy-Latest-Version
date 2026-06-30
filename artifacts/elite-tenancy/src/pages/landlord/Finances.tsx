@@ -15,7 +15,7 @@ export default function LandlordFinances() {
   return (
     <LandlordLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">Finances</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">Finances</h1>
         <p className="text-muted-foreground mt-1">Revenue summary and transaction history.</p>
       </div>
 
@@ -31,7 +31,7 @@ export default function LandlordFinances() {
             ].map(({ label, value }) => (
               <div key={label} className="bg-card border border-border/50 rounded-xl p-5">
                 <p className="text-xs text-muted-foreground">{label}</p>
-                <p className="font-serif text-2xl font-bold text-primary mt-1">{value}</p>
+                <p className="font-display text-2xl font-bold text-primary mt-1">{value}</p>
               </div>
             ))}
           </div>

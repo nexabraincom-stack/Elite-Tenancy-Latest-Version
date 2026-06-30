@@ -16,7 +16,7 @@ export default function LandlordLeads() {
   return (
     <LandlordLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">Leads</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">Leads</h1>
         <p className="text-muted-foreground mt-1">Incoming enquiries and applicant leads.</p>
       </div>
 

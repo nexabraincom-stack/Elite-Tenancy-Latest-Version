@@ -4,9 +4,9 @@ export default function Privacy() {
   return (
     <PublicLayout>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <h1 className="font-serif text-4xl font-bold text-foreground mb-2">Privacy Policy</h1>
+        <h1 className="font-display text-4xl font-bold text-foreground mb-2">Privacy Policy</h1>
         <p className="text-sm text-muted-foreground mb-10">Last updated: 1 January 2025</p>
-        <div className="prose prose-invert prose-sm max-w-none prose-headings:font-serif prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-li:text-muted-foreground">
+        <div className="prose prose-invert prose-sm max-w-none prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-li:text-muted-foreground">
           <h2>1. Who we are</h2>
           <p>Elite Tenancy Ltd ("Elite Tenancy", "we", "us", "our") is a company registered in England and Wales. Our registered address is Office 18077, 182-184 High Street North, East Ham, London, E6 2JA. We are the controller of your personal data under this policy.</p>
           <h2>2. What personal data we collect</h2>

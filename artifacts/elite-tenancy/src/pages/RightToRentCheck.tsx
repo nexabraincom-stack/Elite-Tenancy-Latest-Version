@@ -54,7 +54,7 @@ export default function RightToRentCheck() {
           <span className="inline-flex items-center gap-2 bg-primary/10 border border-primary/25 text-primary text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
             <ShieldCheck size={13} /> Compliance · Landlords
           </span>
-          <h1 className="font-serif text-5xl sm:text-6xl font-bold text-foreground leading-tight mt-6">
+          <h1 className="font-display text-5xl sm:text-6xl font-bold text-foreground leading-tight mt-6">
             Right to Rent — <span className="text-accent italic">checked & tracked</span>
           </h1>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -69,7 +69,7 @@ export default function RightToRentCheck() {
           <div className="bg-card border border-border/50 rounded-2xl p-7 mb-6">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">1</div>
-              <h2 className="font-serif text-2xl font-bold text-foreground">Run the official check</h2>
+              <h2 className="font-display text-2xl font-bold text-foreground">Run the official check</h2>
             </div>
             <p className="text-sm text-muted-foreground mb-4 leading-relaxed">Ask your tenant for their 9-character GOV.UK share code and date of birth, then run the free official check. It returns a live Home Office result.</p>
             <a href={GOV_CHECK} target="_blank" rel="noopener noreferrer">
@@ -81,7 +81,7 @@ export default function RightToRentCheck() {
           <div className="bg-card border border-border/50 rounded-2xl p-7">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">2</div>
-              <h2 className="font-serif text-2xl font-bold text-foreground">Record the result & set a reminder</h2>
+              <h2 className="font-display text-2xl font-bold text-foreground">Record the result & set a reminder</h2>
             </div>
             <form onSubmit={submit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -118,7 +118,7 @@ export default function RightToRentCheck() {
         <section className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="bg-card border border-green-500/30 rounded-2xl p-8 text-center">
             <CheckCircle2 size={40} className="text-green-600 mx-auto mb-3" />
-            <h3 className="font-serif text-2xl font-bold text-foreground mb-2">Check recorded for {done.tenantName}</h3>
+            <h3 className="font-display text-2xl font-bold text-foreground mb-2">Check recorded for {done.tenantName}</h3>
             {done.rightStatus === "time_limited" ? (
               <p className="text-muted-foreground">We've logged the time-limited right expiring <strong className="text-foreground">{done.expiryDate}</strong>. We'll email you a reminder before it lapses so you can request a fresh share code and keep your statutory excuse.</p>
             ) : done.rightStatus === "unlimited" ? (

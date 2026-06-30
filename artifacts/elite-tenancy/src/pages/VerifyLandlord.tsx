@@ -59,7 +59,7 @@ export default function VerifyLandlord() {
           <span className="inline-flex items-center gap-2 bg-primary/10 border border-primary/25 text-primary text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
             <ShieldCheck size={13} /> Anti-Scam Check
           </span>
-          <h1 className="font-serif text-5xl sm:text-6xl font-bold text-foreground leading-tight mt-6">
+          <h1 className="font-display text-5xl sm:text-6xl font-bold text-foreground leading-tight mt-6">
             Verify a <span className="text-accent italic">landlord</span>
           </h1>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -87,7 +87,7 @@ export default function VerifyLandlord() {
         {result && result.found === false && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="bg-card border border-destructive/30 rounded-2xl p-8 text-center">
             <ShieldAlert size={36} className="text-destructive mx-auto mb-3" />
-            <h3 className="font-serif text-2xl text-foreground mb-2">No company found</h3>
+            <h3 className="font-display text-2xl text-foreground mb-2">No company found</h3>
             <p className="text-muted-foreground text-sm max-w-md mx-auto">{result.message} A genuine letting company should be on the register. Treat with caution, never pay upfront, and consider listing with a verified service like Elite Tenancy instead.</p>
           </motion.div>
         )}
@@ -97,7 +97,7 @@ export default function VerifyLandlord() {
             <div className="flex items-center gap-3 mb-5">
               {result.active ? <ShieldCheck size={26} className="text-green-600" /> : <ShieldAlert size={26} className="text-accent" />}
               <div>
-                <h3 className="font-serif text-2xl font-bold text-foreground leading-tight">{result.name}</h3>
+                <h3 className="font-display text-2xl font-bold text-foreground leading-tight">{result.name}</h3>
                 <p className="text-xs text-muted-foreground">Company no. {result.companyNumber}</p>
               </div>
               <Badge className={`ml-auto ${result.active ? "bg-green-500/15 text-green-700 border-green-500/30" : "bg-accent/15 text-accent border-accent/30"}`}>

@@ -29,7 +29,7 @@ export default function LandlordPassports() {
   return (
     <LandlordLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">Tenant AI Matching</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">Tenant AI Matching</h1>
         <p className="text-muted-foreground mt-1">Discover prospective tenants perfectly matched to your properties.</p>
       </div>
 
@@ -48,7 +48,7 @@ export default function LandlordPassports() {
               <div className="p-5">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="font-serif text-lg font-bold text-foreground flex items-center gap-2">
+                    <h3 className="font-display text-lg font-bold text-foreground flex items-center gap-2">
                       <UserCircle size={18} className="text-primary" />
                       {p.name}
                     </h3>

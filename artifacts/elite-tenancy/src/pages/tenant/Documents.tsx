@@ -18,7 +18,7 @@ export default function TenantDocuments() {
   return (
     <TenantLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">Documents</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">Documents</h1>
         <p className="text-muted-foreground mt-1">Your tenancy documents, available to download at any time.</p>
       </div>
 

@@ -38,7 +38,7 @@ export default function Contact() {
       <div className="bg-gradient-to-br from-card to-background border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <p className="text-xs text-primary uppercase tracking-widest font-medium mb-3">Get in touch</p>
-          <h1 className="font-serif text-5xl font-bold text-foreground mb-3">Contact Us</h1>
+          <h1 className="font-display text-5xl font-bold text-foreground mb-3">Contact Us</h1>
           <p className="text-muted-foreground">We typically respond within 2 hours during business hours.</p>
         </div>
       </div>
@@ -51,7 +51,7 @@ export default function Contact() {
                 <div className="w-16 h-16 bg-primary/15 rounded-full flex items-center justify-center mx-auto mb-5">
                   <CheckCircle2 size={32} className="text-primary" />
                 </div>
-                <h2 className="font-serif text-3xl font-bold text-foreground mb-3">Message Received</h2>
+                <h2 className="font-display text-3xl font-bold text-foreground mb-3">Message Received</h2>
                 <p className="text-muted-foreground">Thank you for getting in touch. A member of our team will respond within 2 hours.</p>
               </div>
             ) : (

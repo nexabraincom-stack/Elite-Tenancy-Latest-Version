@@ -119,7 +119,7 @@ export default function LondonRentalsEurope() {
       <section className="bg-gradient-to-br from-card to-background border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">London Rentals for Europeans</Badge>
-          <h1 className="text-4xl sm:text-5xl font-serif font-bold text-foreground mb-6">
+          <h1 className="text-4xl sm:text-5xl font-display font-bold text-foreground mb-6">
             London Rentals for Europeans in 2026
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
@@ -139,7 +139,7 @@ export default function LondonRentalsEurope() {
       {/* European city cards */}
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-10 text-center">Moving from European Cities</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-10 text-center">Moving from European Cities</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {EUROPEAN_CITIES.map(({ city, flag, flightTime, avgLondonRent, popularAreas, notes }) => (
               <div key={city} className="bg-card rounded-xl border border-border p-6 hover:shadow-md transition-shadow">
@@ -168,7 +168,7 @@ export default function LondonRentalsEurope() {
       {/* Best neighbourhoods */}
       <section className="py-16 bg-card border-y border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-10 text-center">Best London Neighbourhoods for European Professionals</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-10 text-center">Best London Neighbourhoods for European Professionals</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {NEIGHBOURHOODS.map(({ area, vibe, desc, avgRent, bestFor }) => (
               <div key={area} className="bg-background rounded-xl border border-border p-6">
@@ -195,7 +195,7 @@ export default function LondonRentalsEurope() {
       {/* Eurostar connections */}
       <section className="py-12 bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-serif font-bold text-foreground mb-6 text-center">European Connections</h2>
+          <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">European Connections</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -224,7 +224,7 @@ export default function LondonRentalsEurope() {
       {/* FAQ */}
       <section className="py-16 bg-card border-t border-border">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-8 text-center">London Rentals for Europeans — FAQ</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">London Rentals for Europeans — FAQ</h2>
           <div className="space-y-5">
             {FAQS.map(({ q, a }) => (
               <div key={q} className="bg-background rounded-xl border border-border p-6">

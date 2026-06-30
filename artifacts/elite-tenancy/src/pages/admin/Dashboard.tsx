@@ -22,7 +22,7 @@ export default function AdminDashboard() {
   return (
     <AdminLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">Admin Dashboard</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">Admin Dashboard</h1>
         <p className="text-muted-foreground mt-1">Platform overview and key metrics.</p>
       </div>
 
@@ -33,7 +33,7 @@ export default function AdminDashboard() {
               <p className="text-xs text-muted-foreground">{label}</p>
               <Icon size={14} className="text-primary" />
             </div>
-            <p className="font-serif text-2xl font-bold text-foreground">{value}</p>
+            <p className="font-display text-2xl font-bold text-foreground">{value}</p>
           </div>
         ))}
       </div>

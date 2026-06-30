@@ -15,7 +15,7 @@ export default function TenantDashboard() {
   return (
     <TenantLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">
+        <h1 className="font-display text-3xl font-bold text-foreground">
           Welcome back, {firstName}
         </h1>
         <p className="text-muted-foreground mt-1">
@@ -61,7 +61,7 @@ export default function TenantDashboard() {
                 <Icon size={15} className={urgent ? "text-primary" : "text-muted-foreground"} />
               </div>
             </div>
-            <p className="font-serif text-2xl font-bold text-foreground">{value}</p>
+            <p className="font-display text-2xl font-bold text-foreground">{value}</p>
             {sub && <p className="text-xs text-muted-foreground mt-1">{sub}</p>}
           </div>
         ))}

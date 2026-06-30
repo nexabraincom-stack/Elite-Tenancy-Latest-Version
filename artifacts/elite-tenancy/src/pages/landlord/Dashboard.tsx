@@ -21,7 +21,7 @@ export default function LandlordDashboard() {
   return (
     <LandlordLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">Landlord Dashboard</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">Landlord Dashboard</h1>
         <p className="text-muted-foreground mt-1">Overview of your portfolio performance.</p>
       </div>
 
@@ -34,7 +34,7 @@ export default function LandlordDashboard() {
                 <Icon size={14} className="text-primary" />
               </div>
             </div>
-            <p className="font-serif text-2xl font-bold text-foreground">{value}</p>
+            <p className="font-display text-2xl font-bold text-foreground">{value}</p>
           </div>
         ))}
       </div>

@@ -77,7 +77,7 @@ export default function Profile() {
       <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/">
-            <span className="font-serif text-xl font-bold text-primary cursor-pointer">Elite Tenancy</span>
+            <span className="font-display text-xl font-bold text-primary cursor-pointer">Elite Tenancy</span>
           </Link>
           <div className="flex items-center gap-3">
             <Link href={portalHref}>
@@ -99,7 +99,7 @@ export default function Profile() {
 
       <div className="max-w-4xl mx-auto px-6 py-10">
         <div className="mb-8">
-          <h1 className="font-serif text-3xl font-bold text-foreground">Account Settings</h1>
+          <h1 className="font-display text-3xl font-bold text-foreground">Account Settings</h1>
           <p className="text-muted-foreground mt-1">Manage your Elite Tenancy profile</p>
         </div>
 
@@ -111,7 +111,7 @@ export default function Profile() {
               animate={{ opacity: 1, y: 0 }}
               className="bg-card border border-border/50 rounded-xl p-6 text-center"
             >
-              <div className="w-20 h-20 rounded-full bg-primary/15 flex items-center justify-center mx-auto mb-4 text-3xl font-serif font-bold text-primary">
+              <div className="w-20 h-20 rounded-full bg-primary/15 flex items-center justify-center mx-auto mb-4 text-3xl font-display font-bold text-primary">
                 {(name || user?.firstName || "?")[0]?.toUpperCase()}
               </div>
               <p className="font-semibold text-foreground text-sm">{name || user?.fullName || "—"}</p>

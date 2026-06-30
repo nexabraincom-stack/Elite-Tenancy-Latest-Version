@@ -46,7 +46,7 @@ export default function Listings() {
     <PublicLayout>
       <div className="bg-card/50 border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="font-serif text-4xl font-bold text-foreground mb-2">Property Listings</h1>
+          <h1 className="font-display text-4xl font-bold text-foreground mb-2">Property Listings</h1>
           <p className="text-muted-foreground">
             {isLoading ? "Loading..." : `${listings?.length ?? 0} properties available`}
           </p>

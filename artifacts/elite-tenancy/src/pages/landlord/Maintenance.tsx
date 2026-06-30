@@ -20,7 +20,7 @@ export default function LandlordMaintenance() {
   return (
     <LandlordLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">Maintenance</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">Maintenance</h1>
         <p className="text-muted-foreground mt-1">Maintenance requests across all your properties.</p>
       </div>
 

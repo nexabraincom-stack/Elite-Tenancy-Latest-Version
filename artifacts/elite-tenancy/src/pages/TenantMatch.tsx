@@ -239,7 +239,7 @@ export default function TenantMatch() {
             </div>
             <Badge className="bg-primary/10 text-primary border-primary/20 text-xs">AI-Powered</Badge>
           </div>
-          <h1 className="font-serif text-5xl font-bold text-foreground leading-tight mb-3">
+          <h1 className="font-display text-5xl font-bold text-foreground leading-tight mb-3">
             Find Your Perfect Match
           </h1>
           <p className="text-muted-foreground max-w-xl text-lg">
@@ -389,7 +389,7 @@ export default function TenantMatch() {
                 <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
                   <Sparkles size={36} className="text-primary" />
                 </div>
-                <h3 className="font-serif text-2xl font-bold text-foreground mb-3">
+                <h3 className="font-display text-2xl font-bold text-foreground mb-3">
                   Your AI Property Matchmaker
                 </h3>
                 <p className="text-muted-foreground max-w-md leading-relaxed">

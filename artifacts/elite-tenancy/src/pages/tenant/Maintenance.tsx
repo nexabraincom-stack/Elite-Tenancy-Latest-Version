@@ -50,7 +50,7 @@ export default function TenantMaintenance() {
     <TenantLayout>
       <div className="flex items-start justify-between mb-8">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-foreground">Maintenance</h1>
+          <h1 className="font-display text-3xl font-bold text-foreground">Maintenance</h1>
           <p className="text-muted-foreground mt-1">Report issues and track their resolution.</p>
         </div>
         <Button onClick={() => setOpen(true)} className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2">

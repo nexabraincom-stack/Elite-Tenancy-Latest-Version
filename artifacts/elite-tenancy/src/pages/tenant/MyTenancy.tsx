@@ -9,7 +9,7 @@ export default function MyTenancy() {
   return (
     <TenantLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">My Tenancy</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">My Tenancy</h1>
         <p className="text-muted-foreground mt-1">Your current tenancy details.</p>
       </div>
 

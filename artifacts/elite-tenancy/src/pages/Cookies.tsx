@@ -4,9 +4,9 @@ export default function Cookies() {
   return (
     <PublicLayout>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <h1 className="font-serif text-4xl font-bold text-foreground mb-2">Cookie Policy</h1>
+        <h1 className="font-display text-4xl font-bold text-foreground mb-2">Cookie Policy</h1>
         <p className="text-sm text-muted-foreground mb-10">Last updated: 1 January 2025</p>
-        <div className="prose prose-invert prose-sm max-w-none prose-headings:font-serif prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-li:text-muted-foreground">
+        <div className="prose prose-invert prose-sm max-w-none prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-li:text-muted-foreground">
           <h2>What are cookies?</h2>
           <p>Cookies are small text files that are placed on your device by websites that you visit. They are widely used in order to make websites work, or work more efficiently, as well as to provide information to the owners of the site.</p>
           <h2>How we use cookies</h2>

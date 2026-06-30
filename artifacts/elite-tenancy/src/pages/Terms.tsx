@@ -4,9 +4,9 @@ export default function Terms() {
   return (
     <PublicLayout>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <h1 className="font-serif text-4xl font-bold text-foreground mb-2">Terms of Service</h1>
+        <h1 className="font-display text-4xl font-bold text-foreground mb-2">Terms of Service</h1>
         <p className="text-sm text-muted-foreground mb-10">Last updated: 1 January 2025</p>
-        <div className="prose prose-invert prose-sm max-w-none prose-headings:font-serif prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-li:text-muted-foreground">
+        <div className="prose prose-invert prose-sm max-w-none prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 prose-li:text-muted-foreground">
           <h2>1. Acceptance of Terms</h2>
           <p>By using the Elite Tenancy platform and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</p>
           <h2>2. Services</h2>

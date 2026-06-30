@@ -125,7 +125,7 @@ export default function EuCitizensGuide() {
       <section className="bg-gradient-to-br from-card to-background border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">For EU Citizens</Badge>
-          <h1 className="text-4xl sm:text-5xl font-serif font-bold text-foreground mb-6">
+          <h1 className="text-4xl sm:text-5xl font-display font-bold text-foreground mb-6">
             EU Citizens: You Can Still Rent in the UK
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
@@ -150,7 +150,7 @@ export default function EuCitizensGuide() {
       {/* Key facts */}
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-10 text-center">Key Facts for EU Nationals</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-10 text-center">Key Facts for EU Nationals</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {KEY_FACTS.map(({ icon: Icon, title, desc }) => (
               <div key={title} className="flex gap-4 bg-card rounded-xl border border-border p-6">
@@ -168,7 +168,7 @@ export default function EuCitizensGuide() {
       {/* Step by step */}
       <section className="py-16 bg-card border-y border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-10 text-center">
+          <h2 className="text-3xl font-display font-bold text-foreground mb-10 text-center">
             How to Rent as an EU Citizen in 5 Steps
           </h2>
           <div className="space-y-6">
@@ -188,7 +188,7 @@ export default function EuCitizensGuide() {
       {/* FAQ */}
       <section className="py-16 bg-background">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-8 text-center">EU Citizens Rental FAQ</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">EU Citizens Rental FAQ</h2>
           <div className="space-y-5">
             {FAQS.map(({ q, a }) => (
               <div key={q} className="bg-card rounded-xl border border-border p-6">

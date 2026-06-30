@@ -19,7 +19,7 @@ export default function LandlordListings() {
     <LandlordLayout>
       <div className="flex items-start justify-between mb-8">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-foreground">Your Listings</h1>
+          <h1 className="font-display text-3xl font-bold text-foreground">Your Listings</h1>
           <p className="text-muted-foreground mt-1">{listings?.length ?? 0} properties in your portfolio.</p>
         </div>
         <Link href="/list-your-property">

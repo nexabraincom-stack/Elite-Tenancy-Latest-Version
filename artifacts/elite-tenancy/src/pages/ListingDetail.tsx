@@ -47,7 +47,7 @@ export default function ListingDetail() {
     return (
       <PublicLayout>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <h1 className="font-serif text-3xl text-foreground mb-4">Property not found</h1>
+          <h1 className="font-display text-3xl text-foreground mb-4">Property not found</h1>
           <Link href="/listings"><Button>Back to listings</Button></Link>
         </div>
       </PublicLayout>
@@ -103,14 +103,14 @@ export default function ListingDetail() {
             <div>
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h1 className="font-serif text-3xl font-bold text-foreground">{listing.title}</h1>
+                  <h1 className="font-display text-3xl font-bold text-foreground">{listing.title}</h1>
                   <p className="text-muted-foreground mt-1 flex items-center gap-1.5">
                     <MapPin size={14} />
                     {listing.addressLine1 ? `${listing.addressLine1}, ` : ""}{listing.city}, {listing.postcode}
                   </p>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="font-serif text-3xl font-bold text-primary">
+                  <p className="font-display text-3xl font-bold text-primary">
                     £{listing.price?.toLocaleString("en-GB")}
                   </p>
                   <p className="text-sm text-muted-foreground">per {listing.pricePeriod ?? "month"}</p>

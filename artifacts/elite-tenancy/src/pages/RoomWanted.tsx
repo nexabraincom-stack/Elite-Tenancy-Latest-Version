@@ -54,7 +54,7 @@ export default function RoomWanted() {
           <span className="inline-flex items-center gap-2 bg-primary/10 border border-primary/25 text-primary text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
             <Users size={13} /> Live Renter Demand
           </span>
-          <h1 className="font-serif text-5xl sm:text-6xl font-bold text-foreground leading-tight mt-6">
+          <h1 className="font-display text-5xl sm:text-6xl font-bold text-foreground leading-tight mt-6">
             Renters looking <span className="text-accent italic">right now</span>
           </h1>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -81,7 +81,7 @@ export default function RoomWanted() {
         {(error || (items && items.length === 0)) && (
           <div className="rounded-2xl border border-border bg-card p-12 text-center">
             <Users className="mx-auto text-primary mb-3" size={30} />
-            <h3 className="font-serif text-2xl text-foreground mb-2">Be the first to get matched</h3>
+            <h3 className="font-display text-2xl text-foreground mb-2">Be the first to get matched</h3>
             <p className="text-muted-foreground mb-6 max-w-md mx-auto">No active renter posts yet. Build your Renter Passport and you'll appear here instantly for landlords to find.</p>
             <Link href="/renter-passport"><Button className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2">Build my Renter Passport <ArrowRight size={15} /></Button></Link>
           </div>

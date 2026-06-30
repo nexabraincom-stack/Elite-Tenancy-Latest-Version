@@ -16,7 +16,7 @@ export default function AdminLeads() {
   return (
     <AdminLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">All Leads</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">All Leads</h1>
         <p className="text-muted-foreground mt-1">{leads?.length ?? 0} total leads on the platform.</p>
       </div>
 

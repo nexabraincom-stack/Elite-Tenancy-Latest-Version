@@ -97,7 +97,7 @@ export default function RenterPassport() {
           <span className="inline-flex items-center gap-2 bg-primary/10 border border-primary/25 text-primary text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
             <Sparkles size={13} /> AI-Powered · Two-Way Matching
           </span>
-          <h1 className="font-serif text-5xl sm:text-6xl font-bold text-foreground leading-tight mt-6">
+          <h1 className="font-display text-5xl sm:text-6xl font-bold text-foreground leading-tight mt-6">
             Your <span className="text-accent italic">Renter Passport</span>
           </h1>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -115,7 +115,7 @@ export default function RenterPassport() {
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center"><Icon size={19} className="text-primary" /></div>
                 <span className="text-xs font-bold text-accent">STEP {i + 1}</span>
               </div>
-              <h3 className="font-serif text-lg font-bold text-foreground mb-1">{title}</h3>
+              <h3 className="font-display text-lg font-bold text-foreground mb-1">{title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
             </div>
           ))}
@@ -125,7 +125,7 @@ export default function RenterPassport() {
       {/* Form */}
       <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         <div className="bg-card border border-border/50 rounded-2xl p-7 shadow-sm">
-          <h2 className="font-serif text-2xl font-bold text-foreground mb-1">Build your passport</h2>
+          <h2 className="font-display text-2xl font-bold text-foreground mb-1">Build your passport</h2>
           <p className="text-sm text-muted-foreground mb-6">Free, no account needed. The more you share, the stronger your passport.</p>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -186,7 +186,7 @@ export default function RenterPassport() {
               <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
                 <div className="text-center shrink-0">
                   <div className="w-24 h-24 rounded-2xl bg-card border border-accent/30 flex flex-col items-center justify-center shadow-sm">
-                    <span className="font-serif text-4xl font-bold text-accent leading-none">{score}</span>
+                    <span className="font-display text-4xl font-bold text-accent leading-none">{score}</span>
                     <span className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">/ 100</span>
                   </div>
                   <p className="text-xs font-semibold text-primary mt-2 flex items-center justify-center gap-1"><Star size={11} className="fill-accent text-accent" /> {scoreLabel}</p>
@@ -194,7 +194,7 @@ export default function RenterPassport() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
                     <ShieldCheck size={16} className="text-primary" />
-                    <h3 className="font-serif text-xl font-bold text-foreground">{result.passport.name}'s Renter Passport</h3>
+                    <h3 className="font-display text-xl font-bold text-foreground">{result.passport.name}'s Renter Passport</h3>
                   </div>
                   <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">How landlords will see you</p>
                   <p className="text-sm text-foreground leading-relaxed italic">"{result.passport.aiPersona}"</p>
@@ -205,7 +205,7 @@ export default function RenterPassport() {
 
             {/* Matching homes */}
             <div className="flex items-center justify-between mb-6">
-              <h3 className="font-serif text-2xl font-bold text-foreground flex items-center gap-2"><Home size={20} className="text-primary" /> Your best-matching homes</h3>
+              <h3 className="font-display text-2xl font-bold text-foreground flex items-center gap-2"><Home size={20} className="text-primary" /> Your best-matching homes</h3>
               <Badge className="bg-accent/10 text-accent border-accent/20 text-xs">{result.matches.length} found</Badge>
             </div>
             {result.matches.length > 0 ? (

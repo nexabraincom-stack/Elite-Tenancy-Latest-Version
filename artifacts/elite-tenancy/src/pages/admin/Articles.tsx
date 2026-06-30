@@ -10,7 +10,7 @@ export default function AdminArticles() {
   return (
     <AdminLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">Blog Articles</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">Blog Articles</h1>
         <p className="text-muted-foreground mt-1">{articles?.length ?? 0} articles published.</p>
       </div>
 

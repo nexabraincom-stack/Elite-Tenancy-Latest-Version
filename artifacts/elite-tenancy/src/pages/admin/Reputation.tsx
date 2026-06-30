@@ -85,15 +85,15 @@ function Stars({ count }: { count: number }) {
 function StatusBadge({ status }: { status: string }) {
   const map: Record<string, string> = {
     verified:        "bg-green-500/10 text-green-400 border-green-500/20",
-    pending_action:  "bg-amber-500/10 text-amber-400 border-amber-500/20",
-    pending_pin:     "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    pending_action:  "bg-accent/10 text-amber-400 border-amber-500/20",
+    pending_pin:     "bg-accent/10 text-amber-400 border-amber-500/20",
     unchecked:       "bg-muted/40 text-muted-foreground border-border/30",
     not_listed:      "bg-destructive/10 text-destructive border-destructive/20",
     connected:       "bg-green-500/10 text-green-400 border-green-500/20",
     not_configured:  "bg-muted/40 text-muted-foreground border-border/30",
     active:          "bg-green-500/10 text-green-400 border-green-500/20",
-    needs_GBP_vars:  "bg-amber-500/10 text-amber-400 border-amber-500/20",
-    needs_WA_vars:   "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    needs_GBP_vars:  "bg-accent/10 text-amber-400 border-amber-500/20",
+    needs_WA_vars:   "bg-accent/10 text-amber-400 border-amber-500/20",
   };
   const cls = map[status] ?? "bg-muted/40 text-muted-foreground border-border/30";
   const label = status.replace(/_/g, " ");
@@ -152,7 +152,7 @@ function ReviewsTab() {
     const msg = (error as Error).message;
     const isConfig = msg.includes("GBP") || msg.includes("not configured") || msg.includes("424");
     return (
-      <div className="bg-amber-500/8 border border-amber-500/20 rounded-xl p-6">
+      <div className="bg-accent/8 border border-amber-500/20 rounded-xl p-6">
         <p className="font-semibold text-amber-400 text-sm mb-2">
           {isConfig ? "Google Business Profile not connected yet" : "Could not load reviews"}
         </p>
@@ -186,7 +186,7 @@ function ReviewsTab() {
         ].map(({ label, value }) => (
           <div key={label} className="bg-card border border-border/50 rounded-xl p-4 text-center">
             <p className="text-xs text-muted-foreground mb-1">{label}</p>
-            <p className="font-serif text-2xl font-bold text-foreground">{value}</p>
+            <p className="font-display text-2xl font-bold text-foreground">{value}</p>
           </div>
         ))}
       </div>
@@ -228,7 +228,7 @@ function ReviewsTab() {
                       <CheckCircle2 size={9} className="mr-1" /> Replied
                     </Badge>
                   ) : (
-                    <Badge className="bg-amber-500/10 text-amber-400 border-amber-500/20 text-[10px] shrink-0">
+                    <Badge className="bg-accent/10 text-amber-400 border-amber-500/20 text-[10px] shrink-0">
                       <Clock size={9} className="mr-1" /> Needs reply
                     </Badge>
                   )}
@@ -353,7 +353,7 @@ function NapTab() {
         ].map(({ label, value }) => (
           <div key={label} className="bg-card border border-border/50 rounded-xl p-4 text-center">
             <p className="text-xs text-muted-foreground mb-1">{label}</p>
-            <p className="font-serif text-2xl font-bold text-foreground">{value}</p>
+            <p className="font-display text-2xl font-bold text-foreground">{value}</p>
           </div>
         ))}
       </div>
@@ -375,7 +375,7 @@ function NapTab() {
 
       {/* Next actions */}
       {next.length > 0 && (
-        <div className="bg-amber-500/8 border border-amber-500/20 rounded-xl p-5">
+        <div className="bg-accent/8 border border-amber-500/20 rounded-xl p-5">
           <p className="font-semibold text-sm text-amber-400 mb-3">⚡ Priority actions</p>
           <div className="space-y-2">
             {next.map((a) => (
@@ -411,7 +411,7 @@ function NapTab() {
                   <p className="text-sm text-foreground font-medium">{d.name}</p>
                   <Badge className={`text-[9px] px-1.5 py-0 capitalize border ${
                     d.priority === "critical" ? "bg-destructive/10 text-destructive border-destructive/20" :
-                    d.priority === "high"     ? "bg-amber-500/10 text-amber-400 border-amber-500/20" :
+                    d.priority === "high"     ? "bg-accent/10 text-amber-400 border-amber-500/20" :
                                                 "bg-muted/30 text-muted-foreground border-border/30"
                   }`}>{d.priority}</Badge>
                 </div>
@@ -659,7 +659,7 @@ function HealthTab() {
 
       {/* Setup required */}
       {(data?.setupRequired ?? []).length > 0 && (
-        <div className="bg-amber-500/8 border border-amber-500/20 rounded-xl p-5">
+        <div className="bg-accent/8 border border-amber-500/20 rounded-xl p-5">
           <p className="font-semibold text-amber-400 text-sm mb-3 flex items-center gap-2">
             <AlertCircle size={14} /> Required to activate GBP features
           </p>
@@ -688,7 +688,7 @@ export default function AdminReputation() {
       <div className="mb-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="font-serif text-3xl font-bold text-foreground">Reputation</h1>
+            <h1 className="font-display text-3xl font-bold text-foreground">Reputation</h1>
             <p className="text-muted-foreground mt-1 text-sm">
               Reviews · NAP audit · Social posts · Free AI — replaces NiceJob + Cloutly + BrightLocal
             </p>

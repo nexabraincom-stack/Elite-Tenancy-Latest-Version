@@ -9,7 +9,7 @@ export default function LandlordTenants() {
   return (
     <LandlordLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">Tenants</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">Tenants</h1>
         <p className="text-muted-foreground mt-1">All current tenants across your properties.</p>
       </div>
 
@@ -37,7 +37,7 @@ export default function LandlordTenants() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="font-serif text-xl font-bold text-primary">£{tenant.rentAmount?.toLocaleString("en-GB")}<span className="text-sm font-normal text-muted-foreground">/mo</span></p>
+                  <p className="font-display text-xl font-bold text-primary">£{tenant.rentAmount?.toLocaleString("en-GB")}<span className="text-sm font-normal text-muted-foreground">/mo</span></p>
                   <Badge className="bg-green-500/10 text-green-400 border-green-500/20 text-xs mt-1.5 capitalize">{tenant.status}</Badge>
                 </div>
               </div>

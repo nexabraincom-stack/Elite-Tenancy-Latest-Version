@@ -66,7 +66,7 @@ export default function TenantReferral() {
   return (
     <TenantLayout>
       <div className="mb-6">
-        <h1 className="font-serif text-3xl font-bold text-foreground">Refer & Earn</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">Refer & Earn</h1>
         <p className="text-muted-foreground mt-1 text-sm">
           Refer friends to Elite Tenancy — earn £20 for each who completes their referencing
         </p>
@@ -95,7 +95,7 @@ export default function TenantReferral() {
         ].map(({ label, value, desc }) => (
           <div key={label} className="bg-card border border-border/50 rounded-xl p-5 text-center">
             <p className="text-xs text-muted-foreground mb-1">{label}</p>
-            <p className="font-serif text-3xl font-bold text-foreground">{value}</p>
+            <p className="font-display text-3xl font-bold text-foreground">{value}</p>
             <p className="text-xs text-muted-foreground mt-1">{desc}</p>
           </div>
         ))}
@@ -203,7 +203,7 @@ export default function TenantReferral() {
             <Badge className={
               data.myProgress.status === "completed"
                 ? "bg-green-500/10 text-green-400 border-green-500/20"
-                : "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                : "bg-accent/10 text-amber-400 border-amber-500/20"
             }>
               {data.myProgress.steps}/{data.myProgress.total} steps
             </Badge>
@@ -221,7 +221,7 @@ export default function TenantReferral() {
                   <span className={`text-sm ${done ? "text-foreground" : "text-muted-foreground"}`}>{label}</span>
                   {done && <Badge className="ml-auto bg-green-500/10 text-green-400 border-green-500/20 text-[10px]">Done</Badge>}
                   {!done && i === (data.myProgress?.steps ?? 0) && (
-                    <Badge className="ml-auto bg-amber-500/10 text-amber-400 border-amber-500/20 text-[10px]">
+                    <Badge className="ml-auto bg-accent/10 text-amber-400 border-amber-500/20 text-[10px]">
                       <ChevronRight size={9} className="mr-0.5" /> Next
                     </Badge>
                   )}

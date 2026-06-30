@@ -67,7 +67,7 @@ export default function RoomsToLet() {
     return (
       <PublicLayout>
         <div className="max-w-3xl mx-auto px-4 py-20 text-center">
-          <h1 className="font-serif text-3xl text-foreground mb-3">Choose a city</h1>
+          <h1 className="font-display text-3xl text-foreground mb-3">Choose a city</h1>
           <p className="text-muted-foreground mb-8">Browse rooms and homes to let across the UK.</p>
           <div className="flex flex-wrap gap-2 justify-center">
             {Object.entries(CITIES).map(([s, c]) => (
@@ -91,7 +91,7 @@ export default function RoomsToLet() {
           <p className="text-xs text-primary uppercase tracking-widest font-medium mb-3 flex items-center gap-2">
             <MapPin size={14} /> {info.region}
           </p>
-          <h1 className="font-serif text-5xl sm:text-6xl font-bold text-foreground leading-tight">
+          <h1 className="font-display text-5xl sm:text-6xl font-bold text-foreground leading-tight">
             Rooms &amp; homes to let in <span className="text-accent italic">{cityName}</span>
           </h1>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl leading-relaxed">
@@ -106,7 +106,7 @@ export default function RoomsToLet() {
 
       {/* Listings */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <h2 className="font-serif text-3xl font-bold text-foreground mb-8">
+        <h2 className="font-display text-3xl font-bold text-foreground mb-8">
           {isLoading ? `Homes in ${cityName}` : `${listings?.length ?? 0} home${(listings?.length ?? 0) === 1 ? "" : "s"} to let in ${cityName}`}
         </h2>
         {isLoading ? (
@@ -118,7 +118,7 @@ export default function RoomsToLet() {
         ) : (
           <div className="rounded-2xl border border-border bg-card p-10 text-center">
             <Sparkles className="mx-auto text-primary mb-3" size={28} />
-            <h3 className="font-serif text-2xl text-foreground mb-2">New {cityName} homes added weekly</h3>
+            <h3 className="font-display text-2xl text-foreground mb-2">New {cityName} homes added weekly</h3>
             <p className="text-muted-foreground mb-6 max-w-md mx-auto">Create a free profile and our AI will alert you the moment a matching {cityName} property is listed.</p>
             <Link href="/find-my-match"><Button className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2">Set up alerts <ArrowRight size={15} /></Button></Link>
           </div>
@@ -128,7 +128,7 @@ export default function RoomsToLet() {
       {/* Landlord CTA */}
       <section className="bg-card/50 border-y border-border/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center">
-          <h2 className="font-serif text-3xl font-bold text-foreground">Letting a property in {cityName}?</h2>
+          <h2 className="font-display text-3xl font-bold text-foreground">Letting a property in {cityName}?</h2>
           <p className="mt-3 text-muted-foreground max-w-xl mx-auto">List free and pay only when we place a tenant — two weeks' rent introduction or 8% managed. No upfront fees, no empty-room risk.</p>
           <Link href="/list-your-property"><Button size="lg" className="mt-6 bg-primary text-primary-foreground hover:bg-primary/90 gap-2">List your {cityName} property <ArrowRight size={15} /></Button></Link>
         </div>
@@ -136,7 +136,7 @@ export default function RoomsToLet() {
 
       {/* Other cities — internal linking */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <h2 className="font-serif text-2xl font-bold text-foreground mb-5">Explore other cities</h2>
+        <h2 className="font-display text-2xl font-bold text-foreground mb-5">Explore other cities</h2>
         <div className="flex flex-wrap gap-2">
           {otherCities.map(([s, c]) => (
             <Link key={s} href={`/rooms-to-let/${s}`} className="px-4 py-2 rounded-lg border border-border bg-card text-sm font-medium hover:border-primary/50 hover:text-primary transition-colors">

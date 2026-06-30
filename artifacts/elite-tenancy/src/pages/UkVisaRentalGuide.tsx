@@ -101,7 +101,7 @@ export default function UkVisaRentalGuide() {
       <section className="bg-gradient-to-br from-card to-background border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">For Visa Holders</Badge>
-          <h1 className="text-4xl sm:text-5xl font-serif font-bold text-foreground mb-6">
+          <h1 className="text-4xl sm:text-5xl font-display font-bold text-foreground mb-6">
             Renting in the UK on a Visa — 2026 Guide
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
@@ -121,7 +121,7 @@ export default function UkVisaRentalGuide() {
       {/* Visa types table */}
       <section className="py-16 bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-8 text-center">Does My Visa Allow Me to Rent?</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">Does My Visa Allow Me to Rent?</h2>
           <div className="overflow-x-auto rounded-xl border border-border">
             <table className="w-full text-sm">
               <thead className="bg-card">
@@ -153,7 +153,7 @@ export default function UkVisaRentalGuide() {
       {/* Documents needed */}
       <section className="py-16 bg-card border-y border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-8 text-center">Documents You Will Need</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">Documents You Will Need</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {DOCUMENTS.map(({ category, items }) => (
               <div key={category} className="bg-background rounded-xl border border-border p-6">
@@ -178,7 +178,7 @@ export default function UkVisaRentalGuide() {
       {/* Timeline */}
       <section className="py-16 bg-background">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-10 text-center">What to Expect: Day-by-Day</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-10 text-center">What to Expect: Day-by-Day</h2>
           <div className="space-y-6">
             {TIMELINE_DAYS.map(({ when, title, desc }) => (
               <div key={when} className="flex gap-5">
@@ -198,7 +198,7 @@ export default function UkVisaRentalGuide() {
       {/* FAQ */}
       <section className="py-16 bg-card border-t border-border">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-8 text-center">UK Visa Rental Guide — FAQ</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">UK Visa Rental Guide — FAQ</h2>
           <div className="space-y-5">
             {FAQS.map(({ q, a }) => (
               <div key={q} className="bg-background rounded-xl border border-border p-6">

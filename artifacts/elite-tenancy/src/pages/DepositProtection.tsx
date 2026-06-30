@@ -228,7 +228,7 @@ export default function DepositProtection() {
                   <span className="text-xs font-semibold text-accent">{day}</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-amber-400 mt-1.5" />
+                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-accent mt-1.5" />
                   <p className="text-sm text-foreground">{event}</p>
                 </div>
               </div>

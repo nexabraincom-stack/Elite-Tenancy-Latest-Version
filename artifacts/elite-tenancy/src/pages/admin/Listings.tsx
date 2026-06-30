@@ -16,7 +16,7 @@ export default function AdminListings() {
   return (
     <AdminLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">All Listings</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">All Listings</h1>
         <p className="text-muted-foreground mt-1">{listings?.length ?? 0} total listings on the platform.</p>
       </div>
 

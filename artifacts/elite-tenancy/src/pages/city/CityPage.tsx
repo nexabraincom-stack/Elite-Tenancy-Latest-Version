@@ -99,7 +99,7 @@ export default function CityPage({
             <MapPin size={14} />
             {city}, {region}
           </div>
-          <h1 className="font-serif text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
+          <h1 className="font-display text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
             Premium Rentals in <span className="text-primary">{city}</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
@@ -125,15 +125,15 @@ export default function CityPage({
       <section className="border-y border-border/50 bg-card/50 py-8">
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-3 gap-6 text-center">
           <div>
-            <p className="font-serif text-3xl font-bold text-primary">{listingCount}+</p>
+            <p className="font-display text-3xl font-bold text-primary">{listingCount}+</p>
             <p className="text-sm text-muted-foreground mt-1">Active Listings</p>
           </div>
           <div>
-            <p className="font-serif text-3xl font-bold text-primary">{avgRent}</p>
+            <p className="font-display text-3xl font-bold text-primary">{avgRent}</p>
             <p className="text-sm text-muted-foreground mt-1">Avg Monthly Rent</p>
           </div>
           <div>
-            <p className="font-serif text-3xl font-bold text-primary">48h</p>
+            <p className="font-display text-3xl font-bold text-primary">48h</p>
             <p className="text-sm text-muted-foreground mt-1">Avg Response Time</p>
           </div>
         </div>
@@ -142,7 +142,7 @@ export default function CityPage({
       {/* Popular Areas */}
       <section className="py-16 px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-serif text-3xl font-bold text-foreground mb-2">
+          <h2 className="font-display text-3xl font-bold text-foreground mb-2">
             Popular Areas in {city}
           </h2>
           <p className="text-muted-foreground mb-8">
@@ -166,7 +166,7 @@ export default function CityPage({
       {/* Why Elite Tenancy in This City */}
       <section className="py-16 px-4 bg-card/30">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-serif text-3xl font-bold text-foreground mb-8 text-center">
+          <h2 className="font-display text-3xl font-bold text-foreground mb-8 text-center">
             Why Rent with Elite Tenancy in {city}?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -195,7 +195,7 @@ export default function CityPage({
       {/* FAQs */}
       <section className="py-16 px-4">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-serif text-3xl font-bold text-foreground mb-8 text-center">
+          <h2 className="font-display text-3xl font-bold text-foreground mb-8 text-center">
             Renting in {city} — FAQs
           </h2>
           <div className="space-y-4">
@@ -212,7 +212,7 @@ export default function CityPage({
       {/* CTA */}
       <section className="py-16 px-4 bg-primary/5 border-t border-primary/10">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-serif text-3xl font-bold text-foreground mb-4">
+          <h2 className="font-display text-3xl font-bold text-foreground mb-4">
             Ready to find your home in {city}?
           </h2>
           <p className="text-muted-foreground mb-8">

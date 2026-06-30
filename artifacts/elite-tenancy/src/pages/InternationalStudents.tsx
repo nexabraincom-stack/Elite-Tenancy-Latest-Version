@@ -107,7 +107,7 @@ export default function InternationalStudents() {
       <section className="bg-gradient-to-br from-card to-background border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">International Students</Badge>
-          <h1 className="text-4xl sm:text-5xl font-serif font-bold text-foreground mb-6">
+          <h1 className="text-4xl sm:text-5xl font-display font-bold text-foreground mb-6">
             UK Student Accommodation for International Students
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
@@ -127,7 +127,7 @@ export default function InternationalStudents() {
       {/* Student origins */}
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-4 text-center">
+          <h2 className="text-3xl font-display font-bold text-foreground mb-4 text-center">
             Helping Students from Around the World
           </h2>
           <p className="text-muted-foreground text-center mb-10 max-w-2xl mx-auto">
@@ -149,7 +149,7 @@ export default function InternationalStudents() {
       {/* How to rent step by step */}
       <section className="py-16 bg-card border-y border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-10 text-center">
+          <h2 className="text-3xl font-display font-bold text-foreground mb-10 text-center">
             How to Rent in the UK as an International Student
           </h2>
           <div className="space-y-6">
@@ -171,7 +171,7 @@ export default function InternationalStudents() {
       {/* University cities */}
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-4 text-center">
+          <h2 className="text-3xl font-display font-bold text-foreground mb-4 text-center">
             University Cities — Average Rents 2026
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -197,7 +197,7 @@ export default function InternationalStudents() {
       {/* Legal protections */}
       <section className="py-16 bg-card border-y border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-6 text-center">
+          <h2 className="text-3xl font-display font-bold text-foreground mb-6 text-center">
             Your Rights as a Tenant in the UK
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -222,7 +222,7 @@ export default function InternationalStudents() {
       {/* FAQ */}
       <section className="py-16 bg-background">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-8 text-center">
+          <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">
             Frequently Asked Questions
           </h2>
           <div className="space-y-6">

@@ -50,7 +50,7 @@ interface AdminData {
 
 function StatusBadge({ status }: { status: string }) {
   const map: Record<string, string> = {
-    in_progress: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    in_progress: "bg-accent/10 text-amber-400 border-amber-500/20",
     completed:   "bg-blue-500/10 text-blue-400 border-blue-500/20",
     rewarded:    "bg-green-500/10 text-green-400 border-green-500/20",
     pending:     "bg-muted/40 text-muted-foreground border-border/30",
@@ -80,7 +80,7 @@ export default function AdminReferrals() {
     <AdminLayout>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-foreground">Referrals &amp; Trials</h1>
+          <h1 className="font-display text-3xl font-bold text-foreground">Referrals &amp; Trials</h1>
           <p className="text-muted-foreground mt-1 text-sm">
             Tenant £20 · Landlord £50 · Agency £100 — paid after conditions met
           </p>
@@ -101,7 +101,7 @@ export default function AdminReferrals() {
         ].map(({ label, value, icon: Icon }) => (
           <div key={label} className="bg-card border border-border/50 rounded-xl p-4 text-center">
             <Icon size={15} className="text-primary mx-auto mb-1.5" />
-            <p className="font-serif text-2xl font-bold text-foreground">{isLoading ? "—" : value}</p>
+            <p className="font-display text-2xl font-bold text-foreground">{isLoading ? "—" : value}</p>
             <p className="text-xs text-muted-foreground mt-0.5">{label}</p>
           </div>
         ))}

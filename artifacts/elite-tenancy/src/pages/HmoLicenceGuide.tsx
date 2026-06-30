@@ -147,8 +147,8 @@ const LICENSING_TIERS = [
   },
   {
     label: "Additional",
-    badge: "bg-amber-100 text-amber-800",
-    dot: "bg-accent/100",
+    badge: "bg-accent/15 text-foreground",
+    dot: "bg-accent",
     trigger: "3–4 occupants (where the scheme is in force)",
     applies: "Councils that have adopted it — including Newham",
     fee: "Varies by council (~£500–£1,500)",
@@ -401,7 +401,7 @@ export default function HmoLicenceGuide() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-border/40">
                     {ROOM_SIZES.map((r, i) => (
                       <tr key={i} className="bg-white hover:bg-muted/50">
                         <td className="px-4 py-3 text-foreground">{r.use}</td>
@@ -434,7 +434,7 @@ export default function HmoLicenceGuide() {
                     key={s.n}
                     className="flex gap-4 bg-white border border-border rounded-xl p-5 shadow-sm"
                   >
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 text-accent font-bold text-sm flex items-center justify-center">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-accent/15 text-accent font-bold text-sm flex items-center justify-center">
                       {s.n}
                     </div>
                     <div>
@@ -573,7 +573,7 @@ export default function HmoLicenceGuide() {
                   Licence valid up to 5 years — must renew
                 </li>
                 <li className="flex items-start gap-2">
-                  <Users className="h-4 w-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                  <Users className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
                   Min. room: 6.51 m² (1 adult), 10.22 m² (2)
                 </li>
                 <li className="flex items-start gap-2">
@@ -617,24 +617,24 @@ export default function HmoLicenceGuide() {
               </p>
               <Link
                 href="/renters-rights-act-2025"
-                className="text-sm text-accent font-medium hover:text-amber-800 inline-flex items-center gap-1"
+                className="text-sm text-accent font-medium hover:text-foreground inline-flex items-center gap-1"
               >
                 Full RRA 2025 guide <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
 
             {/* Dark CTA */}
-            <div className="bg-gray-900 rounded-xl p-6 text-white">
+            <div className="bg-primary rounded-xl p-6 text-white">
               <h3 className="font-display font-bold text-lg mb-2">
                 Need HMO tenants?
               </h3>
-              <p className="text-sm text-gray-300 mb-4">
+              <p className="text-sm text-white/50 mb-4">
                 Elite Tenancy references and introduces tenants for HMOs and
                 shared houses. One fee. No monthly cut.
               </p>
               <Link
                 href="/pricing"
-                className="w-full inline-flex items-center justify-center gap-2 bg-accent/100 text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-amber-400 transition-colors text-sm"
+                className="w-full inline-flex items-center justify-center gap-2 bg-accent text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-accent transition-colors text-sm"
               >
                 See pricing <ArrowRight className="h-4 w-4" />
               </Link>

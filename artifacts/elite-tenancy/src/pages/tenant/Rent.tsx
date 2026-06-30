@@ -15,7 +15,7 @@ export default function Rent() {
   return (
     <TenantLayout>
       <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-foreground">Rent History</h1>
+        <h1 className="font-display text-3xl font-bold text-foreground">Rent History</h1>
         <p className="text-muted-foreground mt-1">Your payment record at a glance.</p>
       </div>
 

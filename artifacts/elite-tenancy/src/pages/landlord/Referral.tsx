@@ -57,12 +57,12 @@ export default function LandlordReferral() {
       <div className="mb-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="font-serif text-3xl font-bold text-foreground">Refer & Earn</h1>
+            <h1 className="font-display text-3xl font-bold text-foreground">Refer & Earn</h1>
             <p className="text-muted-foreground mt-1 text-sm">
               Refer fellow landlords to Elite Tenancy — earn £50 per successful referral
             </p>
           </div>
-          <Badge className="bg-amber-500/10 text-amber-400 border-amber-500/20 text-xs px-3 py-1">
+          <Badge className="bg-accent/10 text-amber-400 border-amber-500/20 text-xs px-3 py-1">
             <PoundSterling size={11} className="mr-1" /> £50 per referral
           </Badge>
         </div>
@@ -92,7 +92,7 @@ export default function LandlordReferral() {
         ].map(({ label, value, icon: Icon }) => (
           <div key={label} className="bg-card border border-border/50 rounded-xl p-5 text-center">
             <Icon size={16} className="text-primary mx-auto mb-2" />
-            <p className="font-serif text-2xl font-bold text-foreground">{value}</p>
+            <p className="font-display text-2xl font-bold text-foreground">{value}</p>
             <p className="text-xs text-muted-foreground mt-1">{label}</p>
           </div>
         ))}
@@ -125,7 +125,7 @@ export default function LandlordReferral() {
             </div>
           )}
 
-          <div className="bg-amber-500/5 border border-amber-500/15 rounded-lg p-3 text-xs text-muted-foreground leading-relaxed">
+          <div className="bg-accent/5 border border-amber-500/15 rounded-lg p-3 text-xs text-muted-foreground leading-relaxed">
             <span className="font-semibold text-foreground">Your code: </span>
             <span className="font-mono text-amber-400 text-sm">{data?.code ?? "…"}</span>
             <br />

@@ -106,7 +106,7 @@ export default function LandlordManaged() {
       <div className="mb-8 flex items-start justify-between">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <h1 className="font-serif text-3xl font-bold text-foreground">Managed Lettings</h1>
+            <h1 className="font-display text-3xl font-bold text-foreground">Managed Lettings</h1>
             <Badge className="bg-primary/20 text-primary border-primary/30 text-xs gap-1">
               <Star size={10} className="fill-current" /> Premium Service
             </Badge>
@@ -133,7 +133,7 @@ export default function LandlordManaged() {
               <p className="text-xs text-muted-foreground">{label}</p>
               <Icon size={15} className={color} />
             </div>
-            <p className={`font-serif text-2xl font-bold ${color}`}>{value}</p>
+            <p className={`font-display text-2xl font-bold ${color}`}>{value}</p>
           </div>
         ))}
       </div>
@@ -343,7 +343,7 @@ export default function LandlordManaged() {
             ].map(({ label, value, sub }) => (
               <div key={label} className="bg-card border border-border/50 rounded-xl p-5">
                 <p className="text-xs text-muted-foreground mb-1">{label}</p>
-                <p className="font-serif text-2xl font-bold text-primary">{value}</p>
+                <p className="font-display text-2xl font-bold text-primary">{value}</p>
                 <p className="text-xs text-muted-foreground mt-1">{sub}</p>
               </div>
             ))}
@@ -383,7 +383,7 @@ export default function LandlordManaged() {
               <p className="font-semibold text-foreground">Annual Net Revenue Projection</p>
               <p className="text-xs text-muted-foreground mt-1">Based on current managed properties at full occupancy</p>
             </div>
-            <p className="font-serif text-3xl font-bold text-primary">
+            <p className="font-display text-3xl font-bold text-primary">
               £{((totalRevenue - totalFees) * 12).toLocaleString("en-GB")}
             </p>
           </div>

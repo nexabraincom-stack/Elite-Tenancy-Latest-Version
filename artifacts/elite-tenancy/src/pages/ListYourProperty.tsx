@@ -65,7 +65,7 @@ export default function ListYourProperty() {
     <PublicLayout>
       <div className="bg-gradient-to-br from-card to-background border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="font-serif text-4xl font-bold text-foreground mb-2">List Your Property</h1>
+          <h1 className="font-display text-4xl font-bold text-foreground mb-2">List Your Property</h1>
           <p className="text-muted-foreground">Join over 300 landlords on the Elite Tenancy platform.</p>
         </div>
       </div>

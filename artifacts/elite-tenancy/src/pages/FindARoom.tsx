@@ -31,7 +31,7 @@ export default function FindARoom() {
       <div className="bg-gradient-to-br from-card to-background border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <p className="text-xs text-primary uppercase tracking-widest font-medium mb-3">Tenant search</p>
-          <h1 className="font-serif text-5xl font-bold text-foreground mb-4">Find a Room</h1>
+          <h1 className="font-display text-5xl font-bold text-foreground mb-4">Find a Room</h1>
           <p className="text-muted-foreground max-w-xl">
             Browse our curated selection of exceptional rental properties across the UK's best cities.
           </p>

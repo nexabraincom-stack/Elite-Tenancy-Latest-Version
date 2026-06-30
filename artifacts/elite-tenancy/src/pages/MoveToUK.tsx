@@ -118,7 +118,7 @@ export default function MoveToUK() {
       <section className="bg-gradient-to-br from-card to-background border-b border-border/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Moving to the UK</Badge>
-          <h1 className="text-4xl sm:text-5xl font-serif font-bold text-foreground mb-6">
+          <h1 className="text-4xl sm:text-5xl font-display font-bold text-foreground mb-6">
             Moving to the UK? Find Your Home Before You Arrive
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
@@ -138,7 +138,7 @@ export default function MoveToUK() {
       {/* Profiles */}
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-10 text-center">We Help All Types of Relocations</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-10 text-center">We Help All Types of Relocations</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {PROFILES.map(({ icon, title, desc, popular }) => (
               <div key={title} className={`bg-card rounded-xl border p-6 relative ${popular ? "border-primary shadow-md" : "border-border"}`}>
@@ -155,7 +155,7 @@ export default function MoveToUK() {
       {/* Timeline */}
       <section className="py-16 bg-card border-y border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-10 text-center">UK Relocation Timeline</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-10 text-center">UK Relocation Timeline</h2>
           <div className="space-y-8">
             {TIMELINE.map(({ when, title, steps }, i) => (
               <div key={when} className="flex gap-6">
@@ -184,7 +184,7 @@ export default function MoveToUK() {
       {/* Destination cities */}
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-10 text-center">Top Destination Cities</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-10 text-center">Top Destination Cities</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {DESTINATION_CITIES.map(({ city, avgRent, employers, notes }) => (
               <div key={city} className="bg-card rounded-xl border border-border p-6 hover:shadow-md transition-shadow">
@@ -206,7 +206,7 @@ export default function MoveToUK() {
       {/* Legal protections */}
       <section className="py-12 bg-card border-y border-border">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-serif font-bold text-foreground mb-6 text-center">UK Tenant Protections</h2>
+          <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">UK Tenant Protections</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               { icon: Shield, title: "Deposit protection", desc: "Your deposit is legally protected in a government-approved scheme. You get it back if you leave in good condition." },
@@ -226,7 +226,7 @@ export default function MoveToUK() {
       {/* FAQ */}
       <section className="py-16 bg-background">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-8 text-center">Relocation FAQ</h2>
+          <h2 className="text-3xl font-display font-bold text-foreground mb-8 text-center">Relocation FAQ</h2>
           <div className="space-y-5">
             {FAQS.map(({ q, a }) => (
               <div key={q} className="bg-card rounded-xl border border-border p-6">

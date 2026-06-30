@@ -67,7 +67,7 @@ export default function Home() {
             <Badge className="bg-primary/15 text-primary border-primary/30 mb-6 text-xs tracking-wide uppercase">
               UK's Premier Lettings Platform
             </Badge>
-            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] tracking-tight">
+            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] tracking-tight">
               Find your{" "}
               <span className="text-accent italic">perfect</span>{" "}
               tenancy today
@@ -189,7 +189,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="text-right shrink-0">
-                    <p className="font-serif text-xl font-bold text-accent leading-none flex items-center gap-1">
+                    <p className="font-display text-xl font-bold text-accent leading-none flex items-center gap-1">
                       4.9<Star size={13} className="text-accent fill-accent" />
                     </p>
                     <p className="text-[10px] text-muted-foreground mt-1">tenant rating</p>
@@ -200,7 +200,7 @@ export default function Home() {
 
             {/* offset accent stat chip */}
             <div className="absolute -bottom-5 -left-5 bg-primary text-primary-foreground rounded-2xl px-5 py-3 shadow-xl">
-              <p className="font-serif text-2xl font-bold leading-none">14 days</p>
+              <p className="font-display text-2xl font-bold leading-none">14 days</p>
               <p className="text-[11px] opacity-80 mt-1">average time to let</p>
             </div>
           </motion.div>
@@ -233,7 +233,7 @@ export default function Home() {
                 { label: "Satisfaction Rate", value: `${stats.satisfactionRate}%` },
               ].map((s) => (
                 <div key={s.label} className="space-y-1">
-                  <p className="font-serif text-2xl font-bold text-primary">{s.value}</p>
+                  <p className="font-display text-2xl font-bold text-primary">{s.value}</p>
                   <p className="text-xs text-muted-foreground">{s.label}</p>
                 </div>
               ))}
@@ -247,7 +247,7 @@ export default function Home() {
         <div className="flex items-end justify-between mb-10">
           <div>
             <p className="text-xs text-primary uppercase tracking-widest font-medium mb-2">Hand-selected</p>
-            <h2 className="font-serif text-4xl font-bold text-foreground">Featured Properties</h2>
+            <h2 className="font-display text-4xl font-bold text-foreground">Featured Properties</h2>
           </div>
           <Link href="/listings">
             <Button variant="ghost" className="text-primary hover:text-primary gap-2">
@@ -275,7 +275,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-14">
             <p className="text-xs text-primary uppercase tracking-widest font-medium mb-2">Why us</p>
-            <h2 className="font-serif text-4xl font-bold text-foreground">The Elite Difference</h2>
+            <h2 className="font-display text-4xl font-bold text-foreground">The Elite Difference</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -320,7 +320,7 @@ export default function Home() {
           <div className="flex items-end justify-between mb-10">
             <div>
               <p className="text-xs text-primary uppercase tracking-widest font-medium mb-2">Expert insights</p>
-              <h2 className="font-serif text-4xl font-bold text-foreground">From the Blog</h2>
+              <h2 className="font-display text-4xl font-bold text-foreground">From the Blog</h2>
             </div>
             <Link href="/blog">
               <Button variant="ghost" className="text-primary hover:text-primary gap-2">
@@ -346,7 +346,7 @@ export default function Home() {
                     <Badge className="bg-primary/10 text-primary border-primary/20 text-xs mb-3">
                       {article.category}
                     </Badge>
-                    <h3 className="font-serif text-xl font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                    <h3 className="font-display text-xl font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
                       {article.title}
                     </h3>
                     <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{article.excerpt}</p>
@@ -375,7 +375,7 @@ export default function Home() {
         <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full border border-white/8 pointer-events-none" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
           <p className="text-accent text-xs font-semibold uppercase tracking-widest mb-4">Get started today</p>
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-primary-foreground mb-5">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-primary-foreground mb-5">
             Ready to let with confidence?
           </h2>
           <p className="text-primary-foreground/70 mb-10 max-w-xl mx-auto text-lg leading-relaxed">
