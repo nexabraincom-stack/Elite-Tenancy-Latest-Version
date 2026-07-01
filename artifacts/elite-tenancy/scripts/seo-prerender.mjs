@@ -207,6 +207,226 @@ const ROUTES = [
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }],
   },
   {
+    path: "/faq",
+    title: "UK Lettings FAQ 2026 — Elite Tenancy | Landlords & Tenants",
+    desc: "Answers to 25+ common questions about UK lettings, the Renters' Rights Act 2025, Right to Rent, tenant fees, deposits, HMO licences, and how Elite Tenancy works.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "FAQ", path: "/faq" }],
+    schema: {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+                {
+                      "@type": "Question",
+                      "name": "What is Elite Tenancy?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Elite Tenancy is a premium UK lettings platform and tenant introduction service. We connect high-quality, referenced tenants with verified landlords, using AI-powered matching. Landlords pay a transparent completion-only fee of two weeks' rent — no upfront costs, no monthly management commission."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "Is Elite Tenancy a registered company?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes. Elite Tenancy Ltd is registered at Companies House under number 17135665, incorporated on 2 April 2026. Our registered office is: Office 18077, 182-184 High Street North, East Ham, London, E6 2JA."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "What areas does Elite Tenancy operate in?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Elite Tenancy operates UK-wide, with a concentration in London (particularly East London — East Ham, Stratford, Newham, Ilford, Barking, Forest Gate, Beckton) and all major UK cities including Manchester, Birmingham, Leeds, Liverpool, Sheffield, Bristol, Edinburgh, Glasgow, Cardiff, Nottingham, Leicester, and Newcastle."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "What makes Elite Tenancy different from a traditional letting agent?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Traditional letting agents charge landlords 8–15% of monthly rent as an ongoing management fee. Elite Tenancy charges a single completion fee of two weeks' rent, payable only when a tenant moves in — saving landlords thousands over the tenancy. We also offer AI-powered tenant matching, built-in Right to Rent checks, and digital-first processes."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "How much does Elite Tenancy cost landlords?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Landlords pay two weeks' rent as a one-off completion fee when a tenant successfully moves in. There are no upfront fees, no monthly management charges, and no renewal fees. If we don't find a tenant, you pay nothing."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "Is there a fee for tenants to use Elite Tenancy?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "No. Tenants use Elite Tenancy free of charge. Under the Tenant Fees Act 2019, landlords and agents cannot charge tenants any fees except for holding deposits, damage deposits, and rent. We comply fully with this legislation."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "What is a completion-only fee?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "A completion-only fee means you pay only when the tenancy actually starts — when a tenant moves into the property. If the process falls through at any stage, you owe nothing. This aligns our incentives with yours: we only get paid when you get a tenant."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "How does the Renter Passport work?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "The Renter Passport is a digital tenant profile powered by AI. Tenants complete their profile (employment, income, references, move-in date, preferred area), and our AI writes a landlord-facing summary and calculates a readiness score. Landlords can view Renter Passports directly, making the introduction faster and more transparent for both sides."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "How does AI tenant matching work?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Our matching algorithm cross-references your Renter Passport (income, lifestyle, preferences, move-in timeline) against every active property. It scores each match and returns your top properties ranked by compatibility. Unlike basic filter-and-search, it considers factors like tenant–landlord fit, commute, and reference strength."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "What references does Elite Tenancy require?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "We conduct credit checks, employer references (or self-employment accountant letters), and previous landlord references. For international tenants or those with non-standard employment, we offer alternative referencing options, including larger deposits or guarantors, in line with the Renters' Rights Act 2025."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "Can I rent through Elite Tenancy if I have a poor credit history?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "We consider applications on a case-by-case basis. Tenants with adverse credit may qualify with a larger deposit (capped under the Tenant Fees Act), a UK-based guarantor, or six months' rent in advance. Contact us to discuss your specific situation."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "Can international students or workers rent through Elite Tenancy?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes. We regularly place international students, NHS workers, and overseas employees. We have a dedicated International Students page with guidance on visa requirements, Right to Rent documentation, and referencing options for non-UK nationals."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "How do I list my property with Elite Tenancy?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Click 'List Your Property' on our website and complete the property details form. A member of our team will contact you within one business day to confirm the listing and arrange photos if needed. Your property goes live on our platform and is matched to suitable tenants in our database."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "How quickly can Elite Tenancy find me a tenant?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "For well-priced properties in high-demand areas (London, Manchester, Birmingham), we typically produce shortlisted, referenced applicants within 5–14 days of listing. More specialist properties or rural locations may take longer. We maintain an active database of pre-referenced tenants looking now."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "Does Elite Tenancy manage my property after the tenant moves in?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "No — Elite Tenancy is an introduction service, not a full management service. Once we have introduced the tenant and the tenancy agreement is signed, you manage the property yourself (or appoint your own managing agent). This is how we keep costs low for landlords."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "What is the Verify a Landlord tool?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Verify a Landlord lets prospective tenants check a landlord's identity against Companies House records — useful for limited company landlords. It also allows landlords to register their verified status publicly, which helps build trust with quality tenants."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "What does the Renters' Rights Act 2025 mean for landlords?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "The Renters' Rights Act 2025 (effective from 2026) abolishes Section 21 'no-fault' evictions, converts all assured shorthold tenancies to assured periodic tenancies, introduces a private rented sector database, and strengthens tenants' rights on rent increases and property standards. Landlords can still end tenancies on valid grounds under Section 8."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "Is a 6-month fixed-term tenancy still possible after the Renters' Rights Act?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "New tenancies created after the Renters' Rights Act commencement date are assured periodic tenancies by default. Fixed-term tenancies are no longer possible for new lets. Existing fixed-term tenancies continue until their end date and then convert to periodic. Tenants gain the right to leave with two months' notice at any time."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "What is Right to Rent and who needs to check it?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Right to Rent is the legal requirement for landlords in England to verify that all adult occupants have the right to live in the UK before a tenancy begins. Failure to conduct a compliant check can result in a civil penalty of up to £20,000 per occupant. Elite Tenancy provides a built-in Right to Rent check tool using the UK Home Office share code system."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "What is the maximum deposit a landlord can charge in the UK?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Under the Tenant Fees Act 2019, the security deposit is capped at five weeks' rent where the annual rent is under £50,000, or six weeks' rent where it is £50,000 or above. Holding deposits are capped at one week's rent."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "Can a landlord refuse pets in 2026?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "The Renters' Rights Act 2025 gives tenants the right to request a pet and requires landlords to consider the request and only decline on reasonable grounds. Landlords can require a tenant to take out pet damage insurance. A blanket 'no pets' clause in a tenancy agreement is no longer enforceable."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "Can a landlord refuse benefits tenants (DSS) in 2026?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Blanket 'No DSS' policies are unlawful indirect discrimination. Multiple court rulings and the Equality Act 2010 confirm that refusing all housing benefit or Universal Credit claimants without individual assessment is discriminatory. Landlords must assess each applicant on their own merits."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "What is average rent in East Ham, London in 2026?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Based on ONS and market data, average rent in East Ham (E6) in 2026 is approximately £1,910 per month for a whole property, up around 8.5% year-on-year. Room rents in HMOs average around £780–£850 per month including bills. East Ham remains significantly cheaper than Central London while benefiting from fast District and Hammersmith & City Line connections."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "Do I need a landlord licence in Newham (East Ham) in 2026?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Newham Council operates a borough-wide selective licensing scheme requiring most private rented properties to hold a licence. Mandatory HMO licences apply for properties with 5+ occupants forming 2+ households. Additional HMO licences apply for smaller HMOs in designated areas. Fees start at approximately £750 for a 5-year selective licence. Elite Tenancy verifies licence compliance for all listed Newham properties."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "What transport links does East Ham have?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "East Ham station is served by the District Line and Hammersmith & City Line, giving direct access to the City (Aldgate: ~15 min), West End (Victoria: ~35 min), and Canary Wharf via change. Crossrail (Elizabeth Line) at Canning Town is 5 minutes away. The A13 and North Circular (A406) provide road access."
+                      }
+                },
+                {
+                      "@type": "Question",
+                      "name": "Does Elite Tenancy use AI? How?",
+                      "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes. Our 'Ellie' AI assistant answers tenancy questions 24/7. Our matching algorithm analyses Renter Passport data to score tenant–property compatibility. Our Renter Passport uses AI to write a landlord-ready tenant summary from structured profile data. We also use AI to automate tenant follow-ups and property recommendations."
+                      }
+                }
+          ]
+    },
+  },
+  {
     path: "/contact",
     title: "Contact Elite Tenancy | UK Lettings Help & Support",
     desc: "Contact Elite Tenancy for landlord or tenant support. Call, email, or submit a form — our team responds within one business day.",
@@ -562,8 +782,43 @@ const BLOG_ARTICLES = [
   },
 ];
 
+// Publish dates from the blog_articles table (published_at), used for
+// BlogPosting datePublished/dateModified below.
+const PUBLISHED_DATES = {
+  "ai-tenant-matching-how-it-works": "2026-03-27",
+  "assured-periodic-tenancy-explained": "2026-05-27",
+  "average-rent-birmingham-2026": "2026-05-23",
+  "average-rent-manchester-2026-area-guide": "2026-06-02",
+  "average-rent-uk-2026-city-price-guide": "2026-05-22",
+  "buy-to-let-2026-worth-it": "2026-04-11",
+  "can-landlord-refuse-pets-2026-uk": "2026-05-31",
+  "cheapest-rooms-to-rent-london-2026": "2026-03-15",
+  "find-premium-rentals-london-2026": "2026-05-19",
+  "hmo-licence-newham-east-ham-2026": "2026-04-05",
+  "hmo-licence-uk-2026-complete-guide": "2026-05-20",
+  "landlord-guide-letting-2026": "2026-05-12",
+  "letting-agent-fees-uk-2026-landlord-guide": "2026-05-26",
+  "manchester-vs-london-rent-2026": "2026-05-05",
+  "no-dss-illegal-2026-benefits-tenants-landlord-guide": "2026-05-24",
+  "properties-to-rent-east-ham-2026": "2026-03-20",
+  "rent-calculator-uk-2026-guide": "2026-04-25",
+  "rent-in-advance-legal-2026-uk": "2026-05-29",
+  "renter-passport-uk-2026-guide": "2026-04-01",
+  "renters-rights-act-2026-landlord-guide": "2026-05-15",
+  "renters-rights-act-2026-tenant-guide": "2026-05-01",
+  "renting-london-international-tenant-2026": "2026-03-20",
+  "right-to-rent-uk-2026-guide": "2026-02-15",
+  "section-21-abolished-2026-landlord-guide": "2026-05-18",
+  "section-21-abolished-what-it-means-for-tenants": "2026-05-25",
+  "tenancy-agreement-clauses-guide": "2026-04-26",
+};
+
 // Add blog articles to routes
 for (const article of BLOG_ARTICLES) {
+  const headline = article.title.split("|")[0].trim();
+  const canonical = `${BASE_URL}/blog/${article.slug}`;
+  const publishedDate = PUBLISHED_DATES[article.slug];
+
   ROUTES.push({
     path: `/blog/${article.slug}`,
     title: article.title,
@@ -572,8 +827,25 @@ for (const article of BLOG_ARTICLES) {
     breadcrumbs: [
       { name: "Home", path: "/" },
       { name: "Blog", path: "/blog" },
-      { name: article.title.split("|")[0].trim(), path: `/blog/${article.slug}` },
+      { name: headline, path: `/blog/${article.slug}` },
     ],
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline,
+      description: article.desc,
+      image: article.image,
+      author: { "@type": "Organization", name: "Elite Tenancy" },
+      publisher: {
+        "@type": "Organization",
+        name: "Elite Tenancy Ltd",
+        logo: { "@type": "ImageObject", url: `${BASE_URL}/logo.svg` },
+      },
+      datePublished: publishedDate,
+      dateModified: publishedDate,
+      mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+      url: canonical,
+    },
   });
 }
 
