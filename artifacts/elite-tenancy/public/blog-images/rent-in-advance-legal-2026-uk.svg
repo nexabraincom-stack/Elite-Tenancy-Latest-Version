@@ -32,7 +32,7 @@
   <g transform="translate(64, 56)">
     <rect width="200" height="40" rx="20" fill="#FFFFFF" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.15" />
     <circle cx="24" cy="20" r="4" fill="#D4A24A" />
-    <text x="40" y="26" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" letter-spacing="1.5" fill="#D4A24A">COMPLIANCE & LAW</text>
+    <text x="40" y="26" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" letter-spacing="1.5" fill="#D4A24A">COMPLIANCE &amp; LAW</text>
   </g>
 
   <!-- Icon box -->
