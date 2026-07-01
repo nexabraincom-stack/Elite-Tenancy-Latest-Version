@@ -87,6 +87,80 @@ router.get("/auth/me", async (req, res): Promise<void> => {
   });
 });
 
+// Self-service portal selection (Tenant / Landlord — Agency and HMO Owner
+// both map onto the "landlord" role since they share the same dashboard).
+// "admin" is never accepted from client input and an existing admin row is
+// never touched by this endpoint — admin accounts are provisioned manually.
+const CLAIMABLE_ROLES = ["tenant", "landlord"] as const;
+type ClaimableRole = (typeof CLAIMABLE_ROLES)[number];
+
+router.post("/auth/claim-role", async (req, res): Promise<void> => {
+  const auth = getAuth(req);
+  const clerkId = auth?.userId;
+
+  if (!clerkId) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
+  }
+
+  const { role } = req.body as { role?: unknown };
+  if (typeof role !== "string" || !CLAIMABLE_ROLES.includes(role as ClaimableRole)) {
+    res.status(400).json({ error: "role must be 'tenant' or 'landlord'" });
+    return;
+  }
+
+  const [existing] = await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.clerkId, clerkId));
+
+  if (existing?.role === "admin") {
+    res.json({
+      id: existing.id,
+      clerkId: existing.clerkId,
+      name: existing.name,
+      email: existing.email,
+      role: existing.role,
+    });
+    return;
+  }
+
+  let clerkEmail = auth.sessionClaims?.email as string | undefined;
+  let clerkName = auth.sessionClaims?.name as string | undefined;
+
+  if (!clerkEmail) {
+    try {
+      const clerkUser = await clerkClient.users.getUser(clerkId);
+      clerkEmail =
+        clerkUser.primaryEmailAddress?.emailAddress ??
+        `user_${clerkId}@elitetenancy.co.uk`;
+      clerkName ??= clerkUser.fullName ?? clerkUser.firstName ?? "New User";
+    } catch {
+      clerkEmail = `user_${clerkId}@elitetenancy.co.uk`;
+      clerkName ??= "New User";
+    }
+  } else {
+    clerkName ??= "New User";
+  }
+
+  const [user] = await db
+    .insert(usersTable)
+    .values({ clerkId, email: clerkEmail, name: clerkName, role: role as ClaimableRole })
+    .onConflictDoUpdate({
+      target: usersTable.clerkId,
+      set: { role: role as ClaimableRole, lastActiveAt: new Date() },
+    })
+    .returning();
+
+  res.json({
+    id: user.id,
+    clerkId: user.clerkId,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  });
+});
+
 router.patch("/auth/profile", async (req, res): Promise<void> => {
   const auth = getAuth(req);
   const clerkId = auth?.userId;

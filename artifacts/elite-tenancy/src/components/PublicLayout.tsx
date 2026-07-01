@@ -152,6 +152,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                 <li><Link href="/find-my-match" className="hover:text-primary transition-colors">AI Match</Link></li>
                 <li><Link href="/find-a-room" className="hover:text-primary transition-colors">Find a Room</Link></li>
                 <li><Link href="/valuation" className="hover:text-primary transition-colors">Free Valuation</Link></li>
+                <li><Link href="/rent-calculator" className="hover:text-primary transition-colors">Rent Calculator</Link></li>
                 <li><Link href="/list-your-property" className="hover:text-primary transition-colors">List Your Property</Link></li>
               </ul>
             </div>

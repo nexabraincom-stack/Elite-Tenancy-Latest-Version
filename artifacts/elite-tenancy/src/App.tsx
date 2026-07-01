@@ -1,8 +1,8 @@
-import { useEffect, useRef, lazy, Suspense } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { ClerkProvider, SignIn, SignUp, Show, useClerk, useUser } from "@clerk/react";
 import { useGetAuthMe } from "@workspace/api-client-react";
 import { shadcn } from "@clerk/themes";
-import { Switch, Route, Router as WouterRouter, useLocation, Redirect } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation, useSearch, Redirect, Link } from "wouter";
 import { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -82,6 +82,7 @@ const EuCitizensGuide = lazy(() => import("@/pages/EuCitizensGuide"));
 const LondonRentalsEurope = lazy(() => import("@/pages/LondonRentalsEurope"));
 const UkVisaRentalGuide = lazy(() => import("@/pages/UkVisaRentalGuide"));
 const Profile = lazy(() => import("@/pages/Profile"));
+const GetStarted = lazy(() => import("@/pages/GetStarted"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 import { ChatProvider } from "@/contexts/ChatContext";
 import { usePageTracking } from "@/hooks/use-page-tracking";
@@ -190,18 +191,58 @@ const queryClient = new QueryClient({
 
 function SignInPage() {
   return (
-    <div className="flex min-h-[100dvh] items-center justify-center bg-background px-4">
+    <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-background px-4 py-12">
       <SignIn
         routing="path"
         path={`${basePath}/sign-in`}
         signUpUrl={`${basePath}/sign-up`}
         fallbackRedirectUrl={`${basePath}/dashboard`}
       />
+      <p className="mt-6 text-sm text-muted-foreground">
+        New to Elite Tenancy?{" "}
+        <Link href="/sign-up" className="text-primary font-medium hover:text-accent transition-colors">
+          Get started
+        </Link>{" "}
+        as a tenant, landlord, agency, or HMO owner
+      </p>
     </div>
   );
 }
 
+const PENDING_ROLE_KEY = "et_pending_role";
+
+function readRole(search: string): "tenant" | "landlord" | null {
+  const value = new URLSearchParams(search).get("role");
+  return value === "tenant" || value === "landlord" ? value : null;
+}
+
 function SignUpPage() {
+  const search = useSearch();
+
+  // Resolved role is "sticky": once a valid role is seen (from the URL or a
+  // prior sessionStorage claim), we keep showing the Clerk form even if Clerk
+  // later rewrites the URL back to the bare /sign-up path for its own
+  // multi-step flow (email verification, OAuth callback, etc.) — otherwise
+  // the page would flash back to the portal chooser mid-signup.
+  const [resolvedRole, setResolvedRole] = useState<"tenant" | "landlord" | null>(() => {
+    const fromUrl = readRole(window.location.search);
+    if (fromUrl) return fromUrl;
+    const stored = sessionStorage.getItem(PENDING_ROLE_KEY);
+    return stored === "tenant" || stored === "landlord" ? stored : null;
+  });
+
+  useEffect(() => {
+    const fromUrl = readRole(search);
+    if (fromUrl) {
+      sessionStorage.setItem(PENDING_ROLE_KEY, fromUrl);
+      setResolvedRole(fromUrl);
+    }
+  }, [search]);
+
+  if (!resolvedRole) {
+    return <GetStarted />;
+  }
+
   return (
     <div className="flex min-h-[100dvh] items-center justify-center bg-background px-4">
       <SignUp
@@ -223,11 +264,36 @@ const ROLE_DESTINATIONS = {
 function RoleRedirect() {
   const { user, isLoaded } = useUser();
   const [, navigate] = useLocation();
+  const [roleClaimSettled, setRoleClaimSettled] = useState(false);
 
-  // Only fire once Clerk has confirmed the user is signed in, so the
-  // session cookie is guaranteed to be present for the /api/auth/me call.
+  // If the user picked a portal on the Get Started screen, claim that role
+  // BEFORE /api/auth/me runs — otherwise the very first /api/auth/me call
+  // would create their row as the default "tenant" and the claim would be
+  // too late to change where they land.
+  useEffect(() => {
+    if (!isLoaded || !user) return;
+    const pendingRole = sessionStorage.getItem(PENDING_ROLE_KEY);
+    if (!pendingRole) {
+      setRoleClaimSettled(true);
+      return;
+    }
+    fetch(`${basePath}/api/auth/claim-role`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ role: pendingRole }),
+    })
+      .catch(() => {})
+      .finally(() => {
+        sessionStorage.removeItem(PENDING_ROLE_KEY);
+        setRoleClaimSettled(true);
+      });
+  }, [isLoaded, user]);
+
+  // Only fire once Clerk has confirmed the user is signed in AND any pending
+  // role claim has settled, so the session cookie and role are both ready.
   const { data: me, isError } = useGetAuthMe({
-    enabled: isLoaded && !!user,
+    enabled: isLoaded && !!user && roleClaimSettled,
   });
 
   useEffect(() => {
