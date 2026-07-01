@@ -408,91 +408,157 @@ const BLOG_ARTICLES = [
     slug: "renters-rights-act-2026-landlord-guide",
     title: "Renters' Rights Act 2026: Complete Landlord Guide | Elite Tenancy",
     desc: "The Renters' Rights Act 2026 abolished Section 21, ended fixed-term tenancies, and gave pets new rights. Complete guide for UK landlords.",
+    image: `${BASE_URL}/blog-images/renters-rights-act-2026-landlord-guide.svg`,
   },
   {
     slug: "section-21-abolished-2026-landlord-guide",
     title: "Section 21 Abolished 2026: What Landlords Must Do Now | Elite Tenancy",
     desc: "Section 21 no-fault evictions were abolished on 1 May 2026. Here's what UK landlords need to know about possession under Section 8.",
+    image: `${BASE_URL}/blog-images/section-21-abolished-2026-landlord-guide.svg`,
   },
   {
     slug: "section-21-abolished-what-it-means-for-tenants",
     title: "Section 21 Abolished: What It Means for Tenants 2026 | Elite Tenancy",
     desc: "Section 21 'no-fault' evictions are gone. UK tenants now have much stronger security of tenure. Here's what changed and what it means for you.",
+    image: `${BASE_URL}/blog-images/section-21-abolished-what-it-means-for-tenants.svg`,
   },
   {
     slug: "no-dss-illegal-2026-benefits-tenants-landlord-guide",
     title: "No DSS is Illegal in 2026: Benefits Tenants Landlord Guide | Elite Tenancy",
     desc: "Refusing tenants on housing benefits ('No DSS') is now illegal in the UK. What landlords must do and how benefits tenants can assert their rights.",
+    image: `${BASE_URL}/blog-images/no-dss-illegal-2026-benefits-tenants-landlord-guide.svg`,
   },
   {
     slug: "can-landlord-refuse-pets-2026-uk",
     title: "Can a Landlord Refuse Pets in 2026? UK Law Explained | Elite Tenancy",
     desc: "UK landlords can no longer unreasonably refuse pets since the Renters' Rights Act 2025. Here's how the new pet rules work for landlords and tenants.",
+    image: `${BASE_URL}/blog-images/can-landlord-refuse-pets-2026-uk.svg`,
   },
   {
     slug: "assured-periodic-tenancy-explained",
     title: "Assured Periodic Tenancy Explained 2026 | Elite Tenancy",
     desc: "All UK tenancies are now rolling periodic. What this means for landlords and tenants — rent increases, notice periods, and possession.",
+    image: `${BASE_URL}/blog-images/assured-periodic-tenancy-explained.svg`,
   },
   {
     slug: "rent-in-advance-legal-2026-uk",
     title: "Is Rent in Advance Legal? UK Landlord Guide 2026 | Elite Tenancy",
     desc: "Can UK landlords charge more than one month's rent in advance? The Renters' Rights Act 2025 restricts rent in advance. Full legal guide.",
+    image: `${BASE_URL}/blog-images/rent-in-advance-legal-2026-uk.svg`,
   },
   {
     slug: "hmo-licence-uk-2026-complete-guide",
     title: "HMO Licence UK 2026: Complete Guide for Landlords | Elite Tenancy",
     desc: "Do you need an HMO licence? Complete guide to Houses in Multiple Occupation licences for UK landlords in 2026.",
+    image: `${BASE_URL}/blog-images/hmo-licence-uk-2026-complete-guide.svg`,
   },
   {
     slug: "letting-agent-fees-uk-2026-landlord-guide",
     title: "Letting Agent Fees UK 2026: Landlord Cost Guide | Elite Tenancy",
     desc: "How much do letting agents charge in 2026? Full breakdown of landlord letting agent fees vs Elite Tenancy's completion-only model.",
+    image: `${BASE_URL}/blog-images/letting-agent-fees-uk-2026-landlord-guide.svg`,
   },
   {
     slug: "landlord-guide-letting-2026",
     title: "Complete Landlord Guide to Letting a Property in 2026 | Elite Tenancy",
     desc: "The definitive 2026 guide for UK landlords. Valuation, marketing, tenant screening, AST, deposit protection, Right to Rent, and more.",
+    image: `${BASE_URL}/blog-images/landlord-guide-letting-2026.svg`,
   },
   {
     slug: "buy-to-let-2026-worth-it",
     title: "Is Buy to Let Worth It in 2026? UK Investment Guide | Elite Tenancy",
     desc: "Is buy-to-let still a worthwhile investment in 2026? Analysis of yields, mortgage rates, tax changes, and the Renters' Rights Act impact.",
+    image: `${BASE_URL}/blog-images/buy-to-let-2026-worth-it.svg`,
   },
   {
     slug: "average-rent-uk-2026-city-price-guide",
     title: "Average Rent UK 2026: City-by-City Price Guide | Elite Tenancy",
     desc: "What is the average rent in UK cities in 2026? London, Manchester, Birmingham, Leeds, Bristol, Edinburgh — full breakdown by area and property type.",
+    image: `${BASE_URL}/blog-images/average-rent-uk-2026-city-price-guide.svg`,
   },
   {
     slug: "average-rent-birmingham-2026",
     title: "Average Rent in Birmingham 2026: Area Guide | Elite Tenancy",
     desc: "Average rent in Birmingham in 2026 by area. Jewellery Quarter, Edgbaston, Moseley, Harborne — what renters and investors need to know.",
+    image: `${BASE_URL}/blog-images/average-rent-birmingham-2026.svg`,
   },
   {
     slug: "average-rent-manchester-2026-area-guide",
     title: "Average Rent in Manchester 2026: Area Guide | Elite Tenancy",
     desc: "Average rent in Manchester in 2026 by area. City centre, Salford, Didsbury, Ancoats, Chorlton — complete rental market breakdown.",
+    image: `${BASE_URL}/blog-images/average-rent-manchester-2026-area-guide.svg`,
   },
   {
     slug: "manchester-vs-london-rent-2026",
     title: "Manchester vs London Rent 2026: Cost Comparison | Elite Tenancy",
     desc: "Manchester vs London rental costs in 2026. Comparing average rents, quality of life, job markets, and what your money gets you in both cities.",
+    image: `${BASE_URL}/blog-images/manchester-vs-london-rent-2026.svg`,
   },
   {
     slug: "find-premium-rentals-london-2026",
     title: "How to Find Premium Rentals in London 2026 | Elite Tenancy",
     desc: "How to find premium rental properties in London in 2026. Best areas, platforms, and how Elite Tenancy's AI matching gives you an edge.",
+    image: `${BASE_URL}/blog-images/find-premium-rentals-london-2026.svg`,
   },
   {
     slug: "tenancy-agreement-clauses-guide",
     title: "Tenancy Agreement Clauses: Complete UK Guide 2026 | Elite Tenancy",
     desc: "What to look for in a UK tenancy agreement. Key clauses, unfair terms, and what the Renters' Rights Act 2025 changed about ASTs.",
+    image: `${BASE_URL}/blog-images/tenancy-agreement-clauses-guide.svg`,
   },
   {
     slug: "ai-tenant-matching-how-it-works",
     title: "AI Tenant Matching: How Elite Tenancy Works | Elite Tenancy",
     desc: "How Elite Tenancy's AI-powered tenant matching works. Six-stage screening, Renter Passport scoring, and why landlords get better tenants faster.",
+    image: `${BASE_URL}/blog-images/ai-tenant-matching-how-it-works.svg`,
+  },
+  {
+    slug: "cheapest-rooms-to-rent-london-2026",
+    title: "Cheapest Rooms to Rent in London 2026: 5 Postcodes Under £800 | Elite Tenancy",
+    desc: "Only 5 London postcodes still have room rents under £800/month in 2026. See which areas — led by East Ham E6 — still offer affordable London living.",
+    image: `${BASE_URL}/blog-images/cheapest-rooms-to-rent-london-2026.svg`,
+  },
+  {
+    slug: "properties-to-rent-east-ham-2026",
+    title: "Properties to Rent in East Ham 2026: Complete Area Guide | Elite Tenancy",
+    desc: "Renting in East Ham E6? Average rents, best streets, transport links, and local amenities — the complete 2026 guide to one of London's best-value areas.",
+    image: `${BASE_URL}/blog-images/properties-to-rent-east-ham-2026.svg`,
+  },
+  {
+    slug: "renter-passport-uk-2026-guide",
+    title: "What Is a Renter Passport? UK 2026 Guide | Elite Tenancy",
+    desc: "A Renter Passport proves your tenancy history and identity to landlords before you apply. How it works, who benefits, and how to get yours free.",
+    image: `${BASE_URL}/blog-images/renter-passport-uk-2026-guide.svg`,
+  },
+  {
+    slug: "hmo-licence-newham-east-ham-2026",
+    title: "HMO Licence in Newham & East Ham 2026: Costs & Rules | Elite Tenancy",
+    desc: "Everything landlords need on HMO licensing in Newham — East Ham, Forest Gate, Stratford. Selective licensing, mandatory HMO, costs, and how to apply.",
+    image: `${BASE_URL}/blog-images/hmo-licence-newham-east-ham-2026.svg`,
+  },
+  {
+    slug: "renting-london-international-tenant-2026",
+    title: "Renting in London as an International Tenant 2026 | Elite Tenancy",
+    desc: "Moving to London from abroad? Right to Rent checks, documents, referencing without UK credit history, guarantors, and the best areas to live.",
+    image: `${BASE_URL}/blog-images/renting-london-international-tenant-2026.svg`,
+  },
+  {
+    slug: "renters-rights-act-2026-tenant-guide",
+    title: "Renters' Rights Act 2026: Your Complete Tenant Guide | Elite Tenancy",
+    desc: "What the Renters' Rights Act 2026 means for tenants — Section 21 abolished, stronger eviction protection, pet rights, and rent increase limits.",
+    image: `${BASE_URL}/blog-images/renters-rights-act-2026-tenant-guide.svg`,
+  },
+  {
+    slug: "right-to-rent-uk-2026-guide",
+    title: "Right to Rent UK 2026: Guide for Tenants & Landlords | Elite Tenancy",
+    desc: "How Right to Rent works in 2026 — who checks, accepted documents, EU share codes, landlord penalties, and your rights against discrimination.",
+    image: `${BASE_URL}/blog-images/right-to-rent-uk-2026-guide.svg`,
+  },
+  {
+    slug: "rent-calculator-uk-2026-guide",
+    title: "How to Use a UK Rent Calculator in 2026 | Elite Tenancy",
+    desc: "How much rent can you afford in the UK? The 30x income rule explained, rental yield formulas for landlords, deposit caps, and free tools.",
+    image: `${BASE_URL}/blog-images/rent-calculator-uk-2026-guide.svg`,
   },
 ];
 
@@ -502,6 +568,7 @@ for (const article of BLOG_ARTICLES) {
     path: `/blog/${article.slug}`,
     title: article.title,
     desc: article.desc,
+    image: article.image,
     breadcrumbs: [
       { name: "Home", path: "/" },
       { name: "Blog", path: "/blog" },
@@ -548,6 +615,26 @@ function injectSeo(template, route) {
     /(<meta property="og:url"\s+content=")[^"]*(")/,
     `$1${safe(canonical)}$2`
   );
+
+  // OG image / Twitter image — per-article image overrides the default og-image.jpg
+  if (route.image) {
+    html = html.replace(
+      /(<meta property="og:image"\s+content=")[^"]*(")/,
+      `$1${safe(route.image)}$2`
+    );
+    html = html.replace(
+      /(<meta property="og:image:alt"\s+content=")[^"]*(")/,
+      `$1${safe(route.title.split("|")[0].trim())}$2`
+    );
+    html = html.replace(
+      /(<meta name="twitter:image"\s+content=")[^"]*(")/,
+      `$1${safe(route.image)}$2`
+    );
+    html = html.replace(
+      /(<meta name="twitter:image:alt"\s+content=")[^"]*(")/,
+      `$1${safe(route.title.split("|")[0].trim())}$2`
+    );
+  }
 
   // Twitter title  — same whitespace fix
   html = html.replace(

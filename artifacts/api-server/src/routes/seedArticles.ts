@@ -36,7 +36,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 7,
     tags: ["Renters Rights Act", "Section 21", "Landlord Guide", "2026", "UK Law"],
     publishedAt: new Date("2026-01-10"),
-    imageUrl: null,
+    imageUrl: "/blog-images/renters-rights-act-2026-landlord-guide.svg",
     content: `
 <h2>What Is the Renters' Rights Act 2026?</h2>
 <p>The Renters' Rights Act 2026 is the most significant shake-up to the private rented sector in a generation. Building on the earlier Renters (Reform) Bill, this legislation has now received Royal Assent and fundamentally changes the relationship between landlords and tenants across England.</p>
@@ -100,7 +100,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 6,
     tags: ["Section 21", "Eviction", "Landlord Guide", "Section 8", "2026"],
     publishedAt: new Date("2026-01-12"),
-    imageUrl: null,
+    imageUrl: "/blog-images/section-21-abolished-2026-landlord-guide.svg",
     content: `
 <h2>Section 21 Is Gone — What Replaces It?</h2>
 <p>As of 2026, Section 21 "no-fault" eviction notices are abolished for all residential tenancies in England. This means landlords can no longer end a tenancy simply by giving two months' notice without providing a specific legal reason.</p>
@@ -167,7 +167,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 6,
     tags: ["HMO", "Licence", "Landlord Guide", "2026", "UK Property"],
     publishedAt: new Date("2026-01-18"),
-    imageUrl: null,
+    imageUrl: "/blog-images/hmo-licence-uk-2026-complete-guide.svg",
     content: `
 <h2>What Is an HMO?</h2>
 <p>A House in Multiple Occupation (HMO) is a property shared by three or more people from two or more separate households who share facilities such as a kitchen or bathroom. Common examples include student houses, bedsits, and shared houses rented by young professionals.</p>
@@ -248,7 +248,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 5,
     tags: ["Average Rent", "UK Rent 2026", "Rental Prices", "London", "Manchester"],
     publishedAt: new Date("2026-02-01"),
-    imageUrl: null,
+    imageUrl: "/blog-images/average-rent-uk-2026-city-price-guide.svg",
     content: `
 <h2>UK Rental Market Overview 2026</h2>
 <p>The UK rental market has continued to experience strong demand and rising prices into 2026, driven by the ongoing housing supply shortfall, higher mortgage rates keeping would-be buyers renting for longer, and growing urban populations. Here is a comprehensive, up-to-date breakdown of average rents by city.</p>
@@ -332,7 +332,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 5,
     tags: ["Letting Agent Fees", "Property Management", "Landlord Costs", "2026"],
     publishedAt: new Date("2026-01-25"),
-    imageUrl: null,
+    imageUrl: "/blog-images/letting-agent-fees-uk-2026-landlord-guide.svg",
     content: `
 <h2>Three Types of Letting Agent Service</h2>
 <p>Most letting agents in the UK offer three tiers of service. Understanding exactly what each includes — and what it costs — is essential before signing up.</p>
@@ -391,7 +391,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 5,
     tags: ["No DSS", "Housing Benefit", "Discrimination", "Landlord Guide", "2026"],
     publishedAt: new Date("2026-01-20"),
-    imageUrl: null,
+    imageUrl: "/blog-images/no-dss-illegal-2026-benefits-tenants-landlord-guide.svg",
     content: `
 <h2>What Does 'No DSS' Mean?</h2>
 <p>"No DSS" (named after the old Department of Social Security) is the practice of refusing to rent to tenants who receive housing benefit or Universal Credit housing costs. For decades this was widespread — advertised openly in property listings and enforced by landlords and letting agents alike.</p>
@@ -456,7 +456,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 5,
     tags: ["Periodic Tenancy", "AST", "Tenancy Law", "Renters Rights Act", "2026"],
     publishedAt: new Date("2026-02-05"),
-    imageUrl: null,
+    imageUrl: "/blog-images/assured-periodic-tenancy-explained.svg",
     content: `
 <h2>What Is an Assured Periodic Tenancy?</h2>
 <p>An assured periodic tenancy (APT) is a tenancy that runs for successive periods — typically month-by-month — with no fixed end date. Unlike a fixed-term tenancy (which runs for a set period, e.g. 12 months), a periodic tenancy continues indefinitely until either the landlord or tenant gives valid notice to end it.</p>
@@ -518,7 +518,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 5,
     tags: ["Section 21", "Tenant Rights", "Renters Rights Act", "Security of Tenure", "2026"],
     publishedAt: new Date("2026-01-15"),
-    imageUrl: null,
+    imageUrl: "/blog-images/section-21-abolished-what-it-means-for-tenants.svg",
     content: `
 <h2>Section 21 Is Abolished — What Does That Actually Mean?</h2>
 <p>For years, Section 21 notices were a constant source of anxiety for private renters. A landlord could issue one at any time after the initial fixed term expired, giving you just two months to find a new home — without having to give any reason. This is now gone.</p>
@@ -571,7 +571,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 4,
     tags: ["Birmingham Rent", "Average Rent", "Birmingham 2026", "UK Property"],
     publishedAt: new Date("2026-02-10"),
-    imageUrl: null,
+    imageUrl: "/blog-images/average-rent-birmingham-2026.svg",
     content: `
 <h2>Birmingham Rental Market 2026</h2>
 <p>Birmingham is the UK's second largest city and one of its fastest-growing rental markets. Significant investment around the HS2 terminus at Curzon Street, ongoing regeneration of Digbeth, and a booming young professional population have kept demand strong — and rents rising.</p>
@@ -639,7 +639,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 4,
     tags: ["Manchester Rent", "Average Rent", "Manchester 2026", "UK Property"],
     publishedAt: new Date("2026-02-12"),
-    imageUrl: null,
+    imageUrl: "/blog-images/average-rent-manchester-2026-area-guide.svg",
     content: `
 <h2>Manchester Rental Market 2026</h2>
 <p>Manchester has consistently ranked among the UK's strongest rental markets outside London, driven by a thriving economy, major investment in tech and creative industries, and two of the UK's largest universities. Rents have risen significantly over the past five years, though Manchester still offers far better value than London.</p>
@@ -712,7 +712,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 4,
     tags: ["Pets in Rented Properties", "Tenant Rights", "Renters Rights Act", "2026", "UK Law"],
     publishedAt: new Date("2026-02-15"),
-    imageUrl: null,
+    imageUrl: "/blog-images/can-landlord-refuse-pets-2026-uk.svg",
     content: `
 <h2>The New Law on Pets in Rented Properties</h2>
 <p>The Renters' Rights Act 2026 fundamentally changed tenants' rights regarding pets. Previously, landlords could include a blanket "no pets" clause in any tenancy agreement and refuse any pet request with no explanation. That has changed.</p>
@@ -770,7 +770,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 4,
     tags: ["Rent in Advance", "Deposit", "Tenant Rights", "UK Law", "2026"],
     publishedAt: new Date("2026-02-18"),
-    imageUrl: null,
+    imageUrl: "/blog-images/rent-in-advance-legal-2026-uk.svg",
     content: `
 <h2>Is Rent in Advance Legal in the UK?</h2>
 <p>Yes — <strong>asking for rent in advance is legal in the UK</strong>, but with important restrictions introduced by the Renters' Rights Act 2026. Landlords cannot request more than one month's rent in advance at the start of a tenancy.</p>
@@ -825,7 +825,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 4,
     tags: ["AI Matching", "Tenant Matching", "Property Technology", "Proptech"],
     publishedAt: new Date("2026-03-01"),
-    imageUrl: null,
+    imageUrl: "/blog-images/ai-tenant-matching-how-it-works.svg",
     content: `
 <h2>Why Traditional Property Search Falls Short</h2>
 <p>Traditional property search — browsing listings on portals, filtering by price and bedrooms, then sending speculative enquiries — is slow, imprecise, and frustrating for both tenants and landlords. Tenants spend hours viewing unsuitable properties; landlords receive enquiries from applicants who don't meet their criteria.</p>
@@ -884,7 +884,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 5,
     tags: ["Buy to Let", "Property Investment", "Landlord", "UK Property", "2026"],
     publishedAt: new Date("2026-02-20"),
-    imageUrl: null,
+    imageUrl: "/blog-images/buy-to-let-2026-worth-it.svg",
     content: `
 <h2>The State of Buy-to-Let in 2026</h2>
 <p>The past five years have been challenging for buy-to-let landlords. Rising mortgage rates, the gradual removal of mortgage interest tax relief (Section 24), stricter regulation under the Renters' Rights Act, and energy efficiency requirements have all squeezed margins. Many landlords — particularly those with highly leveraged portfolios — have sold up.</p>
@@ -949,7 +949,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 4,
     tags: ["London Rentals", "Premium Property", "London 2026", "Tenant Tips"],
     publishedAt: new Date("2026-03-05"),
-    imageUrl: null,
+    imageUrl: "/blog-images/find-premium-rentals-london-2026.svg",
     content: `
 <h2>London's Rental Market in 2026</h2>
 <p>London's rental market is one of the most competitive in the world. Demand consistently outstrips supply — particularly at the premium end, where quality properties let within days of listing. Average rents in inner London now exceed £2,000 per month for a one-bedroom flat, and competition for the best properties remains fierce.</p>
@@ -1011,7 +1011,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 5,
     tags: ["Landlord Guide", "How to Let", "Property Letting", "2026", "UK Landlord"],
     publishedAt: new Date("2026-01-22"),
-    imageUrl: null,
+    imageUrl: "/blog-images/landlord-guide-letting-2026.svg",
     content: `
 <h2>Before You Let: Essential Compliance Checklist 2026</h2>
 <p>Before marketing your property, you must ensure all the following are in place:</p>
@@ -1098,7 +1098,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 4,
     tags: ["Manchester vs London", "Rent Comparison", "UK Cities", "2026", "Rental Market"],
     publishedAt: new Date("2026-03-10"),
-    imageUrl: null,
+    imageUrl: "/blog-images/manchester-vs-london-rent-2026.svg",
     content: `
 <h2>The Great North–South Rental Divide</h2>
 <p>For many renters — particularly Londoners feeling the squeeze of ever-rising rents — Manchester has become the most compelling alternative to the capital. With hybrid and remote working now mainstream, relocating 200 miles north is a realistic option for more people than ever before.</p>
@@ -1171,7 +1171,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 5,
     tags: ["Tenancy Agreement", "Rental Contract", "Tenant Rights", "Landlord Guide", "2026"],
     publishedAt: new Date("2026-02-25"),
-    imageUrl: null,
+    imageUrl: "/blog-images/tenancy-agreement-clauses-guide.svg",
     content: `
 <h2>What Is a Tenancy Agreement?</h2>
 <p>A tenancy agreement is the legally binding contract between a landlord and tenant that sets out the terms of the tenancy. In England, all new assured tenancies (which cover the vast majority of private rentals) must now be periodic tenancies — there are no longer any fixed-term assured shorthold tenancies.</p>
@@ -1262,7 +1262,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 5,
     tags: ["Cheap Rooms London", "Affordable Rent London", "East Ham", "E6", "2026"],
     publishedAt: new Date("2026-03-15"),
-    imageUrl: null,
+    imageUrl: "/blog-images/cheapest-rooms-to-rent-london-2026.svg",
     content: `
 <h2>The Truth About Cheap Rooms in London in 2026</h2>
 <p>London rents keep rising — but not everywhere. According to SpareRoom's Q1 2026 data, <strong>only 5 London postcodes still offer room rents averaging under £800 per month</strong>. If you know where to look, affordable London living is still possible.</p>
@@ -1339,7 +1339,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 6,
     tags: ["East Ham", "E6", "East Ham Rentals", "London Property", "Newham"],
     publishedAt: new Date("2026-03-20"),
-    imageUrl: null,
+    imageUrl: "/blog-images/properties-to-rent-east-ham-2026.svg",
     content: `
 <h2>Why Rent in East Ham in 2026?</h2>
 <p>East Ham (postcode E6, London Borough of Newham) is one of London's most compelling rental destinations in 2026 — offering genuine affordability in a zone 3 location with fast tube connections into the City and Canary Wharf.</p>
@@ -1409,7 +1409,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 4,
     tags: ["Renter Passport", "Tenant Referencing", "Digital Rental ID", "2026", "UK"],
     publishedAt: new Date("2026-04-01"),
-    imageUrl: null,
+    imageUrl: "/blog-images/renter-passport-uk-2026-guide.svg",
     content: `
 <h2>What Is a Renter Passport?</h2>
 <p>A renter passport (also called a digital rental identity or tenant passport) is a verified digital profile that holds your rental history, identity verification, and financial references — all pre-checked and ready to share with any landlord or letting agent. Instead of re-doing a full reference check every time you apply for a property, you present your renter passport and the landlord can make an instant, informed decision.</p>
@@ -1471,7 +1471,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 5,
     tags: ["HMO Newham", "HMO East Ham", "Newham Licensing", "Landlord Guide", "2026"],
     publishedAt: new Date("2026-04-05"),
-    imageUrl: null,
+    imageUrl: "/blog-images/hmo-licence-newham-east-ham-2026.svg",
     content: `
 <h2>HMO Licensing in Newham: What You Need to Know</h2>
 <p>Newham Council operates one of the most extensive private rented sector licensing schemes in England. As a landlord in East Ham, Forest Gate, Stratford, or anywhere else in the London Borough of Newham, you are very likely to need at least one licence — possibly more.</p>
@@ -1544,7 +1544,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 8,
     tags: ["International Tenant", "Moving to London", "Right to Rent", "UK Rental Guide", "2026"],
     publishedAt: new Date("2026-04-10"),
-    imageUrl: null,
+    imageUrl: "/blog-images/renting-london-international-tenant-2026.svg",
     content: `
 <h2>Renting in London as an International Tenant: What's Different</h2>
 <p>Renting in London as someone who has moved from overseas involves a few extra steps compared to UK residents — but none of them are impossible. The key differences are: <strong>Right to Rent checks</strong>, limited UK credit history, and income proof in a foreign currency. This guide covers everything you need to navigate London's rental market successfully in 2026.</p>
@@ -1618,7 +1618,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 6,
     tags: ["Renters Rights Act", "Tenant Rights", "Section 21", "UK Law", "2026"],
     publishedAt: new Date("2026-05-01"),
-    imageUrl: null,
+    imageUrl: "/blog-images/renters-rights-act-2026-tenant-guide.svg",
     content: `
 <h2>The Renters' Rights Act 2026 — The Biggest Tenant Victory in a Generation</h2>
 <p>The Renters' Rights Act 2026 came into full effect on 1 May 2026. It is the most significant change to tenants' rights in England in over 30 years. If you rent privately in England, here is exactly what has changed and how it protects you.</p>
@@ -1693,7 +1693,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 5,
     tags: ["Right to Rent", "UK Immigration", "Tenant Check", "Share Code", "2026"],
     publishedAt: new Date("2026-04-20"),
-    imageUrl: null,
+    imageUrl: "/blog-images/right-to-rent-uk-2026-guide.svg",
     content: `
 <h2>What Is Right to Rent?</h2>
 <p>Right to Rent is the UK government's mandatory immigration check for private landlords. Before starting a tenancy in England, landlords must verify that all adult occupants have the legal right to reside and rent in the UK. Failure to check — or to evict tenants found to be without the right to rent — can result in criminal prosecution.</p>
@@ -1763,7 +1763,7 @@ const ARTICLES: Array<{
     readTimeMinutes: 4,
     tags: ["Rent Calculator", "Rent Affordability", "UK Rent 2026", "How Much Rent Can I Afford"],
     publishedAt: new Date("2026-04-25"),
-    imageUrl: null,
+    imageUrl: "/blog-images/rent-calculator-uk-2026-guide.svg",
     content: `
 <h2>How Much Rent Can I Afford? The UK 30× Rule</h2>
 <p>The standard UK affordability rule is simple: your <strong>annual gross income should be at least 30 times the monthly rent</strong>. This is the threshold most letting agents and landlords use when assessing applications.</p>
