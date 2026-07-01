@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Building2, UserCheck, BookOpen, Users, LogOut, ShieldCheck, User, Star, Gift } from "lucide-react";
+import { LayoutDashboard, Building2, UserCheck, BookOpen, Users, LogOut, ShieldCheck, User, Star, Gift, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useUser, useClerk } from "@clerk/react";
 
@@ -11,6 +11,7 @@ const navItems = [
   { label: "Leads", href: "/admin/leads", icon: UserCheck },
   { label: "Articles", href: "/admin/articles", icon: BookOpen },
   { label: "Users", href: "/admin/users", icon: Users },
+  { label: "SEO Dashboard", href: "/admin/seo-dashboard", icon: TrendingUp },
   { label: "Reputation", href: "/admin/reputation", icon: Star },
   { label: "Referrals", href: "/admin/referrals", icon: Gift },
 ];
