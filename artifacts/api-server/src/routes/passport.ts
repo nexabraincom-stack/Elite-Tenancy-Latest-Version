@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
 import https from "node:https";
+import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { db, renterPassportsTable, listingsTable } from "@workspace/db";
 import { and, eq, lte, gte, desc, ilike } from "drizzle-orm";
 import { requireAuth, requireRole } from "../middlewares/requireAuth";
@@ -39,7 +40,13 @@ interface PassportInput {
   employment: string | null;
   petsOwner: boolean;
   about: string | null;
+  photoUrl: string | null;
 }
+
+// Only accept URLs actually issued by our own Vercel Blob store — this is a
+// public, unauthenticated endpoint, so a free-text URL field would let anyone
+// point the board at arbitrary off-site content.
+const BLOB_URL_RE = /^https:\/\/[a-z0-9]+\.public\.blob\.vercel-storage\.com\//i;
 
 function asStr(v: unknown, max: number): string | null {
   if (typeof v !== "string") return null;
@@ -63,6 +70,7 @@ function validatePassport(b: Record<string, unknown>): { ok: true; data: Passpor
   if (!city) return { ok: false, error: "Preferred city is required" };
   if (!maxBudget || maxBudget <= 0) return { ok: false, error: "Max budget is required" };
   const bedroomsRaw = asNum(b?.bedrooms);
+  const photoUrlRaw = asStr(b?.photoUrl, 500);
   return {
     ok: true,
     data: {
@@ -78,6 +86,7 @@ function validatePassport(b: Record<string, unknown>): { ok: true; data: Passpor
       employment: asStr(b?.employment, 160),
       petsOwner: b?.petsOwner === true || b?.petsOwner === "true",
       about: asStr(b?.about, 1200),
+      photoUrl: photoUrlRaw && BLOB_URL_RE.test(photoUrlRaw) ? photoUrlRaw : null,
     },
   };
 }
@@ -140,6 +149,31 @@ Respond ONLY with valid JSON (no markdown):
   }
 }
 
+// ── Public: client-upload token for a passport photo ─────────────────────────
+// Standard @vercel/blob client-upload flow: the browser uploads the file
+// directly to Blob storage using a short-lived token minted here, so the
+// image never passes through this server. Requires BLOB_READ_WRITE_TOKEN to
+// be set (auto-populated once Blob storage is connected in the Vercel
+// project's Storage tab).
+router.post("/passport/photo-upload", async (req, res): Promise<void> => {
+  try {
+    const jsonResponse = await handleUpload({
+      body: req.body as HandleUploadBody,
+      request: req,
+      onBeforeGenerateToken: async () => ({
+        allowedContentTypes: ["image/jpeg", "image/png", "image/webp"],
+        addRandomSuffix: true,
+        maximumSizeInBytes: 5 * 1024 * 1024,
+      }),
+      onUploadCompleted: async () => {},
+    });
+    res.json(jsonResponse);
+  } catch (err) {
+    req.log.error({ err }, "Passport photo upload token failed");
+    res.status(400).json({ error: err instanceof Error ? err.message : "Upload failed" });
+  }
+});
+
 // ── Public: submit a Renter Passport ─────────────────────────────────────────
 router.post("/passport", async (req, res): Promise<void> => {
   const v = validatePassport((req.body ?? {}) as Record<string, unknown>);
@@ -168,6 +202,7 @@ router.post("/passport", async (req, res): Promise<void> => {
         employment: p.employment ?? null,
         petsOwner: Boolean(p.petsOwner),
         about: p.about ?? null,
+        photoUrl: p.photoUrl ?? null,
         aiPersona: persona,
         aiScore: score,
         status: "new",
@@ -238,9 +273,12 @@ router.get("/wanted", async (_req, res): Promise<void> => {
       occupants: renterPassportsTable.occupants,
       aiPersona: renterPassportsTable.aiPersona,
       aiScore: renterPassportsTable.aiScore,
+      photoUrl: renterPassportsTable.photoUrl,
+      verified: renterPassportsTable.verified,
       createdAt: renterPassportsTable.createdAt,
     })
     .from(renterPassportsTable)
+    .where(eq(renterPassportsTable.approved, true))
     .orderBy(desc(renterPassportsTable.createdAt))
     .limit(60);
 
@@ -262,6 +300,8 @@ router.get("/wanted", async (_req, res): Promise<void> => {
         occupants: r.occupants,
         aiPersona: r.aiPersona,
         aiScore: r.aiScore,
+        photoUrl: r.photoUrl,
+        verified: r.verified,
         createdAt: r.createdAt.toISOString(),
       };
     });
@@ -288,6 +328,9 @@ router.get("/passports", requireAuth(), requireRole("landlord", "admin"), async 
       aiPersona: renterPassportsTable.aiPersona,
       aiScore: renterPassportsTable.aiScore,
       status: renterPassportsTable.status,
+      photoUrl: renterPassportsTable.photoUrl,
+      approved: renterPassportsTable.approved,
+      verified: renterPassportsTable.verified,
       createdAt: renterPassportsTable.createdAt,
     })
     .from(renterPassportsTable)
@@ -295,6 +338,43 @@ router.get("/passports", requireAuth(), requireRole("landlord", "admin"), async 
     .limit(50);
 
   res.json({ passports });
+});
+
+// ── Admin: moderate a Renter Passport (Room Wanted board visibility + verified badge) ──
+router.patch("/admin/passports/:id", requireAuth(), requireRole("admin"), async (req, res): Promise<void> => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id) || id <= 0) {
+    res.status(400).json({ error: "Invalid passport id" });
+    return;
+  }
+
+  const b = (req.body ?? {}) as Record<string, unknown>;
+  const updates: Partial<{ approved: boolean; verified: boolean }> = {};
+  if (typeof b.approved === "boolean") updates.approved = b.approved;
+  if (typeof b.verified === "boolean") updates.verified = b.verified;
+
+  if (Object.keys(updates).length === 0) {
+    res.status(400).json({ error: "Provide 'approved' and/or 'verified' as booleans" });
+    return;
+  }
+
+  const [row] = await db
+    .update(renterPassportsTable)
+    .set(updates)
+    .where(eq(renterPassportsTable.id, id))
+    .returning({
+      id: renterPassportsTable.id,
+      name: renterPassportsTable.name,
+      approved: renterPassportsTable.approved,
+      verified: renterPassportsTable.verified,
+    });
+
+  if (!row) {
+    res.status(404).json({ error: "Passport not found" });
+    return;
+  }
+
+  res.json(row);
 });
 
 export default router;

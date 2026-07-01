@@ -167,10 +167,17 @@ export const renterPassportsTable = pgTable("renter_passports", {
   aiPersona: text("ai_persona"),          // landlord-facing AI summary
   aiScore: integer("ai_score"),           // 0–100 tenant readiness/fit
   status: leadStatusEnum("status").notNull().default("new"),
+  photoUrl: text("photo_url"),
+  // Auto-true on submit so the board keeps its current always-visible
+  // behaviour; admin can flip to false to hide spam/inappropriate entries.
+  approved: boolean("approved").notNull().default(true),
+  // Admin-confirmed only — never self-service. Distinct from `approved`:
+  // a passport can be visible on the board without being verified.
+  verified: boolean("verified").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
-export const insertRenterPassportSchema = createInsertSchema(renterPassportsTable).omit({ id: true, createdAt: true, aiPersona: true, aiScore: true, status: true });
+export const insertRenterPassportSchema = createInsertSchema(renterPassportsTable).omit({ id: true, createdAt: true, aiPersona: true, aiScore: true, status: true, approved: true, verified: true });
 export type RenterPassport = typeof renterPassportsTable.$inferSelect;
 export type InsertRenterPassport = z.infer<typeof insertRenterPassportSchema>;
 

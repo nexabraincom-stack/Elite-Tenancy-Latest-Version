@@ -52,6 +52,7 @@ const AdminReputation = lazy(() => import("@/pages/admin/Reputation"));
 const TenantReferral = lazy(() => import("@/pages/tenant/Referral"));
 const LandlordReferral = lazy(() => import("@/pages/landlord/Referral"));
 const AdminReferrals = lazy(() => import("@/pages/admin/Referrals"));
+const AdminRoomWanted = lazy(() => import("@/pages/admin/RoomWanted"));
 const Features = lazy(() => import("@/pages/Features"));
 
 const TenantMessages = lazy(() => import("@/pages/tenant/Messages"));
@@ -563,6 +564,9 @@ function AppRoutes() {
       </Route>
       <Route path="/admin/referrals">
         {() => <ProtectedRoute component={AdminReferrals} requiredRole="admin" />}
+      </Route>
+      <Route path="/admin/room-wanted">
+        {() => <ProtectedRoute component={AdminRoomWanted} requiredRole="admin" />}
       </Route>
 
       <Route component={NotFound} />

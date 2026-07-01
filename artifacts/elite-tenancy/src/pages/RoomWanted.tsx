@@ -18,6 +18,8 @@ interface WantedItem {
   occupants: string | null;
   aiPersona: string | null;
   aiScore: number | null;
+  photoUrl: string | null;
+  verified: boolean;
   createdAt: string;
 }
 
@@ -100,7 +102,11 @@ export default function RoomWanted() {
               >
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">{w.displayName[0]}</div>
+                    {w.photoUrl ? (
+                      <img src={w.photoUrl} alt={w.displayName} className="w-10 h-10 rounded-full object-cover" />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">{w.displayName[0]}</div>
+                    )}
                     <div>
                       <p className="font-semibold text-foreground leading-tight">{w.displayName}</p>
                       <p className="text-xs text-muted-foreground flex items-center gap-1"><MapPin size={10} /> {w.city}</p>
@@ -120,7 +126,9 @@ export default function RoomWanted() {
                 {w.aiPersona && <p className="text-sm text-muted-foreground leading-relaxed italic flex-1">"{w.aiPersona}"</p>}
 
                 <div className="mt-4 pt-4 border-t border-border/40 flex items-center justify-between">
-                  <span className="text-xs text-primary font-medium flex items-center gap-1"><BadgeCheck size={12} /> Verified renter</span>
+                  {w.verified ? (
+                    <span className="text-xs text-primary font-medium flex items-center gap-1"><BadgeCheck size={12} /> Verified by Elite Tenancy</span>
+                  ) : <span />}
                   <Link href="/list-your-property"><Button size="sm" variant="outline" className="text-xs border-border/60 hover:border-primary/50 gap-1">Offer a home <ArrowRight size={12} /></Button></Link>
                 </div>
               </motion.div>

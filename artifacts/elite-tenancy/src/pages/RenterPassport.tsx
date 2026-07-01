@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Sparkles, ShieldCheck, ArrowRight, BadgeCheck, Users, Home, Star } from "lucide-react";
+import { upload } from "@vercel/blob/client";
+import { Sparkles, ShieldCheck, ArrowRight, BadgeCheck, Users, Home, Star, Camera, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -42,6 +43,43 @@ export default function RenterPassport() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [photoUploading, setPhotoUploading] = useState(false);
+  const [photoError, setPhotoError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  async function handlePhotoSelect(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      setPhotoError("Photo must be under 5MB.");
+      return;
+    }
+    setPhotoError(null);
+    setPhotoPreview(URL.createObjectURL(file));
+    setPhotoUploading(true);
+    try {
+      const blob = await upload(file.name, file, {
+        access: "public",
+        handleUploadUrl: `${import.meta.env.BASE_URL}api/passport/photo-upload`,
+      });
+      setPhotoUrl(blob.url);
+    } catch {
+      setPhotoError("Photo upload failed. You can still submit without one.");
+      setPhotoPreview(null);
+    } finally {
+      setPhotoUploading(false);
+    }
+  }
+
+  function removePhoto() {
+    setPhotoUrl(null);
+    setPhotoPreview(null);
+    setPhotoError(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  }
+
   function update(field: string, value: unknown) {
     setForm((f) => ({ ...f, [field]: value }));
   }
@@ -66,6 +104,7 @@ export default function RenterPassport() {
         ...(form.employment && { employment: form.employment }),
         petsOwner: form.petsOwner || undefined,
         ...(form.about && { about: form.about }),
+        ...(photoUrl && { photoUrl }),
       };
       const res = await fetch(`${import.meta.env.BASE_URL}api/passport`, {
         method: "POST",
@@ -128,6 +167,41 @@ export default function RenterPassport() {
           <h2 className="font-display text-2xl font-bold text-foreground mb-1">Build your passport</h2>
           <p className="text-sm text-muted-foreground mb-6">Free, no account needed. The more you share, the stronger your passport.</p>
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="flex items-center gap-4">
+              <div className="relative shrink-0">
+                <div className="w-20 h-20 rounded-full bg-muted border border-border/50 overflow-hidden flex items-center justify-center">
+                  {photoPreview ? (
+                    <img src={photoPreview} alt="" className="w-full h-full object-cover" />
+                  ) : (
+                    <Camera size={22} className="text-muted-foreground" />
+                  )}
+                  {photoUploading && (
+                    <div className="absolute inset-0 bg-background/70 flex items-center justify-center">
+                      <Loader2 size={20} className="text-primary animate-spin" />
+                    </div>
+                  )}
+                </div>
+                {photoPreview && !photoUploading && (
+                  <button
+                    type="button"
+                    onClick={removePhoto}
+                    className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-destructive text-white flex items-center justify-center"
+                    aria-label="Remove photo"
+                  >
+                    <X size={11} />
+                  </button>
+                )}
+              </div>
+              <div>
+                <Label className="text-xs mb-1.5 block">Add a photo (optional)</Label>
+                <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/webp" onChange={handlePhotoSelect} className="hidden" id="passport-photo" />
+                <Button type="button" variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} disabled={photoUploading} className="text-xs">
+                  {photoPreview ? "Change photo" : "Choose photo"}
+                </Button>
+                <p className="text-xs text-muted-foreground mt-1.5">Landlords respond faster to profiles with a photo.</p>
+                {photoError && <p className="text-xs text-destructive mt-1">{photoError}</p>}
+              </div>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div><Label className="text-xs mb-1.5 block">Full name *</Label><Input required value={form.name} onChange={(e) => update("name", e.target.value)} placeholder="Jane Doe" className="bg-background text-sm" /></div>
               <div><Label className="text-xs mb-1.5 block">Email *</Label><Input required type="email" value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="jane@email.com" className="bg-background text-sm" /></div>
@@ -164,7 +238,7 @@ export default function RenterPassport() {
               <span className="text-sm text-foreground">I have a pet</span>
               <Switch checked={form.petsOwner} onCheckedChange={(v) => update("petsOwner", v)} />
             </div>
-            <Button type="submit" size="lg" disabled={loading || !form.name || !form.email || !form.city || !form.maxBudget} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 gap-2">
+            <Button type="submit" size="lg" disabled={loading || photoUploading || !form.name || !form.email || !form.city || !form.maxBudget} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 gap-2">
               {loading ? (
                 <><motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}><Sparkles size={16} /></motion.div> Building your passport…</>
               ) : (
