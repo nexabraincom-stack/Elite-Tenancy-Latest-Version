@@ -4,7 +4,6 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import EllieChat from "@/components/EllieChat";
-import EllieStage from "@/components/EllieStage";
 
 const navLinks = [
   { label: "Listings", href: "/listings" },
@@ -129,7 +128,6 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
 
       <main className="flex-1">{children}</main>
       <EllieChat />
-      <EllieStage />
 
       <footer className="bg-card border-t border-border mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
