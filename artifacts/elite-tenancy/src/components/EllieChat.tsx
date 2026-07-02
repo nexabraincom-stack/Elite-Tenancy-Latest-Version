@@ -203,18 +203,25 @@ interface DrawState {
   tilt: number;     // whole-body lean, radians
   ding: number;     // 1 just-dinged … 0 settled (drives squash + arcs)
   mouth: number;    // 0 closed smile … 1 fully open (speaking flap)
+  walk: number;     // 0 standing; otherwise the step-cycle phase while strolling
+  facing: 1 | -1;   // horizontal facing (mirrors the body toward travel direction)
+  lookAt: { x: number; y: number }; // extra eye offset (cursor tracking), unit-scaled
 }
 
 function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H: number, s: DrawState) {
   const u = H / 100; // 1 unit = 1% of character height
-  const squash = 1 - s.ding * 0.09;
-  const spread = 1 + s.ding * 0.07;
+  // Walking adds a waddle: extra squash bounce + side-to-side lean per step
+  const stepBounce = s.walk > 0 ? Math.abs(Math.sin(s.walk)) * 0.03 : 0;
+  const waddle = s.walk > 0 ? Math.sin(s.walk) * 0.055 : 0;
+  const squash = 1 - s.ding * 0.09 + stepBounce;
+  const spread = 1 + s.ding * 0.07 - stepBounce * 0.5;
 
   ctx.save();
-  // Squash-and-stretch about the ground point (feet stay planted)
+  // Squash-and-stretch about the ground point (feet stay planted);
+  // facing mirrors the whole body toward her direction of travel.
   ctx.translate(cx, groundY);
-  ctx.rotate(s.tilt);
-  ctx.scale(spread, squash);
+  ctx.rotate(s.tilt + waddle);
+  ctx.scale(spread * s.facing, squash);
   ctx.translate(-cx, -groundY);
 
   // Ground shadow
@@ -223,15 +230,17 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
   ctx.fillStyle = "rgba(13, 37, 48, 0.22)";
   ctx.fill();
 
-  // Legs + shoe plates (navy)
+  // Legs + shoe plates (navy) — alternate lift while walking
   [-1, 1].forEach((side) => {
-    const lx = cx + side * 9 * u;
+    const step = s.walk > 0 ? Math.max(0, Math.sin(s.walk + (side === -1 ? 0 : Math.PI))) : 0;
+    const lift = step * 4 * u;
+    const lx = cx + side * 9 * u + (s.walk > 0 ? Math.sin(s.walk + (side === -1 ? 0 : Math.PI)) * 2.5 * u : 0);
     ctx.beginPath();
-    ctx.roundRect(lx - 3 * u, groundY - 15 * u, 6 * u, 12 * u, 3 * u);
+    ctx.roundRect(lx - 3 * u, groundY - 15 * u - lift * 0.4, 6 * u, 12 * u, 3 * u);
     ctx.fillStyle = NAVY;
     ctx.fill();
     ctx.beginPath();
-    ctx.ellipse(lx + side * 1.5 * u, groundY - 2.5 * u, 7 * u, 3 * u, 0, 0, Math.PI * 2);
+    ctx.ellipse(lx + side * 1.5 * u, groundY - 2.5 * u - lift, 7 * u, 3 * u, 0, 0, Math.PI * 2);
     ctx.fillStyle = NAVY_DEEP;
     ctx.fill();
   });
@@ -345,7 +354,13 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
   const eyeDX = 10 * u;
   const eyeW = 5.6 * u;
   const eyeH = 7 * u;
+  // Base gaze per pose, plus damped cursor-tracking (lookAt is in screen
+  // space, so compensate for the facing mirror to keep her eyes honest).
   const look = s.pose === "thinking" ? { x: -1.6 * u, y: -1.8 * u } : s.pose === "listening" ? { x: Math.sin(s.phase * 0.8) * 1.2 * u, y: -0.6 * u } : { x: Math.sin(s.phase * 0.35) * 0.8 * u, y: 0 };
+  if (s.pose !== "thinking") {
+    look.x += s.lookAt.x * s.facing * u;
+    look.y += s.lookAt.y * u;
+  }
 
   // Eyebrows — the main mood carrier
   ctx.strokeStyle = NAVY;
@@ -475,12 +490,11 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
   }
 }
 
+// Reserved corner area the chat panel positions itself around — this is where
+// Ellie walks "home" to when the panel opens, not a bounding box for her roam.
 const STAGE_SIZE_CSS = "clamp(160px, 22vw, 250px)";
 const WANDER_JITTER = 1.2;
-const IDLE_SPEED = 0.05;
-const CHAR_H_FRAC = 0.62; // character height as fraction of stage min-dimension
 const TARGET_FPS = 30;
-const SETTLED_POS = { x: 0.6, y: 0.62 };
 
 export default function EllieChat() {
   const [open, setOpen] = useState(false);
@@ -513,6 +527,8 @@ export default function EllieChat() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hitRegionRef = useRef<HTMLButtonElement>(null);
   const badgeRef = useRef<HTMLSpanElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const micRef = useRef<HTMLSpanElement>(null);
   const poseRef = useRef<Pose>("idle");
   const modeRef = useRef<"wander" | "settled">("wander");
   const unreadRef = useRef(0);
@@ -716,7 +732,13 @@ export default function EllieChat() {
     };
   }, [voiceOn, langCode, send, triggerDing]);
 
-  // ── Spatial animation engine ───────────────────────────────────────────────
+  // ── Spatial animation engine — full-viewport free roam ─────────────────────
+  // Ellie now owns the whole page as her stage (canvas is pointer-events:none
+  // so she never blocks a click; only her own hit-region button is clickable).
+  // "Free will" = a tiny behaviour brain: she strolls, pauses to look around,
+  // occasionally does a spontaneous visual ding, and wraps around the screen
+  // edges. Depth illusion: she scales smaller the higher (farther) she is,
+  // faces her direction of travel, and waddles a real step cycle.
   useEffect(() => {
     const stage = stageRef.current;
     const canvas = canvasRef.current;
@@ -731,7 +753,7 @@ export default function EllieChat() {
       const rect = stage!.getBoundingClientRect();
       stageWidth = rect.width;
       stageHeight = rect.height;
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2); // cap for 4K perf
       canvas!.width = stageWidth * dpr;
       canvas!.height = stageHeight * dpr;
       canvas!.style.width = `${stageWidth}px`;
@@ -742,6 +764,8 @@ export default function EllieChat() {
     const ro = new ResizeObserver(resize);
     ro.observe(stage);
     resize();
+
+    const baseH = () => Math.max(90, Math.min(165, Math.min(stageWidth, stageHeight) * 0.17));
 
     function placeOverlays(cx: number, groundY: number, H: number) {
       if (hitRegionRef.current) {
@@ -754,54 +778,113 @@ export default function EllieChat() {
         badgeRef.current.style.left = `${cx + H * 0.28}px`;
         badgeRef.current.style.top = `${groundY - H * 0.95}px`;
       }
+      if (tooltipRef.current) {
+        const tw = tooltipRef.current.offsetWidth || 120;
+        tooltipRef.current.style.left = `${Math.min(Math.max(8, cx - tw / 2), stageWidth - tw - 8)}px`;
+        tooltipRef.current.style.top = `${Math.max(8, groundY - H - 34)}px`;
+      }
+      if (micRef.current) {
+        micRef.current.style.left = `${cx + H * 0.24}px`;
+        micRef.current.style.top = `${groundY - H * 0.22}px`;
+      }
     }
 
-    const baseState = (): DrawState => ({
+    // Settle target (pixels): her "home" beside the chat panel, bottom-right.
+    const settleTarget = (H: number) => ({
+      x: (stageWidth - 105) / stageWidth,
+      y: (stageHeight - 55 - H / 2) / stageHeight,
+    });
+
+    const staticState = (): DrawState => ({
       pose: poseRef.current, phase: 0, eyeOpen: 1, tilt: 0, ding: 0, mouth: 0,
+      walk: 0, facing: -1, lookAt: { x: 0, y: 0 },
     });
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion) {
-      const H = Math.min(stageWidth, stageHeight) * CHAR_H_FRAC;
-      const cx = 0.55 * stageWidth;
-      const groundY = 0.6 * stageHeight + H / 2;
+      const H = baseH();
+      const t = settleTarget(H);
+      const cx = t.x * stageWidth;
+      const groundY = t.y * stageHeight + H / 2;
       ctx.clearRect(0, 0, stageWidth, stageHeight);
-      drawEllie(ctx, cx, groundY, H, baseState());
+      drawEllie(ctx, cx, groundY, H, staticState());
       placeOverlays(cx, groundY, H);
       return () => ro.disconnect();
     }
 
-    const pos = { x: 0.55, y: 0.55 };
-    let heading = Math.random() * Math.PI * 2;
+    // Cursor tracking — her eyes follow the mouse within a small damped cone.
+    const cursor = { x: -1, y: -1 };
+    const lookAt = { x: 0, y: 0 };
+    function onMouseMove(e: MouseEvent) {
+      cursor.x = e.clientX;
+      cursor.y = e.clientY;
+    }
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+
+    const pos = { x: 0.7, y: 0.65 };
+    let heading = Math.PI + Math.random() * Math.PI; // start heading leftish/up
     let phase = 0;
+    let walkPhase = 0;
+    let speedNow = 0;            // px/s, eased toward the behaviour's target
+    let facing: 1 | -1 = -1;
     let blinkTimer = 2 + Math.random() * 3;
     let blinkPhase = 0;
 
+    // Behaviour brain
+    type Behaviour = "stroll" | "pause" | "gaze";
+    let behaviour: Behaviour = "stroll";
+    let behaviourTimer = 4 + Math.random() * 4;
+    let spontaneousDingTimer = 40 + Math.random() * 40;
+    const STROLL_SPEED = 58; // px/s
+
+    function nextBehaviour() {
+      if (behaviour === "stroll") {
+        const r = Math.random();
+        if (r < 0.55) { behaviour = "pause"; behaviourTimer = 1.2 + Math.random() * 2; }
+        else { behaviour = "gaze"; behaviourTimer = 1.8 + Math.random() * 2.2; }
+      } else {
+        behaviour = "stroll";
+        behaviourTimer = 4 + Math.random() * 5;
+        heading += (Math.random() - 0.5) * 2.4; // pick a fresh-ish direction
+      }
+    }
+
     function draw() {
-      const H = Math.min(stageWidth, stageHeight) * CHAR_H_FRAC;
+      const H0 = baseH();
       ctx!.clearRect(0, 0, stageWidth, stageHeight);
 
       const mode = modeRef.current;
       const pose = poseRef.current;
+
+      // Depth illusion: farther (higher on screen) = smaller + softer.
+      const depth = 0.72 + 0.42 * pos.y;
+      const H = H0 * (mode === "settled" ? 1 : depth);
+
       const eyeOpen = blinkPhase > 0 ? Math.max(0, Math.cos(Math.min(blinkPhase, 1) * Math.PI)) : 1;
-      const bobAmp = mode === "wander" && unreadRef.current > 0 ? 0.05 : 0.03;
-      const bobY = Math.sin(phase) * bobAmp;
-      const tilt = mode === "wander" ? Math.sin(heading) * 0.1 : Math.sin(phase * 0.6) * 0.015;
+      const bobAmp = mode === "wander" && unreadRef.current > 0 ? 0.012 : 0.007;
+      const bobY = speedNow > 8 ? 0 : Math.sin(phase) * bobAmp; // bob only when standing
+      const tilt = speedNow > 8 ? Math.cos(heading) * facing * 0.05 : Math.sin(phase * 0.6) * 0.015;
       const mouth = pose === "speaking" ? Math.max(0, Math.sin(phase * 6)) : 0;
 
-      const state: DrawState = { pose, phase, eyeOpen, tilt, ding: dingRef.current, mouth };
+      const state: DrawState = {
+        pose, phase, eyeOpen, tilt, ding: dingRef.current, mouth,
+        walk: speedNow > 8 ? walkPhase : 0,
+        facing,
+        lookAt: { x: lookAt.x, y: lookAt.y },
+      };
 
       const cx = pos.x * stageWidth;
       const groundY = (pos.y + bobY) * stageHeight + H / 2;
       drawEllie(ctx!, cx, groundY, H, state);
 
-      // Toroidal ghost copies while wandering
+      // Toroidal ghost copies near the viewport edges
       if (mode === "wander") {
-        const f = 0.4;
-        if (pos.x < f) drawEllie(ctx!, (pos.x + 1) * stageWidth, groundY, H, state);
-        if (pos.x > 1 - f) drawEllie(ctx!, (pos.x - 1) * stageWidth, groundY, H, state);
-        if (pos.y < f) drawEllie(ctx!, cx, groundY + stageHeight, H, state);
-        if (pos.y > 1 - f) drawEllie(ctx!, cx, groundY - stageHeight, H, state);
+        const fx = (H * 0.7) / stageWidth;
+        const fy = (H * 1.2) / stageHeight;
+        if (pos.x < fx) drawEllie(ctx!, cx + stageWidth, groundY, H, state);
+        if (pos.x > 1 - fx) drawEllie(ctx!, cx - stageWidth, groundY, H, state);
+        if (pos.y < fy) drawEllie(ctx!, cx, groundY + stageHeight, H, state);
+        if (pos.y > 1 - fy) drawEllie(ctx!, cx, groundY - stageHeight, H, state);
       }
 
       placeOverlays(cx, groundY, H);
@@ -825,7 +908,6 @@ export default function EllieChat() {
       const pose = poseRef.current;
       phase += dt * (pose === "speaking" ? 3.2 : pose === "thinking" ? 2.6 : 2.0);
 
-      // Ding decay
       if (dingRef.current > 0) dingRef.current = Math.max(0, dingRef.current - dt * 2.2);
 
       blinkTimer -= dt;
@@ -838,15 +920,58 @@ export default function EllieChat() {
         }
       }
 
+      // Damped cursor gaze (skip while she's mid-thought)
+      const H0 = baseH();
+      if (cursor.x >= 0 && pose !== "thinking") {
+        const dx = cursor.x - pos.x * stageWidth;
+        const dy = cursor.y - (pos.y * stageHeight);
+        const dist = Math.hypot(dx, dy) || 1;
+        const strength = behaviour === "gaze" ? 1.7 : 1.1;
+        const tx = (dx / dist) * Math.min(1, dist / 300) * strength;
+        const ty = (dy / dist) * Math.min(1, dist / 300) * strength * 0.6;
+        lookAt.x += (tx - lookAt.x) * Math.min(1, dt * 4);
+        lookAt.y += (ty - lookAt.y) * Math.min(1, dt * 4);
+      } else {
+        lookAt.x += (0 - lookAt.x) * Math.min(1, dt * 3);
+        lookAt.y += (0 - lookAt.y) * Math.min(1, dt * 3);
+      }
+
       if (mode === "wander") {
-        heading += (Math.random() - 0.5) * WANDER_JITTER * dt;
-        pos.x += Math.cos(heading) * IDLE_SPEED * dt;
-        pos.y += Math.sin(heading) * IDLE_SPEED * dt;
+        // Behaviour brain tick
+        behaviourTimer -= dt;
+        if (behaviourTimer <= 0) nextBehaviour();
+
+        spontaneousDingTimer -= dt;
+        if (spontaneousDingTimer <= 0) {
+          dingRef.current = 1; // visual-only delight ding (no sound uninvited)
+          spontaneousDingTimer = 40 + Math.random() * 40;
+        }
+
+        const targetSpeed = behaviour === "stroll" ? STROLL_SPEED : 0;
+        speedNow += (targetSpeed - speedNow) * Math.min(1, dt * 4);
+
+        if (behaviour === "stroll") {
+          heading += (Math.random() - 0.5) * WANDER_JITTER * dt;
+        }
+
+        const vxPx = Math.cos(heading) * speedNow;
+        pos.x += (vxPx * dt) / stageWidth;
+        pos.y += (Math.sin(heading) * speedNow * 0.7 * dt) / stageHeight;
         pos.x = ((pos.x % 1) + 1) % 1;
         pos.y = ((pos.y % 1) + 1) % 1;
+
+        // Face travel direction (with hysteresis so she doesn't flicker)
+        if (vxPx > 12) facing = 1;
+        else if (vxPx < -12) facing = -1;
+
+        walkPhase += dt * (speedNow / 58) * 9;
       } else {
-        pos.x += (SETTLED_POS.x - pos.x) * Math.min(1, dt * 3);
-        pos.y += (SETTLED_POS.y - pos.y) * Math.min(1, dt * 3);
+        // Settle home beside the panel
+        speedNow = 0;
+        const t = settleTarget(H0);
+        pos.x += (t.x - pos.x) * Math.min(1, dt * 3);
+        pos.y += (t.y - pos.y) * Math.min(1, dt * 3);
+        facing = -1; // face the panel/user
       }
 
       draw();
@@ -867,6 +992,7 @@ export default function EllieChat() {
       cancelAnimationFrame(rafId);
       ro.disconnect();
       document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("mousemove", onMouseMove);
     };
   }, []);
 
@@ -917,28 +1043,27 @@ export default function EllieChat() {
         }
       `}</style>
 
-      {/* Roaming character stage */}
+      {/* Free-roam character stage — the whole viewport. pointer-events:none
+          means she can never block a click; only her hit-region button (which
+          follows her) is interactive. z-40 keeps her under the sticky header
+          and the chat panel for a natural depth cue. */}
       <div
         ref={stageRef}
-        className="fixed z-50"
-        style={{
-          right: "16px",
-          bottom: "16px",
-          width: STAGE_SIZE_CSS,
-          height: STAGE_SIZE_CSS,
-          pointerEvents: "none",
-        }}
+        className="fixed inset-0 z-40"
+        style={{ pointerEvents: "none" }}
+        aria-hidden="false"
       >
         <canvas style={{ display: "block", width: "100%", height: "100%" }} ref={canvasRef} />
 
         <AnimatePresence>
           {!open && (
             <motion.div
-              initial={{ opacity: 0, y: 8, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.9 }}
-              className="absolute top-0 right-0 bg-card border border-primary/30 rounded-xl px-3 py-2 shadow-lg text-xs text-muted-foreground flex items-center gap-2 whitespace-nowrap"
-              style={{ pointerEvents: "none" }}
+              ref={tooltipRef}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="absolute bg-card border border-primary/30 rounded-xl px-3 py-2 shadow-lg text-xs text-muted-foreground flex items-center gap-2 whitespace-nowrap"
+              style={{ pointerEvents: "none", left: -999, top: -999 }}
             >
               <Home size={11} className="text-primary" />
               {voiceListening ? "I'm listening…" : voiceOn ? 'Say "Hey Ellie"' : "Chat with Ellie"}
@@ -967,8 +1092,9 @@ export default function EllieChat() {
 
         {voiceOn && !open && (
           <span
-            className="absolute bottom-2 right-2 flex items-center justify-center rounded-full bg-primary text-primary-foreground w-7 h-7 shadow-lg"
-            style={{ pointerEvents: "none" }}
+            ref={micRef}
+            className="absolute flex items-center justify-center rounded-full bg-primary text-primary-foreground w-7 h-7 shadow-lg"
+            style={{ pointerEvents: "none", left: -999, top: -999 }}
             aria-hidden="true"
           >
             <Mic size={13} className={voiceListening ? "animate-pulse text-accent" : ""} />
