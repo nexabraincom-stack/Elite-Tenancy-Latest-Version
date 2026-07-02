@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Send, RotateCcw, Mic, MicOff, Globe } from "lucide-react";
+import { Home, Send, RotateCcw, Mic, MicOff, Globe, Volume2, VolumeX } from "lucide-react";
 
 interface Message {
   role: "user" | "ellie";
@@ -18,8 +18,6 @@ const GREETING =
   "Hi, I'm **Ellie** — your Elite Tenancy letting assistant 🏡 I can help you find a home, explain how we work, answer pricing questions, or guide landlords through listing a property. What can I help you with today?";
 
 // ── Multi-language voice support ──────────────────────────────────────────────
-// Web Speech API BCP-47 tags. Wake phrase stays "hey ellie" globally so users
-// don't need to memorise per-language triggers — brand name works across all.
 const LANGUAGES: Array<{ code: string; label: string }> = [
   { code: "en-GB", label: "English (UK)" },
   { code: "en-US", label: "English (US)" },
@@ -43,19 +41,17 @@ const LANGUAGES: Array<{ code: string; label: string }> = [
 const WAKE_PHRASE = "hey ellie";
 const VOICE_MODE_KEY = "et_ellie_voice_mode";
 const VOICE_LANG_KEY = "et_ellie_voice_lang";
+const SOUND_KEY = "et_ellie_sound";
 
 function pickInitialLang(): string {
   if (typeof navigator === "undefined") return "en-GB";
   const nav = navigator.language;
-  // Exact match first, then match by primary subtag.
   if (LANGUAGES.some((l) => l.code === nav)) return nav;
   const primary = nav.split("-")[0];
   const found = LANGUAGES.find((l) => l.code.startsWith(primary + "-"));
   return found?.code ?? "en-GB";
 }
 
-// Minimal shape we actually use from the SpeechRecognition API — enough to
-// avoid the DOM-lib type gap without shipping any experimental d.ts.
 interface SR extends EventTarget {
   lang: string;
   continuous: boolean;
@@ -75,43 +71,71 @@ function getSpeechRecognitionCtor(): SRCtor | null {
   return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
 }
 
-/** Strip markdown/HTML/emoji-ish characters before speaking — TTS sounds terrible reading raw markdown. */
 function textForSpeech(input: string): string {
   return input
     .replace(/\*\*(.*?)\*\*/g, "$1")
     .replace(/\*(.*?)\*/g, "$1")
     .replace(/<[^>]+>/g, "")
     .replace(/\/[a-z][a-z0-9/-]*/gi, " ")
-    .replace(/[🏡🏠✅❌🔑💷📞😊]/g, "")
+    .replace(/[🏡🏠✅❌🔑💷📞😊👋]/g, "")
     .replace(/\s+/g, " ")
     .trim();
 }
 
-/** Play a short 2-tone welcome chime via Web Audio API — no external asset. */
-function playChime() {
+// ── Sound engine ──────────────────────────────────────────────────────────────
+// All sounds are synthesized via Web Audio API — no external files. Two sounds:
+// a bell "ding!" (Ellie IS a concierge bell — this is her signature) and tiny
+// per-letter speech blips while her replies type out, PvZ-dialogue style.
+let sharedAudioCtx: AudioContext | null = null;
+function getAudioCtx(): AudioContext | null {
   try {
-    const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-    if (!AudioCtx) return;
-    const ctx = new AudioCtx();
-    [
-      { freq: 660, start: 0, dur: 0.14 },
-      { freq: 880, start: 0.11, dur: 0.18 },
-    ].forEach(({ freq, start, dur }) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = "sine";
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0, ctx.currentTime + start);
-      gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + start + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + dur);
-      osc.connect(gain).connect(ctx.destination);
-      osc.start(ctx.currentTime + start);
-      osc.stop(ctx.currentTime + start + dur + 0.05);
-    });
-    setTimeout(() => ctx.close(), 700);
+    if (!sharedAudioCtx) {
+      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!AudioCtx) return null;
+      sharedAudioCtx = new AudioCtx();
+    }
+    if (sharedAudioCtx.state === "suspended") void sharedAudioCtx.resume();
+    return sharedAudioCtx;
   } catch {
-    /* ignore audio failures */
+    return null;
   }
+}
+
+/** Ellie's signature "ding!" — a bright bell strike with a soft harmonic. */
+function playDing() {
+  const ctx = getAudioCtx();
+  if (!ctx) return;
+  [
+    { freq: 1318.5, gain: 0.16, dur: 0.55 }, // E6 fundamental
+    { freq: 1975.5, gain: 0.07, dur: 0.4 },  // B6 harmonic shimmer
+  ].forEach(({ freq, gain, dur }) => {
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.value = freq;
+    g.gain.setValueAtTime(0, ctx.currentTime);
+    g.gain.linearRampToValueAtTime(gain, ctx.currentTime + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+    osc.connect(g).connect(ctx.destination);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + dur + 0.05);
+  });
+}
+
+/** Tiny per-letter speech blip — random pitch so it never sounds robotic. */
+function playBlip() {
+  const ctx = getAudioCtx();
+  if (!ctx) return;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = "triangle";
+  osc.frequency.value = 330 * (0.88 + Math.random() * 0.28);
+  g.gain.setValueAtTime(0, ctx.currentTime);
+  g.gain.linearRampToValueAtTime(0.045, ctx.currentTime + 0.005);
+  g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.055);
+  osc.connect(g).connect(ctx.destination);
+  osc.start(ctx.currentTime);
+  osc.stop(ctx.currentTime + 0.08);
 }
 
 function TypingDots() {
@@ -129,16 +153,18 @@ function TypingDots() {
   );
 }
 
-/** Escape HTML, then apply safe bold/italic/link/newline substitutions. */
-function renderContent(text: string): string {
-  const escaped = text
+function escapeHtml(text: string): string {
+  return text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
 
-  return escaped
+/** Escape HTML, then apply safe bold/italic/link/newline substitutions. */
+function renderContent(text: string): string {
+  return escapeHtml(text)
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.*?)\*/g, "<em>$1</em>")
     .replace(
@@ -152,302 +178,309 @@ function renderContent(text: string): string {
     .replace(/\n/g, "<br/>");
 }
 
-// ── Character drawing ────────────────────────────────────────────────────────
-// Ellie is an original cartoon bird — chubby round body, big head, big shiny
-// eyes with highlights, small wings, tuft on top, tiny feet. Pseudo-3D via
-// radial-gradient shading, highlight dots, and a cast shadow — real Three.js
-// would be overkill at this size (and hurt mobile battery for no visual gain).
+// ── Ellie the Concierge Bell ──────────────────────────────────────────────────
+// Original character: a polished gold desk-bell with big navy eyes, eyebrows,
+// blush, a name tag, stubby legs, and the press-button on top. The bell shape
+// is the universal shorthand for premium at-your-service hospitality — exactly
+// the brand promise — and it gives her a built-in signature sound (the ding).
+// All shapes drawn with canvas paths + gradients; pseudo-3D via a light-source
+// gradient on the dome, a highlight crescent, and a soft ground shadow.
 
-type Pose = "idle" | "thinking" | "listening";
+const GOLD_LIGHT = "#F0CE83";
+const GOLD = "#D4A24A";
+const GOLD_DEEP = "#A67A2E";
+const NAVY = "#163A4A";
+const NAVY_DEEP = "#0D2530";
+const CREAM = "#FAF8F4";
+const BLUSH = "rgba(232, 167, 140, 0.45)";
 
-function drawShadow(ctx: CanvasRenderingContext2D, cx: number, cy: number, w: number) {
-  ctx.beginPath();
-  ctx.ellipse(cx, cy, w, w * 0.16, 0, 0, Math.PI * 2);
-  ctx.fillStyle = "rgba(22, 58, 74, 0.22)";
-  ctx.filter = "blur(3px)";
-  ctx.fill();
-  ctx.filter = "none";
+type Pose = "idle" | "listening" | "thinking" | "speaking";
+
+interface DrawState {
+  pose: Pose;
+  phase: number;    // global animation clock (radians-ish)
+  eyeOpen: number;  // 1 open … 0 closed
+  tilt: number;     // whole-body lean, radians
+  ding: number;     // 1 just-dinged … 0 settled (drives squash + arcs)
+  mouth: number;    // 0 closed smile … 1 fully open (speaking flap)
 }
 
-function drawBlob(
-  ctx: CanvasRenderingContext2D,
-  cx: number,
-  cy: number,
-  w: number,
-  h: number,
-  lightStops: [string, string, string, string],
-) {
-  ctx.beginPath();
-  ctx.ellipse(cx, cy, w, h, 0, 0, Math.PI * 2);
-  const grad = ctx.createRadialGradient(cx - w * 0.35, cy - h * 0.5, 0, cx, cy, Math.max(w, h) * 1.25);
-  grad.addColorStop(0, lightStops[0]);
-  grad.addColorStop(0.35, lightStops[1]);
-  grad.addColorStop(0.75, lightStops[2]);
-  grad.addColorStop(1, lightStops[3]);
-  ctx.fillStyle = grad;
-  ctx.fill();
-  ctx.strokeStyle = "rgba(22, 58, 74, 0.28)";
-  ctx.lineWidth = 1.2;
-  ctx.stroke();
-}
+function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H: number, s: DrawState) {
+  const u = H / 100; // 1 unit = 1% of character height
+  const squash = 1 - s.ding * 0.09;
+  const spread = 1 + s.ding * 0.07;
 
-function drawEye(ctx: CanvasRenderingContext2D, x: number, y: number, r: number, open: number, lookX = 0, lookY = 0) {
-  // Eye white — vertical squash represents blink
-  ctx.beginPath();
-  ctx.ellipse(x, y, r * 1.15, r * 1.15 * Math.max(0.06, open), 0, 0, Math.PI * 2);
-  ctx.fillStyle = "#FFFDF5";
-  ctx.fill();
-  ctx.strokeStyle = "rgba(22, 58, 74, 0.35)";
-  ctx.lineWidth = 0.8;
-  ctx.stroke();
-
-  if (open > 0.25) {
-    const pupilX = x + lookX * r * 0.3;
-    const pupilY = y + r * 0.05 + lookY * r * 0.3;
-    ctx.beginPath();
-    ctx.ellipse(pupilX, pupilY, r * 0.62, r * 0.62 * open, 0, 0, Math.PI * 2);
-    ctx.fillStyle = "#0E2530";
-    ctx.fill();
-
-    // "Wet" highlights — cheap but effective pseudo-3D cue
-    ctx.beginPath();
-    ctx.arc(pupilX - r * 0.24, pupilY - r * 0.15, r * 0.22 * open, 0, Math.PI * 2);
-    ctx.fillStyle = "#FFFFFF";
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.arc(pupilX + r * 0.16, pupilY + r * 0.22, r * 0.08 * open, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(255,255,255,0.75)";
-    ctx.fill();
-  }
-}
-
-function drawBeak(ctx: CanvasRenderingContext2D, cx: number, cy: number, r: number, open: number) {
-  const halfOpen = open * r * 0.15;
-  // Upper mandible
-  ctx.beginPath();
-  ctx.moveTo(cx - r * 0.18, cy);
-  ctx.quadraticCurveTo(cx, cy + r * 0.4 - halfOpen, cx + r * 0.18, cy);
-  ctx.quadraticCurveTo(cx, cy - halfOpen, cx - r * 0.18, cy);
-  const grad = ctx.createLinearGradient(cx, cy - r * 0.2, cx, cy + r * 0.3);
-  grad.addColorStop(0, "#F0BC5A");
-  grad.addColorStop(1, "#B87A20");
-  ctx.fillStyle = grad;
-  ctx.fill();
-  ctx.strokeStyle = "rgba(22, 58, 74, 0.45)";
-  ctx.lineWidth = 1;
-  ctx.stroke();
-
-  if (open > 0.15) {
-    // Lower mandible (opens down)
-    ctx.beginPath();
-    ctx.moveTo(cx - r * 0.16, cy);
-    ctx.quadraticCurveTo(cx, cy + r * 0.55 + halfOpen, cx + r * 0.16, cy);
-    ctx.quadraticCurveTo(cx, cy + halfOpen, cx - r * 0.16, cy);
-    ctx.fillStyle = "#7C5015";
-    ctx.fill();
-  }
-}
-
-function drawWing(
-  ctx: CanvasRenderingContext2D,
-  ax: number,
-  ay: number,
-  size: number,
-  rotation: number,
-  mirror: boolean,
-) {
   ctx.save();
-  ctx.translate(ax, ay);
-  ctx.rotate(rotation);
-  if (mirror) ctx.scale(-1, 1);
+  // Squash-and-stretch about the ground point (feet stay planted)
+  ctx.translate(cx, groundY);
+  ctx.rotate(s.tilt);
+  ctx.scale(spread, squash);
+  ctx.translate(-cx, -groundY);
 
+  // Ground shadow
   ctx.beginPath();
-  ctx.moveTo(0, 0);
-  ctx.quadraticCurveTo(size * 0.55, -size * 0.35, size * 1.05, -size * 0.05);
-  ctx.quadraticCurveTo(size * 0.85, size * 0.5, 0, size * 0.35);
-  ctx.closePath();
-
-  const grad = ctx.createLinearGradient(0, -size * 0.3, size, size * 0.4);
-  grad.addColorStop(0, "#E2B968");
-  grad.addColorStop(0.55, "#B8862A");
-  grad.addColorStop(1, "#6E4E15");
-  ctx.fillStyle = grad;
+  ctx.ellipse(cx, groundY - 1 * u, 30 * u * spread, 5 * u, 0, 0, Math.PI * 2);
+  ctx.fillStyle = "rgba(13, 37, 48, 0.22)";
   ctx.fill();
-  ctx.strokeStyle = "rgba(22, 58, 74, 0.4)";
-  ctx.lineWidth = 1;
-  ctx.stroke();
 
-  // Feather lines (3 arcs)
-  ctx.strokeStyle = "rgba(22, 58, 74, 0.25)";
-  ctx.lineWidth = 0.8;
-  for (let i = 0; i < 3; i++) {
-    const t = (i + 1) / 4;
+  // Legs + shoe plates (navy)
+  [-1, 1].forEach((side) => {
+    const lx = cx + side * 9 * u;
     ctx.beginPath();
-    ctx.moveTo(size * 0.15, size * 0.05 * (1 - t));
-    ctx.quadraticCurveTo(size * 0.6 * t + size * 0.3, size * 0.1 * t, size * 1.0 * t + size * 0.05, size * 0.2 * t);
+    ctx.roundRect(lx - 3 * u, groundY - 15 * u, 6 * u, 12 * u, 3 * u);
+    ctx.fillStyle = NAVY;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(lx + side * 1.5 * u, groundY - 2.5 * u, 7 * u, 3 * u, 0, 0, Math.PI * 2);
+    ctx.fillStyle = NAVY_DEEP;
+    ctx.fill();
+  });
+
+  const domeBaseY = groundY - 13 * u;
+  const domeTopY = groundY - 62 * u;
+  const domeHalfW = 31 * u;
+
+  // Arms (gold stubs) — pose-dependent
+  const armY = groundY - 34 * u;
+  const drawArm = (side: number, raise: number, out: number) => {
+    const sx = cx + side * (domeHalfW - 2 * u);
+    const ex = sx + side * out * u;
+    const ey = armY - raise * u;
+    ctx.beginPath();
+    ctx.moveTo(sx, armY);
+    ctx.quadraticCurveTo(sx + side * 6 * u, (armY + ey) / 2, ex, ey);
+    ctx.lineWidth = 5.5 * u;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = GOLD_DEEP;
     ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(ex, ey, 3.6 * u, 0, Math.PI * 2);
+    ctx.fillStyle = GOLD;
+    ctx.fill();
+    ctx.strokeStyle = "rgba(13,37,48,0.3)";
+    ctx.lineWidth = 0.8 * u;
+    ctx.stroke();
+  };
+  const wave = Math.sin(s.phase * 3) * 4;
+  if (s.pose === "listening") {
+    drawArm(-1, 4, 7);
+    drawArm(1, 26 + wave * 0.5, 4); // hand up near "ear"
+  } else if (s.pose === "thinking") {
+    drawArm(-1, 2, 6);
+    drawArm(1, 18, -2); // hand toward chin
+  } else if (s.pose === "speaking") {
+    drawArm(-1, 8 + wave, 9);
+    drawArm(1, 8 - wave, 9); // gesturing while talking
+  } else {
+    drawArm(-1, 2, 7);
+    drawArm(1, 2, 7);
   }
 
-  ctx.restore();
-}
+  // Dome body — gold hemisphere with flat bottom
+  ctx.beginPath();
+  ctx.moveTo(cx - domeHalfW, domeBaseY);
+  ctx.bezierCurveTo(
+    cx - domeHalfW, domeTopY + 8 * u,
+    cx - 18 * u, domeTopY,
+    cx, domeTopY,
+  );
+  ctx.bezierCurveTo(
+    cx + 18 * u, domeTopY,
+    cx + domeHalfW, domeTopY + 8 * u,
+    cx + domeHalfW, domeBaseY,
+  );
+  ctx.closePath();
+  const domeGrad = ctx.createRadialGradient(cx - 12 * u, domeTopY + 14 * u, 2 * u, cx, domeBaseY - 20 * u, 48 * u);
+  domeGrad.addColorStop(0, GOLD_LIGHT);
+  domeGrad.addColorStop(0.45, GOLD);
+  domeGrad.addColorStop(1, GOLD_DEEP);
+  ctx.fillStyle = domeGrad;
+  ctx.fill();
+  ctx.strokeStyle = "rgba(13, 37, 48, 0.35)";
+  ctx.lineWidth = 1 * u;
+  ctx.stroke();
 
-function drawTuft(ctx: CanvasRenderingContext2D, cx: number, cy: number, r: number, phase: number) {
-  const feathers = [-0.22, 0, 0.22];
-  const sway = Math.sin(phase * 1.5) * 0.15;
-  feathers.forEach((fx, i) => {
-    ctx.save();
-    ctx.translate(cx + fx * r, cy);
-    ctx.rotate((fx * 2 + sway) * 0.4 + (i - 1) * 0.1);
+  // Highlight crescent (upper-left polish sheen)
+  ctx.beginPath();
+  ctx.ellipse(cx - 13 * u, domeTopY + 13 * u, 9 * u, 4.5 * u, -0.6, 0, Math.PI * 2);
+  ctx.fillStyle = "rgba(255, 248, 228, 0.55)";
+  ctx.fill();
+
+  // Navy rim band across the base of the dome
+  ctx.beginPath();
+  ctx.roundRect(cx - domeHalfW - 1.5 * u, domeBaseY - 5 * u, (domeHalfW + 1.5 * u) * 2, 6.5 * u, 3 * u);
+  const rimGrad = ctx.createLinearGradient(cx, domeBaseY - 5 * u, cx, domeBaseY + 1.5 * u);
+  rimGrad.addColorStop(0, "#1F4A5E");
+  rimGrad.addColorStop(1, NAVY_DEEP);
+  ctx.fillStyle = rimGrad;
+  ctx.fill();
+
+  // Name tag (cream, hanging from a thin navy ribbon at the dome base)
+  const tagY = domeBaseY - 9 * u;
+  ctx.beginPath();
+  ctx.moveTo(cx - 3 * u, tagY - 4 * u);
+  ctx.lineTo(cx, tagY - 1 * u);
+  ctx.lineTo(cx + 3 * u, tagY - 4 * u);
+  ctx.strokeStyle = NAVY;
+  ctx.lineWidth = 1 * u;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.roundRect(cx - 7.5 * u, tagY - 1 * u, 15 * u, 7 * u, 1.5 * u);
+  ctx.fillStyle = CREAM;
+  ctx.fill();
+  ctx.strokeStyle = "rgba(13,37,48,0.4)";
+  ctx.lineWidth = 0.6 * u;
+  ctx.stroke();
+  // Suggest "ELITE" lettering with tiny strokes (legible text impossible at this size)
+  ctx.strokeStyle = NAVY;
+  ctx.lineWidth = 1.1 * u;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(cx - 4.5 * u, tagY + 2.5 * u);
+  ctx.lineTo(cx + 4.5 * u, tagY + 2.5 * u);
+  ctx.stroke();
+
+  // ── Face ──
+  const eyeY = domeTopY + 22 * u;
+  const eyeDX = 10 * u;
+  const eyeW = 5.6 * u;
+  const eyeH = 7 * u;
+  const look = s.pose === "thinking" ? { x: -1.6 * u, y: -1.8 * u } : s.pose === "listening" ? { x: Math.sin(s.phase * 0.8) * 1.2 * u, y: -0.6 * u } : { x: Math.sin(s.phase * 0.35) * 0.8 * u, y: 0 };
+
+  // Eyebrows — the main mood carrier
+  ctx.strokeStyle = NAVY;
+  ctx.lineWidth = 1.5 * u;
+  ctx.lineCap = "round";
+  [-1, 1].forEach((side) => {
+    const bx = cx + side * eyeDX;
+    let by = eyeY - eyeH - 3 * u;
+    let curl = 2.5 * u;
+    if (s.pose === "listening") by -= 1.8 * u;          // raised, attentive
+    if (s.pose === "thinking") { by -= side === -1 ? 2.2 * u : 0; curl = 1.8 * u; } // asymmetric, pondering
     ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.quadraticCurveTo(r * 0.08, -r * 0.2, 0, -r * 0.42);
-    ctx.quadraticCurveTo(-r * 0.08, -r * 0.2, 0, 0);
-    const g = ctx.createLinearGradient(0, 0, 0, -r * 0.42);
-    g.addColorStop(0, "#B8862A");
-    g.addColorStop(1, "#F0D89A");
-    ctx.fillStyle = g;
-    ctx.fill();
-    ctx.strokeStyle = "rgba(22, 58, 74, 0.35)";
-    ctx.lineWidth = 0.7;
+    ctx.moveTo(bx - 3.5 * u, by + curl * 0.4);
+    ctx.quadraticCurveTo(bx, by - curl * 0.6, bx + 3.5 * u, by + curl * 0.4);
     ctx.stroke();
-    ctx.restore();
   });
-}
 
-function drawFeet(ctx: CanvasRenderingContext2D, cx: number, cy: number, r: number) {
+  // Eyes — big navy almonds with sparkle highlights
+  [-1, 1].forEach((side) => {
+    const ex = cx + side * eyeDX + look.x;
+    const eh = eyeH * Math.max(0.07, s.eyeOpen);
+    ctx.beginPath();
+    ctx.ellipse(ex, eyeY + look.y, eyeW, eh, 0, 0, Math.PI * 2);
+    ctx.fillStyle = NAVY;
+    ctx.fill();
+    if (s.eyeOpen > 0.3) {
+      ctx.beginPath();
+      ctx.arc(ex + 1.6 * u, eyeY + look.y - eh * 0.35, 1.7 * u * s.eyeOpen, 0, Math.PI * 2);
+      ctx.fillStyle = CREAM;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(ex - 1.4 * u, eyeY + look.y + eh * 0.3, 0.8 * u * s.eyeOpen, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(250,248,244,0.7)";
+      ctx.fill();
+    }
+  });
+
+  // Blush
   [-1, 1].forEach((side) => {
     ctx.beginPath();
-    ctx.ellipse(cx + side * r * 0.22, cy, r * 0.14, r * 0.09, 0, 0, Math.PI * 2);
-    ctx.fillStyle = "#B87A20";
+    ctx.ellipse(cx + side * 17 * u, eyeY + 7 * u, 3.5 * u, 2 * u, 0, 0, Math.PI * 2);
+    ctx.fillStyle = BLUSH;
     ctx.fill();
-    ctx.strokeStyle = "rgba(22, 58, 74, 0.35)";
-    ctx.lineWidth = 0.8;
-    ctx.stroke();
-  });
-}
-
-function drawThoughtCloud(ctx: CanvasRenderingContext2D, cx: number, cy: number, size: number, phase: number) {
-  const puffs: Array<[number, number, number]> = [
-    [0, 0, 0.55],
-    [-0.55, 0.05, 0.42],
-    [0.55, 0.05, 0.42],
-    [-0.25, -0.35, 0.38],
-    [0.35, -0.3, 0.42],
-    [0, -0.55, 0.35],
-  ];
-
-  ctx.fillStyle = "rgba(255, 253, 245, 0.96)";
-  ctx.strokeStyle = "rgba(22, 58, 74, 0.22)";
-  ctx.lineWidth = 1;
-
-  puffs.forEach(([px, py, pr]) => {
-    ctx.beginPath();
-    ctx.arc(cx + px * size, cy + py * size, pr * size, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
   });
 
-  // 3-dot trail below cloud, pulsing
-  for (let i = 0; i < 3; i++) {
-    const alpha = Math.max(0.25, (Math.sin(phase * 2 + i * 0.9) + 1) * 0.4);
+  // Mouth
+  const mouthY = eyeY + 11 * u;
+  ctx.strokeStyle = NAVY;
+  ctx.fillStyle = NAVY;
+  ctx.lineWidth = 1.4 * u;
+  ctx.lineCap = "round";
+  if (s.mouth > 0.15) {
+    // Open — rounded 'o' scaled by mouth amount
     ctx.beginPath();
-    ctx.arc(cx + (i - 1) * size * 0.28, cy + size * 0.85 + i * size * 0.14, size * 0.11 - i * size * 0.02, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255, 253, 245, ${alpha})`;
+    ctx.ellipse(cx, mouthY + 1 * u, 2.6 * u, (1.5 + s.mouth * 2.6) * u, 0, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = `rgba(22, 58, 74, ${alpha * 0.3})`;
+    ctx.beginPath();
+    ctx.ellipse(cx, mouthY + 1.8 * u, 1.4 * u, s.mouth * 1.2 * u, 0, 0, Math.PI * 2);
+    ctx.fillStyle = "#E88264";
+    ctx.fill();
+  } else if (s.pose === "thinking") {
+    ctx.beginPath();
+    ctx.moveTo(cx - 2.5 * u, mouthY + 0.5 * u);
+    ctx.lineTo(cx + 2.5 * u, mouthY);
+    ctx.stroke();
+  } else {
+    const w = s.pose === "listening" ? 4.2 * u : 3.4 * u;
+    ctx.beginPath();
+    ctx.moveTo(cx - w, mouthY - 0.5 * u);
+    ctx.quadraticCurveTo(cx, mouthY + 2.2 * u, cx + w, mouthY - 0.5 * u);
     ctx.stroke();
   }
 
-  // Little sparkle inside cloud
-  const sparkle = (Math.sin(phase * 3) + 1) * 0.5;
-  ctx.fillStyle = `rgba(212, 162, 74, ${0.5 + sparkle * 0.4})`;
+  // Top press-button (dips when dinged)
+  const btnDip = s.ding * 2.5 * u;
   ctx.beginPath();
-  ctx.arc(cx - size * 0.05, cy - size * 0.1, size * 0.09 * (0.6 + sparkle * 0.4), 0, Math.PI * 2);
+  ctx.roundRect(cx - 6 * u, domeTopY - 5.5 * u + btnDip, 12 * u, 6.5 * u, 2.5 * u);
+  const btnGrad = ctx.createLinearGradient(cx, domeTopY - 5.5 * u + btnDip, cx, domeTopY + 1 * u + btnDip);
+  btnGrad.addColorStop(0, GOLD_LIGHT);
+  btnGrad.addColorStop(1, GOLD_DEEP);
+  ctx.fillStyle = btnGrad;
   ctx.fill();
-}
-
-function drawEllie(
-  ctx: CanvasRenderingContext2D,
-  cx: number,
-  cy: number,
-  r: number,
-  pose: Pose,
-  phase: number,
-  eyeOpen: number,
-  tilt: number,
-) {
-  const beakOpen = pose === "listening" ? 0 : Math.max(0, Math.sin(phase * 4.5)) * 0.4;
-  const wingFlap = Math.sin(phase * 2.5) * 0.35;
-
-  ctx.save();
-  ctx.translate(cx, cy);
-  ctx.rotate(tilt);
-
-  // Cast shadow anchored below feet
-  drawShadow(ctx, 0, r * 1.15, r * 0.7);
-
-  // Back wings for idle/listening — spread and flapping. Skipped for thinking
-  // (the wings come up over the face instead).
-  if (pose !== "thinking") {
-    drawWing(ctx, -r * 0.55, r * 0.15, r * 0.55, -0.35 - wingFlap * 0.45, false);
-    drawWing(ctx, r * 0.55, r * 0.15, r * 0.55, 0.35 + wingFlap * 0.45, true);
-  }
-
-  // Feet
-  drawFeet(ctx, 0, r * 1.05, r);
-
-  // Body
-  drawBlob(ctx, 0, r * 0.5, r * 0.7, r * 0.65, ["#FFF5D0", "#F0D89A", "#D4A24A", "#A87F30"]);
-
-  // Head (bigger than body — kawaii proportions)
-  const headY = -r * 0.35;
-  drawBlob(ctx, 0, headY, r * 0.8, r * 0.72, ["#FFF8DE", "#F5E0A5", "#D9AB55", "#9E7530"]);
-
-  // Rosy cheeks
-  ctx.beginPath();
-  ctx.ellipse(-r * 0.45, headY + r * 0.05, r * 0.14, r * 0.09, 0, 0, Math.PI * 2);
-  ctx.fillStyle = "rgba(232, 130, 100, 0.4)";
-  ctx.fill();
-  ctx.beginPath();
-  ctx.ellipse(r * 0.45, headY + r * 0.05, r * 0.14, r * 0.09, 0, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Face (skipped when wings cover)
-  if (pose !== "thinking") {
-    const lookX = pose === "listening" ? Math.sin(phase * 0.7) * 0.6 : Math.sin(phase * 0.4) * 0.2;
-    const lookY = pose === "listening" ? -0.2 : 0;
-    const eyeR = r * 0.13;
-    drawEye(ctx, -r * 0.22, headY - r * 0.05, eyeR, eyeOpen, lookX, lookY);
-    drawEye(ctx, r * 0.22, headY - r * 0.05, eyeR, eyeOpen, lookX, lookY);
-    drawBeak(ctx, 0, headY + r * 0.18, r * 0.9, beakOpen);
-  }
-
-  // Tuft
-  drawTuft(ctx, 0, headY - r * 0.55, r * 0.9, phase + (pose === "listening" ? 3 : 0));
-
-  // Wings-on-face for thinking
-  if (pose === "thinking") {
-    const cover = 0.9 + Math.sin(phase * 2) * 0.06;
-    drawWing(ctx, -r * 0.5, headY - r * 0.1, r * 0.6, -0.4 * cover, false);
-    drawWing(ctx, r * 0.5, headY - r * 0.1, r * 0.6, 0.4 * cover, true);
-  }
+  ctx.strokeStyle = "rgba(13,37,48,0.35)";
+  ctx.lineWidth = 0.8 * u;
+  ctx.stroke();
 
   ctx.restore();
 
-  // Thought cloud floats above her head (drawn outside the character
-  // transform so its position stays stable regardless of body tilt).
-  if (pose === "thinking") {
-    drawThoughtCloud(ctx, cx + r * 0.5, cy - r * 1.35, r * 0.45, phase);
+  // ── Un-squashed overlays (drawn outside the body transform) ──
+
+  // "Ding!" arcs radiating from the button
+  if (s.ding > 0.05) {
+    ctx.strokeStyle = `rgba(22, 58, 74, ${s.ding * 0.75})`;
+    ctx.lineWidth = 1.6 * u;
+    ctx.lineCap = "round";
+    const spreadR = (1 - s.ding) * 6 * u;
+    [-1, 1].forEach((side) => {
+      ctx.beginPath();
+      ctx.arc(cx + side * 10 * u, groundY - 66 * u, 5 * u + spreadR, side === -1 ? Math.PI * 1.05 : Math.PI * 1.55, side === -1 ? Math.PI * 1.45 : Math.PI * 1.95);
+      ctx.stroke();
+    });
+  }
+
+  // Thinking dots rising beside the button
+  if (s.pose === "thinking") {
+    for (let i = 0; i < 3; i++) {
+      const a = Math.max(0.2, (Math.sin(s.phase * 2.2 + i * 0.9) + 1) * 0.45);
+      const rr = (1.6 + i * 0.9) * u;
+      ctx.beginPath();
+      ctx.arc(cx + (12 + i * 6) * u, groundY - (68 + i * 7) * u, rr, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(250, 248, 244, ${a})`;
+      ctx.fill();
+      ctx.strokeStyle = `rgba(22, 58, 74, ${a * 0.5})`;
+      ctx.lineWidth = 0.7 * u;
+      ctx.stroke();
+    }
+  }
+
+  // Listening halo — soft pulsing ring
+  if (s.pose === "listening") {
+    const pulse = (Math.sin(s.phase * 2.5) + 1) * 0.5;
+    ctx.beginPath();
+    ctx.arc(cx, groundY - 38 * u, (38 + pulse * 5) * u, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(212, 162, 74, ${0.35 - pulse * 0.2})`;
+    ctx.lineWidth = 1.5 * u;
+    ctx.stroke();
   }
 }
 
 const STAGE_SIZE_CSS = "clamp(160px, 22vw, 250px)";
 const WANDER_JITTER = 1.2;
 const IDLE_SPEED = 0.05;
-const CHAR_RADIUS_FRAC = 0.24;
+const CHAR_H_FRAC = 0.62; // character height as fraction of stage min-dimension
 const TARGET_FPS = 30;
-const SETTLED_POS = { x: 0.72, y: 0.65 };
+const SETTLED_POS = { x: 0.6, y: 0.62 };
 
 export default function EllieChat() {
   const [open, setOpen] = useState(false);
@@ -457,7 +490,12 @@ export default function EllieChat() {
   const [unread, setUnread] = useState(0);
   const [sessionId] = useState<string>(() => `${Date.now()}-${Math.random().toString(36).slice(2)}`);
 
-  // Voice mode state ─────────────────────────────────────────────────────────
+  // Typewriter: index of the message currently being revealed + revealed char count
+  const [typing, setTyping] = useState<{ index: number; count: number } | null>(null);
+  const [soundOn, setSoundOn] = useState(true);
+  const soundOnRef = useRef(true);
+
+  // Voice mode state
   const [voiceOn, setVoiceOn] = useState(false);
   const [langCode, setLangCode] = useState<string>(pickInitialLang);
   const [voiceSupported, setVoiceSupported] = useState(true);
@@ -476,33 +514,28 @@ export default function EllieChat() {
   const hitRegionRef = useRef<HTMLButtonElement>(null);
   const badgeRef = useRef<HTMLSpanElement>(null);
   const poseRef = useRef<Pose>("idle");
-  const modeRef = useRef<"wander" | "settled" | "thinking">("wander");
+  const modeRef = useRef<"wander" | "settled">("wander");
   const unreadRef = useRef(0);
+  const dingRef = useRef(0);
 
   useEffect(() => {
     setVoiceSupported(getSpeechRecognitionCtor() !== null);
-    const savedMode = localStorage.getItem(VOICE_MODE_KEY);
-    if (savedMode === "1") setVoiceOn(true);
+    if (localStorage.getItem(VOICE_MODE_KEY) === "1") setVoiceOn(true);
     const savedLang = localStorage.getItem(VOICE_LANG_KEY);
     if (savedLang && LANGUAGES.some((l) => l.code === savedLang)) setLangCode(savedLang);
+    if (localStorage.getItem(SOUND_KEY) === "0") setSoundOn(false);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem(VOICE_MODE_KEY, voiceOn ? "1" : "0");
-  }, [voiceOn]);
+  useEffect(() => { localStorage.setItem(VOICE_MODE_KEY, voiceOn ? "1" : "0"); }, [voiceOn]);
+  useEffect(() => { localStorage.setItem(VOICE_LANG_KEY, langCode); }, [langCode]);
+  useEffect(() => { localStorage.setItem(SOUND_KEY, soundOn ? "1" : "0"); soundOnRef.current = soundOn; }, [soundOn]);
 
   useEffect(() => {
-    localStorage.setItem(VOICE_LANG_KEY, langCode);
-  }, [langCode]);
+    modeRef.current = open ? "settled" : "wander";
+    poseRef.current = loading ? "thinking" : voiceListening ? "listening" : typing ? "speaking" : "idle";
+  }, [open, loading, voiceListening, typing]);
 
-  useEffect(() => {
-    modeRef.current = open ? "settled" : loading ? "thinking" : "wander";
-    poseRef.current = loading ? "thinking" : voiceListening ? "listening" : "idle";
-  }, [open, loading, voiceListening]);
-
-  useEffect(() => {
-    unreadRef.current = unread;
-  }, [unread]);
+  useEffect(() => { unreadRef.current = unread; }, [unread]);
 
   useEffect(() => {
     if (open) {
@@ -513,14 +546,43 @@ export default function EllieChat() {
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+  }, [messages, loading, typing]);
 
-  // ── send message helper (used by text form + voice) ───────────────────────
+  // ── Typewriter reveal for the latest Ellie reply (with PvZ-style blips) ────
+  useEffect(() => {
+    if (!typing) return;
+    const msg = messages[typing.index];
+    if (!msg || msg.role !== "ellie") { setTyping(null); return; }
+    if (typing.count >= msg.content.length) { setTyping(null); return; }
+
+    const t = window.setTimeout(() => {
+      const next = Math.min(msg.content.length, typing.count + 2);
+      // Blip roughly every 3rd tick, skipping whitespace; silent when TTS is speaking
+      if (
+        soundOnRef.current &&
+        next % 6 < 2 &&
+        msg.content[typing.count] !== " " &&
+        !(typeof window !== "undefined" && "speechSynthesis" in window && window.speechSynthesis.speaking)
+      ) {
+        playBlip();
+      }
+      setTyping({ index: typing.index, count: next });
+    }, 24);
+    return () => window.clearTimeout(t);
+  }, [typing, messages]);
+
+  const triggerDing = useCallback(() => {
+    dingRef.current = 1;
+    if (soundOnRef.current) playDing();
+  }, []);
+
+  // ── send message (shared by text form + voice) ─────────────────────────────
   const send = useCallback(
     async (text?: string) => {
       const msg = (text ?? input).trim();
       if (!msg || loading) return;
       setInput("");
+      setTyping(null); // finish any in-flight reveal instantly
       const newMessages: Message[] = [...messages, { role: "user", content: msg }];
       setMessages(newMessages);
       setLoading(true);
@@ -534,9 +596,9 @@ export default function EllieChat() {
         const data = await res.json();
         const reply = data.reply ?? "Sorry, I couldn't get a response. Please try again.";
         setMessages([...newMessages, { role: "ellie", content: reply }]);
+        setTyping({ index: newMessages.length, count: 0 });
         if (!open) setUnread((n) => n + 1);
 
-        // If voice mode is on, speak the reply in the selected language.
         if (wantsVoiceRef.current && typeof window !== "undefined" && "speechSynthesis" in window) {
           try {
             const utter = new SpeechSynthesisUtterance(textForSpeech(reply));
@@ -546,19 +608,12 @@ export default function EllieChat() {
             if (match) utter.voice = match;
             window.speechSynthesis.cancel();
             window.speechSynthesis.speak(utter);
-          } catch {
-            /* TTS unavailable — silent fallback */
-          }
+          } catch { /* TTS unavailable */ }
         }
       } catch {
-        setMessages([
-          ...newMessages,
-          {
-            role: "ellie",
-            content:
-              "Sorry, something went wrong. Please try again in a moment, or call us on **+44 7446 192577** 🏡",
-          },
-        ]);
+        const errMsg = "Sorry, something went wrong. Please try again in a moment, or call us on **+44 7446 192577** 🏡";
+        setMessages([...newMessages, { role: "ellie", content: errMsg }]);
+        setTyping({ index: newMessages.length, count: 0 });
       } finally {
         setLoading(false);
       }
@@ -566,7 +621,7 @@ export default function EllieChat() {
     [input, loading, messages, open, sessionId, langCode],
   );
 
-  // ── Voice mode wake-word listener ─────────────────────────────────────────
+  // ── Voice wake-word listener ───────────────────────────────────────────────
   useEffect(() => {
     wantsVoiceRef.current = voiceOn;
     if (!voiceOn) {
@@ -594,21 +649,17 @@ export default function EllieChat() {
     rec.onresult = (e) => {
       if (cancelled) return;
       let combined = "";
-      for (let i = 0; i < e.results.length; i++) {
-        combined += e.results[i][0].transcript + " ";
-      }
+      for (let i = 0; i < e.results.length; i++) combined += e.results[i][0].transcript + " ";
       const lower = combined.toLowerCase();
 
       if (!capturingQueryRef.current) {
-        // Wake-word listening state
         const idx = lower.indexOf(WAKE_PHRASE);
         if (idx !== -1) {
           capturingQueryRef.current = true;
           queryBufferRef.current = lower.slice(idx + WAKE_PHRASE.length).trim();
           setVoiceListening(true);
-          playChime();
+          triggerDing();
           setOpen(true);
-          // Give the user ~3.5s of quiet before treating what they said as the full query.
           if (querySilenceTimerRef.current) window.clearTimeout(querySilenceTimerRef.current);
           querySilenceTimerRef.current = window.setTimeout(() => {
             const q = queryBufferRef.current.trim();
@@ -619,9 +670,6 @@ export default function EllieChat() {
           }, 3500);
         }
       } else {
-        // Query capture state — reset silence timer as the user keeps talking.
-        // (Web Speech API keeps appending to the same results list, so just
-        // take everything spoken since the wake word triggered.)
         const wakeIdx = lower.lastIndexOf(WAKE_PHRASE);
         queryBufferRef.current = wakeIdx !== -1 ? lower.slice(wakeIdx + WAKE_PHRASE.length).trim() : lower.trim();
         if (querySilenceTimerRef.current) window.clearTimeout(querySilenceTimerRef.current);
@@ -639,28 +687,20 @@ export default function EllieChat() {
       if (e.error === "not-allowed" || e.error === "service-not-allowed") {
         setVoiceHint("Microphone permission denied. Voice mode turned off.");
         setVoiceOn(false);
-      } else if (e.error === "no-speech") {
-        // Silence is fine — the onend restart below keeps us listening.
-      } else {
+      } else if (e.error !== "no-speech") {
         setVoiceHint(`Voice error: ${e.error}`);
       }
     };
 
     rec.onend = () => {
-      // Auto-restart while voice mode stays enabled — SpeechRecognition
-      // stops itself after silence in many browsers.
       if (!cancelled && wantsVoiceRef.current) {
-        try {
-          rec.start();
-        } catch {
-          /* start-while-starting is fine, ignore */
-        }
+        try { rec.start(); } catch { /* already starting */ }
       }
     };
 
     try {
       rec.start();
-    } catch (err) {
+    } catch {
       setVoiceHint("Couldn't start the microphone.");
       setVoiceOn(false);
       return;
@@ -672,13 +712,11 @@ export default function EllieChat() {
       queryBufferRef.current = "";
       setVoiceListening(false);
       if (querySilenceTimerRef.current) window.clearTimeout(querySilenceTimerRef.current);
-      try {
-        rec.abort();
-      } catch { /* ignore */ }
+      try { rec.abort(); } catch { /* ignore */ }
     };
-  }, [voiceOn, langCode, send]);
+  }, [voiceOn, langCode, send, triggerDing]);
 
-  // ── Spatial animation engine ──────────────────────────────────────────────
+  // ── Spatial animation engine ───────────────────────────────────────────────
   useEffect(() => {
     const stage = stageRef.current;
     const canvas = canvasRef.current;
@@ -705,62 +743,68 @@ export default function EllieChat() {
     ro.observe(stage);
     resize();
 
-    function placeOverlays(cx: number, cy: number, r: number) {
+    function placeOverlays(cx: number, groundY: number, H: number) {
       if (hitRegionRef.current) {
-        hitRegionRef.current.style.left = `${cx - r * 1.1}px`;
-        hitRegionRef.current.style.top = `${cy - r * 1.6}px`;
-        hitRegionRef.current.style.width = `${r * 2.2}px`;
-        hitRegionRef.current.style.height = `${r * 3}px`;
+        hitRegionRef.current.style.left = `${cx - H * 0.4}px`;
+        hitRegionRef.current.style.top = `${groundY - H}px`;
+        hitRegionRef.current.style.width = `${H * 0.8}px`;
+        hitRegionRef.current.style.height = `${H}px`;
       }
       if (badgeRef.current) {
-        badgeRef.current.style.left = `${cx + r * 0.75}px`;
-        badgeRef.current.style.top = `${cy - r * 1.55}px`;
+        badgeRef.current.style.left = `${cx + H * 0.28}px`;
+        badgeRef.current.style.top = `${groundY - H * 0.95}px`;
       }
     }
+
+    const baseState = (): DrawState => ({
+      pose: poseRef.current, phase: 0, eyeOpen: 1, tilt: 0, ding: 0, mouth: 0,
+    });
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion) {
-      const r = Math.min(stageWidth, stageHeight) * CHAR_RADIUS_FRAC;
+      const H = Math.min(stageWidth, stageHeight) * CHAR_H_FRAC;
       const cx = 0.55 * stageWidth;
-      const cy = 0.5 * stageHeight;
+      const groundY = 0.6 * stageHeight + H / 2;
       ctx.clearRect(0, 0, stageWidth, stageHeight);
-      drawEllie(ctx, cx, cy, r, "idle", 0, 1, 0);
-      placeOverlays(cx, cy, r);
+      drawEllie(ctx, cx, groundY, H, baseState());
+      placeOverlays(cx, groundY, H);
       return () => ro.disconnect();
     }
 
-    const pos = { x: 0.55, y: 0.5 };
+    const pos = { x: 0.55, y: 0.55 };
     let heading = Math.random() * Math.PI * 2;
     let phase = 0;
     let blinkTimer = 2 + Math.random() * 3;
     let blinkPhase = 0;
 
     function draw() {
-      const r = Math.min(stageWidth, stageHeight) * CHAR_RADIUS_FRAC;
+      const H = Math.min(stageWidth, stageHeight) * CHAR_H_FRAC;
       ctx!.clearRect(0, 0, stageWidth, stageHeight);
 
       const mode = modeRef.current;
       const pose = poseRef.current;
       const eyeOpen = blinkPhase > 0 ? Math.max(0, Math.cos(Math.min(blinkPhase, 1) * Math.PI)) : 1;
-      const bobAmp = pose === "thinking" ? 0.05 : mode === "wander" && unreadRef.current > 0 ? 0.055 : 0.035;
+      const bobAmp = mode === "wander" && unreadRef.current > 0 ? 0.05 : 0.03;
       const bobY = Math.sin(phase) * bobAmp;
-      const tilt = mode === "wander" ? Math.sin(heading) * 0.12 : 0;
+      const tilt = mode === "wander" ? Math.sin(heading) * 0.1 : Math.sin(phase * 0.6) * 0.015;
+      const mouth = pose === "speaking" ? Math.max(0, Math.sin(phase * 6)) : 0;
 
-      const at = (x: number, y: number) => drawEllie(ctx!, x * stageWidth, (y + bobY) * stageHeight, r, pose, phase, eyeOpen, tilt);
+      const state: DrawState = { pose, phase, eyeOpen, tilt, ding: dingRef.current, mouth };
 
-      at(pos.x, pos.y);
+      const cx = pos.x * stageWidth;
+      const groundY = (pos.y + bobY) * stageHeight + H / 2;
+      drawEllie(ctx!, cx, groundY, H, state);
+
+      // Toroidal ghost copies while wandering
       if (mode === "wander") {
-        const nearLeft = pos.x < CHAR_RADIUS_FRAC * 1.5;
-        const nearRight = pos.x > 1 - CHAR_RADIUS_FRAC * 1.5;
-        const nearTop = pos.y < CHAR_RADIUS_FRAC * 1.5;
-        const nearBottom = pos.y > 1 - CHAR_RADIUS_FRAC * 1.5;
-        if (nearLeft) at(pos.x + 1, pos.y);
-        if (nearRight) at(pos.x - 1, pos.y);
-        if (nearTop) at(pos.x, pos.y + 1);
-        if (nearBottom) at(pos.x, pos.y - 1);
+        const f = 0.4;
+        if (pos.x < f) drawEllie(ctx!, (pos.x + 1) * stageWidth, groundY, H, state);
+        if (pos.x > 1 - f) drawEllie(ctx!, (pos.x - 1) * stageWidth, groundY, H, state);
+        if (pos.y < f) drawEllie(ctx!, cx, groundY + stageHeight, H, state);
+        if (pos.y > 1 - f) drawEllie(ctx!, cx, groundY - stageHeight, H, state);
       }
 
-      placeOverlays(pos.x * stageWidth, (pos.y + bobY) * stageHeight, r);
+      placeOverlays(cx, groundY, H);
     }
 
     let rafId = 0;
@@ -779,7 +823,10 @@ export default function EllieChat() {
 
       const mode = modeRef.current;
       const pose = poseRef.current;
-      phase += dt * (pose === "thinking" ? 4.5 : pose === "listening" ? 3.5 : 2.2);
+      phase += dt * (pose === "speaking" ? 3.2 : pose === "thinking" ? 2.6 : 2.0);
+
+      // Ding decay
+      if (dingRef.current > 0) dingRef.current = Math.max(0, dingRef.current - dt * 2.2);
 
       blinkTimer -= dt;
       if (blinkTimer <= 0 && blinkPhase === 0) blinkPhase = 0.0001;
@@ -825,18 +872,58 @@ export default function EllieChat() {
 
   function resetConversation() {
     setMessages([{ role: "ellie", content: GREETING }]);
+    setTyping(null);
     setInput("");
+  }
+
+  function handleCharacterClick() {
+    if (!open) triggerDing();
+    setOpen(!open);
+  }
+
+  /** Message body — typewriter shows escaped plain text mid-reveal, full markdown once done. */
+  function messageHtml(msg: Message, i: number): string {
+    if (typing && typing.index === i && msg.role === "ellie") {
+      return escapeHtml(msg.content.slice(0, typing.count));
+    }
+    return renderContent(msg.content);
   }
 
   return (
     <>
+      {/* PvZ-style dialogue layout: on desktop the panel sits BESIDE the
+          character with a speech-bubble tail pointing at her; on mobile it
+          stacks above her. */}
+      <style>{`
+        .ellie-dialog {
+          position: fixed;
+          z-index: 50;
+          right: 16px;
+          bottom: calc(${STAGE_SIZE_CSS} + 12px);
+          width: 360px;
+          max-width: calc(100vw - 24px);
+          max-height: min(540px, calc(100dvh - ${STAGE_SIZE_CSS} - 24px)) !important;
+        }
+        @media (min-width: 768px) {
+          .ellie-dialog {
+            right: calc(${STAGE_SIZE_CSS} + 30px);
+            bottom: 44px;
+            width: 400px;
+            max-height: min(540px, calc(100dvh - 88px)) !important;
+          }
+          .ellie-dialog-tail {
+            display: block !important;
+          }
+        }
+      `}</style>
+
       {/* Roaming character stage */}
       <div
         ref={stageRef}
         className="fixed z-50"
         style={{
-          right: "20px",
-          bottom: "20px",
+          right: "16px",
+          bottom: "16px",
           width: STAGE_SIZE_CSS,
           height: STAGE_SIZE_CSS,
           pointerEvents: "none",
@@ -862,7 +949,7 @@ export default function EllieChat() {
         <button
           type="button"
           ref={hitRegionRef}
-          onClick={() => setOpen(!open)}
+          onClick={handleCharacterClick}
           aria-label={open ? "Close chat" : "Open chat with Ellie"}
           className="absolute rounded-full"
           style={{ pointerEvents: "auto", background: "transparent", border: "none", cursor: "pointer", padding: 0 }}
@@ -878,10 +965,9 @@ export default function EllieChat() {
           </span>
         )}
 
-        {/* Voice-mode indicator dot on the stage — separate from the badge */}
         {voiceOn && !open && (
           <span
-            className="absolute bottom-3 right-3 flex items-center justify-center rounded-full bg-primary text-primary-foreground w-7 h-7 shadow-lg"
+            className="absolute bottom-2 right-2 flex items-center justify-center rounded-full bg-primary text-primary-foreground w-7 h-7 shadow-lg"
             style={{ pointerEvents: "none" }}
             aria-hidden="true"
           >
@@ -898,151 +984,178 @@ export default function EllieChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed right-6 z-50 w-[360px] max-w-[calc(100vw-24px)] bg-card border border-border/60 rounded-2xl shadow-2xl shadow-black/40 flex flex-col overflow-hidden"
-            style={{ maxHeight: "540px", bottom: `calc(${STAGE_SIZE_CSS} + 12px)` }}
+            className="ellie-dialog bg-card border border-border/60 rounded-2xl shadow-2xl shadow-black/40 flex flex-col overflow-visible"
+            style={{ maxHeight: "540px" }}
           >
-            {/* Header */}
-            <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border/50 bg-gradient-to-r from-card to-card/80 shrink-0">
-              <div className="w-8 h-8 rounded-full bg-primary/15 flex items-center justify-center">
-                <Home size={15} className="text-primary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-semibold text-foreground text-sm">Ellie</p>
-                <p className="text-xs text-muted-foreground">
-                  {voiceListening ? "Listening…" : "Elite Tenancy Letting Assistant"}
-                </p>
-              </div>
-              <button
-                onClick={resetConversation}
-                className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded"
-                title="Reset conversation"
-                aria-label="Reset conversation"
-              >
-                <RotateCcw size={13} />
-              </button>
-              <div className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-xs text-muted-foreground">Online</span>
-              </div>
-            </div>
+            {/* Speech-bubble tail pointing at Ellie (desktop only) */}
+            <div
+              className="ellie-dialog-tail absolute hidden"
+              style={{
+                right: "-9px",
+                bottom: "56px",
+                width: "18px",
+                height: "18px",
+                transform: "rotate(45deg)",
+                background: "hsl(var(--card))",
+                borderRight: "1px solid hsl(var(--border) / 0.6)",
+                borderTop: "1px solid hsl(var(--border) / 0.6)",
+              }}
+              aria-hidden="true"
+            />
 
-            {/* Voice mode controls */}
-            <div className="px-4 py-2.5 border-b border-border/40 bg-muted/20 flex items-center gap-2 shrink-0">
-              <button
-                onClick={() => {
-                  if (!voiceSupported) return;
-                  setVoiceOn((v) => !v);
-                }}
-                disabled={!voiceSupported}
-                className={`flex items-center gap-1.5 text-xs font-medium px-2.5 py-1.5 rounded-lg transition-colors ${
-                  voiceOn ? "bg-primary text-primary-foreground" : "bg-card border border-border/60 text-foreground hover:bg-muted/50"
-                } disabled:opacity-40 disabled:cursor-not-allowed`}
-                aria-label={voiceOn ? "Turn off voice mode" : "Turn on voice mode"}
-              >
-                {voiceOn ? <Mic size={12} /> : <MicOff size={12} />}
-                {voiceOn ? 'Voice on — say "Hey Ellie"' : "Turn on voice"}
-              </button>
-              <div className="ml-auto flex items-center gap-1.5">
-                <Globe size={12} className="text-muted-foreground" />
-                <select
-                  value={langCode}
-                  onChange={(e) => setLangCode(e.target.value)}
-                  className="text-xs bg-transparent border border-border/40 rounded px-1.5 py-1 text-foreground focus:outline-none focus:border-primary/50"
-                  aria-label="Voice language"
+            <div className="flex flex-col overflow-hidden rounded-2xl" style={{ maxHeight: "inherit" }}>
+              {/* Header */}
+              <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border/50 bg-gradient-to-r from-card to-card/80 shrink-0">
+                <div className="w-8 h-8 rounded-full bg-primary/15 flex items-center justify-center">
+                  <Home size={15} className="text-primary" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-foreground text-sm">Ellie</p>
+                  <p className="text-xs text-muted-foreground">
+                    {voiceListening ? "Listening…" : "Elite Tenancy Letting Assistant"}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setSoundOn((v) => !v)}
+                  className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded"
+                  title={soundOn ? "Mute sounds" : "Unmute sounds"}
+                  aria-label={soundOn ? "Mute sounds" : "Unmute sounds"}
                 >
-                  {LANGUAGES.map((l) => (
-                    <option key={l.code} value={l.code}>{l.label}</option>
-                  ))}
-                </select>
+                  {soundOn ? <Volume2 size={13} /> : <VolumeX size={13} />}
+                </button>
+                <button
+                  onClick={resetConversation}
+                  className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded"
+                  title="Reset conversation"
+                  aria-label="Reset conversation"
+                >
+                  <RotateCcw size={13} />
+                </button>
+                <div className="flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-xs text-muted-foreground">Online</span>
+                </div>
               </div>
-            </div>
-            {voiceHint && (
-              <div className="px-4 py-1.5 text-[11px] text-destructive bg-destructive/5 border-b border-border/40 shrink-0">{voiceHint}</div>
-            )}
 
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 min-h-0">
-              {messages.map((msg, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+              {/* Voice mode controls */}
+              <div className="px-4 py-2.5 border-b border-border/40 bg-muted/20 flex items-center gap-2 shrink-0">
+                <button
+                  onClick={() => { if (voiceSupported) setVoiceOn((v) => !v); }}
+                  disabled={!voiceSupported}
+                  className={`flex items-center gap-1.5 text-xs font-medium px-2.5 py-1.5 rounded-lg transition-colors ${
+                    voiceOn ? "bg-primary text-primary-foreground" : "bg-card border border-border/60 text-foreground hover:bg-muted/50"
+                  } disabled:opacity-40 disabled:cursor-not-allowed`}
+                  aria-label={voiceOn ? "Turn off voice mode" : "Turn on voice mode"}
                 >
-                  {msg.role === "ellie" && (
+                  {voiceOn ? <Mic size={12} /> : <MicOff size={12} />}
+                  {voiceOn ? 'Voice on — say "Hey Ellie"' : "Turn on voice"}
+                </button>
+                <div className="ml-auto flex items-center gap-1.5">
+                  <Globe size={12} className="text-muted-foreground" />
+                  <select
+                    value={langCode}
+                    onChange={(e) => setLangCode(e.target.value)}
+                    className="text-xs bg-transparent border border-border/40 rounded px-1.5 py-1 text-foreground focus:outline-none focus:border-primary/50"
+                    aria-label="Voice language"
+                  >
+                    {LANGUAGES.map((l) => (
+                      <option key={l.code} value={l.code}>{l.label}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              {voiceHint && (
+                <div className="px-4 py-1.5 text-[11px] text-destructive bg-destructive/5 border-b border-border/40 shrink-0">{voiceHint}</div>
+              )}
+
+              {/* Messages */}
+              <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 min-h-0">
+                {messages.map((msg, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                  >
+                    {msg.role === "ellie" && (
+                      <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0 mt-0.5 mr-2">
+                        <Home size={11} className="text-primary" />
+                      </div>
+                    )}
+                    <div
+                      className={`max-w-[82%] px-3 py-2 rounded-xl text-xs leading-relaxed ${
+                        msg.role === "user"
+                          ? "bg-primary text-primary-foreground rounded-br-sm"
+                          : "bg-muted/60 text-foreground rounded-bl-sm"
+                      }`}
+                      onClick={() => {
+                        // Click a mid-reveal message to skip to full text instantly
+                        if (typing && typing.index === i) setTyping(null);
+                      }}
+                      dangerouslySetInnerHTML={{ __html: messageHtml(msg, i) }}
+                    />
+                  </motion.div>
+                ))}
+
+                {loading && (
+                  <div className="flex justify-start">
                     <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0 mt-0.5 mr-2">
                       <Home size={11} className="text-primary" />
                     </div>
-                  )}
-                  <div
-                    className={`max-w-[82%] px-3 py-2 rounded-xl text-xs leading-relaxed ${
-                      msg.role === "user"
-                        ? "bg-primary text-primary-foreground rounded-br-sm"
-                        : "bg-muted/60 text-foreground rounded-bl-sm"
-                    }`}
-                    dangerouslySetInnerHTML={{ __html: renderContent(msg.content) }}
-                  />
-                </motion.div>
-              ))}
-
-              {loading && (
-                <div className="flex justify-start">
-                  <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0 mt-0.5 mr-2">
-                    <Home size={11} className="text-primary" />
+                    <div className="bg-muted/60 rounded-xl rounded-bl-sm px-3 py-2">
+                      <TypingDots />
+                    </div>
                   </div>
-                  <div className="bg-muted/60 rounded-xl rounded-bl-sm px-3 py-2">
-                    <TypingDots />
+                )}
+
+                {messages.length === 1 && !loading && (
+                  <div className="grid grid-cols-2 gap-1.5 mt-2">
+                    {STARTERS.map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => send(s)}
+                        className="text-left text-xs px-2.5 py-2 rounded-lg bg-muted/40 hover:bg-muted/70 text-muted-foreground hover:text-foreground transition-colors leading-snug border border-border/30"
+                      >
+                        {s}
+                      </button>
+                    ))}
                   </div>
-                </div>
-              )}
+                )}
 
-              {messages.length === 1 && !loading && (
-                <div className="grid grid-cols-2 gap-1.5 mt-2">
-                  {STARTERS.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => send(s)}
-                      className="text-left text-xs px-2.5 py-2 rounded-lg bg-muted/40 hover:bg-muted/70 text-muted-foreground hover:text-foreground transition-colors leading-snug border border-border/30"
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              )}
+                <div ref={bottomRef} />
+              </div>
 
-              <div ref={bottomRef} />
-            </div>
-
-            {/* Input */}
-            <div className="px-3 py-3 border-t border-border/50 shrink-0">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  send();
-                }}
-                className="flex items-center gap-2"
-              >
-                <input
-                  ref={inputRef}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask Ellie anything…"
-                  className="flex-1 bg-background text-foreground text-xs rounded-lg px-3 py-2.5 border border-border/40 outline-none focus:border-primary/50 placeholder:text-muted-foreground/60 transition-colors"
-                  disabled={loading}
-                />
-                <button
-                  type="submit"
-                  disabled={loading || !input.trim()}
-                  aria-label="Send message"
-                  className="w-9 h-9 rounded-lg bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:bg-primary/90 transition-colors shrink-0"
+              {/* Input */}
+              <div className="px-3 py-3 border-t border-border/50 shrink-0">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    send();
+                  }}
+                  className="flex items-center gap-2"
                 >
-                  <Send size={14} />
-                </button>
-              </form>
-              <p className="text-center text-[10px] text-muted-foreground/50 mt-1.5">
-                Ellie · Elite Tenancy AI Assistant
-              </p>
+                  <input
+                    ref={inputRef}
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Ask Ellie anything…"
+                    className="flex-1 bg-background text-foreground text-xs rounded-lg px-3 py-2.5 border border-border/40 outline-none focus:border-primary/50 placeholder:text-muted-foreground/60 transition-colors"
+                    disabled={loading}
+                  />
+                  <button
+                    type="submit"
+                    disabled={loading || !input.trim()}
+                    aria-label="Send message"
+                    className="w-9 h-9 rounded-lg bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:bg-primary/90 transition-colors shrink-0"
+                  >
+                    <Send size={14} />
+                  </button>
+                </form>
+                <p className="text-center text-[10px] text-muted-foreground/50 mt-1.5">
+                  Ellie · Elite Tenancy AI Assistant
+                </p>
+              </div>
             </div>
           </motion.div>
         )}
