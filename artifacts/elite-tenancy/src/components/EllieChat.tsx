@@ -204,25 +204,79 @@ const BLUSH = "rgba(232, 167, 140, 0.45)";
 
 type Pose = "idle" | "listening" | "thinking" | "speaking";
 
+interface ArmPose {
+  lR: number; // left arm raise
+  lO: number; // left arm out
+  rR: number; // right arm raise
+  rO: number; // right arm out
+  brow: number; // 0..1 attentive brow raise
+  asym: number; // 0..1 thinking brow asymmetry
+}
+
 interface DrawState {
   pose: Pose;
   phase: number;    // global animation clock (radians-ish)
   eyeOpen: number;  // 1 open … 0 closed
   tilt: number;     // whole-body lean, radians
-  ding: number;     // 1 just-dinged … 0 settled (drives squash + arcs)
+  ding: number;     // 1 just-dinged … 0 settled (drives the strike envelope)
   mouth: number;    // 0 closed smile … 1 fully open (speaking flap)
   walk: number;     // 0 standing; otherwise the step-cycle phase while strolling
   facing: 1 | -1;   // horizontal facing (mirrors the body toward travel direction)
   lookAt: { x: number; y: number }; // extra eye offset (cursor tracking), unit-scaled
+  arm: ArmPose;     // blended limb/brow targets — engine lerps between poses
+  breath: number;   // -1..1 breathing cycle (micro scaleY swell while standing)
+  tagSwing: number; // name-tag pendulum angle, radians
+  btnLag: number;   // press-button vertical lag behind the body bob, u units
+  squint: number;   // 0..1 happy lower-lid (idle/speaking warmth)
+  depth01: number;  // 0 far … 1 near — scales ground-shadow density
+}
+
+const IDLE_ARMS: ArmPose = { lR: 2, lO: 7, rR: 2, rO: 7, brow: 0, asym: 0 };
+
+/** Per-pose limb/brow targets. The engine blends between these on pose
+ * change (ease-out-back, eyes lead / body follows) so states never snap. */
+function armTargets(pose: Pose, phase: number, gesture: number): ArmPose {
+  if (pose === "listening") return { lR: 4, lO: 7, rR: 26 + Math.sin(phase * 3) * 2, rO: 4, brow: 1, asym: 0 };
+  if (pose === "thinking") return { lR: 2, lO: 6, rR: 18, rO: -2, brow: 0, asym: 1 };
+  if (pose === "speaking") return { lR: 8 + gesture, lO: 9, rR: 8 - gesture, rO: 9, brow: 0.2, asym: 0 };
+  return IDLE_ARMS;
+}
+
+/** Ease-out with a gentle ~6% overshoot — "polished concierge", never rubbery. */
+function easeOutBack(t: number): number {
+  const s = 1.2;
+  const q = t - 1;
+  return 1 + q * q * ((s + 1) * q + s);
+}
+
+/** One semi-implicit Euler step of a damped spring — drives the name-tag
+ * pendulum and the press-button lag toward a moving target. */
+function springStep(pos: number, vel: number, target: number, dt: number, stiffness: number, damping: number): [number, number] {
+  const accel = stiffness * (target - pos) - damping * vel;
+  const nv = vel + accel * dt;
+  const np = pos + nv * dt;
+  return [np, nv];
 }
 
 function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H: number, s: DrawState) {
   const u = H / 100; // 1 unit = 1% of character height
-  // Walking adds a waddle: extra squash bounce + side-to-side lean per step
+  // Bell-strike envelope — a strike is percussive: ≤90ms press-in, a springy
+  // rebound past neutral, then a slow settle. s.ding runs 1 → 0 over ~500ms;
+  // strike > 0 is press-in, strike < 0 is the stretch rebound.
+  const p = 1 - s.ding;
+  let strike = 0;
+  if (s.ding > 0.001) {
+    if (p < 0.14) { const q = p / 0.14; strike = q * q; }
+    else if (p < 0.36) { const q = (p - 0.14) / 0.22; strike = 1 - 1.35 * (1 - (1 - q) * (1 - q)); }
+    else { const q = (p - 0.36) / 0.64; strike = -0.35 * (1 - q) * (1 - q); }
+  }
+  // Walking adds a waddle: extra squash bounce + side-to-side lean per step.
+  // Standing adds a slow breathing swell instead.
   const stepBounce = s.walk > 0 ? Math.abs(Math.sin(s.walk)) * 0.03 : 0;
   const waddle = s.walk > 0 ? Math.sin(s.walk) * 0.055 : 0;
-  const squash = 1 - s.ding * 0.09 + stepBounce;
-  const spread = 1 + s.ding * 0.07 - stepBounce * 0.5;
+  const breathSwell = s.walk > 0 ? 0 : s.breath * 0.008;
+  const squash = 1 - strike * 0.12 + stepBounce + breathSwell;
+  const spread = 1 + strike * 0.09 - stepBounce * 0.5 - breathSwell * 0.5;
 
   ctx.save();
   // Squash-and-stretch about the ground point (feet stay planted);
@@ -238,11 +292,12 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
   // Near-black neutral works over both cream and navy backgrounds.
   const lift01 = s.walk > 0 ? Math.abs(Math.sin(s.walk)) : 0;
   const shadowY = groundY - 1 * u;
+  const shDense = 0.5 + 0.5 * s.depth01; // farther = lighter shadow
   ctx.save();
   ctx.translate(cx, shadowY);
   ctx.scale(spread, 5 / 30);
   const poolGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, 30 * u);
-  poolGrad.addColorStop(0, "rgba(12, 22, 28, 0.22)");
+  poolGrad.addColorStop(0, `rgba(12, 22, 28, ${0.22 * shDense})`);
   poolGrad.addColorStop(1, "rgba(12, 22, 28, 0)");
   ctx.beginPath();
   ctx.arc(0, 0, 30 * u, 0, Math.PI * 2);
@@ -253,7 +308,7 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
   const coreScale = 1 - lift01 * 0.3;
   ctx.beginPath();
   ctx.ellipse(plantedX, shadowY, 15 * u * coreScale, 2.2 * u * coreScale, 0, 0, Math.PI * 2);
-  ctx.fillStyle = `rgba(12, 22, 28, ${0.34 - lift01 * 0.14})`;
+  ctx.fillStyle = `rgba(12, 22, 28, ${(0.34 - lift01 * 0.14) * shDense})`;
   ctx.fill();
 
   // Legs + shoe plates (navy) — alternate lift while walking
@@ -300,20 +355,10 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
     ctx.lineWidth = 0.8 * u;
     ctx.stroke();
   };
-  const wave = Math.sin(s.phase * 3) * 4;
-  if (s.pose === "listening") {
-    drawArm(-1, 4, 7);
-    drawArm(1, 26 + wave * 0.5, 4); // hand up near "ear"
-  } else if (s.pose === "thinking") {
-    drawArm(-1, 2, 6);
-    drawArm(1, 18, -2); // hand toward chin
-  } else if (s.pose === "speaking") {
-    drawArm(-1, 8 + wave, 9);
-    drawArm(1, 8 - wave, 9); // gesturing while talking
-  } else {
-    drawArm(-1, 2, 7);
-    drawArm(1, 2, 7);
-  }
+  // Limbs use the engine-blended pose params, so state changes glide
+  // (hand travels to the chin) instead of snapping frame-to-frame.
+  drawArm(-1, s.arm.lR, s.arm.lO);
+  drawArm(1, s.arm.rR, s.arm.rO);
 
   // Dome body — gold hemisphere with flat bottom
   const traceDome = () => {
@@ -394,7 +439,9 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
   ctx.fillStyle = rimGrad;
   ctx.fill();
 
-  // Name tag (cream, hanging from a thin navy ribbon at the dome base)
+  // Name tag (cream, hanging from a thin navy ribbon at the dome base).
+  // The card is a damped pendulum around its ribbon anchor — it lags her
+  // acceleration and keeps swinging a beat after she stops.
   const tagY = domeBaseY - 9 * u;
   ctx.beginPath();
   ctx.moveTo(cx - 3 * u, tagY - 4 * u);
@@ -403,6 +450,10 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
   ctx.strokeStyle = NAVY;
   ctx.lineWidth = 1 * u;
   ctx.stroke();
+  ctx.save();
+  ctx.translate(cx, tagY - 1 * u);
+  ctx.rotate(s.tagSwing);
+  ctx.translate(-cx, -(tagY - 1 * u));
   ctx.beginPath();
   ctx.roundRect(cx - 7.5 * u, tagY - 1 * u, 15 * u, 7 * u, 1.5 * u);
   ctx.fillStyle = CREAM;
@@ -418,6 +469,7 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
   ctx.moveTo(cx - 4.5 * u, tagY + 2.5 * u);
   ctx.lineTo(cx + 4.5 * u, tagY + 2.5 * u);
   ctx.stroke();
+  ctx.restore();
 
   // ── Face ──
   const eyeY = domeTopY + 22 * u;
@@ -432,16 +484,15 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
     look.y += s.lookAt.y * u;
   }
 
-  // Eyebrows — the main mood carrier
+  // Eyebrows — the main mood carrier, blended so moods glide between poses
   ctx.strokeStyle = NAVY;
   ctx.lineWidth = 1.5 * u;
   ctx.lineCap = "round";
   [-1, 1].forEach((side) => {
     const bx = cx + side * eyeDX;
-    let by = eyeY - eyeH - 3 * u;
-    let curl = 2.5 * u;
-    if (s.pose === "listening") by -= 1.8 * u;          // raised, attentive
-    if (s.pose === "thinking") { by -= side === -1 ? 2.2 * u : 0; curl = 1.8 * u; } // asymmetric, pondering
+    let by = eyeY - eyeH - 3 * u - s.arm.brow * 1.8 * u; // attentive raise
+    const curl = (2.5 - s.arm.asym * 0.7) * u;
+    if (side === -1) by -= s.arm.asym * 2.2 * u; // pondering asymmetry
     ctx.beginPath();
     ctx.moveTo(bx - 3.5 * u, by + curl * 0.4);
     ctx.quadraticCurveTo(bx, by - curl * 0.6, bx + 3.5 * u, by + curl * 0.4);
@@ -465,6 +516,15 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
       ctx.arc(ex - 1.4 * u, eyeY + look.y + eh * 0.3, 0.8 * u * s.eyeOpen, 0, Math.PI * 2);
       ctx.fillStyle = "rgba(250,248,244,0.7)";
       ctx.fill();
+    }
+    // Happy lower lid — a soft cream squint line that makes smiles land
+    if (s.squint > 0.05 && s.eyeOpen > 0.5) {
+      ctx.beginPath();
+      ctx.ellipse(ex, eyeY + look.y + eh * 0.7, eyeW * 0.85, eh * 0.45, 0, Math.PI * 0.15, Math.PI * 0.85);
+      ctx.strokeStyle = `rgba(250, 248, 244, ${0.85 * s.squint})`;
+      ctx.lineWidth = 1.2 * u;
+      ctx.lineCap = "round";
+      ctx.stroke();
     }
   });
 
@@ -504,8 +564,9 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
     ctx.stroke();
   }
 
-  // Top press-button (dips when dinged)
-  const btnDip = s.ding * 2.5 * u;
+  // Top press-button — dips sharply on the strike attack, and lags the
+  // body bob on a soft spring while she walks (secondary motion).
+  const btnDip = Math.max(0, strike) * 2.8 * u + s.btnLag * u;
   ctx.beginPath();
   ctx.roundRect(cx - 6 * u, domeTopY - 5.5 * u + btnDip, 12 * u, 6.5 * u, 2.5 * u);
   const btnGrad = ctx.createLinearGradient(cx, domeTopY - 5.5 * u + btnDip, cx, domeTopY + 1 * u + btnDip);
@@ -1011,6 +1072,7 @@ export default function EllieChat() {
     const staticState = (): DrawState => ({
       pose: poseRef.current, phase: 0, eyeOpen: 1, tilt: 0, ding: 0, mouth: 0,
       walk: 0, facing: -1, lookAt: { x: 0, y: 0 },
+      arm: { ...IDLE_ARMS }, breath: 0, tagSwing: 0, btnLag: 0, squint: 0.6, depth01: 1,
     });
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1028,9 +1090,11 @@ export default function EllieChat() {
     // Cursor tracking — her eyes follow the mouse within a small damped cone.
     const cursor = { x: -1, y: -1 };
     const lookAt = { x: 0, y: 0 };
+    let lastMouseMove = performance.now();
     function onMouseMove(e: MouseEvent) {
       cursor.x = e.clientX;
       cursor.y = e.clientY;
+      lastMouseMove = performance.now();
     }
     window.addEventListener("mousemove", onMouseMove, { passive: true });
 
@@ -1042,6 +1106,36 @@ export default function EllieChat() {
     let facing: 1 | -1 = -1;
     let blinkTimer = 2 + Math.random() * 3;
     let blinkPhase = 0;
+    let justDoubleBlinked = false;
+
+    // ── Phase 3: pose blending, secondary motion, micro-life ──────────────
+    // Arms/brows ease toward their live per-pose target instead of snapping;
+    // brows lead by 60ms so the mood reads before the gesture arrives.
+    let armCurrent: ArmPose = { ...IDLE_ARMS };
+    let armFrom: ArmPose = { ...IDLE_ARMS };
+    let browBlendT = 1;
+    let limbBlendT = 1;
+    let limbDelay = 0;
+    let lastPose: Pose = poseRef.current;
+    let speakingStartSec = 0;
+    let breath = 0;
+    let squintCurrent = 0.6;
+    // Name-tag pendulum + press-button lag — damped springs kicked by
+    // horizontal acceleration and footfall/breath bounce respectively.
+    let tagSwingPos = 0, tagSwingVel = 0;
+    let btnLagPos = 0, btnLagVel = 0;
+    let prevVxPx = 0;
+    // Weight shift — a slow, subtle lateral settle while standing still;
+    // never counted as locomotion, just "alive" stillness.
+    let weightShiftTimer = 8 + Math.random() * 6;
+    let weightShiftPhase = 0;
+    let weightShiftDir: 1 | -1 = 1;
+    let weightShiftX = 0;
+    // Random look-around — an independent glance away from the cursor for a
+    // beat, so she reads as noticing more than just the mouse pointer.
+    let lookAroundTimer = 9 + Math.random() * 8;
+    let lookAroundHold = 0;
+    let lookAroundOffset = { x: 0, y: 0 };
 
     // Behaviour brain — premium duty cycle: mostly still, occasionally alive.
     // Target ≤25-30% walking. Strolls are short; dwells are long and chain
@@ -1089,9 +1183,15 @@ export default function EllieChat() {
         walk: speedNow > 8 ? walkPhase : 0,
         facing,
         lookAt: { x: lookAt.x, y: lookAt.y },
+        arm: armCurrent,
+        breath,
+        tagSwing: tagSwingPos,
+        btnLag: btnLagPos,
+        squint: squintCurrent,
+        depth01: mode === "settled" ? 1 : pos.y,
       };
 
-      const cx = pos.x * stageWidth;
+      const cx = pos.x * stageWidth + weightShiftX;
       const groundY = (pos.y + bobY) * stageHeight + H / 2;
       drawEllie(ctx!, cx, groundY, H, state);
 
@@ -1124,13 +1224,41 @@ export default function EllieChat() {
         blinkPhase += dt / 0.12;
         if (blinkPhase >= 1) {
           blinkPhase = 0;
-          blinkTimer = 2.5 + Math.random() * 3.5;
+          // 15% chance of a quick double-blink — a tiny, human tell
+          if (!justDoubleBlinked && Math.random() < 0.15) {
+            blinkTimer = 0.14;
+            justDoubleBlinked = true;
+          } else {
+            blinkTimer = 2.5 + Math.random() * 3.5;
+            justDoubleBlinked = false;
+          }
         }
       }
 
-      // Damped cursor gaze (skip while she's mid-thought)
+      // Random look-around — independent of cursor tracking, so she isn't
+      // purely mouse-reactive. Skipped mid-thought and mid-stroll (a strolling
+      // glance-away would read as inattentive, not charming).
+      if (pose !== "thinking" && behaviour !== "stroll") {
+        if (lookAroundHold > 0) {
+          lookAroundHold -= dt;
+        } else {
+          lookAroundTimer -= dt;
+          if (lookAroundTimer <= 0) {
+            const ang = Math.random() * Math.PI * 2;
+            lookAroundOffset = { x: Math.cos(ang) * 1.4, y: Math.sin(ang) * 0.9 };
+            lookAroundHold = 0.8 + Math.random() * 0.7;
+            lookAroundTimer = 9 + Math.random() * 8;
+          }
+        }
+      }
+      const lookingAround = lookAroundHold > 0;
+
+      // Damped cursor gaze (skip while she's mid-thought or glancing away)
       const H0 = baseH();
-      if (cursor.x >= 0 && pose !== "thinking") {
+      if (lookingAround) {
+        lookAt.x += (lookAroundOffset.x - lookAt.x) * Math.min(1, dt * 5);
+        lookAt.y += (lookAroundOffset.y - lookAt.y) * Math.min(1, dt * 5);
+      } else if (cursor.x >= 0 && pose !== "thinking") {
         const dx = cursor.x - pos.x * stageWidth;
         const dy = cursor.y - (pos.y * stageHeight);
         const dist = Math.hypot(dx, dy) || 1;
@@ -1205,6 +1333,80 @@ export default function EllieChat() {
         pos.y += (t.y - pos.y) * Math.min(1, dt * 3);
         facing = -1; // face the panel/user
       }
+
+      // ── Phase 3: pose blending + secondary motion, once per frame ────────
+      const nowSec = now / 1000;
+
+      // Pose-change blend: brows/asymmetry ease immediately, limbs 60ms
+      // later ("eyes lead, body follows"), both via a low-overshoot
+      // ease-out-back so state changes glide instead of snapping.
+      if (pose !== lastPose) {
+        armFrom = { ...armCurrent };
+        browBlendT = 0;
+        limbBlendT = 0;
+        limbDelay = 0.06;
+        if (pose === "speaking") speakingStartSec = nowSec;
+        lastPose = pose;
+      }
+      if (limbDelay > 0) limbDelay = Math.max(0, limbDelay - dt);
+      browBlendT = Math.min(1, browBlendT + dt / 0.3);
+      if (limbDelay <= 0) limbBlendT = Math.min(1, limbBlendT + dt / 0.3);
+
+      // Real speakers settle: gesture amplitude drops ~30% after ~4s talking
+      const gestureAmp = pose === "speaking" && nowSec - speakingStartSec > 4 ? 2.8 : 4;
+      const liveArmTarget = armTargets(pose, phase, gestureAmp);
+      const browEase = easeOutBack(browBlendT);
+      const limbEase = easeOutBack(limbBlendT);
+      armCurrent = {
+        lR: armFrom.lR + (liveArmTarget.lR - armFrom.lR) * limbEase,
+        lO: armFrom.lO + (liveArmTarget.lO - armFrom.lO) * limbEase,
+        rR: armFrom.rR + (liveArmTarget.rR - armFrom.rR) * limbEase,
+        rO: armFrom.rO + (liveArmTarget.rO - armFrom.rO) * limbEase,
+        brow: armFrom.brow + (liveArmTarget.brow - armFrom.brow) * browEase,
+        asym: armFrom.asym + (liveArmTarget.asym - armFrom.asym) * browEase,
+      };
+
+      // Breathing — base idle layer; walking has its own bounce, so this
+      // only runs while standing. Driven off wall-clock time (not an
+      // accumulator) so it can't drift out of phase across frame drops.
+      breath = speedNow > 8 ? 0 : Math.sin(nowSec * (2 * Math.PI / 3.2));
+
+      // Happy lower-lid squint — warm at idle/speaking, neutral while
+      // listening/thinking (kindchenschema smile, not a permanent grin).
+      const squintTarget = pose === "idle" || pose === "speaking" ? 0.6 : 0;
+      squintCurrent += (squintTarget - squintCurrent) * Math.min(1, dt * 3);
+
+      // Name-tag pendulum — underdamped spring kicked by horizontal
+      // acceleration, so it keeps swinging a beat after she starts/stops.
+      const vxPxNow = Math.cos(heading) * speedNow;
+      const hAccel = (vxPxNow - prevVxPx) / Math.max(dt, 0.001);
+      prevVxPx = vxPxNow;
+      const tagTarget = Math.max(-1, Math.min(1, -hAccel / 900)) * 0.09;
+      [tagSwingPos, tagSwingVel] = springStep(tagSwingPos, tagSwingVel, tagTarget, dt, 40, 3.2);
+
+      // Press-button spring — lags the footfall bounce (walking) or the
+      // idle breath (standing), never ticking in lockstep with the body.
+      const bounceExcite = speedNow > 8 ? Math.abs(Math.sin(walkPhase)) * 1.3 : Math.abs(breath) * 0.4;
+      [btnLagPos, btnLagVel] = springStep(btnLagPos, btnLagVel, bounceExcite, dt, 120, 9);
+
+      // Weight shift — a slow, subtle lateral settle while standing still;
+      // purely cosmetic (never touches pos.x), so it never reads as travel.
+      if (speedNow < 6) {
+        if (weightShiftPhase > 0) {
+          weightShiftPhase = Math.min(1, weightShiftPhase + dt / 0.6);
+          if (weightShiftPhase >= 1) {
+            weightShiftPhase = 0;
+            weightShiftTimer = 8 + Math.random() * 6;
+          }
+        } else {
+          weightShiftTimer -= dt;
+          if (weightShiftTimer <= 0) {
+            weightShiftPhase = 0.0001;
+            weightShiftDir = Math.random() < 0.5 ? -1 : 1;
+          }
+        }
+      }
+      weightShiftX = weightShiftPhase > 0 ? weightShiftDir * Math.sin(weightShiftPhase * Math.PI) * 2.2 : 0;
 
       draw();
     }
