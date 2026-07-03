@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Send, RotateCcw, Mic, MicOff, Globe, Volume2, VolumeX } from "lucide-react";
+import { Home, Send, RotateCcw, Mic, MicOff, Globe, Volume2, VolumeX, Anchor, Eye, EyeOff, MessageCircle } from "lucide-react";
+import { useLocation } from "wouter";
 
 interface Message {
   role: "user" | "ellie";
@@ -490,13 +491,64 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
   }
 }
 
-// Reserved corner area the chat panel positions itself around — this is where
-// Ellie walks "home" to when the panel opens, not a bounding box for her roam.
+// ── Page-type policy matrix ──────────────────────────────────────────────────
+// Premium mascots adapt per page context. A concierge bell is composed and
+// present — never performing over content the user is trying to read or buy.
+type PagePolicy = "ROAM" | "PATROL" | "DOCKED" | "HIDDEN";
+
+function getPagePolicy(pathname: string): PagePolicy {
+  const p = pathname.toLowerCase();
+  // Admin/landlord/tenant portals use their own layouts — EllieChat isn't
+  // rendered there — but guard just in case:
+  if (p.startsWith("/admin")) return "HIDDEN";
+
+  // Legal / compliance — motionless, respectful
+  if (p === "/privacy" || p === "/terms" || p === "/cookies") return "DOCKED";
+
+  // Forms and tools — freeze during data entry
+  if (
+    p === "/renter-passport" || p === "/contact" || p === "/valuation" ||
+    p === "/list-your-property" || p === "/verify-landlord" ||
+    p === "/right-to-rent-check" || p === "/rra-2025-checker" ||
+    p === "/sign-in" || p.startsWith("/sign-in/") ||
+    p === "/sign-up" || p.startsWith("/sign-up/")
+  ) return "DOCKED";
+
+  // Listings — user scanning cards; motion destroys scan patterns
+  if (p === "/listings" || p.startsWith("/listings/")) return "DOCKED";
+  if (p === "/room-wanted" || p === "/rooms-to-let" || p.startsWith("/rooms-to-let/")) return "DOCKED";
+  if (p === "/find-a-room") return "DOCKED";
+
+  // Blog/articles — reading comprehension and motion are enemies
+  if (p === "/blog" || p.startsWith("/blog/")) return "DOCKED";
+
+  // Homepage — personality where it converts
+  if (p === "/") return "PATROL";
+
+  // Everything else (informational pages) — gentle patrol
+  return "PATROL";
+}
+
+// ── User preference persistence ─────────────────────────────────────────────
+const ELLIE_PREF_KEY = "et_ellie_pref";
+type ElliePref = "auto" | "docked" | "hidden";
+
+function loadElliePref(): ElliePref {
+  const v = localStorage.getItem(ELLIE_PREF_KEY);
+  if (v === "docked" || v === "hidden") return v;
+  return "auto";
+}
+
+// Reserved corner area the chat panel positions itself around
 const STAGE_SIZE_CSS = "clamp(160px, 22vw, 250px)";
 const WANDER_JITTER = 1.2;
 const TARGET_FPS = 30;
 
+// Edge margin — she turns around this many px before the viewport edge
+const EDGE_MARGIN = 0.06;
+
 export default function EllieChat() {
+  const [location] = useLocation();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([{ role: "ellie", content: GREETING }]);
   const [input, setInput] = useState("");
@@ -508,6 +560,35 @@ export default function EllieChat() {
   const [typing, setTyping] = useState<{ index: number; count: number } | null>(null);
   const [soundOn, setSoundOn] = useState(true);
   const soundOnRef = useRef(true);
+
+  // User preference: auto / docked / hidden
+  const [elliePref, setElliePref] = useState<ElliePref>(loadElliePref);
+  const pagePolicyRef = useRef<PagePolicy>("PATROL");
+  const effectiveModeRef = useRef<PagePolicy>("PATROL");
+  const freezeRef = useRef(false);
+  const freezeTimerRef = useRef<number | null>(null);
+
+  // Pill menu (Chat · Dock · Hide) shown on hover/focus of the character
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [hideToast, setHideToast] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuCloseTimer = useRef<number | null>(null);
+
+  const openMenu = useCallback(() => {
+    if (menuCloseTimer.current) { window.clearTimeout(menuCloseTimer.current); menuCloseTimer.current = null; }
+    setMenuOpen(true);
+  }, []);
+  const closeMenuSoon = useCallback(() => {
+    if (menuCloseTimer.current) window.clearTimeout(menuCloseTimer.current);
+    menuCloseTimer.current = window.setTimeout(() => setMenuOpen(false), 350);
+  }, []);
+
+  const hideEllie = useCallback(() => {
+    setElliePref("hidden");
+    setMenuOpen(false);
+    setHideToast(true);
+    window.setTimeout(() => setHideToast(false), 4000);
+  }, []);
 
   // Voice mode state
   const [voiceOn, setVoiceOn] = useState(false);
@@ -545,6 +626,64 @@ export default function EllieChat() {
   useEffect(() => { localStorage.setItem(VOICE_MODE_KEY, voiceOn ? "1" : "0"); }, [voiceOn]);
   useEffect(() => { localStorage.setItem(VOICE_LANG_KEY, langCode); }, [langCode]);
   useEffect(() => { localStorage.setItem(SOUND_KEY, soundOn ? "1" : "0"); soundOnRef.current = soundOn; }, [soundOn]);
+
+  // Compute effective mode from page policy + user pref
+  useEffect(() => {
+    const policy = getPagePolicy(location);
+    pagePolicyRef.current = policy;
+    if (elliePref === "hidden") {
+      effectiveModeRef.current = "HIDDEN";
+    } else if (elliePref === "docked") {
+      effectiveModeRef.current = "DOCKED";
+    } else {
+      effectiveModeRef.current = policy;
+    }
+  }, [location, elliePref]);
+
+  useEffect(() => {
+    localStorage.setItem(ELLIE_PREF_KEY, elliePref);
+  }, [elliePref]);
+
+  // Freeze triggers — form focus, scroll, text selection
+  useEffect(() => {
+    function startFreeze(resumeDelayMs: number) {
+      freezeRef.current = true;
+      if (freezeTimerRef.current) window.clearTimeout(freezeTimerRef.current);
+      freezeTimerRef.current = window.setTimeout(() => {
+        freezeRef.current = false;
+        freezeTimerRef.current = null;
+      }, resumeDelayMs);
+    }
+    function onFocusIn(e: FocusEvent) {
+      const t = e.target as HTMLElement;
+      if (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable) {
+        startFreeze(8000);
+      }
+    }
+    function onFocusOut() {
+      startFreeze(5000);
+    }
+    let scrollTimer: number | null = null;
+    function onScroll() {
+      freezeRef.current = true;
+      if (scrollTimer) window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(() => { freezeRef.current = false; }, 4000);
+    }
+    function onSelectStart() { startFreeze(3000); }
+
+    document.addEventListener("focusin", onFocusIn, { passive: true });
+    document.addEventListener("focusout", onFocusOut, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("selectstart", onSelectStart, { passive: true });
+    return () => {
+      document.removeEventListener("focusin", onFocusIn);
+      document.removeEventListener("focusout", onFocusOut);
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("selectstart", onSelectStart);
+      if (scrollTimer) window.clearTimeout(scrollTimer);
+      if (freezeTimerRef.current) window.clearTimeout(freezeTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     modeRef.current = open ? "settled" : "wander";
@@ -783,6 +922,11 @@ export default function EllieChat() {
         tooltipRef.current.style.left = `${Math.min(Math.max(8, cx - tw / 2), stageWidth - tw - 8)}px`;
         tooltipRef.current.style.top = `${Math.max(8, groundY - H - 34)}px`;
       }
+      if (menuRef.current) {
+        const mw = menuRef.current.offsetWidth || 160;
+        menuRef.current.style.left = `${Math.min(Math.max(8, cx - mw / 2), stageWidth - mw - 8)}px`;
+        menuRef.current.style.top = `${Math.max(8, groundY - H - 46)}px`;
+      }
       if (micRef.current) {
         micRef.current.style.left = `${cx + H * 0.24}px`;
         micRef.current.style.top = `${groundY - H * 0.22}px`;
@@ -830,21 +974,26 @@ export default function EllieChat() {
     let blinkTimer = 2 + Math.random() * 3;
     let blinkPhase = 0;
 
-    // Behaviour brain
+    // Behaviour brain — premium duty cycle: mostly still, occasionally alive.
+    // Target ≤25-30% walking. Strolls are short; dwells are long and chain
+    // (pause → gaze) so she reads as composed, not restless.
     type Behaviour = "stroll" | "pause" | "gaze";
-    let behaviour: Behaviour = "stroll";
-    let behaviourTimer = 4 + Math.random() * 4;
-    let spontaneousDingTimer = 40 + Math.random() * 40;
+    let behaviour: Behaviour = "pause";
+    let behaviourTimer = 2 + Math.random() * 3;
+    let spontaneousDingDone = false; // one unprompted delight per page view, max
+    let spontaneousDingTimer = 30 + Math.random() * 30;
     const STROLL_SPEED = 58; // px/s
 
     function nextBehaviour() {
       if (behaviour === "stroll") {
         const r = Math.random();
-        if (r < 0.55) { behaviour = "pause"; behaviourTimer = 1.2 + Math.random() * 2; }
-        else { behaviour = "gaze"; behaviourTimer = 1.8 + Math.random() * 2.2; }
+        if (r < 0.6) { behaviour = "pause"; behaviourTimer = 6 + Math.random() * 8; }
+        else { behaviour = "gaze"; behaviourTimer = 5 + Math.random() * 6; }
+      } else if (behaviour === "pause" && Math.random() < 0.4) {
+        behaviour = "gaze"; behaviourTimer = 4 + Math.random() * 4;
       } else {
         behaviour = "stroll";
-        behaviourTimer = 4 + Math.random() * 5;
+        behaviourTimer = 2.5 + Math.random() * 2.5;
         heading += (Math.random() - 0.5) * 2.4; // pick a fresh-ish direction
       }
     }
@@ -876,16 +1025,6 @@ export default function EllieChat() {
       const cx = pos.x * stageWidth;
       const groundY = (pos.y + bobY) * stageHeight + H / 2;
       drawEllie(ctx!, cx, groundY, H, state);
-
-      // Toroidal ghost copies near the viewport edges
-      if (mode === "wander") {
-        const fx = (H * 0.7) / stageWidth;
-        const fy = (H * 1.2) / stageHeight;
-        if (pos.x < fx) drawEllie(ctx!, cx + stageWidth, groundY, H, state);
-        if (pos.x > 1 - fx) drawEllie(ctx!, cx - stageWidth, groundY, H, state);
-        if (pos.y < fy) drawEllie(ctx!, cx, groundY + stageHeight, H, state);
-        if (pos.y > 1 - fy) drawEllie(ctx!, cx, groundY - stageHeight, H, state);
-      }
 
       placeOverlays(cx, groundY, H);
     }
@@ -936,29 +1075,53 @@ export default function EllieChat() {
         lookAt.y += (0 - lookAt.y) * Math.min(1, dt * 3);
       }
 
-      if (mode === "wander") {
-        // Behaviour brain tick
-        behaviourTimer -= dt;
-        if (behaviourTimer <= 0) nextBehaviour();
+      const eff = effectiveModeRef.current;
+      const frozen = freezeRef.current;
+      const wandering = mode === "wander" && (eff === "PATROL" || eff === "ROAM");
 
-        spontaneousDingTimer -= dt;
-        if (spontaneousDingTimer <= 0) {
-          dingRef.current = 1; // visual-only delight ding (no sound uninvited)
-          spontaneousDingTimer = 40 + Math.random() * 40;
+      if (wandering) {
+        // Frozen (user scrolling/typing/selecting): hold position, don't
+        // advance the behaviour clock — she waits, attentive, until resumed.
+        if (frozen) {
+          speedNow += (0 - speedNow) * Math.min(1, dt * 6);
+        } else {
+          behaviourTimer -= dt;
+          if (behaviourTimer <= 0) nextBehaviour();
+
+          // One unprompted visual-only delight ding per page view, max
+          if (!spontaneousDingDone) {
+            spontaneousDingTimer -= dt;
+            if (spontaneousDingTimer <= 0) {
+              dingRef.current = 1;
+              spontaneousDingDone = true;
+            }
+          }
+
+          const targetSpeed = behaviour === "stroll" ? STROLL_SPEED : 0;
+          speedNow += (targetSpeed - speedNow) * Math.min(1, dt * 4);
+
+          if (behaviour === "stroll") {
+            heading += (Math.random() - 0.5) * WANDER_JITTER * dt;
+          }
         }
 
-        const targetSpeed = behaviour === "stroll" ? STROLL_SPEED : 0;
-        speedNow += (targetSpeed - speedNow) * Math.min(1, dt * 4);
+        // PATROL: confined to the bottom-third band (nav + hero are off
+        // limits). ROAM: full viewport minus the top-third and edges.
+        const bandTop = eff === "PATROL" ? 0.62 : 0.4;
+        const bandBottom = 0.92;
 
-        if (behaviour === "stroll") {
-          heading += (Math.random() - 0.5) * WANDER_JITTER * dt;
-        }
+        // Edge turn-around — she obeys physics, never teleports. Reflect
+        // heading when moving into a boundary, then clamp inside it.
+        if (pos.x < EDGE_MARGIN && Math.cos(heading) < 0) heading = Math.PI - heading;
+        if (pos.x > 1 - EDGE_MARGIN && Math.cos(heading) > 0) heading = Math.PI - heading;
+        if (pos.y < bandTop && Math.sin(heading) < 0) heading = -heading;
+        if (pos.y > bandBottom && Math.sin(heading) > 0) heading = -heading;
 
         const vxPx = Math.cos(heading) * speedNow;
         pos.x += (vxPx * dt) / stageWidth;
         pos.y += (Math.sin(heading) * speedNow * 0.7 * dt) / stageHeight;
-        pos.x = ((pos.x % 1) + 1) % 1;
-        pos.y = ((pos.y % 1) + 1) % 1;
+        pos.x = Math.min(1 - EDGE_MARGIN, Math.max(EDGE_MARGIN, pos.x));
+        pos.y = Math.min(bandBottom, Math.max(bandTop, pos.y));
 
         // Face travel direction (with hysteresis so she doesn't flicker)
         if (vxPx > 12) facing = 1;
@@ -966,7 +1129,7 @@ export default function EllieChat() {
 
         walkPhase += dt * (speedNow / 58) * 9;
       } else {
-        // Settle home beside the panel
+        // Settle home beside the panel (chat open, or DOCKED page policy)
         speedNow = 0;
         const t = settleTarget(H0);
         pos.x += (t.x - pos.x) * Math.min(1, dt * 3);
@@ -994,7 +1157,8 @@ export default function EllieChat() {
       document.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("mousemove", onMouseMove);
     };
-  }, []);
+    // Re-init when the stage mounts/unmounts (user hides or shows Ellie)
+  }, [elliePref]);
 
   function resetConversation() {
     setMessages([{ role: "ellie", content: GREETING }]);
@@ -1047,16 +1211,16 @@ export default function EllieChat() {
           means she can never block a click; only her hit-region button (which
           follows her) is interactive. z-40 keeps her under the sticky header
           and the chat panel for a natural depth cue. */}
+      {elliePref !== "hidden" && (
       <div
         ref={stageRef}
         className="fixed inset-0 z-40"
         style={{ pointerEvents: "none" }}
-        aria-hidden="false"
       >
-        <canvas style={{ display: "block", width: "100%", height: "100%" }} ref={canvasRef} />
+        <canvas style={{ display: "block", width: "100%", height: "100%" }} ref={canvasRef} aria-hidden="true" />
 
         <AnimatePresence>
-          {!open && (
+          {!open && !menuOpen && (
             <motion.div
               ref={tooltipRef}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -1075,10 +1239,53 @@ export default function EllieChat() {
           type="button"
           ref={hitRegionRef}
           onClick={handleCharacterClick}
+          onMouseEnter={openMenu}
+          onMouseLeave={closeMenuSoon}
+          onFocus={openMenu}
+          onBlur={closeMenuSoon}
           aria-label={open ? "Close chat" : "Open chat with Ellie"}
           className="absolute rounded-full"
           style={{ pointerEvents: "auto", background: "transparent", border: "none", cursor: "pointer", padding: 0 }}
         />
+
+        {/* Pill menu: Chat · Dock · Hide — WCAG 2.2.2 pause/stop/hide controls */}
+        <AnimatePresence>
+          {menuOpen && !open && (
+            <motion.div
+              ref={menuRef}
+              initial={{ opacity: 0, y: 6, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 6, scale: 0.95 }}
+              transition={{ duration: 0.15 }}
+              onMouseEnter={openMenu}
+              onMouseLeave={closeMenuSoon}
+              className="absolute flex items-center gap-0.5 bg-card border border-border/60 rounded-full px-1.5 py-1 shadow-lg"
+              style={{ pointerEvents: "auto", left: -999, top: -999 }}
+            >
+              <button
+                type="button"
+                onClick={handleCharacterClick}
+                className="flex items-center gap-1 text-xs font-medium text-foreground hover:bg-muted/60 rounded-full px-2.5 py-1 transition-colors"
+              >
+                <MessageCircle size={12} className="text-primary" /> Chat
+              </button>
+              <button
+                type="button"
+                onClick={() => { setElliePref((p) => (p === "docked" ? "auto" : "docked")); setMenuOpen(false); }}
+                className="flex items-center gap-1 text-xs font-medium text-foreground hover:bg-muted/60 rounded-full px-2.5 py-1 transition-colors"
+              >
+                <Anchor size={12} className="text-primary" /> {elliePref === "docked" ? "Roam" : "Dock"}
+              </button>
+              <button
+                type="button"
+                onClick={hideEllie}
+                className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:bg-muted/60 rounded-full px-2.5 py-1 transition-colors"
+              >
+                <EyeOff size={12} /> Hide
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {unread > 0 && !open && (
           <span
@@ -1101,6 +1308,38 @@ export default function EllieChat() {
           </span>
         )}
       </div>
+      )}
+
+      {/* Hidden-state minimal launcher — Ellie is gone but chat stays a click away */}
+      {elliePref === "hidden" && !open && (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label="Open chat with Ellie"
+          className="fixed bottom-5 right-5 z-40 w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-colors"
+        >
+          <MessageCircle size={20} />
+          {unread > 0 && (
+            <span className="absolute -top-1 -right-1 w-5 h-5 bg-destructive text-white text-xs rounded-full flex items-center justify-center font-bold">
+              {unread}
+            </span>
+          )}
+        </button>
+      )}
+
+      {/* Quiet toast after hiding — no guilt copy, just the way back */}
+      <AnimatePresence>
+        {hideToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="fixed bottom-20 right-5 z-50 bg-card border border-border/60 rounded-xl px-3.5 py-2.5 shadow-lg text-xs text-muted-foreground"
+          >
+            Ellie is hidden — the chat button is always here for you.
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Chat panel */}
       <AnimatePresence>
@@ -1141,6 +1380,16 @@ export default function EllieChat() {
                     {voiceListening ? "Listening…" : "Elite Tenancy Letting Assistant"}
                   </p>
                 </div>
+                {elliePref !== "auto" && (
+                  <button
+                    onClick={() => setElliePref("auto")}
+                    className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded"
+                    title={elliePref === "hidden" ? "Show Ellie" : "Let Ellie roam"}
+                    aria-label={elliePref === "hidden" ? "Show Ellie" : "Let Ellie roam"}
+                  >
+                    {elliePref === "hidden" ? <Eye size={13} /> : <Anchor size={13} />}
+                  </button>
+                )}
                 <button
                   onClick={() => setSoundOn((v) => !v)}
                   className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded"
