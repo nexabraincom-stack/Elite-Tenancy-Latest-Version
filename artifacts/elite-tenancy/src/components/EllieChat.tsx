@@ -190,6 +190,13 @@ function renderContent(text: string): string {
 const GOLD_LIGHT = "#F0CE83";
 const GOLD = "#D4A24A";
 const GOLD_DEEP = "#A67A2E";
+// Extended brass ramp — polished metal reads through compressed tonal bands
+// (hot glint → turned dark edge), not a smooth 3-stop ramp. One light source:
+// upper-left, ~10 o'clock, shared by gradient, speculars, and sheen.
+const GOLD_GLINT = "#FFF3D6"; // hottest band nearest the light
+const GOLD_MID = "#E2B45E";   // between the light band and base gold
+const GOLD_EDGE = "#6E4F1E";  // turned-edge rim where the dome curves away
+const GOLD_LINE = "rgba(138, 100, 40, 0.65)"; // outer silhouette stroke
 const NAVY = "#163A4A";
 const NAVY_DEEP = "#0D2530";
 const CREAM = "#FAF8F4";
@@ -225,10 +232,28 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
   ctx.scale(spread * s.facing, squash);
   ctx.translate(-cx, -groundY);
 
-  // Ground shadow
+  // Two-layer contact shadow. Layer 1: a soft ambient pool that fades to
+  // nothing at its edge. Layer 2: a darker contact core under the planted
+  // foot that shrinks and lightens mid-stride — free "weight" in the walk.
+  // Near-black neutral works over both cream and navy backgrounds.
+  const lift01 = s.walk > 0 ? Math.abs(Math.sin(s.walk)) : 0;
+  const shadowY = groundY - 1 * u;
+  ctx.save();
+  ctx.translate(cx, shadowY);
+  ctx.scale(spread, 5 / 30);
+  const poolGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, 30 * u);
+  poolGrad.addColorStop(0, "rgba(12, 22, 28, 0.22)");
+  poolGrad.addColorStop(1, "rgba(12, 22, 28, 0)");
   ctx.beginPath();
-  ctx.ellipse(cx, groundY - 1 * u, 30 * u * spread, 5 * u, 0, 0, Math.PI * 2);
-  ctx.fillStyle = "rgba(13, 37, 48, 0.22)";
+  ctx.arc(0, 0, 30 * u, 0, Math.PI * 2);
+  ctx.fillStyle = poolGrad;
+  ctx.fill();
+  ctx.restore();
+  const plantedX = s.walk > 0 ? cx + (Math.sin(s.walk) > 0 ? 1 : -1) * 9 * u : cx;
+  const coreScale = 1 - lift01 * 0.3;
+  ctx.beginPath();
+  ctx.ellipse(plantedX, shadowY, 15 * u * coreScale, 2.2 * u * coreScale, 0, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(12, 22, 28, ${0.34 - lift01 * 0.14})`;
   ctx.fill();
 
   // Legs + shoe plates (navy) — alternate lift while walking
@@ -240,10 +265,14 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
     ctx.roundRect(lx - 3 * u, groundY - 15 * u - lift * 0.4, 6 * u, 12 * u, 3 * u);
     ctx.fillStyle = NAVY;
     ctx.fill();
+    ctx.save();
+    ctx.shadowColor = "rgba(250, 248, 244, 0.35)";
+    ctx.shadowBlur = 3 * u;
     ctx.beginPath();
     ctx.ellipse(lx + side * 1.5 * u, groundY - 2.5 * u - lift, 7 * u, 3 * u, 0, 0, Math.PI * 2);
     ctx.fillStyle = NAVY_DEEP;
     ctx.fill();
+    ctx.restore();
   });
 
   const domeBaseY = groundY - 13 * u;
@@ -287,33 +316,73 @@ function drawEllie(ctx: CanvasRenderingContext2D, cx: number, groundY: number, H
   }
 
   // Dome body — gold hemisphere with flat bottom
-  ctx.beginPath();
-  ctx.moveTo(cx - domeHalfW, domeBaseY);
-  ctx.bezierCurveTo(
-    cx - domeHalfW, domeTopY + 8 * u,
-    cx - 18 * u, domeTopY,
-    cx, domeTopY,
-  );
-  ctx.bezierCurveTo(
-    cx + 18 * u, domeTopY,
-    cx + domeHalfW, domeTopY + 8 * u,
-    cx + domeHalfW, domeBaseY,
-  );
-  ctx.closePath();
-  const domeGrad = ctx.createRadialGradient(cx - 12 * u, domeTopY + 14 * u, 2 * u, cx, domeBaseY - 20 * u, 48 * u);
-  domeGrad.addColorStop(0, GOLD_LIGHT);
-  domeGrad.addColorStop(0.45, GOLD);
-  domeGrad.addColorStop(1, GOLD_DEEP);
+  const traceDome = () => {
+    ctx.beginPath();
+    ctx.moveTo(cx - domeHalfW, domeBaseY);
+    ctx.bezierCurveTo(
+      cx - domeHalfW, domeTopY + 8 * u,
+      cx - 18 * u, domeTopY,
+      cx, domeTopY,
+    );
+    ctx.bezierCurveTo(
+      cx + 18 * u, domeTopY,
+      cx + domeHalfW, domeTopY + 8 * u,
+      cx + domeHalfW, domeBaseY,
+    );
+    ctx.closePath();
+  };
+
+  // Cream halo pre-pass: invisible on cream pages, reads as a soft rim glow
+  // on navy heroes — dual-background separation with zero bg detection.
+  ctx.save();
+  ctx.shadowColor = "rgba(250, 248, 244, 0.4)";
+  ctx.shadowBlur = 6 * u;
+  traceDome();
+  ctx.fillStyle = GOLD;
+  ctx.fill();
+  ctx.restore();
+
+  // Banded multi-stop gradient — compressed bands off the upper-left light,
+  // with a tight dark falloff at the rim that gives the dome a turned edge.
+  const domeCY = (domeTopY + domeBaseY) / 2;
+  const lightX = cx - 10.5 * u;
+  const lightY = domeCY - 12 * u;
+  traceDome();
+  const domeGrad = ctx.createRadialGradient(lightX, lightY, 1.5 * u, lightX, lightY, 46 * u);
+  domeGrad.addColorStop(0, GOLD_GLINT);
+  domeGrad.addColorStop(0.15, GOLD_LIGHT);
+  domeGrad.addColorStop(0.34, GOLD_MID);
+  domeGrad.addColorStop(0.55, GOLD);
+  domeGrad.addColorStop(0.78, GOLD_DEEP);
+  domeGrad.addColorStop(1, GOLD_EDGE);
   ctx.fillStyle = domeGrad;
   ctx.fill();
-  ctx.strokeStyle = "rgba(13, 37, 48, 0.35)";
-  ctx.lineWidth = 1 * u;
+  // Warm silhouette stroke — separates gold-on-cream without flattening
+  // the gradients the way a dark internal outline would.
+  ctx.strokeStyle = GOLD_LINE;
+  ctx.lineWidth = 1.4 * u;
   ctx.stroke();
 
-  // Highlight crescent (upper-left polish sheen)
+  // Polish sheen (demoted: the hard speculars below carry "mirror finish")
   ctx.beginPath();
   ctx.ellipse(cx - 13 * u, domeTopY + 13 * u, 9 * u, 4.5 * u, -0.6, 0, Math.PI * 2);
-  ctx.fillStyle = "rgba(255, 248, 228, 0.55)";
+  ctx.fillStyle = "rgba(255, 248, 228, 0.18)";
+  ctx.fill();
+
+  // Hard double specular — mirror-finish metal has hard-edged highlights.
+  // Primary: bright window-reflection ellipse high on the light side.
+  ctx.save();
+  ctx.shadowColor = "rgba(255, 254, 248, 0.95)";
+  ctx.shadowBlur = 2 * u; // softens the edge one pixel, no more
+  ctx.beginPath();
+  ctx.ellipse(cx - 12 * u, domeTopY + 8 * u, 10 * u, 3.8 * u, -0.56, 0, Math.PI * 2);
+  ctx.fillStyle = "rgba(255, 254, 248, 0.95)";
+  ctx.fill();
+  ctx.restore();
+  // Secondary: small glint near the crown, up by the button
+  ctx.beginPath();
+  ctx.arc(cx - 4.5 * u, domeTopY + 5.5 * u, 1.8 * u, 0, Math.PI * 2);
+  ctx.fillStyle = "rgba(255, 254, 248, 0.55)";
   ctx.fill();
 
   // Navy rim band across the base of the dome
