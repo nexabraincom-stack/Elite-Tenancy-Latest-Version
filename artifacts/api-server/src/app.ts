@@ -110,6 +110,24 @@ app.use(
   }),
 );
 
+// A rejected origin above calls next(err), which would otherwise fall
+// through to the generic Express/Sentry error handler as an unhandled
+// "Internal Server Error" — indistinguishable from a real crash, and it
+// would pollute Sentry with routine, expected CORS rejections. Return a
+// clean 403 instead.
+app.use((
+  err: Error,
+  _req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) => {
+  if (err && err.message?.startsWith("CORS:")) {
+    res.status(403).json({ error: "Origin not allowed" });
+    return;
+  }
+  next(err);
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

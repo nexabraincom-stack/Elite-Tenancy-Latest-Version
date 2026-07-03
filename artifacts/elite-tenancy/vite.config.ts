@@ -83,6 +83,15 @@ export default defineConfig({
     fs: {
       strict: true,
     },
+    // Mirrors the /api rewrite in vercel.json so local dev hits the real
+    // live backend (real DB, real AI Gateway) instead of 404ing against
+    // the Vite dev server itself — no local backend/env setup needed.
+    proxy: {
+      "/api": {
+        target: "https://elite-tenancy-latest-version-api-se-rho.vercel.app",
+        changeOrigin: true,
+      },
+    },
   },
   preview: {
     port,
