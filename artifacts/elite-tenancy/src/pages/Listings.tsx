@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearch } from "wouter";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { useSeo } from "@/hooks/use-seo";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,18 @@ export default function Listings() {
   const [bedrooms, setBedrooms] = useState<number | undefined>();
   const [category, setCategory] = useState("all");
   const [furnished, setFurnished] = useState("all");
+
+  // City-page CTAs link here as /listings?city=<City> — pre-fill the filter
+  // so that promise actually holds. Uses wouter's useSearch() (reactive),
+  // not window.location.search, since wouter reuses the component across
+  // same-route query changes and won't remount on navigation between them.
+  // Note: CityPage.tsx also appends &area=<Area>, but there's no area filter
+  // field or backend param on this page yet — left for a future addition.
+  const search = useSearch();
+  useEffect(() => {
+    const cityParam = new URLSearchParams(search).get("city");
+    if (cityParam) setCity(cityParam);
+  }, [search]);
 
   const params = {
     ...(city && { city }),
