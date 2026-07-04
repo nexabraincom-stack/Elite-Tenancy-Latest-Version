@@ -894,6 +894,18 @@ const BLOG_ARTICLES = [
     desc: "How much rent can you afford in the UK? The 30x income rule explained, rental yield formulas for landlords, deposit caps, and free tools.",
     image: `${BASE_URL}/blog-images/rent-calculator-uk-2026-guide.svg`,
   },
+  {
+    slug: "renters-rights-act-information-sheet-2026",
+    title: "RRA Information Sheet 2026: The 31 May Deadline | Elite Tenancy",
+    desc: "Every landlord with an existing tenancy had to serve the official RRA Information Sheet by 31 May 2026 or face a £7,000 fine. What it must contain and what to do if you missed it.",
+    image: `${BASE_URL}/blog-images/renters-rights-act-2026-landlord-guide.svg`,
+  },
+  {
+    slug: "section-13-rent-increase-notice-2026",
+    title: "Section 13 Rent Increase Notice 2026: Form 4A Guide | Elite Tenancy",
+    desc: "Section 13 is now the only lawful way to increase rent in England. The exact process, notice periods, and how tenants can challenge an increase at Tribunal.",
+    image: `${BASE_URL}/blog-images/section-21-abolished-2026-landlord-guide.svg`,
+  },
 ];
 
 // Publish dates from the blog_articles table (published_at), used for
@@ -920,6 +932,8 @@ const PUBLISHED_DATES = {
   "renter-passport-uk-2026-guide": "2026-04-01",
   "renters-rights-act-2026-landlord-guide": "2026-05-15",
   "renters-rights-act-2026-tenant-guide": "2026-05-01",
+  "renters-rights-act-information-sheet-2026": "2026-07-04",
+  "section-13-rent-increase-notice-2026": "2026-07-04",
   "renting-london-international-tenant-2026": "2026-03-20",
   "right-to-rent-uk-2026-guide": "2026-02-15",
   "section-21-abolished-2026-landlord-guide": "2026-05-18",
