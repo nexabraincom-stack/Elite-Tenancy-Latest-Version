@@ -860,6 +860,8 @@ export default function EllieChat() {
     dingRef.current = 1;
     if (soundOnRef.current) playDing();
   }, []);
+  const triggerDingRef = useRef(triggerDing);
+  triggerDingRef.current = triggerDing;
 
   // ── send message (shared by text form + voice) ─────────────────────────────
   const send = useCallback(
@@ -905,6 +907,13 @@ export default function EllieChat() {
     },
     [input, loading, messages, open, sessionId, langCode],
   );
+  // Voice recognition below reads this ref instead of closing over `send`
+  // directly — `send`'s identity changes on every keystroke/message/open-
+  // state change, and depending on it in that effect would tear down and
+  // restart the recognition instance constantly (surfacing as a bogus
+  // "aborted" error each time, e.g. the moment the chat panel opens).
+  const sendRef = useRef(send);
+  sendRef.current = send;
 
   // ── Voice wake-word listener ───────────────────────────────────────────────
   useEffect(() => {
@@ -943,7 +952,7 @@ export default function EllieChat() {
           capturingQueryRef.current = true;
           queryBufferRef.current = lower.slice(idx + WAKE_PHRASE.length).trim();
           setVoiceListening(true);
-          triggerDing();
+          triggerDingRef.current();
           setOpen(true);
           if (querySilenceTimerRef.current) window.clearTimeout(querySilenceTimerRef.current);
           querySilenceTimerRef.current = window.setTimeout(() => {
@@ -951,7 +960,7 @@ export default function EllieChat() {
             capturingQueryRef.current = false;
             setVoiceListening(false);
             queryBufferRef.current = "";
-            if (q) send(q);
+            if (q) sendRef.current(q);
           }, 3500);
         }
       } else {
@@ -963,7 +972,7 @@ export default function EllieChat() {
           capturingQueryRef.current = false;
           setVoiceListening(false);
           queryBufferRef.current = "";
-          if (q) send(q);
+          if (q) sendRef.current(q);
         }, 1600);
       }
     };
@@ -972,7 +981,10 @@ export default function EllieChat() {
       if (e.error === "not-allowed" || e.error === "service-not-allowed") {
         setVoiceHint("Microphone permission denied. Voice mode turned off.");
         setVoiceOn(false);
-      } else if (e.error !== "no-speech") {
+      } else if (e.error !== "no-speech" && e.error !== "aborted") {
+        // "aborted" fires whenever recognition is intentionally torn down
+        // (e.g. this effect restarting) — expected lifecycle noise, not a
+        // real problem worth alarming the user with.
         setVoiceHint(`Voice error: ${e.error}`);
       }
     };
@@ -999,7 +1011,10 @@ export default function EllieChat() {
       if (querySilenceTimerRef.current) window.clearTimeout(querySilenceTimerRef.current);
       try { rec.abort(); } catch { /* ignore */ }
     };
-  }, [voiceOn, langCode, send, triggerDing]);
+    // Deliberately NOT depending on `send`/`triggerDing` — see sendRef/
+    // triggerDingRef above. Only voiceOn/langCode should restart recognition.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [voiceOn, langCode]);
 
   // ── Spatial animation engine — full-viewport free roam ─────────────────────
   // Ellie now owns the whole page as her stage (canvas is pointer-events:none
