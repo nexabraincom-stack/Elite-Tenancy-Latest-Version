@@ -85,6 +85,7 @@ const UkVisaRentalGuide = lazy(() => import("@/pages/UkVisaRentalGuide"));
 const Profile = lazy(() => import("@/pages/Profile"));
 const GetStarted = lazy(() => import("@/pages/GetStarted"));
 const NotFound = lazy(() => import("@/pages/not-found"));
+const UsaComingSoon = lazy(() => import("@/pages/UsaComingSoon"));
 import { ChatProvider } from "@/contexts/ChatContext";
 import { usePageTracking } from "@/hooks/use-page-tracking";
 
@@ -395,8 +396,23 @@ function PageLoader() {
   );
 }
 
+// elitetenancy.com has no live US service yet (no US entity/licensing) — every
+// path on that host renders the waitlist-only coming-soon page instead of the
+// live UK tenancy platform, so nothing implying an active US service (listings,
+// "list your property", the Ellie chat widget, sign-up flows) can leak onto it.
+const US_HOSTS = new Set(["elitetenancy.com", "www.elitetenancy.com"]);
+
 function AppRoutes() {
   usePageTracking();
+
+  if (typeof window !== "undefined" && US_HOSTS.has(window.location.hostname)) {
+    return (
+      <Suspense fallback={<PageLoader />}>
+        <UsaComingSoon />
+      </Suspense>
+    );
+  }
+
   return (
     <Suspense fallback={<PageLoader />}>
     <Switch>

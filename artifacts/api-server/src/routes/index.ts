@@ -29,6 +29,7 @@ import takeoverRouter from "./takeover";
 import interestRouter from "./interest";
 import { router as launchDiscountRouter } from "../services/launchDiscount";
 import seedArticlesRouter from "./seedArticles";
+import usaWaitlistRouter from "./usaWaitlist";
 
 const router: IRouter = Router();
 
@@ -62,5 +63,6 @@ router.use("/takeover",       takeoverRouter);
 router.use("/interest",       interestRouter);
 router.use("/launch-discount", launchDiscountRouter);
 router.use(seedArticlesRouter);
+router.use(usaWaitlistRouter);
 
 export default router;

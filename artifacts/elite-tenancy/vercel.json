@@ -26,18 +26,6 @@
       "has": [{ "type": "host", "value": "www.elitetenancy.uk" }],
       "destination": "https://www.elitetenancy.co.uk/$1",
       "statusCode": 308
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "elitetenancy.com" }],
-      "destination": "https://www.elitetenancy.co.uk/$1",
-      "statusCode": 308
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.elitetenancy.com" }],
-      "destination": "https://www.elitetenancy.co.uk/$1",
-      "statusCode": 308
     }
   ],
   "rewrites": [
