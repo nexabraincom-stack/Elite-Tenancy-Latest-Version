@@ -1000,6 +1000,21 @@ function injectSeo(template, route) {
     `$1${safe(canonical)}$2`
   );
 
+  // hreflang — index.html's static block hardcodes every locale to the
+  // homepage URL. That's correct only for "/" itself; on every other route
+  // (all 26 blog articles, all 24 city pages, all 24 rooms-to-let pages, and
+  // even the dedicated international-targeting pages) it was shipping as
+  // literal HTML, uncorrected, meaning every single page on the site declared
+  // itself to Google as the en/en-GB/en-US/etc. alternate of the homepage —
+  // confirmed via direct curl against the live site as Googlebot, not assumed.
+  // Fix: self-reference each page's own canonical across every listed locale,
+  // which is the correct pattern for one English-language page serving
+  // multiple English-speaking regions (there are no real translated variants).
+  html = html.replace(
+    /(<link rel="alternate" hreflang="[^"]*"\s+href=")[^"]*(")/g,
+    `$1${safe(canonical)}$2`
+  );
+
   // OG title  — use \s+ to tolerate alignment whitespace in index.html
   html = html.replace(
     /(<meta property="og:title"\s+content=")[^"]*(")/,
