@@ -15,12 +15,34 @@
  */
 
 import * as https from "node:https";
+import { createHmac, timingSafeEqual } from "node:crypto";
 import { logger } from "./logger";
 
 export function isWhatsAppConfigured(): boolean {
   return Boolean(
     process.env.WHATSAPP_ACCESS_TOKEN && process.env.WHATSAPP_PHONE_NUMBER_ID,
   );
+}
+
+/**
+ * Verify Meta's X-Hub-Signature-256 header against the raw inbound webhook
+ * body. Without this, anyone who finds the webhook URL could forge a
+ * message claiming to be from any phone number — feeding attacker-controlled
+ * text into Ellie and triggering a real outbound send (at Meta API cost) to
+ * a number of their choosing.
+ *
+ * Fails closed: if WHATSAPP_APP_SECRET isn't set, every request is rejected
+ * rather than silently processed unverified.
+ */
+export function verifyWhatsAppSignature(rawBody: Buffer | undefined, signatureHeader: string | undefined): boolean {
+  const secret = process.env.WHATSAPP_APP_SECRET;
+  if (!secret || !rawBody || !signatureHeader) return false;
+
+  const expected = "sha256=" + createHmac("sha256", secret).update(rawBody).digest("hex");
+  const expectedBuf = Buffer.from(expected, "utf8");
+  const actualBuf = Buffer.from(signatureHeader, "utf8");
+  if (expectedBuf.length !== actualBuf.length) return false;
+  return timingSafeEqual(expectedBuf, actualBuf);
 }
 
 /**

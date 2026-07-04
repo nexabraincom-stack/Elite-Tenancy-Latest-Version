@@ -371,11 +371,10 @@ router.post("/payments/refunds", requireAuth(), async (req: Request, res: Respon
   try {
     // Verify this payment belongs to the requesting user before refunding
     const ownership = await pool.query(
-      `SELECT lp.id FROM listing_payments lp
-       JOIN stripe_customers sc ON sc.user_id = $1
-       WHERE lp.stripe_payment_intent = $2
+      `SELECT id FROM listing_payments
+       WHERE stripe_payment_intent = $1 AND landlord_id = $2
        LIMIT 1`,
-      [user.id, paymentIntentId],
+      [paymentIntentId, user.id],
     );
 
     // Admin users can refund any payment; landlords only their own

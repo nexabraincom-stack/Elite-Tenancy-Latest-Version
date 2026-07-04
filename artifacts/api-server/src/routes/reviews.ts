@@ -37,8 +37,11 @@ function reviewUrl(): string {
 }
 
 function cronAuthorized(req: { header(name: string): string | undefined }): boolean {
+  // Fail closed: if CRON_SECRET isn't configured, deny rather than allow —
+  // these endpoints trigger real tenant-facing emails/WhatsApp messages, and
+  // CRON_SECRET isn't documented in .env.example, so it can't be assumed set.
   const secret = process.env.CRON_SECRET;
-  if (!secret) return true; // open in dev
+  if (!secret) return false;
   return req.header("authorization") === `Bearer ${secret}`;
 }
 

@@ -47,6 +47,16 @@ function clerkProxyMiddleware(): RequestHandler {
 
 const app: Express = express();
 
+// Vercel's edge sits exactly one hop in front of this function and sets its
+// own trustworthy X-Forwarded-For header. Without this, Express's req.ip
+// getter ignores that header entirely (default trust proxy = 0 hops) and
+// falls back to the constant proxy socket address for every request, which
+// collapses every real visitor into the same express-rate-limit bucket
+// below — the limiters silently stop being per-client. `1` (not `true`)
+// trusts exactly that one hop and no further, so a client can't spoof their
+// own IP by forging extra X-Forwarded-For entries.
+app.set("trust proxy", 1);
+
 // ── Security headers ─────────────────────────────────────────────────────────
 // Manually set the critical security headers that helmet would provide,
 // without adding the helmet dependency. Keeps the bundle lean.
@@ -128,7 +138,16 @@ app.use((
   next(err);
 });
 
-app.use(express.json());
+app.use(
+  express.json({
+    // Stash the raw bytes alongside the parsed body — the WhatsApp inbound
+    // webhook needs them to verify Meta's X-Hub-Signature-256 HMAC, and
+    // express.json() doesn't otherwise expose the pre-parse buffer.
+    verify: (req, _res, buf) => {
+      (req as express.Request & { rawBody?: Buffer }).rawBody = buf;
+    },
+  }),
+);
 app.use(express.urlencoded({ extended: true }));
 
 // ── Malformed-JSON guard ──────────────────────────────────────────────────────

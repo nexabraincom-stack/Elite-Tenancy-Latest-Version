@@ -17,11 +17,13 @@
  *   WHATSAPP_VERIFY_TOKEN     = a secret string you invent (used in Meta dashboard)
  *   WHATSAPP_ACCESS_TOKEN     = Meta system-user access token
  *   WHATSAPP_PHONE_NUMBER_ID  = the phone number ID from Meta
+ *   WHATSAPP_APP_SECRET       = Meta App Secret (App settings → Basic) — signs
+ *                               inbound webhook calls; required to accept them
  *   WHATSAPP_GRAPH_VERSION    = (optional) Graph API version, default v21.0
  */
 
 import { Router, type IRouter, type Request, type Response } from "express";
-import { sendWhatsAppText, isWhatsAppConfigured } from "../lib/whatsapp";
+import { sendWhatsAppText, isWhatsAppConfigured, verifyWhatsAppSignature } from "../lib/whatsapp";
 import { askEllie } from "./ellie";
 
 const router: IRouter = Router();
@@ -56,6 +58,13 @@ router.post("/whatsapp/webhook", async (req: Request, res: Response): Promise<vo
   if (!whatsappConfigured()) {
     // Not configured yet — acknowledge so Meta verification/test pings succeed.
     res.sendStatus(200);
+    return;
+  }
+
+  const rawBody = (req as Request & { rawBody?: Buffer }).rawBody;
+  if (!verifyWhatsAppSignature(rawBody, req.header("x-hub-signature-256"))) {
+    console.error("[whatsapp] rejected inbound webhook — missing/invalid X-Hub-Signature-256");
+    res.sendStatus(401);
     return;
   }
 

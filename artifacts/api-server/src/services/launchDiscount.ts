@@ -129,10 +129,11 @@ router.get("/status", async (req: Request, res: Response): Promise<void> => {
 
 // ── POST /launch-discount/run-daily ──────────────────────────────────────────
 // Intended for internal cron use (Vercel Cron → /api/launch-discount/run-daily).
-// Protect with CRON_SECRET in production.
+// Fail closed: this transitions users onto paid Stripe billing, so an unset
+// CRON_SECRET must deny the call, not silently allow it through.
 router.post("/run-daily", async (req: Request, res: Response): Promise<void> => {
   const secret = req.headers["x-cron-secret"];
-  if (process.env.CRON_SECRET && secret !== process.env.CRON_SECRET) {
+  if (!process.env.CRON_SECRET || secret !== process.env.CRON_SECRET) {
     res.status(401).json({ error: "Unauthorized cron call" });
     return;
   }

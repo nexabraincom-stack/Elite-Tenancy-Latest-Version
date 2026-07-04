@@ -8,7 +8,7 @@
  *   GET /api/automations/run-follow-ups  — 08:00 UTC daily (24h lead follow-up)
  *
  * Auth: Vercel Cron sends `Authorization: Bearer {CRON_SECRET}`.
- * If CRON_SECRET is not set the endpoint is open (dev convenience only).
+ * If CRON_SECRET is not set the endpoint is closed (fails safe).
  */
 
 import { Router, type IRouter, type Request, type Response } from "express";
@@ -20,8 +20,10 @@ import { logger } from "../lib/logger";
 const router: IRouter = Router();
 
 function cronAuthorized(req: { header(name: string): string | undefined }): boolean {
+  // Fail closed: this triggers real WhatsApp sends to real leads, and
+  // CRON_SECRET isn't documented in .env.example, so it can't be assumed set.
   const secret = process.env.CRON_SECRET;
-  if (!secret) return true; // open in dev (no secret configured)
+  if (!secret) return false;
   return req.header("authorization") === `Bearer ${secret}`;
 }
 
