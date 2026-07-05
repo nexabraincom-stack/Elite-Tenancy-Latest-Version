@@ -31,6 +31,7 @@ import { router as launchDiscountRouter } from "../services/launchDiscount";
 import seedArticlesRouter from "./seedArticles";
 import usaWaitlistRouter from "./usaWaitlist";
 import lodgerRouter from "./lodger";
+import seoDashboardRouter from "./seoDashboard";
 
 const router: IRouter = Router();
 
@@ -66,5 +67,6 @@ router.use("/launch-discount", launchDiscountRouter);
 router.use(seedArticlesRouter);
 router.use(usaWaitlistRouter);
 router.use(lodgerRouter);
+router.use(seoDashboardRouter);
 
 export default router;

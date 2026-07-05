@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 // ═══ BRAND CONSTANTS ═══
 const N = "#1a2744";   // Navy primary
@@ -388,8 +389,57 @@ export default function Dashboard() {
   const [filter, setFilter] = useState("ALL");
   const [expanded, setExpanded] = useState<number | null>(null);
   const [aud, setAud] = useState(0);
+  const [inspectUrlInput, setInspectUrlInput] = useState("https://www.elitetenancy.co.uk/");
+  const [inspectResult, setInspectResult] = useState<any>(null);
+  const [inspecting, setInspecting] = useState(false);
 
-  const TABS = ["⚔️ 25 SEO Types","🆓 Free Arsenal","🌍 GEO Global","🎯 Audience Intel","🔥 Traffic Hacks","📅 90-Day Plan"];
+  const gscStatus = useQuery({
+    queryKey: ["admin", "seo", "status"],
+    queryFn: async () => {
+      const res = await fetch("/api/admin/seo/status", { credentials: "include" });
+      return res.json();
+    },
+    enabled: tab === 6,
+  });
+  const gscAnalytics = useQuery({
+    queryKey: ["admin", "seo", "analytics"],
+    queryFn: async () => {
+      const res = await fetch("/api/admin/seo/search-analytics?days=28&limit=20", { credentials: "include" });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to load");
+      return data as { startDate: string; endDate: string; rows: Array<{ keys: string[]; clicks: number; impressions: number; ctr: number; position: number }> };
+    },
+    enabled: tab === 6 && gscStatus.data?.configured,
+    retry: false,
+  });
+  const gscSitemaps = useQuery({
+    queryKey: ["admin", "seo", "sitemaps"],
+    queryFn: async () => {
+      const res = await fetch("/api/admin/seo/sitemaps", { credentials: "include" });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to load");
+      return data as { sitemaps: Array<{ path: string; isPending?: boolean; errors?: string; warnings?: string; contents?: Array<{ type: string; submitted: string; indexed?: string }> }> };
+    },
+    enabled: tab === 6 && gscStatus.data?.configured,
+    retry: false,
+  });
+
+  async function runInspectUrl() {
+    setInspecting(true);
+    setInspectResult(null);
+    try {
+      const res = await fetch(`/api/admin/seo/inspect-url?url=${encodeURIComponent(inspectUrlInput)}`, { credentials: "include" });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to inspect URL");
+      setInspectResult(data);
+    } catch (err) {
+      setInspectResult({ error: err instanceof Error ? err.message : "Failed to inspect URL" });
+    } finally {
+      setInspecting(false);
+    }
+  }
+
+  const TABS = ["⚔️ 25 SEO Types","🆓 Free Arsenal","🌍 GEO Global","🎯 Audience Intel","🔥 Traffic Hacks","📅 90-Day Plan","🔴 Live GSC Data"];
   const CATS = ["ALL","FREE","Foundation","Content","Local","Authority","Scale","AISearch","Technical","Global","Emerging","FreeTraffic"];
 
   const seoFiltered = filter === "FREE"
@@ -717,6 +767,126 @@ export default function Dashboard() {
                 ))}
               </div>
             </div>
+          </div>
+        )}
+
+        {/* ══════ TAB 6: LIVE GSC DATA ══════ */}
+        {tab === 6 && (
+          <div>
+            <h2 style={{ color:G, margin:"0 0 4px", fontSize:"17px" }}>🔴 Live Google Search Console Data</h2>
+            <p style={{ color:GR, margin:"0 0 18px", fontSize:"12px" }}>Real indexing and search performance data, pulled directly from the Search Console API via a service account — no manual screenshots needed once connected.</p>
+
+            {gscStatus.isLoading ? (
+              <div style={{ color:GR, fontSize:"13px" }}>Checking connection…</div>
+            ) : !gscStatus.data?.configured ? (
+              <div style={{ background:"#ffffff07", border:`1px solid ${G}33`, borderRadius:"12px", padding:"18px" }}>
+                <div style={{ fontSize:"13px", fontWeight:"700", color:G, marginBottom:"10px" }}>Not connected yet</div>
+                <p style={{ color:GRL, fontSize:"12px", lineHeight:"1.7", margin:"0 0 12px" }}>
+                  This connects once a Google service account is set up and added to the Search Console property. Three steps:
+                </p>
+                <ol style={{ color:GRL, fontSize:"12px", lineHeight:"1.9", margin:0, paddingLeft:"18px" }}>
+                  <li>Google Cloud Console → create/use a project → enable "Search Console API" → create a Service Account → download its JSON key</li>
+                  <li>Google Search Console → Settings → Users and permissions → Add user → paste the service account's email → grant "Restricted"</li>
+                  <li>Set <code style={{ color:G }}>GOOGLE_SERVICE_ACCOUNT_KEY</code> (base64-encoded key JSON) and <code style={{ color:G }}>GSC_SITE_URL</code> as backend environment variables</li>
+                </ol>
+              </div>
+            ) : !gscStatus.data?.reachable ? (
+              <div style={{ background:"#ffffff07", border:"1px solid #ef444455", borderRadius:"12px", padding:"18px" }}>
+                <div style={{ fontSize:"13px", fontWeight:"700", color:"#ef4444", marginBottom:"6px" }}>Connected but unreachable</div>
+                <p style={{ color:GRL, fontSize:"12px", lineHeight:"1.6", margin:0 }}>
+                  Credentials are set but the API call failed — double-check the service account email was actually added as a Search Console user, and that GSC_SITE_URL exactly matches the property type (e.g. <code>sc-domain:elitetenancy.co.uk</code> for a Domain property).
+                  {gscStatus.data?.error ? <><br /><br /><strong>Error:</strong> {gscStatus.data.error}</> : null}
+                </p>
+              </div>
+            ) : (
+              <div style={{ display:"flex", flexDirection:"column", gap:"18px" }}>
+                <div style={{ background:"#22c55e12", border:"1px solid #22c55e55", borderRadius:"12px", padding:"12px 16px", fontSize:"12px", color:"#4ade80", fontWeight:"600" }}>
+                  ✓ Connected — pulling live data below
+                </div>
+
+                {/* Top queries */}
+                <div style={{ background:"#ffffff07", border:`1px solid ${G}22`, borderRadius:"12px", padding:"16px" }}>
+                  <div style={{ fontSize:"13px", fontWeight:"700", marginBottom:"10px" }}>Top queries — last 28 days</div>
+                  {gscAnalytics.isLoading ? (
+                    <div style={{ color:GR, fontSize:"12px" }}>Loading…</div>
+                  ) : gscAnalytics.error ? (
+                    <div style={{ color:"#ef4444", fontSize:"12px" }}>{(gscAnalytics.error as Error).message}</div>
+                  ) : (
+                    <table style={{ width:"100%", borderCollapse:"collapse", fontSize:"12px" }}>
+                      <thead>
+                        <tr style={{ textAlign:"left", color:GR }}>
+                          <th style={{ padding:"6px 8px" }}>Query</th>
+                          <th style={{ padding:"6px 8px" }}>Clicks</th>
+                          <th style={{ padding:"6px 8px" }}>Impressions</th>
+                          <th style={{ padding:"6px 8px" }}>CTR</th>
+                          <th style={{ padding:"6px 8px" }}>Position</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {(gscAnalytics.data?.rows ?? []).map((row, i) => (
+                          <tr key={i} style={{ borderTop:`1px solid ${G}18` }}>
+                            <td style={{ padding:"6px 8px", color:W }}>{row.keys[0]}</td>
+                            <td style={{ padding:"6px 8px", color:GRL }}>{row.clicks}</td>
+                            <td style={{ padding:"6px 8px", color:GRL }}>{row.impressions}</td>
+                            <td style={{ padding:"6px 8px", color:GRL }}>{(row.ctr * 100).toFixed(1)}%</td>
+                            <td style={{ padding:"6px 8px", color:GRL }}>{row.position.toFixed(1)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+                </div>
+
+                {/* Sitemaps */}
+                <div style={{ background:"#ffffff07", border:`1px solid ${G}22`, borderRadius:"12px", padding:"16px" }}>
+                  <div style={{ fontSize:"13px", fontWeight:"700", marginBottom:"10px" }}>Sitemap status</div>
+                  {gscSitemaps.isLoading ? (
+                    <div style={{ color:GR, fontSize:"12px" }}>Loading…</div>
+                  ) : gscSitemaps.error ? (
+                    <div style={{ color:"#ef4444", fontSize:"12px" }}>{(gscSitemaps.error as Error).message}</div>
+                  ) : (
+                    (gscSitemaps.data?.sitemaps ?? []).map((sm, i) => (
+                      <div key={i} style={{ fontSize:"12px", color:GRL, padding:"6px 0", borderTop: i > 0 ? `1px solid ${G}18` : "none" }}>
+                        <div style={{ color:W }}>{sm.path}</div>
+                        {sm.errors && <div style={{ color:"#ef4444" }}>Errors: {sm.errors}</div>}
+                        {sm.warnings && <div style={{ color:"#f59e0b" }}>Warnings: {sm.warnings}</div>}
+                        {sm.contents?.map((c, j) => (
+                          <div key={j} style={{ color:GR }}>{c.type}: {c.submitted} submitted{c.indexed ? `, ${c.indexed} indexed` : ""}</div>
+                        ))}
+                      </div>
+                    ))
+                  )}
+                </div>
+
+                {/* URL inspector */}
+                <div style={{ background:"#ffffff07", border:`1px solid ${G}22`, borderRadius:"12px", padding:"16px" }}>
+                  <div style={{ fontSize:"13px", fontWeight:"700", marginBottom:"10px" }}>URL inspector</div>
+                  <div style={{ display:"flex", gap:"8px", marginBottom:"12px" }}>
+                    <input
+                      value={inspectUrlInput}
+                      onChange={(e) => setInspectUrlInput(e.target.value)}
+                      style={{ flex:1, background:"#ffffff08", border:`1px solid ${G}33`, borderRadius:"8px", padding:"8px 10px", color:W, fontSize:"12px" }}
+                    />
+                    <button
+                      onClick={runInspectUrl}
+                      disabled={inspecting}
+                      style={{ background:G, color:ND, border:"none", borderRadius:"8px", padding:"8px 16px", fontSize:"12px", fontWeight:"700", cursor:"pointer" }}
+                    >
+                      {inspecting ? "Checking…" : "Inspect"}
+                    </button>
+                  </div>
+                  {inspectResult?.error && <div style={{ color:"#ef4444", fontSize:"12px" }}>{inspectResult.error}</div>}
+                  {inspectResult?.inspectionResult?.indexStatusResult && (
+                    <div style={{ fontSize:"12px", color:GRL, lineHeight:"1.8" }}>
+                      <div>Verdict: <strong style={{ color:W }}>{inspectResult.inspectionResult.indexStatusResult.verdict}</strong></div>
+                      <div>Coverage: {inspectResult.inspectionResult.indexStatusResult.coverageState}</div>
+                      <div>Indexing: {inspectResult.inspectionResult.indexStatusResult.indexingState}</div>
+                      <div>Last crawled: {inspectResult.inspectionResult.indexStatusResult.lastCrawlTime ?? "never"}</div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
