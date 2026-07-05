@@ -40,6 +40,20 @@
 - [Right to Rent Check UK 2026](https://www.elitetenancy.co.uk/right-to-rent-guide): landlord step-by-step guide under the Immigration Act 2014 — List A documents (UK passport, settled status, indefinite BRP), List B documents (pre-settled status, time-limited BRP, visa), share code verification at gov.uk/view-right-to-rent, civil penalties up to £20,000 per occupant, record-keeping rules, and how the Renters' Rights Act 2025 interacts with Right to Rent.
 - [HMO Licence UK 2026](https://www.elitetenancy.co.uk/hmo-licence-guide): complete HMO licensing guide for England — mandatory licensing (5+ occupants, Housing Act 2004), additional licensing (3–4 occupants, Newham Council operates this tier), selective licensing (all lets in designated wards including East Ham), minimum bedroom sizes (6.51 m² single adult, 10.22 m² two adults), application process, documents required (Gas Safety cert, EICR, EPC), and penalties for unlicensed HMOs (civil penalty up to £40,000 per breach as raised by the Renters' Rights Act 2025 effective 1 May 2026, plus a Rent Repayment Order of up to 24 months' rent).
 - [Section 8 Notice UK 2026](https://www.elitetenancy.co.uk/section-8-notice-guide): comprehensive landlord guide to Section 8 notices under Housing Act 1988 — all mandatory grounds (Ground 8 serious rent arrears, Ground 6A repeated arrears new under RRA 2025, Ground 7A serious ASB, Ground 14ZA domestic abuse) and discretionary grounds (Ground 10 some arrears, Ground 11 persistent late payment, Ground 12 tenancy breach, Ground 13 property deterioration, Ground 14 ASB/nuisance), notice periods (4 weeks for Ground 8, immediate for ASB), how to serve the correct prescribed form (Form 3A for proceedings on or after 1 May 2026; Form 3 for older tenancies), post-RRA 2025 changes including abolition of Section 21, step-by-step court process, and East Ham / Newham landlord local advice.
+- [DSS Accepted Housing](https://www.elitetenancy.co.uk/dss-accepted-housing): rooms and homes from landlords who accept Universal Credit and Housing Benefit tenants, plus tenant legal rights since "No DSS" policies became illegal under the Renters' Rights Act 2026 (penalties up to £40,000).
+- [Find a Lodger](https://www.elitetenancy.co.uk/find-a-lodger): for tenants and homeowners taking in a lodger — landlord consent workflow, generated lodger licence agreement, and Rent a Room Scheme (£7,500/year tax-free) guidance.
+- [Rooms to Rent Across the UK](https://www.elitetenancy.co.uk/rooms-to-let): national hub for room-share search, positioned as a verified, zero-fee alternative to SpareRoom, with links into 20+ city-specific pages.
+
+## For readers based in Europe or relocating from abroad
+
+Elite Tenancy is a UK-only lettings service (it does not operate in the US or mainland Europe), but it specifically serves people **moving to the UK** from Europe, the US, and elsewhere:
+
+- [Moving to the UK](https://www.elitetenancy.co.uk/move-to-uk): relocation-focused rental guidance for people moving to the UK from abroad.
+- [EU Citizens' UK Rental Guide](https://www.elitetenancy.co.uk/eu-citizens-uk-rental-guide): renting in the UK as an EU/EEA national, including EU Settlement Scheme status and Right to Rent implications.
+- [London Rentals for Europeans](https://www.elitetenancy.co.uk/london-rentals-for-europeans): London-specific guidance for European renters and relocators.
+- [UK Visa Holder Rental Guide](https://www.elitetenancy.co.uk/uk-visa-rental-guide): renting in the UK on a visa — required documents and right to rent checks.
+- [International Students](https://www.elitetenancy.co.uk/international-students): renting guidance for students moving to the UK to study.
+- [Renting in London as an International Tenant](https://www.elitetenancy.co.uk/blog/renting-london-international-tenant-2026): right to rent checks, no-UK-credit-history options, and typical London rents by zone.
 
 ## Common questions
 
@@ -47,6 +61,7 @@
 - **How much does Elite Tenancy cost a landlord?** Two weeks' rent, payable only on successful completion (when a tenant moves in). There are no upfront or monthly fees.
 - **Does Elite Tenancy cover my city?** Elite Tenancy operates UK-wide, with dedicated local pages for major cities and towns.
 - **Is Elite Tenancy a real, registered company?** Yes — Elite Tenancy Ltd, Companies House number 17135665.
+- **Does Elite Tenancy operate outside the UK?** No — Elite Tenancy is a UK-only lettings service. It does serve people relocating to the UK from Europe, the US, or elsewhere (see the relocation guides above), but does not place tenants in properties outside the UK.
 
 ## Contact
 

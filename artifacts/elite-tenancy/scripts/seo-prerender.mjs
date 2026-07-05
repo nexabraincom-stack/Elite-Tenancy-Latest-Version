@@ -79,6 +79,12 @@ const ROUTES = [
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "For Agents", path: "/for-agents" }],
   },
   {
+    path: "/features",
+    title: "Platform Features | Elite Tenancy",
+    desc: "AI tenant matching, automated review management, RRA 2025 compliance, rent collection, and a £20–£100 referral programme with 14-day free trials. All in one platform.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Features", path: "/features" }],
+  },
+  {
     path: "/pricing",
     title: "Transparent Lettings Pricing | Elite Tenancy",
     desc: "Honest, transparent lettings pricing. Elite Tenancy charges landlords only on successful completion. No hidden fees, no upfront costs.",
