@@ -20,7 +20,7 @@ router.get("/listings", async (req, res): Promise<void> => {
     return;
   }
 
-  const { city, minPrice, maxPrice, bedrooms, category, furnished } = parsed.data;
+  const { city, minPrice, maxPrice, bedrooms, category, furnished, dssAccepted } = parsed.data;
   const conditions: SQL[] = [eq(listingsTable.status, "active")];
 
   if (city) conditions.push(eq(listingsTable.city, city));
@@ -29,6 +29,7 @@ router.get("/listings", async (req, res): Promise<void> => {
   if (bedrooms != null) conditions.push(eq(listingsTable.bedrooms, bedrooms));
   if (category) conditions.push(eq(listingsTable.category, category));
   if (furnished != null) conditions.push(eq(listingsTable.furnished, furnished));
+  if (dssAccepted != null) conditions.push(eq(listingsTable.dssAccepted, dssAccepted));
 
   const rows = await db
     .select()

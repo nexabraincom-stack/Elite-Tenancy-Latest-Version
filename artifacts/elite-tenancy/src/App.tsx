@@ -75,6 +75,7 @@ const DepositProtection = lazy(() => import("@/pages/DepositProtection"));
 const RightToRentGuide = lazy(() => import("@/pages/RightToRentGuide"));
 const HmoLicenceGuide = lazy(() => import("@/pages/HmoLicenceGuide"));
 const Section8NoticeGuide = lazy(() => import("@/pages/Section8NoticeGuide"));
+const DssAcceptedHousing = lazy(() => import("@/pages/DssAcceptedHousing"));
 
 // International SEO landing pages
 const InternationalStudents = lazy(() => import("@/pages/InternationalStudents"));
@@ -432,6 +433,7 @@ function AppRoutes() {
       <Route path="/right-to-rent-guide" component={RightToRentGuide} />
       <Route path="/hmo-licence-guide" component={HmoLicenceGuide} />
       <Route path="/section-8-notice-guide" component={Section8NoticeGuide} />
+      <Route path="/dss-accepted-housing" component={DssAcceptedHousing} />
       <Route path="/listings" component={Listings} />
       <Route path="/listings/:id" component={ListingDetail} />
       <Route path="/for-landlords" component={ForLandlords} />

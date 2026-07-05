@@ -590,6 +590,18 @@ const ROUTES = [
 
   // ── Rooms-to-let pages ─────────────────────────────────────────────────
   {
+    path: "/rooms-to-let",
+    title: "Rooms & Homes to Rent Across the UK | Elite Tenancy",
+    desc: "A verified, zero-fee alternative to SpareRoom. AI-matched rooms, flats and houses to rent across 20+ UK cities, from landlords we've already checked.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Rooms to Let", path: "/rooms-to-let" }],
+  },
+  {
+    path: "/dss-accepted-housing",
+    title: "DSS Accepted Properties UK 2026 — Rooms & Homes for Benefits Tenants | Elite Tenancy",
+    desc: "Find DSS accepted rooms, flats and houses to rent across the UK. Landlords who welcome Universal Credit and Housing Benefit tenants, plus your legal rights under the Renters' Rights Act 2026.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "DSS Accepted Housing", path: "/dss-accepted-housing" }],
+  },
+  {
     path: "/rooms-to-let/london",
     title: "Rooms to Let in London 2026 | Elite Tenancy",
     desc: "Find rooms to let in London. Verified landlords, all areas covered. Bills included and furnished options. Zero agency fees.",

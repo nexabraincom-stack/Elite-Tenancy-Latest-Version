@@ -24,6 +24,7 @@ export interface Listing {
   furnished: boolean;
   petsAllowed: boolean;
   billsIncluded: boolean;
+  dssAccepted: boolean;
   status: string;
   isFeatured: boolean;
   isPremium: boolean;

@@ -27,6 +27,7 @@ export interface Listing {
   furnished: boolean;
   petsAllowed: boolean;
   billsIncluded: boolean;
+  dssAccepted: boolean;
   status: string;
   isFeatured: boolean;
   isPremium: boolean;
@@ -55,6 +56,7 @@ export interface ListingInput {
   furnished?: boolean;
   petsAllowed?: boolean;
   billsIncluded?: boolean;
+  dssAccepted?: boolean;
   photos?: string[];
   availableFrom?: string;
 }
@@ -281,5 +283,6 @@ maxPrice?: number;
 bedrooms?: number;
 category?: string;
 furnished?: boolean;
+dssAccepted?: boolean;
 };
 

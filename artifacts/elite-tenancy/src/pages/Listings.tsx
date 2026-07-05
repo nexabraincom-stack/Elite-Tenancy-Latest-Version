@@ -22,6 +22,7 @@ export default function Listings() {
   const [bedrooms, setBedrooms] = useState<number | undefined>();
   const [category, setCategory] = useState("all");
   const [furnished, setFurnished] = useState("all");
+  const [dssAccepted, setDssAccepted] = useState("all");
 
   // City-page CTAs link here as /listings?city=<City> — pre-fill the filter
   // so that promise actually holds. Uses wouter's useSearch() (reactive),
@@ -29,10 +30,13 @@ export default function Listings() {
   // same-route query changes and won't remount on navigation between them.
   // Note: CityPage.tsx also appends &area=<Area>, but there's no area filter
   // field or backend param on this page yet — left for a future addition.
+  // The DSS-accepted landing page links here as /listings?dssAccepted=true.
   const search = useSearch();
   useEffect(() => {
-    const cityParam = new URLSearchParams(search).get("city");
+    const parsed = new URLSearchParams(search);
+    const cityParam = parsed.get("city");
     if (cityParam) setCity(cityParam);
+    if (parsed.get("dssAccepted") === "true") setDssAccepted("yes");
   }, [search]);
 
   const params = {
@@ -42,6 +46,7 @@ export default function Listings() {
     ...(bedrooms != null && { bedrooms }),
     ...(category !== "all" && { category }),
     ...(furnished !== "all" && { furnished: furnished === "yes" }),
+    ...(dssAccepted !== "all" && { dssAccepted: dssAccepted === "yes" }),
   };
 
   const { data: listings, isLoading } = useGetListings(params);
@@ -53,6 +58,7 @@ export default function Listings() {
     setBedrooms(undefined);
     setCategory("all");
     setFurnished("all");
+    setDssAccepted("all");
   }
 
   return (
@@ -73,7 +79,7 @@ export default function Listings() {
             <SlidersHorizontal size={16} className="text-primary" />
             <span className="text-sm font-medium">Filter Properties</span>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3">
             <Input
               placeholder="City"
               value={city}
@@ -127,6 +133,15 @@ export default function Listings() {
                 <SelectItem value="all">Any</SelectItem>
                 <SelectItem value="yes">Furnished</SelectItem>
                 <SelectItem value="no">Unfurnished</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={dssAccepted} onValueChange={setDssAccepted}>
+              <SelectTrigger className="bg-background">
+                <SelectValue placeholder="DSS / Benefits" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Any</SelectItem>
+                <SelectItem value="yes">DSS / Benefits accepted</SelectItem>
               </SelectContent>
             </Select>
           </div>

@@ -20,6 +20,7 @@ export interface ListingInput {
   furnished?: boolean;
   petsAllowed?: boolean;
   billsIncluded?: boolean;
+  dssAccepted?: boolean;
   photos?: string[];
   availableFrom?: string;
 }

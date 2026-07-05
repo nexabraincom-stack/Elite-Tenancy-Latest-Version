@@ -13,4 +13,5 @@ maxPrice?: number;
 bedrooms?: number;
 category?: string;
 furnished?: boolean;
+dssAccepted?: boolean;
 };

@@ -37,6 +37,7 @@ export const listingsTable = pgTable("listings", {
   furnished: boolean("furnished").notNull().default(false),
   petsAllowed: boolean("pets_allowed").notNull().default(false),
   billsIncluded: boolean("bills_included").notNull().default(false),
+  dssAccepted: boolean("dss_accepted").notNull().default(false),
   status: listingStatusEnum("status").notNull().default("active"),
   isFeatured: boolean("is_featured").notNull().default(false),
   isPremium: boolean("is_premium").notNull().default(false),

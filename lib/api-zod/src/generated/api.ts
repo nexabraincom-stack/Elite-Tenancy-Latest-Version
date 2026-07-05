@@ -47,6 +47,7 @@ export const GetMatchingScoreResponse = zod.object({
   "furnished": zod.boolean(),
   "petsAllowed": zod.boolean(),
   "billsIncluded": zod.boolean(),
+  "dssAccepted": zod.boolean(),
   "status": zod.string(),
   "isFeatured": zod.boolean(),
   "isPremium": zod.boolean(),
@@ -80,7 +81,8 @@ export const GetListingsQueryParams = zod.object({
   "maxPrice": zod.coerce.number().optional(),
   "bedrooms": zod.coerce.number().optional(),
   "category": zod.coerce.string().optional(),
-  "furnished": zod.coerce.boolean().optional()
+  "furnished": zod.coerce.boolean().optional(),
+  "dssAccepted": zod.coerce.boolean().optional()
 })
 
 export const GetListingsResponseItem = zod.object({
@@ -100,6 +102,7 @@ export const GetListingsResponseItem = zod.object({
   "furnished": zod.boolean(),
   "petsAllowed": zod.boolean(),
   "billsIncluded": zod.boolean(),
+  "dssAccepted": zod.boolean(),
   "status": zod.string(),
   "isFeatured": zod.boolean(),
   "isPremium": zod.boolean(),
@@ -131,6 +134,7 @@ export const CreateListingBody = zod.object({
   "furnished": zod.boolean().optional(),
   "petsAllowed": zod.boolean().optional(),
   "billsIncluded": zod.boolean().optional(),
+  "dssAccepted": zod.boolean().optional(),
   "photos": zod.array(zod.string()).optional(),
   "availableFrom": zod.string().optional()
 })
@@ -156,6 +160,7 @@ export const GetFeaturedListingsResponseItem = zod.object({
   "furnished": zod.boolean(),
   "petsAllowed": zod.boolean(),
   "billsIncluded": zod.boolean(),
+  "dssAccepted": zod.boolean(),
   "status": zod.string(),
   "isFeatured": zod.boolean(),
   "isPremium": zod.boolean(),
@@ -194,6 +199,7 @@ export const GetListingByIdResponse = zod.object({
   "furnished": zod.boolean(),
   "petsAllowed": zod.boolean(),
   "billsIncluded": zod.boolean(),
+  "dssAccepted": zod.boolean(),
   "status": zod.string(),
   "isFeatured": zod.boolean(),
   "isPremium": zod.boolean(),
@@ -346,6 +352,7 @@ export const GetLandlordListingsResponseItem = zod.object({
   "furnished": zod.boolean(),
   "petsAllowed": zod.boolean(),
   "billsIncluded": zod.boolean(),
+  "dssAccepted": zod.boolean(),
   "status": zod.string(),
   "isFeatured": zod.boolean(),
   "isPremium": zod.boolean(),
@@ -377,6 +384,7 @@ export const CreateLandlordListingBody = zod.object({
   "furnished": zod.boolean().optional(),
   "petsAllowed": zod.boolean().optional(),
   "billsIncluded": zod.boolean().optional(),
+  "dssAccepted": zod.boolean().optional(),
   "photos": zod.array(zod.string()).optional(),
   "availableFrom": zod.string().optional()
 })
@@ -568,6 +576,7 @@ export const GetAdminListingsResponseItem = zod.object({
   "furnished": zod.boolean(),
   "petsAllowed": zod.boolean(),
   "billsIncluded": zod.boolean(),
+  "dssAccepted": zod.boolean(),
   "status": zod.string(),
   "isFeatured": zod.boolean(),
   "isPremium": zod.boolean(),

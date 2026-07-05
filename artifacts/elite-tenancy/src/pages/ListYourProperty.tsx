@@ -39,6 +39,7 @@ export default function ListYourProperty() {
     furnished: false,
     petsAllowed: false,
     billsIncluded: false,
+    dssAccepted: false,
     availableFrom: "",
   });
 
@@ -193,6 +194,13 @@ export default function ListYourProperty() {
                   </div>
                   <Switch checked={form.petsAllowed} onCheckedChange={(v) => update("petsAllowed", v)} />
                 </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-foreground">Accepts DSS / Universal Credit / Housing Benefit</p>
+                    <p className="text-xs text-muted-foreground">Refusing tenants on benefits is illegal under the Renters' Rights Act — listing this helps benefit-reliant tenants find you directly</p>
+                  </div>
+                  <Switch checked={form.dssAccepted} onCheckedChange={(v) => update("dssAccepted", v)} />
+                </div>
               </div>
             </div>
           )}
@@ -211,6 +219,7 @@ export default function ListYourProperty() {
                   { label: "Furnished", value: form.furnished ? "Yes" : "No" },
                   { label: "Bills Included", value: form.billsIncluded ? "Yes" : "No" },
                   { label: "Pets Allowed", value: form.petsAllowed ? "Yes" : "No" },
+                  { label: "Accepts DSS/Benefits", value: form.dssAccepted ? "Yes" : "No" },
                   { label: "Available From", value: form.availableFrom || "Immediately" },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex justify-between text-sm py-2 border-b border-border/30 last:border-0">
