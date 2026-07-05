@@ -106,12 +106,39 @@ const allowedOrigins = rawOrigins
   ? rawOrigins.split(",").map((o) => o.trim())
   : ["http://localhost:5173", "http://localhost:4173"];
 
+// Our own domain family is always allowed, regardless of what ALLOWED_ORIGINS
+// currently lists — this was the actual live bug: real visitors landing on a
+// bare/non-www custom domain or a *.vercel.app preview/alias URL (exactly
+// what Vercel's dashboard "Visit" button opens) got every Ellie chat request
+// silently CORS-rejected because those hosts weren't in ALLOWED_ORIGINS, even
+// though the canonical www domain worked fine. Preview deployments also get a
+// fresh random-hash subdomain per deploy, so an exact-match list is always
+// one deployment behind — match the whole elite-tenancy-frontend*.vercel.app
+// family instead of pinning specific hashes.
+const OWN_DOMAIN_ORIGINS = new Set([
+  "https://elitetenancy.co.uk",
+  "https://www.elitetenancy.co.uk",
+  "https://elitetenancy.com",
+  "https://www.elitetenancy.com",
+  "https://elitetenancy.uk",
+  "https://www.elitetenancy.uk",
+]);
+const OWN_VERCEL_PREVIEW_PATTERN = /^https:\/\/elite-tenancy-frontend(-[a-z0-9-]+)?\.vercel\.app$/;
+
+function isAllowedOrigin(origin: string): boolean {
+  return (
+    allowedOrigins.includes(origin) ||
+    OWN_DOMAIN_ORIGINS.has(origin) ||
+    OWN_VERCEL_PREVIEW_PATTERN.test(origin)
+  );
+}
+
 app.use(
   cors({
     credentials: true,
     origin: (origin, callback) => {
       // Allow server-to-server (no Origin header) and explicitly listed origins
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin || isAllowedOrigin(origin)) {
         callback(null, true);
       } else {
         callback(new Error(`CORS: origin '${origin}' not allowed`));
