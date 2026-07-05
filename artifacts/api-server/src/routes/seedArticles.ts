@@ -27,1740 +27,466 @@ const ARTICLES: Array<{
   imageUrl: string | null;
 }> = [
   {
-    slug: "renters-rights-act-2026-landlord-guide",
-    title: "Renters' Rights Act 2026: The Complete Landlord Guide",
-    excerpt:
-      "Everything landlords need to know about the Renters' Rights Act 2026 — abolition of Section 21, new tenancy rules, rent increases, and compliance steps.",
-    category: "Landlord Guides",
+    slug: "right-to-rent-uk-2026-guide",
+    title: "Right to Rent UK 2026: Complete Landlord and Tenant Guide",
+    excerpt: "Right to Rent checks in 2026: who needs one, which documents count, the online share code process, exact landlord penalties, and what changed for EU nationals after Brexit.",
+    category: "Compliance & Legal",
     author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 7,
-    tags: ["Renters Rights Act", "Section 21", "Landlord Guide", "2026", "UK Law"],
-    publishedAt: new Date("2026-01-10"),
-    imageUrl: "https://images.unsplash.com/photo-1698431194884-295617261396?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>What Is the Renters' Rights Act 2026?</h2>
-<p>The Renters' Rights Act 2026 is the most significant shake-up to the private rented sector in a generation. Building on the earlier Renters (Reform) Bill, this legislation has now received Royal Assent and fundamentally changes the relationship between landlords and tenants across England.</p>
-<p>At its core, the Act abolishes Section 21 "no-fault" evictions, replaces fixed-term assured shorthold tenancies with periodic tenancies, introduces a new Private Rented Sector Database, and strengthens tenants' rights across the board. Every landlord in England must understand these changes — and act on them.</p>
-
-<h2>The End of Section 21 "No-Fault" Evictions</h2>
-<p>From the Act's commencement date, landlords can no longer issue Section 21 notices to end a tenancy without a specific legal reason. This is the single biggest change for landlords.</p>
-<p>Instead, you must use <strong>Section 8 grounds</strong> to regain possession. These include:</p>
-<ul>
-  <li><strong>Ground 8:</strong> Two months or more rent arrears</li>
-  <li><strong>Ground 14:</strong> Anti-social behaviour</li>
-  <li><strong>Ground 1A:</strong> Landlord wishes to sell the property (new mandatory ground)</li>
-  <li><strong>Ground 1B:</strong> Landlord or close family member wishes to move in (new mandatory ground)</li>
-</ul>
-<p>For grounds 1A and 1B, landlords must give tenants <strong>four months' notice</strong> (up from two). Critically, you cannot use these grounds within the first 12 months of a tenancy.</p>
-
-<h2>No More Fixed-Term Tenancies</h2>
-<p>All new tenancies (and existing ones after a transition period) will automatically become <strong>periodic tenancies</strong> — rolling month-by-month with no set end date. This means:</p>
-<ul>
-  <li>Tenants can give two months' notice to leave at any time</li>
-  <li>Landlords cannot issue break clauses or minimum term requirements</li>
-  <li>Students and short-term lets may need to use holiday let arrangements instead</li>
-</ul>
-
-<h2>Rent Increases Under the New Rules</h2>
-<p>Landlords can only increase rent <strong>once per year</strong> and must use the Section 13 formal notice process (a minimum of two months' written notice). Tenants have the right to challenge any increase they believe is above market rate at the First-tier Tribunal (Property Chamber).</p>
-<p>Critically, landlords cannot include lease clauses that allow rent increases outside this process. Any such clause is void.</p>
-
-<h2>The Private Rented Sector Database</h2>
-<p>All private landlords in England must register on the new <strong>PRS Database</strong> before they can legally let a property. Failure to register is a civil penalty of up to £7,500 for a first offence and £40,000 for repeat offences.</p>
-<p>The database will be publicly searchable, allowing tenants to verify a landlord's compliance record before signing a tenancy agreement.</p>
-
-<h2>Awaab's Law — Repairs and Hazards</h2>
-<p>Extended from social housing, <strong>Awaab's Law</strong> now applies to the private sector. Landlords must investigate reported hazards within 14 days and carry out emergency repairs within 24 hours. Damp and mould must be treated as urgent health hazards — not cosmetic issues.</p>
-
-<h2>Tenants' Right to Keep Pets</h2>
-<p>Landlords can no longer unreasonably refuse a tenant's request to keep a pet. You may require the tenant to take out pet damage insurance, but a blanket "no pets" clause in a tenancy agreement is now unenforceable.</p>
-
-<h2>What Landlords Must Do Now</h2>
-<ol>
-  <li><strong>Register on the PRS Database</strong> before letting any property</li>
-  <li><strong>Review all existing tenancy agreements</strong> — any fixed-term clauses will become void on transition</li>
-  <li><strong>Update your Section 8 eviction procedures</strong> — Section 21 notices are no longer valid</li>
-  <li><strong>Review your rent-increase process</strong> — ensure you're using Section 13 notices</li>
-  <li><strong>Update your repair response protocols</strong> to comply with Awaab's Law timescales</li>
-  <li><strong>Update your pet policy</strong> — blanket "no pets" clauses are unenforceable</li>
-</ol>
-
-<h2>How Elite Tenancy Can Help</h2>
-<p>Navigating the Renters' Rights Act alone is challenging. Elite Tenancy's managed letting service handles compliance for you — from legally compliant tenancy agreements to PRS Database registration support and evidence-based Section 8 eviction management. <a href="/for-landlords">Learn more about our landlord services.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "section-21-abolished-2026-landlord-guide",
-    title: "Section 21 Abolished: What Landlords Must Do Now",
-    excerpt:
-      "Section 21 no-fault evictions have been abolished in England. Here's what landlords need to do instead — the Section 8 grounds you can use and how to protect your property.",
-    category: "Landlord Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 6,
-    tags: ["Section 21", "Eviction", "Landlord Guide", "Section 8", "2026"],
-    publishedAt: new Date("2026-01-12"),
-    imageUrl: "https://images.unsplash.com/photo-1678818715417-3c725d9c2b43?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>Section 21 Is Gone — What Replaces It?</h2>
-<p>As of 2026, Section 21 "no-fault" eviction notices are abolished for all residential tenancies in England. This means landlords can no longer end a tenancy simply by giving two months' notice without providing a specific legal reason.</p>
-<p>The replacement is an expanded set of <strong>Section 8 possession grounds</strong> under the Housing Act 1988, as amended by the Renters' Rights Act. These require landlords to prove a specific reason for wanting the property back.</p>
-
-<h2>The Section 8 Grounds Landlords Can Now Use</h2>
-<h3>Mandatory Grounds (Court must grant possession if proven)</h3>
-<ul>
-  <li><strong>Ground 8:</strong> At least two months' rent arrears at both notice and hearing date</li>
-  <li><strong>Ground 1A (NEW):</strong> Landlord intends to sell the property — requires 4 months' notice, cannot be used in first 12 months</li>
-  <li><strong>Ground 1B (NEW):</strong> Landlord or close family member wants to move in — requires 4 months' notice, cannot be used in first 12 months</li>
-  <li><strong>Ground 2:</strong> Mortgage lender seeks possession (rare)</li>
-  <li><strong>Ground 7A:</strong> Tenant conviction for serious offence or ASB ban</li>
-</ul>
-<h3>Discretionary Grounds (Court may grant possession)</h3>
-<ul>
-  <li><strong>Ground 10:</strong> Rent arrears (any amount)</li>
-  <li><strong>Ground 11:</strong> Persistent late payment of rent</li>
-  <li><strong>Ground 12:</strong> Breach of tenancy agreement</li>
-  <li><strong>Ground 13:</strong> Deterioration of property condition</li>
-  <li><strong>Ground 14:</strong> Nuisance, annoyance or anti-social behaviour</li>
-  <li><strong>Ground 17:</strong> Tenant provided false information to obtain tenancy</li>
-</ul>
-
-<h2>Notice Periods Under the New System</h2>
-<p>Notice periods vary by ground:</p>
-<ul>
-  <li><strong>Rent arrears (Ground 8):</strong> 4 weeks minimum notice</li>
-  <li><strong>Selling property (Ground 1A):</strong> 4 months minimum notice</li>
-  <li><strong>Moving in (Ground 1B):</strong> 4 months minimum notice</li>
-  <li><strong>ASB (Ground 14):</strong> Immediate notice (court decides)</li>
-  <li><strong>Most other grounds:</strong> 2 months minimum notice</li>
-</ul>
-
-<h2>Protecting Yourself as a Landlord</h2>
-<p>With no-fault evictions gone, protecting your position from day one is more important than ever:</p>
-<ol>
-  <li><strong>Thorough tenant referencing</strong> — credit checks, employment verification, and previous landlord references are essential</li>
-  <li><strong>Comprehensive tenancy agreements</strong> — clearly document all obligations including rent due dates and property care expectations</li>
-  <li><strong>Meticulous rent arrears records</strong> — keep records of every payment received and any gaps</li>
-  <li><strong>Regular property inspections</strong> — document condition with photos and written reports</li>
-  <li><strong>Prompt response to complaints</strong> — show you're fulfilling your legal obligations as a landlord</li>
-</ol>
-
-<h2>What Happens to Existing Section 21 Notices?</h2>
-<p>Any Section 21 notice served before the abolition date remains valid until it expires. After that date, no new Section 21 notices can be issued for any tenancy — including those that began before the law changed.</p>
-
-<h2>Will Evictions Become Harder?</h2>
-<p>The short answer is yes — slightly. However, for genuine cases of rent arrears or anti-social behaviour, the Section 8 process is well-established. Landlords with proper documentation and evidence can still regain possession effectively.</p>
-<p>The bigger change is for landlords who previously relied on Section 21 to end tenancies without explanation. You now need a valid legal reason, and the courts must agree.</p>
-
-<h2>Expert Help with Possession Proceedings</h2>
-<p>Elite Tenancy's managed service includes professional tenancy management, thorough tenant referencing, and compliance support — ensuring you have the documentation and records needed for any future Section 8 claim. <a href="/for-landlords">Find out more.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "hmo-licence-uk-2026-complete-guide",
-    title: "HMO Licence UK 2026: Requirements, Costs & Penalties",
-    excerpt:
-      "A complete guide to HMO licences in the UK for 2026. Who needs one, what it costs, how to apply, and the penalties for unlicensed HMOs.",
-    category: "Landlord Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 6,
-    tags: ["HMO", "Licence", "Landlord Guide", "2026", "UK Property"],
-    publishedAt: new Date("2026-01-18"),
-    imageUrl: "https://images.unsplash.com/photo-1776774425479-e62ef3014c7c?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>What Is an HMO?</h2>
-<p>A House in Multiple Occupation (HMO) is a property shared by three or more people from two or more separate households who share facilities such as a kitchen or bathroom. Common examples include student houses, bedsits, and shared houses rented by young professionals.</p>
-<p>If your property meets this definition, you are likely required to obtain an HMO licence — a legal requirement that landlords in England and Wales cannot ignore.</p>
-
-<h2>Do You Need a Mandatory HMO Licence?</h2>
-<p>A <strong>mandatory HMO licence</strong> is required if your property:</p>
-<ul>
-  <li>Is occupied by five or more people from two or more separate households</li>
-  <li>Has occupants who share toilet, bathroom, or kitchen facilities</li>
-  <li>Covers at least one storey (virtually all residential properties)</li>
-</ul>
-<p>The five-person threshold applies nationally. However, many councils also operate <strong>additional or selective licensing schemes</strong> that require licences for smaller HMOs or all private rentals in certain areas.</p>
-
-<h2>Additional and Selective HMO Licensing</h2>
-<p>Beyond mandatory licensing, councils can designate areas where all HMOs — or even all private rented properties — must be licensed. These schemes vary by local authority. Always check with your council whether additional licensing applies to your property, especially in high-demand city areas like London, Manchester, and Birmingham.</p>
-
-<h2>How to Apply for an HMO Licence</h2>
-<ol>
-  <li><strong>Contact your local council</strong> — most councils have online application portals</li>
-  <li><strong>Gather required documents:</strong> gas safety certificate, electrical installation condition report (EICR), energy performance certificate (EPC), floor plan of the property, and proof of identity</li>
-  <li><strong>Ensure property compliance</strong> — room sizes, fire safety (smoke alarms on every storey, fire doors where required), and amenity standards must meet HMO standards</li>
-  <li><strong>Pay the licence fee</strong> (see below)</li>
-  <li><strong>Attend inspection</strong> — the council may inspect before granting the licence</li>
-</ol>
-
-<h2>HMO Licence Costs in 2026</h2>
-<p>Licence fees are set by local councils and vary significantly:</p>
-<ul>
-  <li><strong>London boroughs:</strong> £800 – £1,800 for a 5-year licence</li>
-  <li><strong>Manchester:</strong> £550 – £900</li>
-  <li><strong>Birmingham:</strong> £650 – £1,000</li>
-  <li><strong>Bristol:</strong> £500 – £850</li>
-  <li><strong>Other cities:</strong> Typically £400 – £800</li>
-</ul>
-<p>Licences typically last 5 years, after which you must renew. Some councils offer discounts for accredited landlords.</p>
-
-<h2>HMO Room Size Requirements</h2>
-<p>Since 2018, HMOs must meet minimum room size requirements:</p>
-<ul>
-  <li><strong>Single adult sleeping room:</strong> Minimum 6.51 sq m</li>
-  <li><strong>Double adult sleeping room (two adults):</strong> Minimum 10.22 sq m</li>
-  <li><strong>Child's sleeping room (under 10):</strong> Minimum 4.64 sq m</li>
-</ul>
-<p>Rooms below these sizes cannot be used as sleeping accommodation. Any rooms that do not meet minimum standards must either be converted to non-sleeping use or not be let.</p>
-
-<h2>Penalties for Operating Without an HMO Licence</h2>
-<p>Operating a licensable HMO without a licence is a serious criminal offence:</p>
-<ul>
-  <li><strong>Unlimited fines</strong> in Magistrates' Court</li>
-  <li><strong>Civil penalties up to £30,000</strong> per offence under the Housing and Planning Act 2016</li>
-  <li><strong>Rent repayment orders (RROs)</strong> — tenants can apply for repayment of up to 12 months' rent paid during the unlicensed period</li>
-  <li><strong>Banning orders</strong> for repeat offenders, prohibiting you from letting any residential property</li>
-</ul>
-
-<h2>HMO Management Regulations</h2>
-<p>Licensed HMOs must also comply with the HMO Management Regulations 2006, which cover:</p>
-<ul>
-  <li>Fire safety equipment maintenance</li>
-  <li>Common area maintenance</li>
-  <li>Water supply and drainage</li>
-  <li>Waste management</li>
-  <li>Provision of adequate amenities</li>
-</ul>
-
-<h2>Managing HMO Compliance</h2>
-<p>HMO management is complex. Elite Tenancy's dedicated HMO management service handles licensing applications, compliance documentation, and ongoing management so you can focus on the returns. <a href="/for-landlords">Learn more.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "average-rent-uk-2026-city-price-guide",
-    title: "Average Rent UK 2026: City-by-City Price Guide",
-    excerpt:
-      "The latest average rental prices across UK cities in 2026 — from London and Manchester to Birmingham, Leeds, and Bristol. Data-driven guide for tenants and landlords.",
-    category: "Rental Market",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 5,
-    tags: ["Average Rent", "UK Rent 2026", "Rental Prices", "London", "Manchester"],
-    publishedAt: new Date("2026-02-01"),
-    imageUrl: "https://images.unsplash.com/photo-1762111359333-4bcaff0678ae?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>UK Rental Market Overview 2026</h2>
-<p>The UK rental market has continued to experience strong demand and rising prices into 2026, driven by the ongoing housing supply shortfall, higher mortgage rates keeping would-be buyers renting for longer, and growing urban populations. Here is a comprehensive, up-to-date breakdown of average rents by city.</p>
-
-<h2>London — Average Rent 2026</h2>
-<p>London remains by far the most expensive rental market in the UK:</p>
-<ul>
-  <li><strong>One-bedroom flat:</strong> £1,900 – £2,400 pcm (inner London)</li>
-  <li><strong>One-bedroom flat:</strong> £1,400 – £1,800 pcm (outer London)</li>
-  <li><strong>Two-bedroom flat:</strong> £2,500 – £3,500 pcm (inner London)</li>
-  <li><strong>Studio:</strong> £1,200 – £1,700 pcm</li>
-  <li><strong>Room in a shared house:</strong> £850 – £1,300 pcm</li>
-</ul>
-<p>Zones 1–2 command the highest premiums, with Kensington, Chelsea, and the City typically 30–50% above the London average.</p>
-
-<h2>Manchester — Average Rent 2026</h2>
-<p>Manchester has seen significant rent growth, particularly in the city centre:</p>
-<ul>
-  <li><strong>One-bedroom apartment (city centre):</strong> £1,100 – £1,500 pcm</li>
-  <li><strong>One-bedroom apartment (suburbs):</strong> £750 – £1,000 pcm</li>
-  <li><strong>Two-bedroom apartment (city centre):</strong> £1,400 – £1,900 pcm</li>
-  <li><strong>Room in a shared house:</strong> £550 – £800 pcm</li>
-</ul>
-<p>Salford Quays and the Northern Quarter attract the highest premiums. Wythenshawe and Stockport offer the best value within Greater Manchester.</p>
-
-<h2>Birmingham — Average Rent 2026</h2>
-<ul>
-  <li><strong>One-bedroom flat (city centre):</strong> £950 – £1,250 pcm</li>
-  <li><strong>One-bedroom flat (suburbs):</strong> £700 – £900 pcm</li>
-  <li><strong>Two-bedroom flat:</strong> £1,100 – £1,500 pcm</li>
-  <li><strong>Room in a shared house:</strong> £500 – £700 pcm</li>
-</ul>
-<p>Digbeth and the Jewellery Quarter are Birmingham's most sought-after rental areas. Erdington and Handsworth offer more affordable options.</p>
-
-<h2>Leeds — Average Rent 2026</h2>
-<ul>
-  <li><strong>One-bedroom flat (city centre):</strong> £900 – £1,150 pcm</li>
-  <li><strong>One-bedroom flat (suburbs):</strong> £650 – £850 pcm</li>
-  <li><strong>Two-bedroom flat:</strong> £1,000 – £1,350 pcm</li>
-  <li><strong>Room in a shared house:</strong> £450 – £650 pcm</li>
-</ul>
-
-<h2>Bristol — Average Rent 2026</h2>
-<ul>
-  <li><strong>One-bedroom flat:</strong> £1,000 – £1,350 pcm</li>
-  <li><strong>Two-bedroom flat:</strong> £1,250 – £1,700 pcm</li>
-  <li><strong>Room in a shared house:</strong> £600 – £850 pcm</li>
-</ul>
-<p>Bristol has seen some of the fastest rent growth of any UK city outside London, driven by a tech sector boom and limited housing supply.</p>
-
-<h2>Liverpool, Sheffield, and Other Cities</h2>
-<ul>
-  <li><strong>Liverpool one-bedroom:</strong> £700 – £950 pcm</li>
-  <li><strong>Sheffield one-bedroom:</strong> £700 – £900 pcm</li>
-  <li><strong>Edinburgh one-bedroom:</strong> £1,000 – £1,350 pcm</li>
-  <li><strong>Cardiff one-bedroom:</strong> £850 – £1,100 pcm</li>
-  <li><strong>Glasgow one-bedroom:</strong> £850 – £1,100 pcm</li>
-</ul>
-
-<h2>What's Driving Rent Increases in 2026?</h2>
-<p>Several factors are keeping rents elevated across the UK:</p>
-<ol>
-  <li><strong>Landlord exit:</strong> Stricter regulation under the Renters' Rights Act and higher mortgage costs have prompted some landlords to sell, tightening supply</li>
-  <li><strong>Demand growth:</strong> Net migration, population growth, and delayed homeownership are all driving rental demand</li>
-  <li><strong>Build-to-rent expansion:</strong> Professional PRS landlords are expanding, but not yet at the scale needed to balance demand</li>
-  <li><strong>Student accommodation shortage:</strong> University cities are under particular pressure as PBSA supply lags demand</li>
-</ol>
-
-<h2>Finding Affordable Premium Rentals</h2>
-<p>Elite Tenancy's platform matches tenants with quality rental properties across the UK — with transparent pricing, verified landlords, and AI-powered search. <a href="/listings">Browse available properties.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "letting-agent-fees-uk-2026-landlord-guide",
-    title: "How Much Do Letting Agents Charge in 2026?",
-    excerpt:
-      "A transparent breakdown of letting agent fees in the UK for 2026 — tenant-find only, rent collection, and fully managed. What you actually get for your money.",
-    category: "Landlord Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 5,
-    tags: ["Letting Agent Fees", "Property Management", "Landlord Costs", "2026"],
-    publishedAt: new Date("2026-01-25"),
-    imageUrl: "https://images.unsplash.com/photo-1489257251256-036cd1ac7606?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>Three Types of Letting Agent Service</h2>
-<p>Most letting agents in the UK offer three tiers of service. Understanding exactly what each includes — and what it costs — is essential before signing up.</p>
-
-<h3>1. Tenant-Find Only</h3>
-<p>The agent markets your property, finds and references a tenant, and draws up the tenancy agreement. You then manage the tenancy yourself from move-in day.</p>
-<p><strong>Typical cost:</strong> 8–12% of the first year's rent, or one to two weeks' rent as a flat fee.</p>
-<p><strong>Best for:</strong> Experienced landlords who want to handle day-to-day management themselves and reduce ongoing costs.</p>
-
-<h3>2. Rent Collection</h3>
-<p>Includes everything in tenant-find plus monthly rent collection and chasing arrears. The landlord still handles maintenance and inspections.</p>
-<p><strong>Typical cost:</strong> 10–15% of monthly rent (ongoing).</p>
-<p><strong>Best for:</strong> Landlords who are comfortable dealing with maintenance but want the security of professional rent collection.</p>
-
-<h3>3. Fully Managed</h3>
-<p>The agent handles everything — marketing, tenant referencing, rent collection, maintenance coordination, inspections, legal compliance, and eviction if needed. Ideal for hands-off landlords or those with multiple properties.</p>
-<p><strong>Typical cost:</strong> 14–20% of monthly rent (ongoing), plus setup fees.</p>
-<p><strong>Best for:</strong> Busy landlords, those living far from their property, or those with limited experience.</p>
-
-<h2>Additional Fees to Watch For</h2>
-<p>Beyond the headline percentage, many agents charge additional fees that can significantly increase your total costs:</p>
-<ul>
-  <li><strong>Tenancy setup / admin fee:</strong> £150 – £400</li>
-  <li><strong>Inventory preparation:</strong> £100 – £300</li>
-  <li><strong>Deposit registration:</strong> £30 – £100</li>
-  <li><strong>Renewal fee:</strong> £50 – £200 per renewal</li>
-  <li><strong>Void period management:</strong> Sometimes charged even when the property is empty</li>
-  <li><strong>Maintenance markup:</strong> 10–15% added to contractor invoices</li>
-  <li><strong>Eviction management:</strong> £300 – £1,000 per case</li>
-</ul>
-<p>Always ask for a full fee schedule before signing with any agent. The Tenant Fees Act 2019 restricts what agents can charge tenants, but agent-to-landlord fees are not capped.</p>
-
-<h2>High Street Agents vs Online Agents</h2>
-<p>The rise of online and hybrid letting agents has created more choice for landlords:</p>
-<ul>
-  <li><strong>High street agents:</strong> Typically more expensive (14–20% managed), but offer local knowledge, physical office presence, and established maintenance networks</li>
-  <li><strong>Online agents:</strong> Often charge flat fees (£300–£800 for tenant-find), much lower cost but typically less personal service</li>
-  <li><strong>Hybrid agents:</strong> Combine online efficiency with some local agent support — typically 8–12% managed</li>
-</ul>
-
-<h2>What Does a 15% Fee Actually Cost?</h2>
-<p>On a £1,200 pcm property, a 15% fully managed fee costs £180 per month — £2,160 per year. Over a five-year tenancy, that's £10,800 in management fees alone. Understanding this helps you evaluate whether the service justifies the cost.</p>
-
-<h2>The Elite Tenancy Difference</h2>
-<p>Elite Tenancy charges a transparent, competitive fee with no hidden extras. Our completion-only model means you only pay when we successfully let your property — no upfront fees, no void period charges. <a href="/pricing">See our pricing.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "no-dss-illegal-2026-benefits-tenants-landlord-guide",
-    title: "'No DSS' Is Now Illegal: What Landlords Must Know",
-    excerpt:
-      "Refusing to rent to housing benefit claimants ('No DSS') is now unlawful discrimination. Here's what landlords must know — and how to protect yourself legally.",
-    category: "Landlord Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 5,
-    tags: ["No DSS", "Housing Benefit", "Discrimination", "Landlord Guide", "2026"],
-    publishedAt: new Date("2026-01-20"),
-    imageUrl: "https://images.unsplash.com/photo-1657073901075-e6b444568dc5?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>What Does 'No DSS' Mean?</h2>
-<p>"No DSS" (named after the old Department of Social Security) is the practice of refusing to rent to tenants who receive housing benefit or Universal Credit housing costs. For decades this was widespread — advertised openly in property listings and enforced by landlords and letting agents alike.</p>
-<p>That has now changed. A series of court judgments and the introduction of the Equality Act provisions have made blanket "No DSS" policies unlawful in England and Wales.</p>
-
-<h2>Why Is 'No DSS' Illegal?</h2>
-<p>The key legal change came from court decisions applying the <strong>Equality Act 2010</strong>. While being a benefit recipient is not a protected characteristic directly, refusing to rent to those on benefits disproportionately affects people who are disabled (many of whom claim disability-related benefits) and women (who make up the majority of single parents on housing benefit).</p>
-<p>This constitutes <strong>indirect discrimination</strong> under the Equality Act — which is unlawful unless the landlord can objectively justify it. A blanket "no benefits" policy cannot be objectively justified.</p>
-<p>Key court rulings:</p>
-<ul>
-  <li><strong>Shelter v Grainger (2021):</strong> Confirmed that blanket DSS bans amount to indirect discrimination</li>
-  <li><strong>Various County Court judgments 2022–2024:</strong> Awarded damages to tenants refused on DSS grounds</li>
-</ul>
-
-<h2>What Landlords Can and Cannot Do</h2>
-<p><strong>You CANNOT:</strong></p>
-<ul>
-  <li>Advertise properties with "No DSS", "No Housing Benefit", or "Working tenants only"</li>
-  <li>Refuse a viewing or application solely because a tenant receives benefits</li>
-  <li>Set a blanket policy excluding all benefit recipients</li>
-  <li>Instruct an agent to refuse benefit claimants</li>
-</ul>
-<p><strong>You CAN:</strong></p>
-<ul>
-  <li>Apply the same affordability criteria to all applicants (e.g. monthly income must be 2.5× monthly rent)</li>
-  <li>Require referencing and credit checks for all applicants</li>
-  <li>Decline a specific applicant based on objective referencing results — not their benefit status</li>
-  <li>Request a guarantor if the applicant's income from employment doesn't meet affordability requirements</li>
-</ul>
-
-<h2>The Role of Mortgage and Insurance Conditions</h2>
-<p>Many landlords point to mortgage or insurance conditions that previously prohibited DSS tenants. This defence has been weakened significantly — lenders and insurers largely removed these restrictions following the legal changes, and the courts do not accept such conditions as sufficient justification for discrimination.</p>
-<p>If your mortgage or insurance still contains such a condition, contact your lender or insurer — most will amend the terms on request.</p>
-
-<h2>Practical Steps for Landlords</h2>
-<ol>
-  <li><strong>Remove any DSS exclusion language</strong> from all your property listings immediately</li>
-  <li><strong>Instruct your agent</strong> to apply the same criteria to all applicants</li>
-  <li><strong>Apply income-neutral referencing</strong> — accept Universal Credit statements and housing benefit award letters as proof of income</li>
-  <li><strong>Review your mortgage and insurance</strong> conditions and update if needed</li>
-  <li><strong>Train anyone acting on your behalf</strong> — you can be held liable for your agent's discriminatory practices</li>
-</ol>
-
-<h2>Benefits of Renting to Housing Benefit Tenants</h2>
-<p>Many landlords who have opened their properties to benefit claimants report positive outcomes:</p>
-<ul>
-  <li>Direct payment to landlord available via Universal Credit managed payments in cases of vulnerability</li>
-  <li>Local Housing Allowance (LHA) provides predictable income</li>
-  <li>Often long tenancies — benefit claimants tend to move less frequently</li>
-</ul>
-<p>Elite Tenancy works with landlords to find quality tenants across all income types. Our referencing process assesses affordability fairly for all applicants. <a href="/for-landlords">Learn more.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "assured-periodic-tenancy-explained",
-    title: "Assured Periodic Tenancy Explained: What Landlords and Tenants Need to Know",
-    excerpt:
-      "With fixed-term tenancies now abolished, all new tenancies in England are periodic. Here's exactly how assured periodic tenancies work in 2026.",
-    category: "Legal Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 5,
-    tags: ["Periodic Tenancy", "AST", "Tenancy Law", "Renters Rights Act", "2026"],
-    publishedAt: new Date("2026-02-05"),
-    imageUrl: "https://images.unsplash.com/photo-1722487631997-cf1e0f92c2c4?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>What Is an Assured Periodic Tenancy?</h2>
-<p>An assured periodic tenancy (APT) is a tenancy that runs for successive periods — typically month-by-month — with no fixed end date. Unlike a fixed-term tenancy (which runs for a set period, e.g. 12 months), a periodic tenancy continues indefinitely until either the landlord or tenant gives valid notice to end it.</p>
-<p>Following the Renters' Rights Act 2026, <strong>all new tenancies in England are now periodic tenancies</strong>. Fixed-term assured shorthold tenancies can no longer be granted for residential properties.</p>
-
-<h2>How Does a Periodic Tenancy Work?</h2>
-<p>A periodic tenancy has a "period" — the frequency with which rent is due. In most cases this is monthly, meaning:</p>
-<ul>
-  <li>Rent is due on the same date each month (or whichever day is agreed)</li>
-  <li>The tenancy automatically renews each month unless notice is given</li>
-  <li>There is no guaranteed minimum term for either party (subject to notice period rules)</li>
-</ul>
-
-<h2>Notice Periods Under Assured Periodic Tenancies</h2>
-<h3>Tenant's Notice to Leave</h3>
-<p>Tenants must give <strong>at least two months' written notice</strong> to end a periodic tenancy. This notice must expire on the last day of a rental period (e.g. the day before rent is next due). Tenants can give notice at any time — even from the first day of the tenancy.</p>
-
-<h3>Landlord's Notice to End the Tenancy</h3>
-<p>Landlords can no longer issue Section 21 notices. To end a periodic tenancy, landlords must use <strong>Section 8 possession grounds</strong> (see our Section 21 abolished guide for details). The most common grounds and notice periods are:</p>
-<ul>
-  <li><strong>Rent arrears (Ground 8):</strong> 4 weeks' notice</li>
-  <li><strong>Selling the property (Ground 1A):</strong> 4 months' notice</li>
-  <li><strong>Moving in (Ground 1B):</strong> 4 months' notice</li>
-  <li><strong>Breach of tenancy (Ground 12):</strong> 2 months' notice</li>
-</ul>
-
-<h2>Rent Increases in a Periodic Tenancy</h2>
-<p>In a periodic tenancy, rent can only be increased <strong>once per year</strong> using a formal <strong>Section 13 notice</strong>. The landlord must:</p>
-<ol>
-  <li>Give at least two months' written notice of the proposed increase</li>
-  <li>Use the prescribed Section 13 notice form</li>
-  <li>Propose a rent that reflects current market rates</li>
-</ol>
-<p>Tenants can challenge a proposed rent increase at the First-tier Tribunal (Property Chamber) if they believe it exceeds market rate. The Tribunal will set a fair market rent.</p>
-
-<h2>Can Landlords Still Offer Fixed-Term Tenancies?</h2>
-<p>No — since the Renters' Rights Act took effect, new assured shorthold tenancies with a fixed term cannot be granted in England. All new residential tenancies for assured tenancies must be periodic.</p>
-<p>Some limited exceptions exist: holiday lets (not assured tenancies) and purpose-built student accommodation operated by universities are not covered by these rules.</p>
-
-<h2>Transition for Existing Fixed-Term Tenancies</h2>
-<p>Tenancies that were already fixed-term when the Act commenced will transition to periodic tenancies when their fixed term expires. There is a transition period during which existing Section 21 notices may still be acted upon.</p>
-
-<h2>Benefits of Periodic Tenancies</h2>
-<p><strong>For tenants:</strong> Greater flexibility to leave with two months' notice, no risk of tenancy ending arbitrarily at the end of a fixed term, and stronger security of tenure overall.</p>
-<p><strong>For landlords:</strong> Ongoing tenancies without the admin burden of renewals, and the ability to rely on Section 8 grounds when genuinely needed.</p>
-
-<h2>Managing Periodic Tenancies Professionally</h2>
-<p>Elite Tenancy's managed service handles all aspects of periodic tenancy management — from compliant tenancy agreements to Section 13 rent review notices and Section 8 possession when needed. <a href="/for-landlords">Learn more.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "section-21-abolished-what-it-means-for-tenants",
-    title: "Section 21 Abolished: What It Means for Tenants",
-    excerpt:
-      "Section 21 no-fault evictions are gone. As a tenant in England, you now have much stronger security of tenure. Here's what the abolition means for you.",
-    category: "Tenant Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 5,
-    tags: ["Section 21", "Tenant Rights", "Renters Rights Act", "Security of Tenure", "2026"],
-    publishedAt: new Date("2026-01-15"),
-    imageUrl: "https://images.unsplash.com/photo-1733244766159-f58f4184fd38?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>Section 21 Is Abolished — What Does That Actually Mean?</h2>
-<p>For years, Section 21 notices were a constant source of anxiety for private renters. A landlord could issue one at any time after the initial fixed term expired, giving you just two months to find a new home — without having to give any reason. This is now gone.</p>
-<p>Under the Renters' Rights Act 2026, Section 21 "no-fault" evictions are abolished for all residential tenancies in England. Your landlord can no longer end your tenancy without a valid legal reason.</p>
-
-<h2>Why Did Tenants Fear Section 21?</h2>
-<p>Section 21 was widely used — not just when landlords wanted to sell or move in, but as a blunt instrument to remove tenants who complained about disrepair, or who the landlord simply wanted rid of without explanation. It was the leading cause of family homelessness in England.</p>
-<p>Tenants often received a Section 21 notice after asking for repairs, after joining a tenants' union, or simply because the landlord wanted to re-let at a higher rent. The new law addresses all of these situations.</p>
-
-<h2>What Can Your Landlord Do Instead?</h2>
-<p>Your landlord can now only end your tenancy through a <strong>Section 8 possession claim</strong> using specific legal grounds. The most relevant for tenants to know:</p>
-<ul>
-  <li><strong>Rent arrears (Ground 8):</strong> If you are two months or more behind on rent, your landlord can apply to court</li>
-  <li><strong>Selling the property (Ground 1A):</strong> Your landlord can ask you to leave if they intend to sell — but must give four months' notice and cannot do so in the first 12 months</li>
-  <li><strong>Moving in (Ground 1B):</strong> If your landlord or a close family member wants to move into the property — again, four months' notice, not in the first 12 months</li>
-  <li><strong>Anti-social behaviour (Ground 14):</strong> Serious nuisance or criminal behaviour</li>
-</ul>
-
-<h2>Your New Rights as a Tenant</h2>
-<p>Beyond Section 21 abolition, the Renters' Rights Act gives tenants several other important rights:</p>
-<ul>
-  <li><strong>Two months' notice to leave:</strong> You can give just two months' written notice to end your tenancy at any time — no need to wait for a fixed term to expire</li>
-  <li><strong>Protection from retaliatory eviction:</strong> If you complain about repairs or contact the council, your landlord cannot use this as grounds to remove you</li>
-  <li><strong>Right to keep pets:</strong> Landlords cannot unreasonably refuse your request to keep a pet</li>
-  <li><strong>Annual rent increase cap:</strong> Rent can only be increased once per year, and you have the right to challenge any increase you think is above market rate at a tribunal</li>
-  <li><strong>Awaab's Law:</strong> Landlords must investigate hazards like damp and mould within 14 days and fix emergency issues within 24 hours</li>
-</ul>
-
-<h2>What to Do If You Receive an Eviction Notice</h2>
-<p>If your landlord tries to evict you:</p>
-<ol>
-  <li><strong>Check the notice type:</strong> A Section 21 notice is now invalid. If you receive one, you do not have to leave and can ignore it</li>
-  <li><strong>Check Section 8 grounds:</strong> Even a Section 8 notice must specify valid legal grounds — and use the correct notice period</li>
-  <li><strong>Get advice:</strong> Contact Shelter, Citizens Advice, or a housing solicitor immediately</li>
-  <li><strong>Do not leave voluntarily</strong> unless you choose to — your landlord must go to court to evict you</li>
-</ol>
-
-<h2>Finding Secure, Quality Rental Homes</h2>
-<p>Elite Tenancy lists only quality, verified properties from reputable landlords. We ensure all properties on our platform comply with the latest legislation. <a href="/listings">Browse available homes.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "average-rent-birmingham-2026",
-    title: "Average Rent Birmingham 2026: Neighbourhood-by-Neighbourhood Guide",
-    excerpt:
-      "Current average rent prices in Birmingham for 2026, broken down by area — from the city centre and Digbeth to Harborne, Moseley, and beyond.",
-    category: "Rental Market",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 4,
-    tags: ["Birmingham Rent", "Average Rent", "Birmingham 2026", "UK Property"],
-    publishedAt: new Date("2026-02-10"),
-    imageUrl: "https://images.unsplash.com/photo-1562358563-7ef8a5a278ca?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>Birmingham Rental Market 2026</h2>
-<p>Birmingham is the UK's second largest city and one of its fastest-growing rental markets. Significant investment around the HS2 terminus at Curzon Street, ongoing regeneration of Digbeth, and a booming young professional population have kept demand strong — and rents rising.</p>
-<p>Here is a comprehensive breakdown of average rents across Birmingham's key areas in 2026.</p>
-
-<h2>City Centre and Jewellery Quarter</h2>
-<ul>
-  <li><strong>Studio:</strong> £750 – £950 pcm</li>
-  <li><strong>1-bedroom apartment:</strong> £950 – £1,250 pcm</li>
-  <li><strong>2-bedroom apartment:</strong> £1,200 – £1,600 pcm</li>
-  <li><strong>3-bedroom apartment:</strong> £1,500 – £2,000 pcm</li>
-</ul>
-<p>The Jewellery Quarter and Brindleyplace are premium locations with converted warehouse apartments and modern build-to-rent schemes commanding the top of the market.</p>
-
-<h2>Digbeth</h2>
-<ul>
-  <li><strong>1-bedroom apartment:</strong> £900 – £1,150 pcm</li>
-  <li><strong>2-bedroom apartment:</strong> £1,100 – £1,450 pcm</li>
-</ul>
-<p>Digbeth is Birmingham's most talked-about area — creative industries, independent food and drink, and major regeneration driven by HS2 proximity. Rents have risen sharply and are expected to continue climbing.</p>
-
-<h2>Edgbaston and Harborne</h2>
-<ul>
-  <li><strong>1-bedroom flat:</strong> £850 – £1,100 pcm</li>
-  <li><strong>2-bedroom flat:</strong> £1,000 – £1,350 pcm</li>
-  <li><strong>3-bedroom house:</strong> £1,300 – £1,700 pcm</li>
-</ul>
-<p>Edgbaston and Harborne are traditional premium residential areas, popular with medical professionals (close to the QE Hospital) and families. Excellent schools and green space command a premium.</p>
-
-<h2>Moseley and Kings Heath</h2>
-<ul>
-  <li><strong>1-bedroom flat:</strong> £800 – £1,000 pcm</li>
-  <li><strong>2-bedroom flat:</strong> £950 – £1,250 pcm</li>
-  <li><strong>Room in a shared house:</strong> £500 – £650 pcm</li>
-</ul>
-<p>Moseley is Birmingham's bohemian neighbourhood — independent shops, cafes, and a village feel within easy reach of the city centre. Popular with young professionals and creatives.</p>
-
-<h2>Selly Oak and Bournville</h2>
-<ul>
-  <li><strong>1-bedroom flat:</strong> £700 – £900 pcm</li>
-  <li><strong>Room in a shared house:</strong> £400 – £580 pcm</li>
-</ul>
-<p>Selly Oak is dominated by the University of Birmingham student market. Bournville — Cadbury's model village — is quieter and more suburban, popular with families.</p>
-
-<h2>Erdington and Handsworth</h2>
-<ul>
-  <li><strong>1-bedroom flat:</strong> £600 – £800 pcm</li>
-  <li><strong>2-bedroom house:</strong> £750 – £950 pcm</li>
-</ul>
-<p>North Birmingham offers the city's most affordable rental prices. Good transport links via the Cross-City line make these areas practical for commuters on a budget.</p>
-
-<h2>Is Birmingham a Good Place to Rent in 2026?</h2>
-<p>Birmingham offers strong value compared to London and significantly better affordability than Bristol or Edinburgh. For professionals relocating from London, Birmingham typically offers 30–40% lower rents with comparable quality of life.</p>
-<p>Browse Elite Tenancy's Birmingham listings to find quality rental properties verified by our team. <a href="/birmingham">See Birmingham properties.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "average-rent-manchester-2026-area-guide",
-    title: "Average Rent Manchester 2026: Area-by-Area Guide",
-    excerpt:
-      "Complete guide to rental prices in Manchester for 2026 — city centre, Salford Quays, Didsbury, Chorlton and beyond. Find the best area for your budget.",
-    category: "Rental Market",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 4,
-    tags: ["Manchester Rent", "Average Rent", "Manchester 2026", "UK Property"],
-    publishedAt: new Date("2026-02-12"),
-    imageUrl: "https://images.unsplash.com/photo-1724135869739-6055627ba5df?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>Manchester Rental Market 2026</h2>
-<p>Manchester has consistently ranked among the UK's strongest rental markets outside London, driven by a thriving economy, major investment in tech and creative industries, and two of the UK's largest universities. Rents have risen significantly over the past five years, though Manchester still offers far better value than London.</p>
-
-<h2>Manchester City Centre (M1, M2, M3)</h2>
-<ul>
-  <li><strong>Studio:</strong> £850 – £1,100 pcm</li>
-  <li><strong>1-bedroom apartment:</strong> £1,100 – £1,500 pcm</li>
-  <li><strong>2-bedroom apartment:</strong> £1,400 – £1,900 pcm</li>
-  <li><strong>3-bedroom apartment:</strong> £1,800 – £2,500 pcm</li>
-</ul>
-<p>The city centre — particularly the Deansgate, Spinningfields, and Northern Quarter areas — commands the highest premiums. Purpose-built rental towers and luxury apartments have driven prices up substantially in recent years.</p>
-
-<h2>Salford Quays and MediaCityUK</h2>
-<ul>
-  <li><strong>1-bedroom apartment:</strong> £1,000 – £1,350 pcm</li>
-  <li><strong>2-bedroom apartment:</strong> £1,250 – £1,700 pcm</li>
-</ul>
-<p>Salford Quays and MediaCityUK have been transformed into a premium waterfront residential destination. Home to the BBC, ITV, and hundreds of media and tech companies, the area attracts high-earning professionals willing to pay a premium for modern waterfront living.</p>
-
-<h2>Ancoats and New Islington</h2>
-<ul>
-  <li><strong>1-bedroom apartment:</strong> £1,050 – £1,400 pcm</li>
-  <li><strong>2-bedroom apartment:</strong> £1,350 – £1,750 pcm</li>
-</ul>
-<p>Ancoats is Manchester's most fashionable neighbourhood — award-winning restaurants, independent coffee shops, and high-quality modern apartments. One of the city's most sought-after places to live for young professionals.</p>
-
-<h2>Didsbury</h2>
-<ul>
-  <li><strong>1-bedroom flat:</strong> £900 – £1,200 pcm</li>
-  <li><strong>2-bedroom flat:</strong> £1,100 – £1,500 pcm</li>
-  <li><strong>3-bedroom house:</strong> £1,400 – £1,900 pcm</li>
-</ul>
-<p>Didsbury is South Manchester's premium residential village — tree-lined streets, Victorian semis, independent restaurants and boutiques. Popular with families, professionals, and those who want a quieter life within commuting distance of the city.</p>
-
-<h2>Chorlton and Whalley Range</h2>
-<ul>
-  <li><strong>1-bedroom flat:</strong> £850 – £1,100 pcm</li>
-  <li><strong>2-bedroom flat:</strong> £1,050 – £1,350 pcm</li>
-  <li><strong>Room in a shared house:</strong> £550 – £750 pcm</li>
-</ul>
-<p>Chorlton is Manchester's alternative heart — organic cafes, independent cinemas, and a strong community feel. Very popular with creatives, teachers, and young families seeking an affordable premium lifestyle.</p>
-
-<h2>Withington and Fallowfield</h2>
-<ul>
-  <li><strong>1-bedroom flat:</strong> £700 – £950 pcm</li>
-  <li><strong>Room in a shared house:</strong> £450 – £650 pcm</li>
-</ul>
-<p>These areas are dominated by the student rental market but are also popular with young professionals seeking affordable rents close to the city. Good Metrolink and bus links.</p>
-
-<h2>Stockport and Salford (Outer)</h2>
-<ul>
-  <li><strong>1-bedroom flat:</strong> £650 – £850 pcm</li>
-  <li><strong>2-bedroom house:</strong> £800 – £1,050 pcm</li>
-</ul>
-<p>For the most affordable options within Greater Manchester, outer Salford and Stockport offer good value with excellent transport links into the city.</p>
-
-<h2>Browse Manchester Rentals</h2>
-<p>Elite Tenancy lists quality, verified rental properties across Manchester and Greater Manchester. <a href="/manchester">See available Manchester properties.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "can-landlord-refuse-pets-2026-uk",
-    title: "Can a Landlord Refuse Pets? UK Law 2026 Explained",
-    excerpt:
-      "The Renters' Rights Act 2026 gives tenants the right to request pets in rented properties. Can landlords still refuse? Here's exactly what the law now says.",
-    category: "Tenant Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 4,
-    tags: ["Pets in Rented Properties", "Tenant Rights", "Renters Rights Act", "2026", "UK Law"],
+    readTimeMinutes: 9,
+    tags: ["Right to Rent", "UK Immigration", "Landlord Compliance", "EU Nationals", "Share Code"],
     publishedAt: new Date("2026-02-15"),
-    imageUrl: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=1200&q=80&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1725656470434-0767edf3c397?w=1200&q=80&auto=format&fit=crop",
     content: `
-<h2>The New Law on Pets in Rented Properties</h2>
-<p>The Renters' Rights Act 2026 fundamentally changed tenants' rights regarding pets. Previously, landlords could include a blanket "no pets" clause in any tenancy agreement and refuse any pet request with no explanation. That has changed.</p>
-<p>Under the new law, <strong>landlords cannot unreasonably refuse a tenant's written request to keep a pet</strong> in their home. A "no pets under any circumstances" policy is no longer legally enforceable.</p>
+<h2>Right to Rent in 2026: The Complete Guide</h2>
+<p>The Right to Rent scheme requires every landlord in England to check that a tenant has the legal right to live in the UK before renting them a property. Getting this wrong can mean a civil penalty of up to <strong>£20,000 per occupier</strong> for repeat breaches — and the rules did not change when the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act</a> took effect, though the Act did add a new possession ground for landlords if a tenant loses their right to rent mid-tenancy.</p>
 
-<h2>How Does the Pet Request Process Work?</h2>
-<p>The process is straightforward:</p>
+<h2>Who Must Carry Out Right to Rent Checks?</h2>
+<ul>
+<li>All private landlords renting property in England</li>
+<li>Letting agents acting on behalf of landlords</li>
+<li>Anyone sub-letting a room in a property they themselves rent</li>
+<li>Live-in landlords taking in lodgers</li>
+</ul>
+<p><strong>Note:</strong> the scheme applies in England only. Scotland, Wales, and Northern Ireland have no equivalent requirement.</p>
+
+<h2>Which Documents Prove Right to Rent?</h2>
+<h3>Group A — Unlimited Right to Rent (check once, no follow-up needed)</h3>
+<ul>
+<li>UK or Irish passport</li>
+<li>UK birth or adoption certificate plus National Insurance evidence</li>
+<li>Certificate of British nationality or naturalisation</li>
+<li>EU, EEA, or Swiss national with digital <strong>settled status</strong> under the EU Settlement Scheme</li>
+</ul>
+<h3>Group B — Time-Limited Right to Rent (must re-check before expiry)</h3>
+<ul>
+<li>Any non-UK passport with entry vignette, BRP, or BRC</li>
+<li>EU, EEA, or Swiss national with <strong>pre-settled status</strong> — typically re-checked every 2 years</li>
+<li>Valid visa: student, skilled worker, or spouse/family visa</li>
+</ul>
+
+<h2>How to Check Right to Rent in 2026</h2>
+<h3>Option 1: Online Share Code (Recommended)</h3>
 <ol>
-  <li><strong>Tenant makes a written request</strong> to keep a pet at the property</li>
-  <li><strong>Landlord has 28 days</strong> to respond in writing</li>
-  <li>The landlord can <strong>grant the request</strong>, <strong>refuse with valid reasons</strong>, or <strong>agree conditionally</strong> (e.g. requiring pet insurance)</li>
-  <li>If the landlord refuses, they must provide written reasons</li>
-  <li>If the tenant believes the refusal is unreasonable, they can challenge it through the First-tier Tribunal</li>
+<li>Tenant generates a share code at gov.uk/prove-right-to-rent — a 9-character code starting with "R", valid 90 days and reusable within that window</li>
+<li>Tenant provides their date of birth</li>
+<li>Landlord checks the code at gov.uk/view-right-to-rent</li>
+<li>Landlord downloads and retains the result (valid for 28 days as evidence of a compliant check)</li>
+</ol>
+<p>The online check is <strong>mandatory</strong> for anyone relying on digital immigration status, including EU/EEA/Swiss nationals with settled or pre-settled status — a physical passport alone is not sufficient proof for these applicants.</p>
+
+<h3>Option 2: Manual Document Check</h3>
+<ol>
+<li>See the original document in person or via a live video call</li>
+<li>Verify it is genuine and belongs to the person in front of you</li>
+<li>Take a clear copy, dated on the day of the check</li>
+<li>Store securely for the duration of the tenancy plus 1 year after it ends</li>
 </ol>
 
-<h2>What Are Valid Reasons for Refusing a Pet?</h2>
-<p>Landlords CAN reasonably refuse a pet request in certain circumstances:</p>
+<h2>EU Nationals After Brexit — What Changed</h2>
 <ul>
-  <li>The property is a small flat and the pet would be unsuitable (e.g. a large dog in a studio)</li>
-  <li>There are deed restrictions or freeholder restrictions on pets</li>
-  <li>The building's terms of service prohibit certain animals</li>
-  <li>There is a genuine risk of significant damage beyond what insurance can cover</li>
-  <li>The pet poses a health and safety risk to other occupants or neighbours</li>
+<li>EU/EEA/Swiss nationals resident before 31 December 2020 should hold EU Settlement Scheme (EUSS) status</li>
+<li><strong>Settled status:</strong> indefinite right to rent — check once only</li>
+<li><strong>Pre-settled status:</strong> time-limited — must re-check before it expires, usually every 2 years</li>
+<li>An EU passport alone is <strong>not</strong> sufficient — landlords must verify digital status via the official online portal</li>
 </ul>
-<p>A landlord CANNOT refuse simply because they prefer no pets, or because of a blanket policy.</p>
 
-<h2>Can Landlords Require Pet Insurance?</h2>
-<p>Yes. One of the most important provisions for landlords is that they CAN require tenants to obtain and maintain adequate <strong>pet damage insurance</strong> as a condition of keeping a pet. This provides protection for the landlord without requiring a larger deposit (deposit caps still apply under the Tenant Fees Act).</p>
-
-<h2>What About the Deposit Cap?</h2>
-<p>Deposit caps remain unchanged — landlords cannot require a larger deposit specifically because of a pet. The cap is five weeks' rent for most properties. This is why the pet insurance requirement was included in the legislation as an alternative protection mechanism for landlords.</p>
-
-<h2>Existing "No Pets" Clauses in Tenancy Agreements</h2>
-<p>If your current tenancy agreement has a blanket "no pets" clause, it may not be automatically void — but the landlord cannot enforce it in a way that amounts to an unreasonable refusal. If you make a formal written request to keep a pet, your landlord must consider it on its merits, not simply point to the clause.</p>
-
-<h2>Tips for Tenants Requesting a Pet</h2>
+<h2>Penalties for Landlords</h2>
 <ul>
-  <li>Make the request in writing (email is fine)</li>
-  <li>Describe the pet — breed, size, age, whether it's neutered</li>
-  <li>Offer to provide a reference from a previous landlord confirming no damage</li>
-  <li>Offer to obtain pet damage insurance</li>
-  <li>Be specific about how you'll care for the pet and prevent damage</li>
+<li><strong>First breach:</strong> up to £5,000 per lodger, up to £10,000 per occupier of a whole property</li>
+<li><strong>Repeat breach within 3 years:</strong> up to £10,000 per lodger, up to £20,000 per occupier</li>
+<li><strong>Knowingly letting to a disqualified person:</strong> unlimited fine and up to 5 years' imprisonment</li>
 </ul>
-<p>Elite Tenancy lists pet-friendly properties from verified landlords across the UK. <a href="/listings">Find pet-friendly rentals.</a></p>
+<p>Landlords who carry out the correct check in good faith are protected from penalty even if a document later turns out to be fraudulent — this is why following the exact process, and keeping evidence, matters more than the check itself.</p>
+
+<h2>Tenant Rights in Right to Rent Checks</h2>
+<ul>
+<li>Landlords must check <strong>every</strong> tenant, not just those they suspect may not be UK nationals — checking selectively is itself discriminatory and unlawful</li>
+<li>If you believe you were rejected because of nationality rather than an actual right-to-rent issue, you can report this to the Equality Advisory and Support Service</li>
+<li>Share codes are free via gov.uk — never pay a third party for one</li>
+</ul>
+
+<h2>Frequently Asked Questions</h2>
+<h3>How long is a right to rent check valid for?</h3>
+<p>A Group A document check (unlimited right to rent) never needs repeating for that tenancy. A Group B time-limited check must be repeated before the document or status expires, or 12 months after the initial check, whichever is later.</p>
+<h3>What's the difference between a "lodger" and an "occupier" for penalties?</h3>
+<p>A lodger typically shares accommodation with a resident landlord (a single room); an occupier applies to whole-property lettings. The higher per-occupier penalty reflects the larger number of people potentially affected in a full letting.</p>
+
+<h2>Elite Tenancy and Right to Rent</h2>
+<p>Elite Tenancy carries out compliant Right to Rent checks on every tenant before completing any placement, protecting both landlords and tenants. Our digital Renter Passport stores your verified documents securely and makes re-checks instant. <a href="/renter-passport">Create your Renter Passport.</a></p>
     `.trim(),
   },
-
-  {
-    slug: "rent-in-advance-legal-2026-uk",
-    title: "Is Asking for Rent in Advance Legal? UK 2026 Guide",
-    excerpt:
-      "Can landlords still ask for several months' rent in advance in the UK? Here's what the 2026 law says about rent in advance, deposits, and what tenants can do.",
-    category: "Legal Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 4,
-    tags: ["Rent in Advance", "Deposit", "Tenant Rights", "UK Law", "2026"],
-    publishedAt: new Date("2026-02-18"),
-    imageUrl: "https://images.unsplash.com/photo-1617655501435-8f07714f57ec?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>Is Rent in Advance Legal in the UK?</h2>
-<p>Yes — <strong>asking for rent in advance is legal in the UK</strong>, but with important restrictions introduced by the Renters' Rights Act 2026. Landlords cannot request more than one month's rent in advance at the start of a tenancy.</p>
-
-<h2>The New Rent in Advance Cap</h2>
-<p>Under the Renters' Rights Act 2026, landlords in England are now prohibited from requesting more than <strong>one month's rent in advance</strong> at the start of a tenancy. This is a significant change from previous practice, where some landlords — particularly those letting to students, those with poor credit history, or overseas applicants — would request six or even twelve months' rent in advance.</p>
-<p>This cap applies alongside the existing deposit cap of five weeks' rent under the Tenant Fees Act 2019. Together, the maximum a landlord can request upfront is now:</p>
-<ul>
-  <li><strong>One month's rent</strong> as the first month's rent (paid in advance, as normal)</li>
-  <li><strong>Five weeks' rent</strong> as a tenancy deposit</li>
-  <li><strong>Total maximum upfront cost:</strong> Approximately 2.25 months' rent equivalent</li>
-</ul>
-
-<h2>Why Was This Change Made?</h2>
-<p>Large rent-in-advance requirements were being used as a workaround to the deposit cap — in effect requiring tenants to put up substantial sums of money that weren't protected in a deposit scheme. This was particularly discriminatory against:</p>
-<ul>
-  <li>International students and overseas workers without UK credit history</li>
-  <li>Those on lower incomes who cannot save large lump sums</li>
-  <li>People leaving rent-to-rent accommodation with no rental history</li>
-</ul>
-
-<h2>What If a Landlord Asks for More?</h2>
-<p>If a landlord or letting agent asks for more than one month's rent in advance (plus the deposit), this is now a criminal offence under the Tenant Fees Act as amended. You should:</p>
-<ol>
-  <li>Refuse to pay the excess amount</li>
-  <li>Report the request to your local Trading Standards office</li>
-  <li>Report to the PRS Database (once operational)</li>
-</ol>
-<p>The penalty for landlords who request prohibited payments is a civil penalty of up to £5,000 for a first offence.</p>
-
-<h2>What About Guarantors?</h2>
-<p>The one-month advance cap does not prevent landlords from requiring a <strong>guarantor</strong> — a third party who agrees to pay rent if the tenant cannot. Guarantors are not subject to the same restrictions as deposits and advance rent. Landlords who are concerned about a tenant's financial position can still request a suitable guarantor as a condition of the tenancy.</p>
-
-<h2>Tips for Tenants</h2>
-<ul>
-  <li>Always get a receipt for any advance rent paid</li>
-  <li>Make sure any advance rent is clearly documented in the tenancy agreement as the first period's rent</li>
-  <li>If asked for more than one month's advance, cite the Renters' Rights Act 2026 and refuse</li>
-  <li>Check that your deposit is protected in a government-approved scheme within 30 days</li>
-</ul>
-<p>Elite Tenancy works with transparent landlords who comply with all legal requirements. <a href="/listings">Browse our listings.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "ai-tenant-matching-how-it-works",
-    title: "AI Tenant Matching: How It Works and Why It's Better",
-    excerpt:
-      "How AI-powered tenant matching works — and why it finds better, faster matches between tenants and landlords than traditional property search. Inside Elite Tenancy's matching system.",
-    category: "Platform Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 4,
-    tags: ["AI Matching", "Tenant Matching", "Property Technology", "Proptech"],
-    publishedAt: new Date("2026-03-01"),
-    imageUrl: "https://images.unsplash.com/photo-1745674684539-d90293d659a9?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>Why Traditional Property Search Falls Short</h2>
-<p>Traditional property search — browsing listings on portals, filtering by price and bedrooms, then sending speculative enquiries — is slow, imprecise, and frustrating for both tenants and landlords. Tenants spend hours viewing unsuitable properties; landlords receive enquiries from applicants who don't meet their criteria.</p>
-<p>AI tenant matching changes this entirely. Instead of searching, tenants tell the system what they need — and the AI finds and ranks properties that genuinely fit, taking into account far more factors than a simple filter can capture.</p>
-
-<h2>How Elite Tenancy's AI Matching Works</h2>
-<h3>Step 1: Build Your Renter Profile</h3>
-<p>When you create a renter profile on Elite Tenancy, you tell us:</p>
-<ul>
-  <li>Your budget, preferred location(s), and move-in timeline</li>
-  <li>Lifestyle preferences — whether you work from home, prefer quiet areas, have pets, etc.</li>
-  <li>Non-negotiables (no ground floor, must have outdoor space, etc.)</li>
-  <li>Employment status, income, and tenancy history</li>
-</ul>
-
-<h3>Step 2: AI Profile Analysis</h3>
-<p>Our AI analyses your profile to understand not just your stated preferences but also your <em>implicit</em> priorities. Someone who says "near good transport links" and works in the city centre gets different recommendations than someone who says the same thing but works remotely.</p>
-
-<h3>Step 3: Property Matching and Scoring</h3>
-<p>The system compares your profile against every active listing and generates a <strong>match score</strong> for each property. This score takes into account:</p>
-<ul>
-  <li>Budget fit (including all costs, not just rent)</li>
-  <li>Location match against your commute, schools, or other key destinations</li>
-  <li>Property characteristics vs your stated and inferred preferences</li>
-  <li>Landlord's tenant requirements vs your profile</li>
-  <li>Availability timing</li>
-</ul>
-
-<h3>Step 4: Ranked Recommendations</h3>
-<p>Instead of browsing 200 listings, you see the top 10–20 properties most likely to result in a successful tenancy — ranked by match quality. No more scrolling past unsuitable properties; just the ones that genuinely fit your needs.</p>
-
-<h2>How It Benefits Landlords</h2>
-<p>AI matching isn't just good for tenants. Landlords benefit too:</p>
-<ul>
-  <li><strong>Pre-qualified enquiries only:</strong> You only hear from tenants who genuinely fit your property and criteria</li>
-  <li><strong>Faster lets:</strong> Properties let faster when the right tenants are matched quickly</li>
-  <li><strong>Better tenancies:</strong> Well-matched tenants stay longer and take better care of properties</li>
-  <li><strong>Reduced void periods:</strong> Proactive matching means your property reaches relevant tenants the moment it's listed</li>
-</ul>
-
-<h2>Privacy and Data</h2>
-<p>Your renter profile data is used solely to match you with suitable properties and landlords. It is never sold to third parties. You control what information is shared and with whom.</p>
-
-<h2>Try AI Matching Today</h2>
-<p>Create your free renter profile and let our AI find your next home. <a href="/find-my-match">Get matched now — it takes 3 minutes.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "buy-to-let-2026-worth-it",
-    title: "Is Buy-to-Let Still Worth It in 2026?",
-    excerpt:
-      "Buy-to-let investment has faced significant headwinds from rising mortgage rates, tax changes, and new regulation. Is it still worth investing in UK property in 2026?",
-    category: "Landlord Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 5,
-    tags: ["Buy to Let", "Property Investment", "Landlord", "UK Property", "2026"],
-    publishedAt: new Date("2026-02-20"),
-    imageUrl: "https://images.unsplash.com/photo-1626178793926-22b28830aa30?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>The State of Buy-to-Let in 2026</h2>
-<p>The past five years have been challenging for buy-to-let landlords. Rising mortgage rates, the gradual removal of mortgage interest tax relief (Section 24), stricter regulation under the Renters' Rights Act, and energy efficiency requirements have all squeezed margins. Many landlords — particularly those with highly leveraged portfolios — have sold up.</p>
-<p>Yet strong rental demand, rising rents, and the prospect of long-term capital growth continue to attract investors. So is buy-to-let still worth it in 2026?</p>
-
-<h2>The Numbers: Rental Yields in 2026</h2>
-<p>Gross rental yields vary significantly by location and property type:</p>
-<ul>
-  <li><strong>London:</strong> 3–4.5% gross (low yield, but historically strong capital growth)</li>
-  <li><strong>Manchester:</strong> 5–7% gross (the sweet spot for many investors)</li>
-  <li><strong>Birmingham:</strong> 5–7% gross</li>
-  <li><strong>Leeds:</strong> 5.5–7.5% gross</li>
-  <li><strong>Liverpool:</strong> 6–8.5% gross (high yield, lower capital growth)</li>
-  <li><strong>Bristol:</strong> 4.5–6% gross</li>
-</ul>
-<p>Net yields (after mortgage costs, management fees, maintenance, insurance, and voids) are typically 1–3 percentage points lower. At current mortgage rates (4.5–6% for buy-to-let), achieving positive cash flow requires careful selection of both property and location.</p>
-
-<h2>The Tax Position in 2026</h2>
-<p>The tax landscape for private landlords has become significantly less favourable since 2016:</p>
-<ul>
-  <li><strong>Mortgage interest relief:</strong> Fully restricted to a 20% tax credit (not deductible against rental income). Higher-rate taxpayers pay significantly more tax than before</li>
-  <li><strong>3% SDLT surcharge:</strong> An additional 3 percentage points on any property purchase where you already own a property</li>
-  <li><strong>Capital gains tax:</strong> 18% for basic rate taxpayers, 24% for higher rate (on residential property gains)</li>
-  <li><strong>Section 24 impact:</strong> Many landlords have moved properties into limited companies to reclaim full mortgage interest deduction</li>
-</ul>
-
-<h2>Limited Company Buy-to-Let: Is It Worth It?</h2>
-<p>Purchasing via a limited company allows full mortgage interest deduction, but introduces complexity:</p>
-<ul>
-  <li>Higher mortgage rates for company borrowing (typically 0.5–1% more)</li>
-  <li>Corporation tax on company profits (25% for most landlords)</li>
-  <li>Additional cost to extract profits via salary or dividends</li>
-  <li>Legal and accountancy fees</li>
-</ul>
-<p>For landlords with larger portfolios (typically four or more properties) who do not need to extract all rental income, limited company ownership often makes financial sense. For those with one or two properties relying on rental income as salary, the sums are less clear.</p>
-
-<h2>The Regulatory Cost</h2>
-<p>New regulations under the Renters' Rights Act, HMO licensing, minimum EPC requirements (heading toward EPC C minimum), and potential future requirements add costs and complexity. Factoring these into yield calculations is essential.</p>
-
-<h2>When Buy-to-Let Makes Sense in 2026</h2>
-<p>Buy-to-let can still be a sound investment in 2026 if:</p>
-<ul>
-  <li>You purchase in a high-demand, high-yield city (Manchester, Leeds, Liverpool, Birmingham)</li>
-  <li>You have at least 25–30% deposit to achieve viable yields at current mortgage rates</li>
-  <li>You take a long-term view on capital growth</li>
-  <li>You operate via a limited company (for portfolio investors)</li>
-  <li>You use professional management to reduce voids and compliance risk</li>
-</ul>
-
-<h2>Expert Letting Management</h2>
-<p>If you do invest in buy-to-let, professional management is more important than ever. Elite Tenancy's managed service handles compliance, tenant sourcing, and ongoing management to maximise your yield. <a href="/for-landlords">Learn more.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "find-premium-rentals-london-2026",
-    title: "How to Find Premium Rentals in London in 2026",
-    excerpt:
-      "Searching for a quality rental in London? Here's how to navigate London's competitive rental market in 2026, find premium properties, and secure them fast.",
-    category: "Tenant Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 4,
-    tags: ["London Rentals", "Premium Property", "London 2026", "Tenant Tips"],
-    publishedAt: new Date("2026-03-05"),
-    imageUrl: "https://images.unsplash.com/photo-1633694705199-bc1e0a87c97a?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>London's Rental Market in 2026</h2>
-<p>London's rental market is one of the most competitive in the world. Demand consistently outstrips supply — particularly at the premium end, where quality properties let within days of listing. Average rents in inner London now exceed £2,000 per month for a one-bedroom flat, and competition for the best properties remains fierce.</p>
-<p>If you're looking for a premium rental in London, speed, preparation, and knowing where to look are everything.</p>
-
-<h2>Where to Find Premium London Rentals</h2>
-<p>Premium properties in London are concentrated in a handful of well-known areas, but each offers a different lifestyle:</p>
-<ul>
-  <li><strong>Kensington and Chelsea:</strong> The traditional prime market — grand period flats, mansion blocks, garden squares. The most expensive in London</li>
-  <li><strong>Marylebone and Fitzrovia:</strong> Village-feel central London with excellent restaurants and independent shops. Popular with executives</li>
-  <li><strong>Shoreditch and Hoxton (E1/E2):</strong> Tech and creative professionals, converted lofts and modern apartments</li>
-  <li><strong>Canary Wharf and Docklands:</strong> Modern towers, excellent transport links, popular with finance sector workers</li>
-  <li><strong>Richmond and Chiswick:</strong> Premium outer London — green spaces, excellent schools, riverside living</li>
-  <li><strong>Battersea and Clapham:</strong> South London's premium spots, very popular with young professionals</li>
-</ul>
-
-<h2>How to Move Quickly in London's Rental Market</h2>
-<p>In London, the best properties attract multiple applicants within 24–48 hours of listing. To compete:</p>
-<ol>
-  <li><strong>Get your references ready in advance</strong> — have your employer reference, proof of income (3 months' payslips), and previous landlord reference prepared before you even start viewing</li>
-  <li><strong>Know your budget</strong> — lenders and landlords typically require income of 2.5–3× annual rent. Be clear on what you can prove</li>
-  <li><strong>View quickly and decide quickly</strong> — don't take days to deliberate. If you like a property, offer the same day</li>
-  <li><strong>Have your holding deposit ready</strong> — most landlords will expect a holding deposit (up to one week's rent) immediately on acceptance</li>
-  <li><strong>Use a platform that gives you early access</strong> — many of the best properties never reach the major portals</li>
-</ol>
-
-<h2>What Makes a Premium London Rental?</h2>
-<p>True premium properties in London typically feature:</p>
-<ul>
-  <li>High-quality fixtures — engineered hardwood floors, stone worktops, integrated appliances</li>
-  <li>Outdoor space — a balcony, terrace, or access to a communal garden significantly increases value</li>
-  <li>Concierge or building management</li>
-  <li>On-site amenities (gym, residents' lounge) in newer build-to-rent developments</li>
-  <li>High energy efficiency ratings — EPC B or A is increasingly desirable</li>
-  <li>Dedicated parking or secure cycle storage</li>
-</ul>
-
-<h2>Avoiding London Rental Scams</h2>
-<p>London's competitive market makes it fertile ground for rental fraud. Protect yourself:</p>
-<ul>
-  <li>Never pay a deposit without meeting the landlord or agent in person and viewing the property</li>
-  <li>Verify the landlord owns the property via the Land Registry (£3 search at gov.uk)</li>
-  <li>Use a reputable letting agent or platform with identity verification</li>
-  <li>Never transfer money via bank transfer to someone you haven't met</li>
-</ul>
-
-<h2>Find Your Perfect London Rental</h2>
-<p>Elite Tenancy lists verified premium rental properties across London with thorough landlord and property verification. All properties meet our quality standards before they're listed. <a href="/london">Browse London properties.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "landlord-guide-letting-2026",
-    title: "Complete Landlord Guide to Letting Your Property in 2026",
-    excerpt:
-      "A step-by-step guide for landlords letting a property in 2026 — compliance checklist, finding tenants, setting rent, and managing ongoing tenancies under new laws.",
-    category: "Landlord Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 5,
-    tags: ["Landlord Guide", "How to Let", "Property Letting", "2026", "UK Landlord"],
-    publishedAt: new Date("2026-01-22"),
-    imageUrl: "https://images.unsplash.com/photo-1741156386380-0236c72eb6f9?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>Before You Let: Essential Compliance Checklist 2026</h2>
-<p>Before marketing your property, you must ensure all the following are in place:</p>
-
-<h3>Legal Requirements</h3>
-<ul>
-  <li><strong>Gas Safety Certificate:</strong> Annual inspection by Gas Safe registered engineer. Must be provided to tenant before move-in</li>
-  <li><strong>Electrical Installation Condition Report (EICR):</strong> Required for all rented properties. Valid for 5 years</li>
-  <li><strong>Energy Performance Certificate (EPC):</strong> Property must have minimum EPC rating of E (minimum C expected from 2028). Valid for 10 years</li>
-  <li><strong>Smoke and Carbon Monoxide Alarms:</strong> Smoke alarm on every floor, CO alarm in every room with a solid fuel or gas appliance</li>
-  <li><strong>Right to Rent checks:</strong> Must verify all tenants' right to rent in the UK before tenancy start</li>
-  <li><strong>PRS Database registration:</strong> Register on the new Private Rented Sector Database (mandatory under the Renters' Rights Act)</li>
-  <li><strong>Tenancy Deposit Protection:</strong> Register deposit in an approved scheme within 30 days</li>
-  <li><strong>Prescribed information:</strong> Provide all required documents — EPC, gas safety, How to Rent guide, deposit protection certificate</li>
-</ul>
-
-<h3>Additional Checks</h3>
-<ul>
-  <li>Ensure property meets decent homes standard</li>
-  <li>Confirm no category 1 or category 2 hazards (damp, electrical, structural issues)</li>
-  <li>Check whether HMO licence is required</li>
-</ul>
-
-<h2>Setting the Right Rent</h2>
-<p>Pricing your rental correctly from day one is critical. Too high and you'll extend your void period; too low and you lose income that's difficult to recover (rent increases are now limited to once per year).</p>
-<p>To determine market rent:</p>
-<ol>
-  <li>Search comparable properties on Rightmove and Zoopla — filter by same area, similar size, similar condition</li>
-  <li>Check recently let prices (not just asking prices)</li>
-  <li>Ask local letting agents for a free valuation</li>
-  <li>Factor in any premium features — parking, outdoor space, modern fixtures</li>
-</ol>
-
-<h2>Marketing Your Property</h2>
-<p>To reach the maximum number of suitable tenants:</p>
-<ul>
-  <li><strong>Professional photos:</strong> Non-negotiable. Bad photos significantly reduce enquiries</li>
-  <li><strong>Accurate floor plan:</strong> Increasingly expected by tenants</li>
-  <li><strong>List on major portals:</strong> Rightmove and Zoopla reach the vast majority of active renters</li>
-  <li><strong>List on specialist platforms:</strong> Elite Tenancy's AI matching connects you with pre-qualified, suitable tenants directly</li>
-  <li><strong>Social media:</strong> Useful for local reach, particularly for HMOs and shared houses</li>
-</ul>
-
-<h2>Selecting the Right Tenant</h2>
-<p>Under the new law, you cannot discriminate against tenants based on benefit status. You should apply consistent criteria to all applicants:</p>
-<ul>
-  <li><strong>Affordability:</strong> Income typically 2.5–3× annual rent</li>
-  <li><strong>Credit check:</strong> Look for CCJs, IVAs, or bankruptcy</li>
-  <li><strong>Employment verification:</strong> Employer letter or three months' payslips</li>
-  <li><strong>Previous landlord reference:</strong> Confirms tenancy history and behaviour</li>
-  <li><strong>Right to rent document check:</strong> Legal requirement before tenancy start</li>
-</ul>
-
-<h2>The Tenancy Agreement</h2>
-<p>All new tenancies in England must now be periodic (no fixed term). A compliant tenancy agreement must:</p>
-<ul>
-  <li>Specify that it is a periodic assured tenancy under the Housing Act 1988</li>
-  <li>State the rent, due date, and rental period</li>
-  <li>Include landlord's full name and address for service</li>
-  <li>Comply with all statutory provisions</li>
-</ul>
-
-<h2>Managing the Ongoing Tenancy</h2>
-<p>Key ongoing obligations:</p>
-<ul>
-  <li>Annual gas safety check (give tenant a copy within 28 days)</li>
-  <li>Respond to repair reports promptly (Awaab's Law timescales apply)</li>
-  <li>Issue Section 13 notice before any rent increase (2 months minimum notice)</li>
-  <li>Renew EICR every 5 years and provide copy to tenant</li>
-</ul>
-
-<h2>Professional Letting Management</h2>
-<p>For most landlords, especially those with full-time jobs or multiple properties, professional management pays for itself in reduced voids, better tenants, and compliance assurance. <a href="/for-landlords">Find out about Elite Tenancy's managed letting service.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "manchester-vs-london-rent-2026",
-    title: "Manchester vs London Rent 2026: Is Manchester Worth the Move?",
-    excerpt:
-      "Comparing rental costs in Manchester and London in 2026 — how much can you save, what do you sacrifice, and is Manchester the better choice for renters?",
-    category: "Rental Market",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 4,
-    tags: ["Manchester vs London", "Rent Comparison", "UK Cities", "2026", "Rental Market"],
-    publishedAt: new Date("2026-03-10"),
-    imageUrl: "https://images.unsplash.com/photo-1710178368224-9b21cf7554e8?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>The Great North–South Rental Divide</h2>
-<p>For many renters — particularly Londoners feeling the squeeze of ever-rising rents — Manchester has become the most compelling alternative to the capital. With hybrid and remote working now mainstream, relocating 200 miles north is a realistic option for more people than ever before.</p>
-<p>But is the rental saving worth the lifestyle change? Let's look at the real numbers.</p>
-
-<h2>Rent Comparison: London vs Manchester 2026</h2>
-
-<h3>Studio / One-Bedroom</h3>
-<ul>
-  <li><strong>Inner London:</strong> £1,900 – £2,400 pcm</li>
-  <li><strong>Outer London:</strong> £1,400 – £1,800 pcm</li>
-  <li><strong>Manchester City Centre:</strong> £1,100 – £1,500 pcm</li>
-  <li><strong>Saving:</strong> Typically £400 – £800 per month vs inner London; £200 – £400 vs outer London</li>
-</ul>
-
-<h3>Two-Bedroom Apartment</h3>
-<ul>
-  <li><strong>Inner London:</strong> £2,500 – £3,500 pcm</li>
-  <li><strong>Manchester City Centre:</strong> £1,400 – £1,900 pcm</li>
-  <li><strong>Saving:</strong> £1,000 – £1,600 per month</li>
-</ul>
-
-<h3>Three-Bedroom House</h3>
-<ul>
-  <li><strong>Outer London:</strong> £2,200 – £3,000 pcm</li>
-  <li><strong>Manchester Suburbs (Didsbury, Chorlton):</strong> £1,400 – £1,900 pcm</li>
-  <li><strong>Saving:</strong> £800 – £1,100 per month</li>
-</ul>
-
-<h2>What £1,300 pcm Gets You</h2>
-<ul>
-  <li><strong>London:</strong> A compact studio in zone 3 or a room in a shared flat in zone 2</li>
-  <li><strong>Manchester:</strong> A well-appointed one-bedroom apartment in the city centre, or a two-bedroom flat in Didsbury or Chorlton</li>
-</ul>
-
-<h2>Quality of Life Comparison</h2>
-<h3>Manchester Advantages</h3>
-<ul>
-  <li>Far better space per pound — larger apartments, more outdoor space</li>
-  <li>Lower cost of living across the board (food, drink, entertainment typically 20–30% cheaper)</li>
-  <li>Excellent cultural scene — world-class music, arts, and food</li>
-  <li>Genuinely walkable city centre</li>
-  <li>Strong tech, media, and professional job market</li>
-  <li>Fast rail connections to London (2 hours on Avanti West Coast)</li>
-</ul>
-<h3>London Advantages</h3>
-<ul>
-  <li>Unrivalled career opportunities — especially in finance, law, media, and government</li>
-  <li>Greater diversity of neighbourhoods and experiences</li>
-  <li>International connectivity (Heathrow)</li>
-  <li>Higher average salaries (though offset by higher costs)</li>
-</ul>
-
-<h2>Is Manchester Right for Remote Workers?</h2>
-<p>For fully remote workers, Manchester offers an outstanding quality-of-life uplift versus London with no income sacrifice. Even hybrid workers who need to be in London two or three days a week may find the maths works if their company provides a travel budget.</p>
-<p>Annual savings of £6,000–£15,000 in rent alone can transform financial options — paying off debt, saving for a deposit, or simply living more comfortably.</p>
-
-<h2>Find Your Manchester Home</h2>
-<p>Elite Tenancy lists quality rental properties across Manchester and Greater Manchester. <a href="/manchester">Browse Manchester rentals.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "tenancy-agreement-clauses-guide",
-    title: "Tenancy Agreement Clauses: A Complete Guide for Landlords and Tenants",
-    excerpt:
-      "What should be in a tenancy agreement in 2026? A complete guide to the essential clauses, what's now illegal, and red flags to look out for.",
-    category: "Legal Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 5,
-    tags: ["Tenancy Agreement", "Rental Contract", "Tenant Rights", "Landlord Guide", "2026"],
-    publishedAt: new Date("2026-02-25"),
-    imageUrl: "https://images.unsplash.com/photo-1664463760781-f159dfe3af30?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>What Is a Tenancy Agreement?</h2>
-<p>A tenancy agreement is the legally binding contract between a landlord and tenant that sets out the terms of the tenancy. In England, all new assured tenancies (which cover the vast majority of private rentals) must now be periodic tenancies — there are no longer any fixed-term assured shorthold tenancies.</p>
-<p>A well-drafted tenancy agreement protects both landlord and tenant by being clear about obligations, rights, and procedures.</p>
-
-<h2>Essential Clauses in Every Tenancy Agreement</h2>
-<h3>1. Parties to the Agreement</h3>
-<p>Full legal names and addresses of all adult tenants and the landlord (or managing agent). The landlord must provide an address for service of notices in England or Wales.</p>
-
-<h3>2. Property Description</h3>
-<p>Full address of the property, including any included or excluded areas (garden, parking, garage, loft storage).</p>
-
-<h3>3. Rent and Payment Terms</h3>
-<ul>
-  <li>Monthly rent amount</li>
-  <li>Day of the month rent is due</li>
-  <li>Accepted payment methods</li>
-  <li>Late payment procedure</li>
-</ul>
-<p>The agreement cannot include provisions for automatic rent increases outside the Section 13 process — such clauses are void under the Renters' Rights Act 2026.</p>
-
-<h3>4. Tenancy Period</h3>
-<p>The tenancy start date and that it is a <strong>monthly periodic tenancy</strong>. Fixed-term clauses are no longer valid for assured tenancies.</p>
-
-<h3>5. Deposit</h3>
-<ul>
-  <li>Deposit amount (maximum five weeks' rent)</li>
-  <li>Name of the deposit protection scheme</li>
-  <li>Conditions under which deductions may be made</li>
-</ul>
-
-<h3>6. Tenant Obligations</h3>
-<p>Common tenant obligations include:</p>
-<ul>
-  <li>Pay rent on time</li>
-  <li>Keep the property in a clean and tidy condition</li>
-  <li>Report maintenance issues promptly</li>
-  <li>Not sublet or take in lodgers without written consent</li>
-  <li>Comply with building rules (particularly in flats)</li>
-  <li>Not cause nuisance to neighbours</li>
-</ul>
-
-<h3>7. Landlord Obligations</h3>
-<ul>
-  <li>Maintain the structure and exterior of the property</li>
-  <li>Maintain heating, hot water, and essential services</li>
-  <li>Provide 24 hours' notice before entering the property (except emergencies)</li>
-  <li>Respond to repair reports within the Awaab's Law timescales</li>
-  <li>Keep all safety certificates up to date</li>
-</ul>
-
-<h2>Clauses That Are Now Illegal or Void</h2>
-<p>Several types of clause that landlords previously used are no longer valid:</p>
-<ul>
-  <li><strong>Fixed-term clauses:</strong> Cannot be used to prevent the tenant leaving or to give the landlord a guaranteed possession date</li>
-  <li><strong>Automatic rent increase clauses:</strong> Rent can only increase via Section 13 notice</li>
-  <li><strong>No pets clauses:</strong> Blanket bans on pets are unenforceable — landlords must consider pet requests reasonably</li>
-  <li><strong>No DSS clauses:</strong> Any clause excluding housing benefit claimants is unlawful discrimination</li>
-  <li><strong>Excessive deposit clauses:</strong> Deposit cannot exceed five weeks' rent</li>
-  <li><strong>Break fees or exit penalties:</strong> Landlords cannot charge fees when tenants exercise their legal right to leave with two months' notice</li>
-</ul>
-
-<h2>Red Flags for Tenants</h2>
-<p>Before signing a tenancy agreement, watch out for:</p>
-<ul>
-  <li>Clauses requiring more than one month's advance rent</li>
-  <li>Any mention of "fixed term" — this is not valid for new periodic tenancies</li>
-  <li>Vague maintenance clauses that place unreasonable responsibility on the tenant</li>
-  <li>Clauses that restrict your right to have guests</li>
-  <li>Any clause that appears to waive rights you have under statute — statutory rights cannot be waived by contract</li>
-</ul>
-
-<h2>Model Tenancy Agreements</h2>
-<p>The government publishes a <a href="https://www.gov.uk/government/publications/model-tenancy-agreement" target="_blank" rel="noopener noreferrer">Model Tenancy Agreement</a> that is up to date with current law. This is a good starting point for landlords who want to draft their own agreements, though professional legal review is always recommended.</p>
-<p>Elite Tenancy uses legally compliant, up-to-date tenancy agreements for all managed properties. <a href="/for-landlords">Learn more about our landlord services.</a></p>
-    `.trim(),
-  },
-
-  // ── NEW ARTICLES (Articles 1, 6, 7, 8, 9, 11, 12 + calculator supporting article) ──
 
   {
     slug: "cheapest-rooms-to-rent-london-2026",
     title: "Cheapest Rooms to Rent in London 2026: The 5 Postcodes Under £800/Month",
-    excerpt:
-      "Only 5 London postcodes still have room rents under £800/month in 2026. East Ham E6 leads at ~£782/month. Here's where to find affordable rooms in London and what you get.",
+    excerpt: "Only 5 London postcodes still have room rents under £800/month in 2026. East Ham E6 leads at ~£782/month. Where to find affordable rooms in London and what you actually get.",
     category: "Rental Market",
     author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 5,
+    readTimeMinutes: 7,
     tags: ["Cheap Rooms London", "Affordable Rent London", "East Ham", "E6", "2026"],
     publishedAt: new Date("2026-03-15"),
     imageUrl: "https://images.unsplash.com/photo-1743867806566-216c945320cb?w=1200&q=80&auto=format&fit=crop",
     content: `
 <h2>The Truth About Cheap Rooms in London in 2026</h2>
-<p>London rents keep rising — but not everywhere. According to SpareRoom's Q1 2026 data, <strong>only 5 London postcodes still offer room rents averaging under £800 per month</strong>. If you know where to look, affordable London living is still possible.</p>
+<p>London rents keep rising overall — average now £2,273–£2,294/month — but not everywhere. According to SpareRoom Q1 2026 data, <strong>only 5 London postcodes still offer room rents averaging under £800/month</strong>. If you know where to look, affordable London living is still possible.</p>
 
 <h2>The 5 Cheapest London Postcodes for Rooms (Q1 2026)</h2>
-<table>
-  <thead><tr><th>Postcode</th><th>Area</th><th>Average Room Rent</th></tr></thead>
-  <tbody>
-    <tr><td><strong>E6</strong></td><td>East Ham</td><td><strong>~£782/month</strong></td></tr>
-    <tr><td>E12</td><td>Manor Park</td><td>~£770/month</td></tr>
-    <tr><td>E7</td><td>Forest Gate</td><td>~£813/month</td></tr>
-    <tr><td>E4</td><td>Chingford</td><td>~£785/month</td></tr>
-    <tr><td>N18</td><td>Upper Edmonton</td><td>~£790/month</td></tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Postcode</th><th>Area</th><th>Average Room Rent</th></tr></thead>
+<tbody><tr><td><strong>E6</strong></td><td>East Ham</td><td><strong>~£782/month</strong></td></tr>
+<tr><td>E12</td><td>Manor Park</td><td>~£770/month</td></tr>
+<tr><td>E7</td><td>Forest Gate</td><td>~£813/month</td></tr>
+<tr><td>E4</td><td>Chingford</td><td>~£785/month</td></tr>
+<tr><td>N18</td><td>Upper Edmonton</td><td>~£790/month</td></tr></tbody></table>
 <p>Source: SpareRoom Q1 2026 London rent statistics.</p>
 
-<h2>Why East Ham E6 Is London's Best Value Postcode</h2>
-<p>East Ham isn't just cheap — it's <strong>cheap and well-connected</strong>. The District and Hammersmith &amp; City lines run directly from East Ham into central London in 25–30 minutes. The area has:</p>
-<ul>
-  <li>One of London's most diverse food scenes (East Ham High Street North spans South Asian, West African, and Middle Eastern cuisine)</li>
-  <li>Large Lidl, Asda, and local market for very low grocery bills</li>
-  <li>East Ham Leisure Centre for affordable fitness</li>
-  <li>Newham's average property rent of £1,910/month — <strong>16% below the London average of £2,273</strong> (ONS Feb 2026)</li>
-</ul>
+<h2>Why East Ham E6 Is London's Best-Value Postcode</h2>
+<p>East Ham is cheap <strong>and</strong> well-connected. The District and Hammersmith & City lines run from East Ham into central London in 25–30 minutes. The area has one of London's most diverse food scenes, large Lidl and Asda stores for low grocery bills, and a Newham average rent of £1,910/month — <strong>16% below the London average</strong>. See our full <a href="/blog/properties-to-rent-east-ham-2026">East Ham area guide</a>.</p>
 
 <h2>What Does a Room in East Ham Actually Get You?</h2>
-<p>At £750–850/month, a typical East Ham room includes:</p>
-<ul>
-  <li>Double room in a 3–5 bed shared house or flat</li>
-  <li>Shared kitchen and bathroom</li>
-  <li>Bills often included (or add £80–120 for utilities and broadband)</li>
-  <li>Furnished, close to local amenities and tube station</li>
-</ul>
-<p>Compare this to zone 2 Hackney or Islington where the same budget gets you a small single room in a shared flat.</p>
-
-<h2>Who Lives in East Ham? The Renter Profile</h2>
-<p>East Ham's rental market is dominated by:</p>
-<ul>
-  <li><strong>NHS workers</strong> — Newham University Hospital is a 5-minute drive; King George Hospital is in neighbouring Ilford</li>
-  <li><strong>International students and recent graduates</strong> — low cost of living, good transport, large South Asian and African community</li>
-  <li><strong>Young professionals</strong> working in Canary Wharf or the City (20–30 min commute)</li>
-  <li><strong>Healthcare and key workers</strong> — Newham has significant social care employment</li>
-</ul>
+<p>At £750–850/month, a typical East Ham room includes a double room in a 3–5 bed shared house, a shared kitchen and bathroom, bills often included, furnished, and close to local amenities and the tube station.</p>
 
 <h2>How to Find a Room in East Ham</h2>
-<p>The most effective routes:</p>
-<ol>
-  <li><strong>Elite Tenancy</strong> — verified listings, AI-matched to your profile. Browse <a href="/listings">available East Ham rooms.</a></li>
-  <li>SpareRoom — largest flatshare platform in the UK</li>
-  <li>Rightmove and Zoopla — wider selection including direct landlords</li>
-  <li>Facebook groups — "East Ham rooms to let" and Newham housing groups have direct landlord listings, but always verify identity</li>
-</ol>
+<ol><li><strong>Elite Tenancy</strong> — verified listings, AI-matched to your profile. Browse <a href="/listings">available East Ham rooms</a>.</li>
+<li>SpareRoom — the largest flatshare platform in the UK</li>
+<li>Rightmove and Zoopla — wider selection including direct landlords</li></ol>
 
-<h2>Red Flags When Viewing East Ham Rooms</h2>
-<p>East Ham's affordability attracts some less reputable landlords. Watch for:</p>
-<ul>
-  <li>Overcrowded properties (more than one person per bedroom is a warning sign for unlicensed HMOs)</li>
-  <li>Landlords asking for more than 5 weeks' deposit + 1 month advance (illegal in 2026)</li>
-  <li>Properties with no gas safety certificate or EICR</li>
-  <li>Landlords who won't confirm they're registered on the PRS Database</li>
-</ul>
+<h2>Red Flags When Viewing Rooms Anywhere in London</h2>
+<ul><li>Landlords asking for more than 5 weeks' deposit plus 1 month advance — <a href="/blog/rent-in-advance-legal-2026-uk">unlawful since 1 May 2026</a></li>
+<li>Properties with no gas safety certificate or EICR</li>
+<li>Landlords who won't confirm PRS Database registration once it opens later in 2026</li>
+<li>Any "no pets" clause presented as absolute — <a href="/blog/can-landlord-refuse-pets-2026-uk">landlords must consider requests individually</a></li></ul>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Is East Ham safe for someone new to London?</h3>
+<p>Like most of inner-east London, East Ham is a busy, densely populated area with generally low rates of serious crime relative to central zones — as anywhere, standard precautions around late-night travel apply.</p>
+<h3>How quickly do cheap rooms in these postcodes get taken?</h3>
+<p>Well-priced, well-located rooms in this price band typically go within days — a verified <a href="/blog/renter-passport-uk-2026-guide">Renter Passport</a> lets you apply immediately rather than losing out while gathering documents.</p>
+
 <p>All Elite Tenancy properties are verified and compliant with 2026 regulations. <a href="/listings">Browse our East Ham listings.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "renting-london-international-tenant-2026",
+    title: "Renting in London as an International Tenant: Your Complete 2026 Guide",
+    excerpt: "Moving to London from abroad? Right to Rent checks, required documents, deposits, the new one-month advance-rent cap, and finding a room without a UK credit history in 2026.",
+    category: "Tenant Guides",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 9,
+    tags: ["International Tenant", "Renting London", "Right to Rent", "No Credit History", "2026"],
+    publishedAt: new Date("2026-03-20"),
+    imageUrl: "https://images.unsplash.com/photo-1550788919-a18fe7099302?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>Renting in London as an International Tenant: What You Need to Know in 2026</h2>
+<p>London remains one of the world's most sought-after cities for international workers, students, and families relocating from Europe, the Americas, and Asia. Average rent citywide sits around <strong>£2,294/month</strong> as of May 2026 — but the bigger barrier for most newcomers isn't price, it's process: no UK credit history, no UK guarantor, no rental references a UK landlord recognises. Here's exactly how to navigate it.</p>
+
+<h2>Step 1: Your Right to Rent Check</h2>
+<p>Before you can rent any property in England, your landlord or agent must verify your <a href="/blog/right-to-rent-uk-2026-guide">Right to Rent</a> — a legal requirement under the Immigration Act 2014, unaffected by the Renters' Rights Act.</p>
+<h3>Documents That Prove Right to Rent</h3>
+<ul><li><strong>EU/EEA/Swiss nationals:</strong> valid passport plus digital status via a UK Visas and Immigration share code (settled or pre-settled status) — the passport alone is not enough</li>
+<li><strong>USA/Canada/Australia/NZ nationals:</strong> valid passport plus entry vignette or BRP card matching your visa type</li>
+<li><strong>Students:</strong> student visa plus CAS confirmation from your university</li>
+<li><strong>Skilled Worker visa holders:</strong> BRP card plus passport</li>
+<li><strong>British nationals:</strong> passport or birth certificate plus proof of address</li></ul>
+
+<h2>Step 2: What Documents Do You Need to Rent?</h2>
+<ul><li>Passport copy</li>
+<li>Proof of income: payslips (last 3 months), employment contract, or bank statements</li>
+<li>Reference from a previous landlord or employer</li>
+<li>Bank statement (last 3 months)</li></ul>
+
+<h2>No UK Credit History? Here's What to Do</h2>
+<ul><li><strong>International guarantor service:</strong> Housing Hand, Unilodgers, or The Guarantor — a fee-based service acts as your UK guarantor</li>
+<li><strong>Build credit fast:</strong> open a UK bank account (Monzo, Starling, Revolut) immediately on arrival; a credit-builder card for 2–3 months helps too</li>
+<li><strong>Employer letter:</strong> a formal offer letter from a UK employer carries real weight with landlords assessing affordability</li></ul>
+<p><strong>Important:</strong> under the <a href="/blog/rent-in-advance-legal-2026-uk">Renters' Rights Act 2026</a>, a landlord cannot demand more than one month's rent in advance, even from an international tenant with no credit history — offering several months upfront is no longer a lawful workaround, so lean on a guarantor service or employer letter instead.</p>
+
+<h2>Deposit Rules</h2>
+<ul><li>Maximum deposit: <strong>5 weeks' rent</strong></li>
+<li>Must be protected in a government-approved scheme (DPS, MyDeposits, or TDS) within 30 days</li>
+<li>Returned within 10 days of agreeing deductions at checkout</li></ul>
+
+<h2>Indicative Rents in London by Area (2026)</h2>
+<ul><li><strong>Zone 1 (Central):</strong> roughly £2,200–£4,000+ for a 1-bed</li>
+<li><strong>Zone 2 (Islington, Hackney, Brixton):</strong> roughly £1,700–£2,500</li>
+<li><strong>Zone 3/4 (East Ham, Stratford, Walthamstow):</strong> roughly £1,100–£1,600</li>
+<li><strong>Shared rooms (all zones):</strong> roughly £700–£1,400/month</li></ul>
+<p>These are estimates for planning purposes — always check current listings for your specific area, as London rents vary significantly street by street.</p>
+
+<h2>Tenant Rights in 2026 — Regardless of Nationality</h2>
+<p>The <a href="/blog/renters-rights-act-2026-tenant-guide">Renters' Rights Act 2026</a> gives every tenant in England the same protections, whatever your nationality:</p>
+<ul><li>No-fault evictions abolished (Section 21 gone)</li>
+<li>Landlords must investigate reported hazards within 14 days (Awaab's Law)</li>
+<li>You can request to keep pets — landlords must respond within 28 days</li>
+<li>Rent increases limited to once per year, via formal Section 13 notice</li></ul>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Can I rent before I arrive in the UK?</h3>
+<p>Some landlords will hold a property with a small reservation fee, but most Right to Rent checks require you to be in the UK or able to complete an online share-code check — plan viewings and paperwork for after arrival where possible.</p>
+<h3>Do I need a UK phone number to apply?</h3>
+<p>Not strictly, but having one speeds up referencing calls significantly and is worth setting up in your first few days.</p>
+
+<h2>How Elite Tenancy Helps International Tenants</h2>
+<p>Elite Tenancy specialises in connecting verified international tenants with compliant landlords in East London. Our AI-powered matching considers your documents, timeline, and budget to find rooms where you genuinely meet the criteria — no wasted viewings. <a href="/listings">Browse available rooms in East Ham and beyond.</a></p>
     `.trim(),
   },
 
   {
     slug: "properties-to-rent-east-ham-2026",
     title: "Properties to Rent in East Ham 2026: Complete Area Guide",
-    excerpt:
-      "Everything you need to know about renting in East Ham, London E6 in 2026 — average rents, best streets, transport, local amenities, and finding the right property.",
+    excerpt: "Everything you need to know about renting in East Ham, London E6 in 2026 - average rents 16% below the London average, transport links, best streets, and local amenities.",
     category: "Area Guides",
     author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 6,
+    readTimeMinutes: 7,
     tags: ["East Ham", "E6", "East Ham Rentals", "London Property", "Newham"],
     publishedAt: new Date("2026-03-20"),
     imageUrl: "https://images.unsplash.com/photo-1767286795557-3bdc9c5597f8?w=1200&q=80&auto=format&fit=crop",
     content: `
 <h2>Why Rent in East Ham in 2026?</h2>
-<p>East Ham (postcode E6, London Borough of Newham) is one of London's most compelling rental destinations in 2026 — offering genuine affordability in a zone 3 location with fast tube connections into the City and Canary Wharf.</p>
-<p>The Newham borough average rent is <strong>£1,910/month</strong> (ONS Feb 2026, +8.5% year-on-year) versus the London average of £2,273. That's a <strong>16% saving</strong> versus the capital average — making East Ham one of the best-value areas in Greater London.</p>
+<p>East Ham (postcode E6, London Borough of Newham) is one of London's most compelling rental destinations in 2026 — genuine affordability in a well-connected zone 3 location with fast tube links into the City and Canary Wharf.</p>
+<p>The Newham borough average rent is <strong>£1,910/month</strong> (ONS Feb 2026, +8.5% year-on-year) versus the London average of £2,273–£2,294. That's a <strong>16% saving</strong> — making East Ham one of the best-value areas in Greater London, and one of only <a href="/blog/cheapest-rooms-to-rent-london-2026">5 London postcodes with room rents still under £800/month</a>.</p>
 
 <h2>Average Rents in East Ham 2026</h2>
-<ul>
-  <li><strong>Room in shared house:</strong> £750 – £850/month</li>
-  <li><strong>Studio flat:</strong> £950 – £1,150/month</li>
-  <li><strong>1-bedroom flat:</strong> £1,250 – £1,550/month</li>
-  <li><strong>2-bedroom flat:</strong> £1,600 – £1,950/month</li>
-  <li><strong>3-bedroom house:</strong> £1,900 – £2,400/month</li>
-</ul>
-<p>SpareRoom Q1 2026 data confirms E6 as one of only 5 London postcodes with average room rents under £800/month.</p>
+<ul><li><strong>Room in shared house:</strong> £750–£850/month</li>
+<li><strong>Studio flat:</strong> £950–£1,150/month</li>
+<li><strong>1-bedroom flat:</strong> £1,250–£1,550/month</li>
+<li><strong>2-bedroom flat:</strong> £1,600–£1,950/month</li>
+<li><strong>3-bedroom house:</strong> £1,900–£2,400/month</li></ul>
 
 <h2>Transport Links from East Ham</h2>
-<p>East Ham's greatest asset is its transport connectivity:</p>
-<ul>
-  <li><strong>East Ham tube station</strong> — District line and Hammersmith &amp; City line. Liverpool Street: 22 minutes. Canary Wharf: 28 minutes (via Shadwell DLR). Westminster: 35 minutes.</li>
-  <li><strong>Upton Park</strong> (adjacent, also E6) — same lines, additional services</li>
-  <li><strong>East Ham overground</strong> — Fenchurch Street line (c2c) for City commuters</li>
-  <li><strong>Crossrail (Elizabeth line)</strong> — accessible via Stratford (5 minutes by bus or overground). Heathrow: under 50 minutes from Stratford.</li>
-</ul>
+<ul><li><strong>East Ham tube station</strong> — District line and Hammersmith & City line. Liverpool Street: 22 minutes. Canary Wharf: 28 minutes. Westminster: 35 minutes.</li>
+<li><strong>Crossrail (Elizabeth line)</strong> — accessible via Stratford (5 minutes by bus). Heathrow: under 50 minutes from Stratford.</li></ul>
 
 <h2>Best Streets and Areas Within East Ham</h2>
-<p>East Ham covers a wide area with distinct micro-neighbourhoods:</p>
-<ul>
-  <li><strong>Central East Ham (near High Street North)</strong> — most amenities, busy, good for singles and young professionals</li>
-  <li><strong>Plashet / Plashet Grove</strong> — quieter, family-friendly Victorian terraces, good schools</li>
-  <li><strong>Rancliffe Road area</strong> — popular with NHS workers (close to Newham Hospital)</li>
-  <li><strong>Barking Road corridor</strong> — more affordable, good bus links</li>
-  <li><strong>Boundary with Forest Gate (E7)</strong> — slightly more gentrified feel, popular with young professionals</li>
-</ul>
+<ul><li><strong>Central East Ham (near High Street North)</strong> — most amenities, good for singles and young professionals</li>
+<li><strong>Plashet / Plashet Grove</strong> — quieter, family-friendly Victorian terraces</li>
+<li><strong>Rancliffe Road area</strong> — popular with NHS workers (close to Newham Hospital)</li></ul>
 
 <h2>Local Amenities and Life in East Ham</h2>
-<ul>
-  <li><strong>Shopping:</strong> East Ham High Street North — one of the UK's most diverse high streets. Major chains plus specialist South Asian, West African, and Middle Eastern shops</li>
-  <li><strong>Supermarkets:</strong> Lidl (one of the cheapest in East London), Asda, Sainsbury's Local</li>
-  <li><strong>Green space:</strong> Central Park (East Ham), Plashet Park, Beckton District Park (15 min cycle)</li>
-  <li><strong>Leisure:</strong> East Ham Leisure Centre, Newham City Farm, multiple sports facilities</li>
-  <li><strong>Healthcare:</strong> Newham University Hospital (A&amp;E), multiple GP surgeries</li>
-  <li><strong>Schools:</strong> Several Outstanding-rated primaries; Sarah Bonnell School, Little Ilford School</li>
-</ul>
+<ul><li><strong>Shopping:</strong> East Ham High Street North — one of the UK's most diverse high streets</li>
+<li><strong>Supermarkets:</strong> Lidl, Asda, Sainsbury's Local</li>
+<li><strong>Green space:</strong> Central Park (East Ham), Plashet Park</li>
+<li><strong>Healthcare:</strong> Newham University Hospital (A&E), multiple GP surgeries</li></ul>
+
+<h2>If You're Renting an HMO Room in East Ham</h2>
+<p>If your room is in a shared house of 3+ people from different households, your landlord should hold the correct Newham licence — see our <a href="/blog/hmo-licence-newham-east-ham-2026">Newham HMO licensing guide</a> for exactly what to check before signing.</p>
 
 <h2>Who Is East Ham Best For?</h2>
-<p>East Ham's combination of affordability and connectivity makes it ideal for:</p>
-<ul>
-  <li><strong>NHS, social care, and key workers</strong> — low cost of living near major healthcare employers</li>
-  <li><strong>City and Canary Wharf workers</strong> — fast tube connection, rent 35–45% below similar-commute west London equivalents</li>
-  <li><strong>International tenants</strong> — established South Asian and African communities, familiar food, culturally rich environment</li>
-  <li><strong>Families</strong> — spacious houses relative to cost, good state schools, green space</li>
-  <li><strong>First-time renters</strong> — affordable entry point to London living</li>
-</ul>
+<p>East Ham is ideal for NHS and key workers, City and Canary Wharf commuters (fast tube, rent 35–45% below similar-commute west London areas), international tenants, families, and first-time renters.</p>
 
-<h2>Finding Your East Ham Property</h2>
-<p>Elite Tenancy specialises in East Ham and the wider Newham area. Our AI matching connects you with verified properties from reputable landlords — no agency fees, transparent pricing. <a href="/listings">Browse available East Ham properties.</a></p>
+<h2>Frequently Asked Questions</h2>
+<h3>Is East Ham well-connected without a car?</h3>
+<p>Yes — the District and Hammersmith & City lines plus nearby Elizabeth line access via Stratford make East Ham genuinely car-free-friendly for London commuting.</p>
+<h3>What should I check before renting a room in East Ham?</h3>
+<p>Confirm the landlord holds the correct Newham licence for the property's occupancy level (Newham operates borough-wide selective licensing, not just HMO rules) and that gas/electrical certificates are current.</p>
+
+<p>Elite Tenancy specialises in East Ham and the wider Newham area. <a href="/listings">Browse available East Ham properties.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "ai-tenant-matching-how-it-works",
+    title: "The Elite Tenancy AI Matching System: How It Works",
+    excerpt: "Our AI scores tenant-property compatibility on 40+ factors. How the system works, why it produces better outcomes for everyone, and why good matching matters more since Section 21 ended.",
+    category: "Platform",
+    author: "Elite Tenancy Tech Team",
+    readTimeMinutes: 6,
+    tags: ["AI", "tenant matching", "technology", "proptech", "2026"],
+    publishedAt: new Date("2026-03-27"),
+    imageUrl: "https://images.unsplash.com/photo-1745674684539-d90293d659a9?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<p>Traditional lettings is a numbers game: list a property, get 50 applications, pick the one with the best references on paper. Elite Tenancy does it differently — and in a market where <a href="/blog/section-21-abolished-2026-landlord-guide">Section 21 no longer offers a quick exit from a bad tenancy</a>, getting the match right upfront matters more than ever.</p>
+
+<h2>The Problem with Traditional Matching</h2>
+<p>High application volumes don't mean better choices. Landlords spend hours reviewing applications for tenants who turn out to be poor fits — wrong move-in date, wrong budget, wrong lifestyle for the property. Tenants waste time applying for properties they were never going to get.</p>
+
+<h2>How AI Matching Works</h2>
+<p>Our system evaluates compatibility on over 40 factors across four categories:</p>
+<p><strong>Financial fit:</strong> verified income-to-rent ratio, credit history indicators, employment stability.</p>
+<p><strong>Lifestyle match:</strong> occupation and working-hours patterns, pet ownership, smoking status versus the property and neighbourhood characteristics.</p>
+<p><strong>Tenancy profile:</strong> rental history, previous landlord feedback, tenancy duration preferences — captured once in a <a href="/blog/renter-passport-uk-2026-guide">Renter Passport</a> and reused across every application.</p>
+<p><strong>Location relevance:</strong> commute analysis, proximity to stated lifestyle preferences, neighbourhood demographic match.</p>
+
+<h2>What This Means for Landlords</h2>
+<p>Our AI-matched tenancies have a 23% lower early termination rate and a 31% higher renewal rate compared to industry averages. That means less void time, lower costs, and — since evicting even a genuinely problematic tenant now takes 6–12 months through the courts — meaningfully lower downside risk from the start.</p>
+
+<h2>What This Means for Tenants</h2>
+<p>Instead of applying to 20 properties and hearing nothing, AI-matched tenants typically get responses to 80%+ of applications, because they're only shown properties where they genuinely fit the landlord's profile.</p>
+
+<h2>Privacy and Fairness</h2>
+<p>Our system is designed to match on legitimate tenancy factors only. It does not consider protected characteristics, and it never factors in benefit status — <a href="/blog/no-dss-illegal-2026-benefits-tenants-landlord-guide">screening out Universal Credit or Housing Benefit recipients is unlawful</a> and is explicitly excluded from our matching logic. All matching decisions can be explained and appealed.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Can I see why I was or wasn't matched to a property?</h3>
+<p>Yes — every match includes a plain-English explanation of the main compatibility factors, and you can request a full breakdown or dispute a match through your account.</p>
+<h3>Does AI matching replace a landlord's final decision?</h3>
+<p>No — matching surfaces the strongest-fit candidates and handles referencing, but the landlord always makes the final tenancy decision.</p>
+
+<p><a href="/sign-up">Create your free verified profile today</a> to start getting matched.</p>
     `.trim(),
   },
 
   {
     slug: "renter-passport-uk-2026-guide",
     title: "What Is a Renter Passport? UK 2026 Guide",
-    excerpt:
-      "A renter passport lets you prove your tenancy history and identity to landlords before you apply. Here's how it works, who benefits, and how to get yours for free.",
+    excerpt: "A renter passport lets you prove your tenancy history and identity to landlords before you apply — even more valuable now that Section 21 abolition means heavier upfront referencing. How it works and how to get yours free.",
     category: "Tenant Guides",
     author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 4,
-    tags: ["Renter Passport", "Tenant Referencing", "Digital Rental ID", "2026", "UK"],
+    readTimeMinutes: 7,
+    tags: ["Renter Passport", "Tenant Referencing", "Digital Rental ID", "Right to Rent", "2026"],
     publishedAt: new Date("2026-04-01"),
     imageUrl: "https://images.unsplash.com/photo-1733244766159-f58f4184fd38?w=1200&q=80&auto=format&fit=crop",
     content: `
 <h2>What Is a Renter Passport?</h2>
-<p>A renter passport (also called a digital rental identity or tenant passport) is a verified digital profile that holds your rental history, identity verification, and financial references — all pre-checked and ready to share with any landlord or letting agent. Instead of re-doing a full reference check every time you apply for a property, you present your renter passport and the landlord can make an instant, informed decision.</p>
-<p>Think of it like a LinkedIn profile for renters — it shows who you are, what your track record is, and why you're a trustworthy tenant.</p>
+<p>A renter passport (also called a digital rental identity or tenant passport) is a verified digital profile holding your rental history, identity verification, and financial references — all pre-checked and ready to share with any landlord or letting agent. It matters more now than ever: since <a href="/blog/section-21-abolished-2026-landlord-guide">Section 21 was abolished</a> in May 2026, landlords can no longer end a bad tenancy quickly, so referencing at the front door has become far more thorough — a verified passport is what gets you through that heavier scrutiny fast.</p>
 
 <h2>What Does a Renter Passport Contain?</h2>
-<p>A full renter passport typically includes:</p>
-<ul>
-  <li><strong>Identity verification</strong> — government-issued ID checked against official databases</li>
-  <li><strong>Right to rent status</strong> — confirms you have the right to rent in the UK, removing the landlord's legal obligation to re-check</li>
-  <li><strong>Rental history</strong> — references from previous landlords, move-in/move-out dates, and tenancy conduct record</li>
-  <li><strong>Employment and income verification</strong> — salary, employer, and length of employment confirmed</li>
-  <li><strong>Credit check summary</strong> — pass/refer/fail against standard letting criteria (not a full credit report)</li>
-  <li><strong>AI match score</strong> — Elite Tenancy's system generates a compatibility score against specific properties</li>
-</ul>
+<ul><li><strong>Identity verification</strong> — government-issued ID checked against official databases</li>
+<li><strong><a href="/blog/right-to-rent-uk-2026-guide">Right to Rent status</a></strong> — confirms your right to rent in the UK, so it doesn't need repeating for every application</li>
+<li><strong>Rental history</strong> — references from previous landlords and your tenancy conduct record</li>
+<li><strong>Employment and income verification</strong> — salary, employer, and length of employment confirmed</li>
+<li><strong>Credit check summary</strong> — pass/refer/fail against standard letting criteria</li>
+<li><strong>AI match score</strong> — a compatibility score against specific properties</li></ul>
 
 <h2>Who Benefits Most from a Renter Passport?</h2>
-<p>Renter passports are especially valuable for:</p>
-<ul>
-  <li><strong>People moving frequently</strong> — contractors, travelling professionals, international workers who rent multiple times</li>
-  <li><strong>International tenants</strong> — your overseas history is translated into a UK-verifiable format, addressing the main barrier overseas applicants face</li>
-  <li><strong>Recent graduates</strong> — build a rental track record from your first tenancy</li>
-  <li><strong>Anyone in a competitive market</strong> — presenting a verified passport gives you a significant advantage when multiple applicants want the same property</li>
-  <li><strong>Tenants who want privacy</strong> — you control what is shared and with whom</li>
-</ul>
+<ul><li><strong>People moving frequently</strong> — contractors, travelling professionals, international workers</li>
+<li><strong>International tenants</strong> — overseas rental history translated into a UK-verifiable format</li>
+<li><strong>Recent graduates</strong> — start building a UK rental track record from your first tenancy</li>
+<li><strong>Anyone in a competitive market</strong> — a verified passport is a real advantage when a listing gets dozens of enquiries in hours</li></ul>
 
 <h2>How Is It Different from Traditional Referencing?</h2>
-<p>Traditional tenant referencing happens after you've offered on a property, takes 3–7 working days, and must be repeated for every new property you apply for — often costing landlords £30–80 per check. A renter passport is:</p>
-<ul>
-  <li><strong>Done once, shared many times</strong> — verified once by a trusted provider, portable to any landlord</li>
-  <li><strong>Instant</strong> — no waiting for employers or previous landlords to respond</li>
-  <li><strong>Renter-controlled</strong> — you decide who sees your data and revoke access at any time</li>
-  <li><strong>Forward-looking</strong> — builds a positive track record proactively</li>
-</ul>
+<p>Traditional tenant referencing takes 3–7 working days and must be repeated in full for every property you apply for. A renter passport is completed once and shared many times — instant, renter-controlled, and reusable across applications.</p>
 
 <h2>How to Get Your Elite Tenancy Renter Passport</h2>
-<ol>
-  <li>Visit <a href="/renter-passport">elitetenancy.co.uk/renter-passport</a></li>
-  <li>Create a free account and complete the profile sections</li>
-  <li>Upload your identity documents (passport or driving licence)</li>
-  <li>Connect employment history and provide income evidence</li>
-  <li>Request references from previous landlords via the platform</li>
-  <li>Complete Right to Rent verification</li>
-  <li>Receive your verified passport and match score within 24 hours</li>
-</ol>
+<ol><li>Visit <a href="/renter-passport">elitetenancy.co.uk/renter-passport</a></li>
+<li>Create a free account and complete the profile sections</li>
+<li>Upload your identity documents (passport or driving licence)</li>
+<li>Connect employment history and provide income evidence</li>
+<li>Request references from previous landlords via the platform</li>
+<li>Complete Right to Rent verification</li>
+<li>Receive your verified passport within 24 hours</li></ol>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Do landlords have to accept a renter passport instead of their own referencing?</h3>
+<p>No — a landlord can still run their own checks, but a verified passport speeds that process up considerably and often means fewer follow-up requests.</p>
+<h3>Is my data secure?</h3>
+<p>Yes — documents are stored encrypted and only shared with a landlord or agent when you explicitly grant access to a specific application.</p>
 
 <h2>Is a Renter Passport Free?</h2>
-<p>Elite Tenancy's Renter Passport is completely free for tenants. Landlords who want to run a full referencing check may pay a small fee, but this is never charged to tenants — in line with the Tenant Fees Act 2019. <a href="/renter-passport">Get your free Renter Passport.</a></p>
+<p>Elite Tenancy's Renter Passport is completely free for tenants. <a href="/renter-passport">Get your free Renter Passport.</a></p>
     `.trim(),
   },
 
   {
     slug: "hmo-licence-newham-east-ham-2026",
-    title: "HMO Licence in Newham and East Ham 2026: Costs, Rules & How to Apply",
-    excerpt:
-      "Everything landlords need to know about HMO licensing in Newham (East Ham, Forest Gate, Stratford) in 2026 — selective licensing, mandatory HMO, costs, and application steps.",
-    category: "Landlord Guides",
+    title: "HMO Licence in Newham and East Ham 2026: Costs, Rules and How to Apply",
+    excerpt: "Everything landlords need to know about HMO and selective licensing in Newham (East Ham, Forest Gate, Stratford) in 2026 - costs, the new £40,000 penalty, and how to apply.",
+    category: "Area Guides",
     author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 5,
-    tags: ["HMO Newham", "HMO East Ham", "Newham Licensing", "Landlord Guide", "2026"],
+    readTimeMinutes: 8,
+    tags: ["HMO Newham", "HMO East Ham", "Newham Licensing", "Landlord Guide", "£40000 penalty"],
     publishedAt: new Date("2026-04-05"),
     imageUrl: "https://images.unsplash.com/photo-1761474909310-bf4a7d6c9d18?w=1200&q=80&auto=format&fit=crop",
     content: `
 <h2>HMO Licensing in Newham: What You Need to Know</h2>
-<p>Newham Council operates one of the most extensive private rented sector licensing schemes in England. As a landlord in East Ham, Forest Gate, Stratford, or anywhere else in the London Borough of Newham, you are very likely to need at least one licence — possibly more.</p>
+<p>Newham Council operates one of the most extensive private rented sector licensing schemes in England. As a landlord in East Ham, Forest Gate, Stratford, or anywhere else in the London Borough of Newham, you are very likely to need at least one licence — and since the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act</a> took effect on 1 May 2026, the cost of getting this wrong has risen sharply.</p>
 
 <h2>Newham's Three Licensing Schemes</h2>
 <h3>1. Mandatory HMO Licence</h3>
-<p>Required nationally for any property occupied by 5 or more people from 2 or more households sharing facilities. In Newham, this means a standard 5-year licence.</p>
-<ul>
-  <li><strong>Cost:</strong> Approximately £1,200–£1,600 for 5 years (varies by property size)</li>
-  <li><strong>Application:</strong> Online via Newham Council's licensing portal</li>
-  <li><strong>Penalty for non-compliance:</strong> Unlimited fine; civil penalty up to £30,000; rent repayment order</li>
-</ul>
+<p>Required nationally for any property occupied by 5 or more people from 2 or more households sharing facilities. In Newham, this is a standard 5-year licence.</p>
+<ul><li><strong>Cost:</strong> approximately £1,200–£1,600 for 5 years</li>
+<li><strong>Penalty for non-compliance:</strong> unlimited fine on prosecution; civil penalty up to <strong>£40,000</strong> (raised from £30,000 on 1 May 2026); plus a separate Rent Repayment Order</li></ul>
 
 <h3>2. Additional HMO Licence</h3>
-<p>Newham also requires a licence for HMOs occupied by <strong>3 or 4 people</strong> from 2 or more households — smaller than the mandatory threshold.</p>
-<ul>
-  <li><strong>Cost:</strong> Approximately £750–£1,000 for 5 years</li>
-  <li><strong>Applies to:</strong> All shared houses and flats with 3+ occupants from multiple households across Newham</li>
-</ul>
+<p>Newham also requires a licence for HMOs occupied by <strong>3 or 4 people</strong> from 2 or more households.</p>
+<ul><li><strong>Cost:</strong> approximately £750–£1,000 for 5 years</li></ul>
 
 <h3>3. Selective Licensing</h3>
-<p>Newham has a borough-wide selective licensing scheme covering <strong>ALL privately rented properties</strong> — not just HMOs. This means a single-occupancy flat or a family home rented to one household also requires a licence in Newham.</p>
-<ul>
-  <li><strong>Cost:</strong> Approximately £750 for 5 years</li>
-  <li><strong>Renewal:</strong> Required every 5 years; must be renewed before expiry</li>
-  <li><strong>Documents required:</strong> Gas safety certificate, EICR, EPC, proof of identity</li>
-</ul>
+<p>Newham has a borough-wide selective licensing scheme covering <strong>all privately rented properties</strong> — not just HMOs. Even a single-occupancy flat requires a licence in Newham.</p>
+<ul><li><strong>Cost:</strong> approximately £750 for 5 years</li>
+<li><strong>Documents required:</strong> gas safety certificate, EICR, EPC, proof of identity</li></ul>
 
-<h2>How to Apply for a Newham HMO or Selective Licence</h2>
-<ol>
-  <li>Go to Newham Council's online licensing portal (search "Newham private rented property licensing")</li>
-  <li>Register as a landlord and add the property</li>
-  <li>Select the correct licence type (mandatory HMO, additional, or selective)</li>
-  <li>Upload all required documents: gas safety certificate, EICR (valid within 5 years), EPC, floor plan, proof of ownership</li>
-  <li>Pay the licence fee</li>
-  <li>Await inspection and licence grant (allow 6–8 weeks)</li>
-</ol>
+<h2>How to Apply for a Newham Licence</h2>
+<ol><li>Go to Newham Council's online licensing portal</li>
+<li>Register as a landlord and add the property</li>
+<li>Select the correct licence type</li>
+<li>Upload required documents: gas safety certificate, EICR, EPC, floor plan, proof of ownership</li>
+<li>Pay the licence fee</li>
+<li>Await inspection and licence grant (allow 6–8 weeks)</li></ol>
 
 <h2>Room Size Requirements for HMOs in Newham</h2>
-<p>All HMO rooms in Newham must meet minimum size standards:</p>
-<ul>
-  <li><strong>Single adult:</strong> Minimum 6.51 sq m</li>
-  <li><strong>Two adults sharing:</strong> Minimum 10.22 sq m</li>
-  <li><strong>Child under 10:</strong> Minimum 4.64 sq m</li>
-</ul>
-<p>Rooms below these sizes cannot be used as sleeping accommodation. Newham inspectors enforce this strictly.</p>
+<ul><li><strong>Single adult:</strong> minimum 6.51 sq m</li>
+<li><strong>Two adults sharing:</strong> minimum 10.22 sq m</li>
+<li><strong>Child under 10:</strong> minimum 4.64 sq m</li></ul>
 
-<h2>Penalties for Unlicensed HMOs in Newham</h2>
-<p>Newham Council is one of the UK's most active enforcement authorities for private rented sector compliance:</p>
-<ul>
-  <li>Civil penalty up to <strong>£30,000</strong> per unlicensed property</li>
-  <li>Rent repayment orders — tenants can claim back up to 12 months' rent</li>
-  <li>Criminal prosecution with unlimited fines</li>
-  <li>Banning orders for repeat offenders</li>
-</ul>
-<p>Newham issues hundreds of penalties per year — do not assume non-compliance goes unnoticed.</p>
+<h2>Penalties for Unlicensed HMOs in Newham — Now Nearly Double</h2>
+<p>Newham Council is one of the UK's most active enforcement authorities, and from 1 May 2026 the national penalty regime became substantially harsher:</p>
+<ul><li>Civil penalty up to <strong>£40,000</strong> per unlicensed property (up from £30,000)</li>
+<li>Rent Repayment Orders — tenants can now claim back up to <strong>24 months'</strong> rent (up from 12 months)</li>
+<li>Criminal prosecution with unlimited fines</li>
+<li>Banning orders for repeat offenders</li></ul>
+<p>These stack: a Newham enforcement action plus tenant-led Rent Repayment Orders across several rooms can easily exceed £70,000 combined on a single unlicensed HMO — see our <a href="/blog/hmo-licence-uk-2026-complete-guide">national HMO licensing guide</a> for the full penalty breakdown.</p>
 
-<h2>Get Help with Newham Licensing Compliance</h2>
-<p>Elite Tenancy's managed service covers Newham licensing support — we check which licences your property requires, prepare the application documentation, and ensure ongoing compliance. <a href="/for-landlords">Talk to our landlord team.</a></p>
+<h2>Frequently Asked Questions</h2>
+<h3>Do I need a licence if I only rent to 2 people in East Ham?</h3>
+<p>Under Newham's borough-wide selective licensing, yes — even single lets and 2-person shares need a selective licence, which is stricter than most other London boroughs.</p>
+<h3>How long does a Newham licence application take?</h3>
+<p>Typically 6–8 weeks including inspection — apply well before your existing licence expires or before you take on new tenants.</p>
+
+<p>Elite Tenancy's managed service covers Newham licensing support. <a href="/for-landlords">Talk to our landlord team.</a></p>
     `.trim(),
   },
 
   {
-    slug: "renting-london-international-tenant-2026",
-    title: "Renting in London as an International Tenant 2026: The Complete Guide",
-    excerpt:
-      "Moving to London from abroad? This complete guide covers Right to Rent checks, documents you need, how to pass referencing without UK credit history, guarantors, and the best areas for international renters.",
-    category: "Tenant Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 8,
-    tags: ["International Tenant", "Moving to London", "Right to Rent", "UK Rental Guide", "2026"],
-    publishedAt: new Date("2026-04-10"),
-    imageUrl: "https://images.unsplash.com/photo-1550788919-a18fe7099302?w=1200&q=80&auto=format&fit=crop",
+    slug: "buy-to-let-2026-worth-it",
+    title: "UK Buy-to-Let in 2026: Is It Still Worth It?",
+    excerpt: "With higher mortgage rates, a doubled HMO penalty regime, and Section 21 gone, many are questioning buy-to-let in 2026. Here is an honest, data-backed assessment.",
+    category: "Landlord Guides",
+    author: "James Chambers, Head of Landlord Services",
+    readTimeMinutes: 7,
+    tags: ["buy-to-let", "investment", "property", "mortgage", "2026"],
+    publishedAt: new Date("2026-04-11"),
+    imageUrl: "https://images.unsplash.com/photo-1626178793926-22b28830aa30?w=1200&q=80&auto=format&fit=crop",
     content: `
-<h2>Renting in London as an International Tenant: What's Different</h2>
-<p>Renting in London as someone who has moved from overseas involves a few extra steps compared to UK residents — but none of them are impossible. The key differences are: <strong>Right to Rent checks</strong>, limited UK credit history, and income proof in a foreign currency. This guide covers everything you need to navigate London's rental market successfully in 2026.</p>
+<p>Buy-to-let has faced headwinds since 2016: stamp duty surcharges, mortgage interest relief restrictions, and tighter EPC requirements. Layer on the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act 2026</a> — no-fault eviction gone, one-a-year rent increases, 24-month Rent Repayment Orders for licensing breaches — and the question in 2026 is whether residential property investment still makes sense.</p>
 
-<h2>Right to Rent: Your Legal Starting Point</h2>
-<p>Every landlord in England must check that you have the legal right to rent before you move in. This is called a <strong>Right to Rent check</strong>. As an international tenant, you prove this using:</p>
-<ul>
-  <li><strong>EU/EEA nationals:</strong> Your digital status under the EU Settlement Scheme. Generate a 9-digit share code at <a href="https://www.gov.uk/prove-right-to-rent" target="_blank" rel="noopener noreferrer">gov.uk/prove-right-to-rent</a> to share with your landlord online. Valid for 90 days.</li>
-  <li><strong>Non-EEA nationals with a visa:</strong> Your passport plus visa/biometric residence permit (BRP). Your Right to Rent is time-limited to your visa expiry.</li>
-  <li><strong>Non-EEA nationals with a BRP:</strong> Use the Home Office online checking service to generate a share code — physical BRPs are no longer accepted in isolation.</li>
-  <li><strong>US and other non-visa-required nationals on short stays:</strong> Passport plus entry stamp/permission. Right to Rent is for 90 days maximum in this scenario.</li>
-</ul>
+<h2>The Case Against</h2>
+<p>Mortgage rates at 4.5–6% have squeezed margins significantly. Properties that yielded 6% gross in 2020 now barely cover mortgage costs at today's rates. Add maintenance (budget 1–2% of property value annually), insurance, agent fees, and voids, and some portfolios are running at a loss. Regulatory risk has also risen: <a href="/blog/hmo-licence-uk-2026-complete-guide">HMO licensing breaches now carry a £40,000 civil penalty</a>, and evicting a genuinely problematic tenant can take 6–12 months given court backlogs since Section 21 was abolished.</p>
 
-<h2>What Documents Will You Need?</h2>
-<p>Beyond Right to Rent, standard referencing for international tenants includes:</p>
-<ul>
-  <li><strong>Passport</strong> (valid, with visa/entry documentation)</li>
-  <li><strong>Proof of income:</strong> 3 months' payslips or an employment contract with salary stated. If paid in foreign currency, provide a letter from your employer confirming UK equivalent salary.</li>
-  <li><strong>Bank statements:</strong> 3 months showing regular income and sufficient balance for deposit + first month's rent</li>
-  <li><strong>Previous landlord reference</strong> — from your home country in English, or translated</li>
-  <li><strong>Employer reference letter</strong> confirming position, salary, and that employment is ongoing</li>
-</ul>
+<h2>The Case For</h2>
+<p>Capital appreciation has historically delivered 4–6% annually across UK residential. Even with thin rental yields, total return can still reach 8–12% for properties in high-demand areas. Supply remains chronically constrained — the UK needs roughly 300,000 new homes annually and is consistently building 150,000–200,000. Rental demand isn't going anywhere: average UK rent for new lets reached <strong>£1,321/month</strong> as of June 2026, up 2.1% year-on-year, with London at £2,294 and even softer markets like Manchester still up 3% annually.</p>
 
-<h2>The Credit History Problem — and How to Solve It</h2>
-<p>Most international tenants have no UK credit history. This is the single biggest hurdle — landlords and agents typically run a UK credit check, which returns blank for new arrivals. Solutions:</p>
-<ol>
-  <li><strong>UK guarantor:</strong> A UK resident with good credit who agrees to cover rent if you default. This is the most common solution. Some referencing companies also offer professional guarantors for a fee (typically 2–4 weeks' rent).</li>
-  <li><strong>Higher deposit:</strong> Some landlords will accept a larger deposit — though note the 5-week cap under UK law. Ensure any extra is framed correctly (e.g. as advance rent, capped at 1 month).</li>
-  <li><strong>Renter Passport:</strong> Elite Tenancy's <a href="/renter-passport">Renter Passport</a> creates a verified international tenancy profile, including an overseas reference check — making your application significantly stronger.</li>
-  <li><strong>Employer letter of support:</strong> A letter from a major employer (multinational company, NHS, university) confirming your employment often substitutes for UK credit history for many landlords.</li>
-</ol>
+<h2>Where It Still Works</h2>
+<p><strong>High-yield areas:</strong> Manchester, Leeds, Sheffield, and Liverpool offer 6–8% gross yields in regeneration areas, with rents rising faster than London's in percentage terms even if the absolute numbers are lower.</p>
+<p><strong>HMOs:</strong> Houses in Multiple Occupation typically yield 8–14% gross, though management intensity — and licensing compliance risk — is considerably higher. Getting the licence wrong is now one of the costliest mistakes in UK property investment.</p>
+<p><strong>New builds:</strong> developer part-exchange schemes can secure properties at below-market price with rental guarantees, useful for de-risking the first 12–24 months of ownership.</p>
 
-<h2>Country-Specific Tips</h2>
-<h3>Americans Moving to London</h3>
-<p>US tenants typically have strong income but no UK credit history. Focus on employer letters and use a professional guarantor service if needed. East Ham E6 offers some of the best value in London — at ~16% below the London average, your dollar goes much further than in zone 1 or 2.</p>
+<h2>What Changed for Investors in 2026 — a Quick Checklist</h2>
+<ul><li>No more Section 21 — factor slower, costlier exits into your risk model</li>
+<li>Rent increases capped at once a year via Section 13</li>
+<li>Maximum one month's rent in advance — no more requiring 6–12 months upfront to de-risk a tenancy</li>
+<li>HMO non-compliance penalties nearly doubled: £30k → £40k civil penalty, 12 → 24 months' Rent Repayment Order</li>
+<li>PRS Database registration required once it launches in late 2026</li></ul>
 
-<h3>Indian and South Asian Nationals</h3>
-<p>East Ham's South Asian community is one of the largest in London, with excellent Indian, Pakistani, and Bangladeshi food, cultural facilities, and community networks. Many landlords in E6 are familiar with international tenants from India, Pakistan, and Sri Lanka. A previous landlord reference from India in English carries weight.</p>
+<h2>Frequently Asked Questions</h2>
+<h3>Is buy-to-let still better than a pension or ISA for retirement income?</h3>
+<p>It depends on your risk tolerance and time horizon — property offers leverage and inflation-linked rent growth but comes with illiquidity, regulatory risk, and management overhead that a pension or ISA doesn't. Most advisers suggest treating it as one part of a diversified portfolio, not the whole strategy.</p>
+<h3>Does the Renters' Rights Act make buy-to-let a bad investment now?</h3>
+<p>It makes bad tenant selection much costlier to fix, since eviction is slower — but it doesn't change the underlying economics of rental demand and capital growth. Landlords who reference thoroughly upfront are affected far less than those who don't.</p>
 
-<h3>Nigerian and West African Nationals</h3>
-<p>East Ham and Forest Gate (E7) have significant Nigerian and West African communities. Newham is one of the most diverse boroughs in the UK. Multiple money transfer services (Western Union, Remitly, Wise) operate on the high street for sending money home.</p>
-
-<h3>Australian and New Zealand Nationals</h3>
-<p>Youth Mobility Visa (Tier 5) holders have full Right to Rent for the visa duration. Bank statements showing Australian savings often satisfy landlords even without UK employment. Start with furnished rooms in E6 or E12 while building UK credit history.</p>
-
-<h3>EU Nationals (Post-Brexit)</h3>
-<p>If you arrived before 30 June 2021 with Settled or Pre-Settled Status under the EU Settlement Scheme, generate your share code at gov.uk/prove-right-to-rent. If arriving after that date, you'll need a relevant visa. Your Right to Rent is confirmed online — landlords cannot require you to show physical documents.</p>
-
-<h2>Best Areas for International Tenants in London 2026</h2>
-<p>These areas combine affordability with established international communities:</p>
-<ul>
-  <li><strong>East Ham E6</strong> — South Asian and West African communities, cheapest zone 3 rents (~£782/room). Our recommendation for best value.</li>
-  <li><strong>Stratford E15</strong> — Crossrail access, Westfield shopping, large international student population</li>
-  <li><strong>Whitechapel / Stepney Green E1</strong> — Bangladesh community, fast City access, strong international networks</li>
-  <li><strong>Hounslow TW3/TW4</strong> — Indian and West African communities, Heathrow proximity</li>
-  <li><strong>Southall UB1/UB2</strong> — Punjabi community hub, affordable, good West London links</li>
-</ul>
-
-<h2>How Elite Tenancy Helps International Tenants</h2>
-<p>Elite Tenancy's <a href="/renter-passport">Renter Passport</a> is designed specifically for international tenants — it verifies your identity and Right to Rent status, creates a portable reference that works for any UK landlord, and significantly improves your chances in a competitive London rental market. Our team understands international applications and will guide you through the process. <a href="/listings">Browse available properties.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "renters-rights-act-2026-tenant-guide",
-    title: "Renters' Rights Act 2026: Your Complete Tenant Guide",
-    excerpt:
-      "What does the Renters' Rights Act 2026 mean for you as a tenant? Section 21 abolished, stronger eviction protection, pet rights, rent increase limits, and what to do if your landlord ignores the new rules.",
-    category: "Tenant Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 6,
-    tags: ["Renters Rights Act", "Tenant Rights", "Section 21", "UK Law", "2026"],
-    publishedAt: new Date("2026-05-01"),
-    imageUrl: "https://images.unsplash.com/photo-1597178817015-5fb22a263382?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>The Renters' Rights Act 2026 — The Biggest Tenant Victory in a Generation</h2>
-<p>The Renters' Rights Act 2026 came into full effect on 1 May 2026. It is the most significant change to tenants' rights in England in over 30 years. If you rent privately in England, here is exactly what has changed and how it protects you.</p>
-
-<h2>1. Section 21 "No-Fault" Evictions — Abolished</h2>
-<p>The most important change: <strong>your landlord can no longer end your tenancy without a legal reason</strong>. Section 21 "no-fault" eviction notices — where landlords could simply issue a two-month notice to leave with no explanation — are gone.</p>
-<p>What this means in practice:</p>
-<ul>
-  <li>You cannot be evicted simply because your landlord wants to re-let at a higher rent</li>
-  <li>You cannot be evicted for complaining about repairs or contacting the council</li>
-  <li>Any Section 21 notice issued after 1 May 2026 is <strong>invalid</strong> — you can ignore it and do not have to leave</li>
-  <li>Your landlord must use specific <strong>Section 8 grounds</strong> and apply to court</li>
-</ul>
-
-<h2>2. All Tenancies Are Now Periodic</h2>
-<p>Fixed-term tenancies no longer exist for new lets. All tenancies are now <strong>periodic (rolling month-to-month)</strong>. This gives you:</p>
-<ul>
-  <li>The right to give <strong>two months' notice to leave at any time</strong> — no more being trapped until a fixed term ends</li>
-  <li>No landlord can end your tenancy at a set date by default — they need a legal reason</li>
-  <li>No "break fees" or exit penalties for leaving with proper notice</li>
-</ul>
-
-<h2>3. Rent Increases — Once a Year Maximum</h2>
-<p>Your landlord can only increase your rent <strong>once per year</strong> using a formal Section 13 notice with at least 2 months' written notice. Important tenant rights:</p>
-<ul>
-  <li>Any rent increase clause in your tenancy agreement that allows more frequent increases is <strong>void</strong></li>
-  <li>If you believe the proposed increase is above market rate, you can challenge it at the <strong>First-tier Tribunal (Property Chamber)</strong> — free to apply</li>
-  <li>Rent bidding wars are banned — landlords cannot advertise below market rent and then encourage applicants to bid above the listed price</li>
-</ul>
-
-<h2>4. Right to Keep Pets</h2>
-<p>Blanket "no pets" policies are now unenforceable. Your landlord must consider any written pet request within 28 days. They can only refuse for genuine, documented reasons. They can require you to have pet damage insurance — but cannot demand a higher deposit solely because of a pet.</p>
-
-<h2>5. Awaab's Law — Repairs Must Be Done</h2>
-<p>Extended from social housing, Awaab's Law now applies to private rentals:</p>
-<ul>
-  <li>Landlords must <strong>investigate reported hazards within 14 days</strong></li>
-  <li><strong>Emergency repairs within 24 hours</strong> — no more waiting weeks for a broken boiler or flooding</li>
-  <li>Damp and mould must be treated as urgent health hazards, not cosmetic issues</li>
-</ul>
-
-<h2>6. Upfront Cost Caps</h2>
-<ul>
-  <li><strong>Deposit:</strong> Maximum 5 weeks' rent (unchanged)</li>
-  <li><strong>Advance rent:</strong> Maximum 1 month — landlords can no longer demand 3 or 6 months in advance</li>
-  <li><strong>Total maximum upfront:</strong> Approximately 2.25 months' rent equivalent</li>
-</ul>
-
-<h2>7. The PRS Database — Landlord Register</h2>
-<p>All landlords must now register on the new <strong>Private Rented Sector Database</strong> before letting any property. You can search this database to verify your landlord is registered and compliant.</p>
-
-<h2>What to Do If Your Landlord Ignores the New Rules</h2>
-<ol>
-  <li><strong>If you receive a Section 21 notice:</strong> Do not leave. Contact Shelter or Citizens Advice. The notice is invalid.</li>
-  <li><strong>If repairs are not done within required timescales:</strong> Send a formal written request, then report to your local council's housing enforcement team</li>
-  <li><strong>If asked for excess advance rent:</strong> Refuse and report to Trading Standards</li>
-  <li><strong>If landlord threatens eviction for complaining:</strong> This is now a retaliatory eviction defence — document everything and contact Shelter</li>
-</ol>
-
-<h2>Find a Compliant, Quality Landlord</h2>
-<p>Elite Tenancy only lists properties from landlords who comply with 2026 regulations — verified documentation, compliant tenancy agreements, and transparent pricing. <a href="/listings">Browse our listings.</a></p>
-    `.trim(),
-  },
-
-  {
-    slug: "right-to-rent-uk-2026-guide",
-    title: "Right to Rent UK 2026: Complete Guide for Tenants and Landlords",
-    excerpt:
-      "How Right to Rent works in 2026 — who needs to check, what documents count, share codes for EU nationals, penalties for landlords, and what tenants can do if checks are used discriminatorily.",
-    category: "Legal Guides",
-    author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 5,
-    tags: ["Right to Rent", "UK Immigration", "Tenant Check", "Share Code", "2026"],
-    publishedAt: new Date("2026-04-20"),
-    imageUrl: "https://images.unsplash.com/photo-1725656470434-0767edf3c397?w=1200&q=80&auto=format&fit=crop",
-    content: `
-<h2>What Is Right to Rent?</h2>
-<p>Right to Rent is the UK government's mandatory immigration check for private landlords. Before starting a tenancy in England, landlords must verify that all adult occupants have the legal right to reside and rent in the UK. Failure to check — or to evict tenants found to be without the right to rent — can result in criminal prosecution.</p>
-
-<h2>Who Needs to Do a Right to Rent Check?</h2>
-<p>Right to Rent checks apply in <strong>England only</strong> (not Scotland, Wales, or Northern Ireland). All private landlords must check all adult tenants aged 18+ before the tenancy starts — including British and Irish nationals.</p>
-
-<h2>How Tenants Prove Right to Rent in 2026</h2>
-<h3>British and Irish nationals</h3>
-<p>Passport, or UK driving licence + birth certificate + HMRC tax letter. Physical document check by the landlord.</p>
-
-<h3>EU/EEA nationals with EU Settlement Scheme status</h3>
-<p>EU nationals must not be asked for physical EU ID cards or passports to prove Right to Rent. Instead:</p>
-<ol>
-  <li>Go to <a href="https://www.gov.uk/prove-right-to-rent" target="_blank" rel="noopener noreferrer">gov.uk/prove-right-to-rent</a></li>
-  <li>Sign in with Government Gateway or GOV.UK One Login</li>
-  <li>Generate a 9-digit <strong>share code</strong> (valid for 90 days)</li>
-  <li>Share the code and your date of birth with the landlord</li>
-  <li>The landlord checks at gov.uk/view-right-to-rent and sees a confirmation</li>
-</ol>
-<p>Landlords who ask EU nationals to provide physical passports or ID cards for Right to Rent are breaking the rules — and potentially committing race discrimination.</p>
-
-<h3>Non-EEA nationals with a visa or BRP</h3>
-<p>Use the Home Office online checking service to generate a share code showing your immigration status. Your Right to Rent is time-limited to your visa expiry — landlords must perform a follow-up check when your visa expires.</p>
-
-<h3>Nationals of the US, Canada, Australia, NZ, and other countries</h3>
-<p>Passport plus valid visa or entry clearance. If on a tourist/visitor visa, Right to Rent is limited to the permitted stay (typically 6 months).</p>
-
-<h2>Right to Rent Share Code: Step by Step</h2>
-<ol>
-  <li>Visit gov.uk/prove-right-to-rent on your phone or computer</li>
-  <li>Choose "EU settlement scheme" or "other immigration status" as appropriate</li>
-  <li>Sign in to your online immigration account</li>
-  <li>Select "Create a share code" — choose "rental" as the purpose</li>
-  <li>The 9-character code is displayed — share it with your landlord along with your date of birth</li>
-  <li>The code is valid for <strong>90 days</strong></li>
-</ol>
-
-<h2>Penalties for Landlords</h2>
-<p>Landlords who rent to someone without the Right to Rent face:</p>
-<ul>
-  <li><strong>Civil penalty:</strong> Up to £10,000 for a first offence; up to £20,000 for repeat offences</li>
-  <li><strong>Criminal prosecution</strong> (if knowingly renting to someone without right to rent): up to 5 years' imprisonment</li>
-</ul>
-
-<h2>Discrimination in Right to Rent Checks</h2>
-<p>The Equality and Human Rights Commission has found that Right to Rent schemes cause some landlords to discriminate against non-British tenants. This is <strong>unlawful</strong>. Landlords must:</p>
-<ul>
-  <li>Apply the same check to all tenants — not just those who "look foreign"</li>
-  <li>Accept digital share codes from EU nationals — not demand passports</li>
-  <li>Not refuse applications solely on nationality or ethnicity</li>
-</ul>
-<p>If you believe you've been discriminated against in a Right to Rent check, contact the Equality Advisory and Support Service (EASS) or Shelter.</p>
-
-<h2>Right to Rent and Elite Tenancy's Renter Passport</h2>
-<p>Elite Tenancy's <a href="/renter-passport">Renter Passport</a> includes a verified Right to Rent check — making it easy for landlords to confirm your status instantly and compliantly, with no risk of discriminatory application. <a href="/right-to-rent-check">Check your Right to Rent status now.</a></p>
+<h2>Our Verdict</h2>
+<p>Buy-to-let in 2026 requires more sophistication than it did a decade ago. It works best as part of a diversified portfolio, in high-yield areas, or for landlords who manage properties well through a platform like Elite Tenancy that minimises voids, handles compliance, and reduces the cost of getting tenant selection wrong.</p>
+<p><a href="/for-landlords">Talk to our landlord team</a> about maximising your property's performance.</p>
     `.trim(),
   },
 
   {
     slug: "rent-calculator-uk-2026-guide",
     title: "How to Use a UK Rent Calculator in 2026: A Complete Guide",
-    excerpt:
-      "How to calculate how much rent you can afford in the UK in 2026 — the 30x rule explained, rental yield formulas for landlords, deposit caps, and the free tools you need.",
+    excerpt: "How to calculate how much rent you can afford in the UK in 2026 - the 30x rule, the 40% take-home rule, rental yield formulas for landlords, and the legal deposit and advance-rent caps.",
     category: "Rental Market",
     author: "Elite Tenancy Editorial Team",
-    readTimeMinutes: 4,
+    readTimeMinutes: 8,
     tags: ["Rent Calculator", "Rent Affordability", "UK Rent 2026", "How Much Rent Can I Afford"],
     publishedAt: new Date("2026-04-25"),
     imageUrl: "https://images.unsplash.com/photo-1670329949691-f056ce6bb079?w=1200&q=80&auto=format&fit=crop",
@@ -1768,53 +494,1030 @@ const ARTICLES: Array<{
 <h2>How Much Rent Can I Afford? The UK 30× Rule</h2>
 <p>The standard UK affordability rule is simple: your <strong>annual gross income should be at least 30 times the monthly rent</strong>. This is the threshold most letting agents and landlords use when assessing applications.</p>
 <p>Formula: <code>Maximum monthly rent = Annual income ÷ 30</code></p>
-<p>Examples:</p>
-<ul>
-  <li>Annual income £30,000 → max rent £1,000/month</li>
-  <li>Annual income £36,000 → max rent £1,200/month</li>
-  <li>Annual income £45,000 → max rent £1,500/month</li>
-  <li>Annual income £60,000 → max rent £2,000/month</li>
-</ul>
+<ul><li>Annual income £30,000 → max rent £1,000/month</li>
+<li>Annual income £36,000 → max rent £1,200/month</li>
+<li>Annual income £45,000 → max rent £1,500/month</li>
+<li>Annual income £60,000 → max rent £2,000/month</li></ul>
 <p>Use our free <a href="/rent-calculator">UK Rent Calculator 2026</a> to find your personal maximum and comfortable range.</p>
 
-<h2>The 40% Take-Home Rule — What You Can Comfortably Afford</h2>
+<h2>The 40% Take-Home Rule</h2>
 <p>The 30× rule is a <em>qualification threshold</em>, not a guide to what you can actually afford comfortably. A better measure: keep rent below <strong>40% of your monthly take-home pay after tax</strong>.</p>
-<p>For a £36,000 salary, take-home is approximately £2,500/month after tax and NI. 40% of that is £1,000/month — the same as the 30× rule output. At £40,000 take-home ~£2,720 → comfortable rent up to ~£1,088/month.</p>
+<p>For a £36,000 salary, take-home is approximately £2,500/month after tax and NI — 40% of that is £1,000/month. At £40,000 salary (~£2,720 take-home), comfortable rent is roughly £1,088/month.</p>
 
 <h2>Calculating Rental Yield for Landlords</h2>
-<p>Rental yield is the return on your property investment, expressed as a percentage of the property's value.</p>
 <p><strong>Gross yield formula:</strong> <code>(Annual rent ÷ Property value) × 100</code></p>
-<p>Example: Property worth £250,000, renting at £1,200/month (£14,400/year). Gross yield = (14,400 ÷ 250,000) × 100 = <strong>5.76%</strong>.</p>
-<p><strong>Net yield</strong> subtracts all costs (management fees, maintenance, insurance, voids). Typically 1–2.5 percentage points below gross. Our <a href="/rent-calculator#yield">rental yield calculator</a> automates this.</p>
+<p>Example: property worth £250,000, renting at £1,200/month (£14,400/year). Gross yield = (14,400 ÷ 250,000) × 100 = <strong>5.76%</strong>.</p>
+<p>Net yield subtracts all costs (management fees, maintenance, insurance, voids) and typically runs 1–2.5 percentage points below gross. See our <a href="/blog/buy-to-let-2026-worth-it">buy-to-let 2026 analysis</a> for what's realistic city by city.</p>
 
-<h2>UK Deposit Calculation — Legal Caps in 2026</h2>
-<p>The Tenant Fees Act 2019 caps deposits at <strong>5 weeks' rent</strong> for most properties. The Renters' Rights Act 2026 caps advance rent at <strong>1 month</strong>.</p>
+<h2>UK Deposit and Advance Rent Caps in 2026</h2>
+<p>The Tenant Fees Act 2019 caps deposits at <strong>5 weeks' rent</strong> (6 weeks if annual rent exceeds £50,000). The <a href="/blog/rent-in-advance-legal-2026-uk">Renters' Rights Act 2026 caps advance rent at 1 month</a> — a landlord cannot demand more, even if offered.</p>
 <p>Formula: <code>Maximum deposit = (Monthly rent × 12) ÷ 52 × 5</code></p>
 <p>For rent of £1,200/month: weekly rent = £276.92; max deposit = £276.92 × 5 = £1,384.62.</p>
-<p>Use our <a href="/rent-calculator#deposit">deposit calculator</a> to find the exact cap for any rent level.</p>
 
 <h2>Average Rent Benchmarks UK 2026</h2>
-<p>Useful context when using any rent calculator:</p>
-<ul>
-  <li>UK national average (all property types): £1,383/month (ONS May 2026)</li>
-  <li>London average: £2,273/month (ONS Feb 2026)</li>
-  <li>Newham (East Ham / E6): £1,910/month — <strong>16% below London average</strong></li>
-  <li>E6 rooms: ~£782/month — one of only 5 London postcodes under £800/month</li>
-  <li>Manchester average: £1,170/month</li>
-  <li>Birmingham average: £1,050/month</li>
-</ul>
+<ul><li>UK national average: £1,321–£1,383/month (Zoopla/ONS, 2026)</li>
+<li>London average: £2,273–£2,294/month</li>
+<li>Newham (East Ham / E6): £1,910/month — 16% below the London average</li>
+<li><a href="/blog/cheapest-rooms-to-rent-london-2026">E6 rooms</a>: ~£782/month — one of only 5 London postcodes under £800/month</li>
+<li>Manchester average: £1,349/month</li>
+<li>Birmingham average: roughly £1,000/month</li></ul>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Does the 30× rule apply to joint applications?</h3>
+<p>Yes — most agents combine both applicants' incomes and apply the same 30× threshold to the combined figure, though some landlords assess joint affordability more conservatively.</p>
+<h3>What if my income doesn't meet the 30× threshold?</h3>
+<p>A guarantor (who separately meets a higher income multiple, often 36×–40×) or several months' rent held as evidence of affordability can bridge the gap — note landlords still cannot demand more than one month upfront regardless.</p>
 
 <h2>Free UK Rent Calculator Tools</h2>
-<p>Use Elite Tenancy's free tools:</p>
-<ul>
-  <li><a href="/rent-calculator">Affordability calculator</a> — find your maximum and comfortable rent from income</li>
-  <li><a href="/rent-calculator">Rental yield calculator</a> — for landlords to calculate gross and net yield</li>
-  <li><a href="/rent-calculator">Deposit calculator</a> — exact deposit cap for any rent level</li>
-  <li><a href="/rent-calculator">UK city comparison</a> — compare rents across 10 major UK cities</li>
-  <li><a href="/rent-calculator">Global comparison</a> — how UK rents compare to EU and USA cities</li>
-</ul>
+<p>Use Elite Tenancy's free tools: <a href="/rent-calculator">affordability calculator</a>, <a href="/rent-calculator">rental yield calculator</a>, <a href="/rent-calculator">deposit calculator</a>, and <a href="/rent-calculator">UK city comparison</a>.</p>
     `.trim(),
   },
+
+  {
+    slug: "tenancy-agreement-clauses-guide",
+    title: "Understanding Your Tenancy Agreement: 10 Clauses Every Tenant Must Read",
+    excerpt: "Ten clauses every tenant should check in their tenancy agreement — and which old-style clauses (Section 21, no-pets, fixed terms) no longer have legal effect after the Renters' Rights Act 2026.",
+    category: "Compliance & Legal",
+    author: "Elite Tenancy Legal Team",
+    readTimeMinutes: 8,
+    tags: ["tenancy agreement", "legal", "tenant rights", "AST", "Renters Rights Act 2026"],
+    publishedAt: new Date("2026-04-26"),
+    imageUrl: "https://images.unsplash.com/photo-1664463760781-f159dfe3af30?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<p>Your tenancy agreement is a legally binding contract. Missing a key clause can cost you your deposit, expose you to unexpected costs, or leave you unable to leave when you need to — and since the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act 2026</a> took effect on 1 May 2026, several of the old standard clauses no longer apply at all.</p>
+
+<h2>1. Tenancy Type and Term</h2>
+<p>Since 1 May 2026, all new tenancies in England are <a href="/blog/assured-periodic-tenancy-explained">Assured Periodic Tenancies</a> — rolling month to month, with no fixed term. If your agreement still describes a "12-month fixed term", that clause has no legal effect; you can give two months' notice at any point regardless of what's printed.</p>
+
+<h2>2. Rent Review</h2>
+<p>Rent can only be increased via a formal <strong>Section 13 notice</strong>, once every 52 weeks, with at least two months' written notice. Any clause allowing automatic or more frequent increases is now unenforceable.</p>
+
+<h2>3. Permitted Occupiers</h2>
+<p>Who is allowed to live in the property? Having an unlisted person stay long-term could be treated as a breach, so check this clause matches who is actually living there.</p>
+
+<h2>4. Pet Policy</h2>
+<p>A blanket "no pets" clause is no longer enforceable. Landlords must consider <a href="/blog/can-landlord-refuse-pets-2026-uk">pet requests individually and respond within 28 days</a>, and cannot require separate pet insurance.</p>
+
+<h2>5. Alterations</h2>
+<p>What changes can you make — hanging pictures, painting walls, shelves? Most agreements still require landlord consent for anything beyond minor, reversible changes.</p>
+
+<h2>6. Subletting</h2>
+<p>Can you sublet a room, or list it on Airbnb? In most standard agreements, subletting is prohibited without express written consent — breaching this clause can itself be a Section 8 ground for possession.</p>
+
+<h2>7. Deposit Protection and Return Timeline</h2>
+<p>Your deposit must be protected in an authorised scheme within 30 days, capped at five weeks' rent (six weeks if annual rent exceeds £50,000). Once deductions are agreed at the end of the tenancy, the law requires the balance back within <strong>10 days</strong>.</p>
+
+<h2>8. Repair Responsibilities</h2>
+<p>Landlords are legally responsible for the structure, exterior, and installations (heating, water, electrics). Some agreements set a threshold — commonly around £50 — below which minor repairs are the tenant's responsibility; check what figure your agreement actually uses.</p>
+
+<h2>9. Check-Out Process</h2>
+<p>What evidence is required at check-out? When must keys be returned, and what is the process for disputing deductions through your deposit scheme's free resolution service?</p>
+
+<h2>10. Notice Periods — What Changed</h2>
+<p>Section 21 no longer exists, so any clause referencing it is void. A landlord can only end the tenancy via a valid <a href="/blog/section-21-abolished-2026-landlord-guide">Section 8 ground</a>, each with its own notice period. As a tenant, you can leave with two months' notice at any time, regardless of what an old-style fixed-term clause says.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>My agreement still mentions Section 21 — is it invalid?</h3>
+<p>The agreement itself is still valid; the specific clause referencing Section 21 simply no longer has legal effect. You don't need a new contract signed, but the current law overrides that clause automatically.</p>
+<h3>Can my landlord add new clauses without my agreement?</h3>
+<p>No — any variation to the tenancy terms requires your agreement, except where the law itself changes what's enforceable (as with Section 21 and pet clauses above).</p>
+
+<p>All tenancies arranged through Elite Tenancy use plain-English agreements reviewed against the current Renters' Rights Act rules by our team.</p>
+    `.trim(),
+  },
+
+  {
+    slug: "renters-rights-act-2026-tenant-guide",
+    title: "Renters Rights Act 2026: Your Complete Tenant Guide",
+    excerpt: "What the Renters' Rights Act 2026 means for you as a tenant: Section 21 abolished, rolling tenancies, pet rights, rent increase limits, Awaab's Law repair deadlines, and what to do if your landlord ignores the new rules.",
+    category: "Tenant Guides",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 9,
+    tags: ["Renters Rights Act", "Tenant Rights", "Section 21", "Awaabs Law", "UK Law", "2026"],
+    publishedAt: new Date("2026-05-01"),
+    imageUrl: "https://images.unsplash.com/photo-1597178817015-5fb22a263382?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>The Renters' Rights Act 2026 — The Biggest Tenant Win in a Generation</h2>
+<p>The Renters' Rights Act 2026 came into full effect on 1 May 2026. It is the most significant change to tenants' rights in England in over 30 years, and every one of the roughly 4.6 million private renting households in England is affected.</p>
+
+<h2>1. Section 21 No-Fault Evictions — Abolished</h2>
+<p><strong>Your landlord can no longer end your tenancy without a legal reason.</strong> Section 21 notices are gone entirely. This means:</p>
+<ul><li>You cannot be evicted simply because your landlord wants to re-let at a higher rent</li>
+<li>You cannot be evicted for complaining about repairs</li>
+<li>Any Section 21 notice issued after 1 May 2026 is <strong>invalid</strong> — do not act on it, seek advice instead</li>
+<li>Your landlord must use a <a href="/blog/section-21-abolished-what-it-means-for-tenants">Section 8 ground</a> and apply to court</li></ul>
+
+<h2>2. All Tenancies Are Now Periodic</h2>
+<p>Fixed-term tenancies no longer exist. Every tenancy is now a rolling <a href="/blog/assured-periodic-tenancy-explained">Assured Periodic Tenancy</a>. This gives you:</p>
+<ul><li>The right to give <strong>two months' notice to leave at any time</strong></li>
+<li>No landlord can end your tenancy at a fixed date — they need a proven legal reason</li>
+<li>No break fees or exit penalties for leaving with proper notice</li></ul>
+
+<h2>3. Rent Increases — Once a Year Maximum</h2>
+<p>Your landlord can only increase rent <strong>once per year</strong>, using a formal Section 13 notice with at least 2 months' written notice. If you believe the proposed increase is above market rate, you can challenge it at the First-tier Tribunal for free, before it takes effect.</p>
+
+<h2>4. Right to Keep Pets</h2>
+<p>Blanket "no pets" policies are unenforceable. Your <a href="/blog/can-landlord-refuse-pets-2026-uk">landlord must consider any written pet request within 28 days</a> and can only refuse on reasonable grounds. Importantly, they <strong>cannot</strong> require you to take out pet damage insurance or charge you extra for having a pet — the standard deposit already covers pet-related damage.</p>
+
+<h2>5. Awaab's Law — Repairs Must Be Done on Time</h2>
+<ul><li>Landlords must <strong>investigate reported hazards within 14 days</strong></li>
+<li><strong>Emergency repairs within 24 hours</strong></li>
+<li>Damp and mould must be treated as urgent health hazards, not cosmetic issues</li></ul>
+
+<h2>6. Upfront Cost Caps</h2>
+<ul><li><strong>Deposit:</strong> maximum 5 weeks' rent (6 weeks if annual rent exceeds £50,000) — unchanged</li>
+<li><strong><a href="/blog/rent-in-advance-legal-2026-uk">Advance rent</a>:</strong> maximum 1 month — landlords can no longer demand 3 or 6 months upfront, even if you offer it</li></ul>
+
+<h2>7. The Information Sheet You Should Have Received</h2>
+<p>Every landlord with an existing tenancy was required to give tenants an official government <strong>RRA Information Sheet</strong> by 31 May 2026, explaining these changes in plain terms. If you haven't received one, ask your landlord for it — it doesn't cost you anything and confirms they're engaging properly with the new law.</p>
+
+<h2>8. The PRS Database — Landlord Register</h2>
+<p>All landlords must register on the new <strong>Private Rented Sector Database</strong>, launching in late 2026. Once live, you'll be able to search it to confirm your landlord is registered and compliant before signing anything.</p>
+
+<h2>What to Do If Your Landlord Ignores the New Rules</h2>
+<ol><li><strong>If you receive a Section 21 notice:</strong> do not leave. Contact Shelter or Citizens Advice — the notice is invalid and has no legal effect</li>
+<li><strong>If repairs are not done within the Awaab's Law timeframes:</strong> report to your local council's housing enforcement team</li>
+<li><strong>If asked for excess advance rent:</strong> refuse, and report persistent attempts to Trading Standards</li></ol>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Can my landlord still evict me for rent arrears?</h3>
+<p>Yes, via Ground 8 (3+ months' arrears) or the new Ground 8A for persistent lower-level arrears — but this always requires a court hearing, not just a notice.</p>
+<h3>Do I need to sign anything for my tenancy to convert?</h3>
+<p>No — your existing tenancy converted to an Assured Periodic Tenancy automatically on 1 May 2026.</p>
+
+<p>Elite Tenancy only lists properties from landlords who comply with 2026 regulations. <a href="/listings">Browse our listings.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "manchester-vs-london-rent-2026",
+    title: "Manchester vs London: Where Should You Rent in 2026?",
+    excerpt: "With London rents at record highs and Manchester still rising faster in percentage terms, many professionals are choosing Manchester. We compare costs, commutes, and quality of life.",
+    category: "Rental Market",
+    author: "Sophie Reynolds, Property Market Analyst",
+    readTimeMinutes: 6,
+    tags: ["manchester", "london", "rental comparison", "relocation", "2026"],
+    publishedAt: new Date("2026-05-05"),
+    imageUrl: "https://images.unsplash.com/photo-1710178368224-9b21cf7554e8?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<p>London has long been the default destination for ambitious professionals, but 2026 looks different. With hybrid and remote work now standard and London rents averaging <strong>£2,273–£2,294/month</strong> against Manchester's <strong>£1,349</strong>, the calculus has genuinely changed.</p>
+
+<h2>The Numbers</h2>
+<p>Average rent for a 1-bed flat: London Zone 2 is roughly £2,100/month, Manchester city centre roughly £1,150/month. That's nearly <strong>£12,000 a year</strong> in savings — before council tax and bill differences, which also favour Manchester.</p>
+
+<h2>Quality of Life</h2>
+<p>Manchester consistently ranks among the UK's most liveable cities. The Northern Quarter offers London-quality restaurants and nightlife at a fraction of the cost, and commute times within the city are dramatically shorter — see our <a href="/blog/average-rent-manchester-2026-area-guide">Manchester area-by-area guide</a> for a neighbourhood breakdown.</p>
+
+<h2>Career Opportunities</h2>
+<p>Manchester is no longer a second-tier market. MediaCityUK, the NOMA district, and Spinningfields have attracted major employers including the BBC, ITV, Deloitte, and Amazon. The tech scene is booming, and Manchester rents are rising faster than London's in percentage terms (3.0% vs roughly 1.7–2.0% annually) — a sign of genuine demand growth, not just cost-of-living arbitrage.</p>
+
+<h2>The London Premium — Is It Worth It?</h2>
+<p>For some industries — finance, law, certain tech roles — London's salary premium still makes sense. But for most roles, the differential has narrowed. Many Manchester-based professionals now earn 80–90% of equivalent London salaries while spending roughly 50% less on rent.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Is it harder to find a rental in Manchester than London?</h3>
+<p>Generally no — Manchester's rental market, while competitive, has less of the multi-application-within-hours pressure seen on premium London listings, though good value properties still move quickly.</p>
+<h3>Do the same tenant rights apply in both cities?</h3>
+<p>Yes — the <a href="/blog/renters-rights-act-2026-tenant-guide">Renters' Rights Act 2026</a> applies across England, so Section 21 abolition, rent-increase limits, and pet rights are identical in both cities.</p>
+
+<h2>Our Verdict</h2>
+<p>For professionals with flexibility: Manchester offers exceptional value. For those tied to London by their industry: use Elite Tenancy's AI matching to find the best value within your required area.</p>
+<p>Browse our listings in both cities to compare.</p>
+    `.trim(),
+  },
+
+  {
+    slug: "landlord-guide-letting-2026",
+    title: "Landlord's Complete Guide to Letting in 2026: Compliance, Yields & Finding Tenants",
+    excerpt: "From EPC requirements to Right to Rent checks and the new Section 8-only eviction rules, everything UK landlords need to let legally and profitably in 2026.",
+    category: "Landlord Guides",
+    author: "James Chambers, Head of Landlord Services",
+    readTimeMinutes: 8,
+    tags: ["landlord", "compliance", "lettings", "EPC", "Renters Rights Act 2026"],
+    publishedAt: new Date("2026-05-12"),
+    imageUrl: "https://images.unsplash.com/photo-1741156386380-0236c72eb6f9?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<p>Being a landlord in 2026 means navigating an increasingly complex regulatory landscape after the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act</a> took effect on 1 May 2026. But with the right approach, residential letting remains one of the UK's most reliable investment strategies.</p>
+
+<h2>Your Legal Obligations</h2>
+<p><strong>EPC Rating:</strong> your property must have an Energy Performance Certificate (EPC) rated E or above to be legally let. The government is consulting on raising this to C by 2028, so consider improvements now rather than facing a rushed deadline later.</p>
+<p><strong>Gas Safety:</strong> annual gas safety checks by a Gas Safe registered engineer are mandatory. Keep certificates for at least 2 years.</p>
+<p><strong>Electrical Safety:</strong> fixed wiring must be inspected every 5 years by a qualified electrician (EICR). Provide the report to tenants before they move in.</p>
+<p><strong><a href="/blog/right-to-rent-uk-2026-guide">Right to Rent</a>:</strong> you must check that every adult tenant has the legal right to rent in England before the tenancy starts.</p>
+<p><strong>Deposit Protection:</strong> all deposits must be protected in a government-approved scheme within 30 days of receipt, with prescribed information served on the tenant in the same window.</p>
+<p><strong>Section 21 is gone:</strong> you can no longer end a tenancy without a valid <a href="/blog/section-21-abolished-2026-landlord-guide">Section 8 ground</a> — plan your referencing and documentation accordingly, since a bad tenancy is now much harder to unwind quickly.</p>
+<p><strong>RRA Information Sheet:</strong> if you had tenants in place before 1 May 2026, you were required to serve the official government Information Sheet by 31 May 2026 — a separate £7,000 fine risk if missed, distinct from every other compliance item here.</p>
+
+<h2>Maximising Your Yield</h2>
+<p>Gross yield = (Annual rent ÷ Property value) × 100. In London, typical gross yields run 4–6%. In Manchester and Leeds, 6–8% is achievable, and <a href="/blog/hmo-licence-uk-2026-complete-guide">HMOs</a> can reach 8–14%.</p>
+<p>To maximise yield: furnish to a high standard (commands a 10–15% premium), focus on low-maintenance finishes, and minimise void periods through proactive tenant retention — remember that under the new rules, a tenant leaving only needs to give two months' notice, so retention now matters more than it used to.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Can I still use a letting agent for full management under these rules?</h3>
+<p>Yes — a good agent should already be building Section 8-only eviction routes, Section 13 rent-increase notices, and Information Sheet compliance into their standard process. Ask directly if they aren't mentioning these.</p>
+<h3>What's the single most-missed compliance step right now?</h3>
+<p>The RRA Information Sheet — because it applies even to tenancies where nothing else is changing, it's the item landlords are most likely to forget entirely.</p>
+
+<h2>Why Use Elite Tenancy</h2>
+<p>Our landlord platform includes AI-powered tenant matching, fully referenced tenants, digital tenancy agreements built RRA-compliant from day one, and ongoing compliance reminders. We charge only on successful letting — no monthly fees. <a href="/valuation">Request your free property valuation.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "renters-rights-act-2026-landlord-guide",
+    title: "Renters' Rights Act 2026: The Complete Landlord Guide to What Changed on 1 May",
+    excerpt: "The Renters' Rights Act 2026 explained: Section 21 abolished, periodic tenancies, the 31 May Information Sheet deadline (£7,000 fine), pet rights, DSS protection, and the incoming PRS Database.",
+    category: "Compliance & Legal",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 9,
+    tags: ["Renters Rights Act 2026", "Section 21 abolished", "landlord guide", "RRA Information Sheet", "PRS Database"],
+    publishedAt: new Date("2026-05-15"),
+    imageUrl: "https://images.unsplash.com/photo-1698431194884-295617261396?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>What Is the Renters' Rights Act 2026?</h2>
+<p>The Renters' Rights Act 2025 received Royal Assent on 27 October 2025, with its core provisions taking effect on <strong>1 May 2026</strong>. It is the biggest overhaul of England's private rented sector in over 40 years, rewriting the relationship between landlords and tenants from the ground up.</p>
+<p>Context: ONS data puts average monthly rent in England at <strong>£1,430</strong> as of February 2026, up 3.6% year-on-year, across roughly <strong>4.6 million</strong> private rented households. Every one of those tenancies is now governed by this Act.</p>
+
+<h2>1. Section 21 Is Abolished — No More No-Fault Evictions</h2>
+<p>The single biggest change: <strong>Section 21 no-fault evictions ended on 1 May 2026.</strong> Landlords can no longer end a tenancy without giving — and proving — a legal reason. From this date, <strong><a href="/blog/section-21-abolished-2026-landlord-guide">Section 8</a> is the only route to possession</strong>, and every claim requires a court hearing.</p>
+<table><tr><th>Ground</th><th>Reason</th><th>Notice period</th></tr>
+<tr><td>Ground 1A (new)</td><td>Landlord intends to sell</td><td>4 months</td></tr>
+<tr><td>Ground 1</td><td>Landlord or close family moving in</td><td>4 months</td></tr>
+<tr><td>Ground 8</td><td>3+ months' rent arrears at notice and hearing</td><td>4 weeks</td></tr>
+<tr><td>Ground 8A (new)</td><td>Persistent arrears pattern</td><td>4 weeks</td></tr>
+<tr><td>Ground 14</td><td>Anti-social behaviour</td><td>Immediate</td></tr>
+<tr><td>Ground 4A (new)</td><td>Student HMO, new academic year</td><td>2 months</td></tr>
+</table>
+<p>Tenants also get a new <strong>12-month protected period</strong> at the start of every tenancy, during which most "sale" and "moving in" grounds cannot be used.</p>
+
+<h2>2. Every Tenancy Is Now Rolling and Periodic</h2>
+<p>Fixed-term Assured Shorthold Tenancies no longer exist. All tenancies — new and pre-existing — automatically became <strong><a href="/blog/assured-periodic-tenancy-explained">Assured Periodic Tenancies</a></strong> on 1 May 2026, rolling month to month with no end date.</p>
+
+<h2>3. Rent Increases: Section 13 Only, Once a Year, 2 Months' Notice</h2>
+<p>Landlords can raise rent only <strong>once every 52 weeks</strong>, using a formal Section 13 notice (Form 4A) giving at least <strong>two months' written notice</strong>. Tenants can challenge an increase they believe is above open-market rent at the First-tier Tribunal, and cannot be charged more than the Tribunal determines.</p>
+
+<h2>4. Maximum One Month's Rent Upfront</h2>
+<p>Landlords <strong><a href="/blog/rent-in-advance-legal-2026-uk">cannot request more than one month's rent in advance</a></strong>, and no rent can be collected before the tenancy agreement is signed. Breaching this carries a civil penalty of up to £5,000.</p>
+
+<h2>5. "No DSS" Discrimination Is Now Explicitly Illegal</h2>
+<p><strong><a href="/blog/no-dss-illegal-2026-benefits-tenants-landlord-guide">Refusing tenants who receive Universal Credit or Housing Benefit</a></strong> is now unlawful in statute, not just under general equality law. Penalties run from £7,000 for a first breach to £40,000 for repeat offences.</p>
+
+<h2>6. Pet Requests Must Be Answered Within 28 Days</h2>
+<p>Landlords must respond to <strong><a href="/blog/can-landlord-refuse-pets-2026-uk">every pet request</a></strong> within 28 days and can only refuse on reasonable grounds — a blanket "no pets" policy is no longer enforceable. Landlords can no longer require separate pet insurance; the standard deposit is intended to cover pet-related damage.</p>
+
+<h2>7. The RRA Information Sheet — Mandatory by 31 May 2026</h2>
+<p>Every landlord with an existing tenancy must serve the official government <a href="/blog/renters-rights-act-information-sheet-2026">RRA Information Sheet</a> on each tenant by <strong>31 May 2026</strong>. Missing this deadline carries a fine of up to £7,000 — and this is the single most overlooked compliance step right now, because it applies even if nothing else about the tenancy changes.</p>
+
+<h2>8. What's Still Coming: the PRS Database</h2>
+<p>Landlords will also need to register on the new <strong>Private Rented Sector (PRS) Database</strong>, launching in late 2026, and from 2028 sign up to the mandatory Landlord Ombudsman. Registering early, once the portal opens, avoids a last-minute scramble.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Can I still evict a tenant for rent arrears?</h3>
+<p>Yes — Ground 8 remains available where a tenant owes at least 3 months' rent at both the notice date and the hearing date, alongside the new Ground 8A for persistent (but lower-level) arrears patterns.</p>
+<h3>Do existing tenancies need a new contract?</h3>
+<p>No. Existing ASTs converted automatically to Assured Periodic Tenancies on 1 May 2026 — no new paperwork is required for the conversion itself, but the Information Sheet must still be served.</p>
+<h3>What happens if I serve a Section 21 notice today?</h3>
+<p>It is simply invalid. Any Section 21 notice served after 1 May 2026 has no legal effect and cannot be used to recover possession.</p>
+
+<h2>RRA 2026 Compliance Checklist</h2>
+<ul><li>No new Section 21 notices — ever, from 1 May 2026 onward</li>
+<li>All tenancies periodic, no new fixed terms</li>
+<li>Maximum one month's rent in advance, none before signing</li>
+<li>Rent increases: Section 13 only, once a year, 2 months' notice</li>
+<li>RRA Information Sheet served on every tenant by 31 May 2026</li>
+<li>Pet requests answered within 28 days, no blanket bans, no pet-insurance demands</li>
+<li>No DSS/benefits discrimination in adverts or screening</li>
+<li>Watch for PRS Database registration opening late 2026</li></ul>
+
+<p>At <a href="/for-landlords">Elite Tenancy</a>, every tenancy we arrange is built RRA-compliant from day one. <a href="/valuation">Request a free property valuation</a> today.</p>
+    `.trim(),
+  },
+
+  {
+    slug: "section-21-abolished-2026-landlord-guide",
+    title: "Section 21 Abolished 2026: What UK Landlords Must Do Now",
+    excerpt: "Section 21 no-fault evictions ended 1 May 2026. Here is the full Section 8 grounds table, notice periods, the 12-month protected period, and what landlords must do now.",
+    category: "Compliance & Legal",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 8,
+    tags: ["Section 21 abolished 2026", "Section 8 eviction", "no fault eviction ended", "landlord eviction rights", "Renters Rights Act"],
+    publishedAt: new Date("2026-05-18"),
+    imageUrl: "https://images.unsplash.com/photo-1678818715417-3c725d9c2b43?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>Section 21 Is Gone — Here's What That Means for You</h2>
+<p>On <strong>1 May 2026</strong>, Section 21 of the Housing Act 1988 was abolished under the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act 2025</a>. For the first time in over 30 years, private landlords in England cannot end a tenancy without stating — and proving — a legal reason.</p>
+<p>This is the most fundamental shift in landlord rights since the Housing Act 1988 created the AST system, and it changes how every eviction in England now has to work.</p>
+
+<h2>What Has Replaced Section 21?</h2>
+<p>From 1 May 2026, <strong>Section 8 is the only legal route to eviction</strong>. A Section 8 notice must cite one or more statutory grounds, and — unlike the old Section 21 process — every claim now proceeds to a full court hearing.</p>
+<table><tr><th>Ground</th><th>Reason</th><th>Notice period</th></tr>
+<tr><td>Ground 1A (new)</td><td>Landlord intends to sell the property</td><td>4 months</td></tr>
+<tr><td>Ground 1</td><td>Landlord or close family wants to move in</td><td>4 months</td></tr>
+<tr><td>Ground 8</td><td>3+ months' rent arrears at notice and hearing</td><td>4 weeks</td></tr>
+<tr><td>Ground 8A (new)</td><td>Persistent rent arrears pattern</td><td>4 weeks</td></tr>
+<tr><td>Ground 14</td><td>Anti-social behaviour</td><td>Immediate</td></tr>
+<tr><td>Ground 4A (new)</td><td>Student HMO — new academic year</td><td>2 months</td></tr>
+<tr><td>Ground 7B</td><td>Tenant loses right to rent during tenancy</td><td>Varies</td></tr>
+</table>
+
+<h2>The 12-Month Protected Period</h2>
+<p>Tenants cannot be evicted under the sale or moving-in grounds during the first <strong>12 months</strong> of any new tenancy. This makes thorough upfront referencing far more important than it was under the old system, since a bad tenancy is now much harder to unwind early.</p>
+
+<h2>Every Eviction Now Needs a Court Hearing</h2>
+<p>With no accelerated "no-fault" route left, every possession claim requires a full hearing. Court backlogs mean possession proceedings currently take an average of <strong>6–12 months</strong> from notice to judgment — factor this into any risk assessment before granting a tenancy.</p>
+
+<h2>What Landlords Should Do Right Now</h2>
+<ol>
+<li><strong>Never serve a Section 21 notice</strong> — it has no legal effect from 1 May 2026 onward</li>
+<li><strong>Strengthen referencing</strong> — credit checks, income verification, and previous landlord references matter more when eviction is slower</li>
+<li><strong>Document everything</strong> — rent payments, communications, and incidents, since Section 8 grounds must be evidenced in court</li>
+<li><strong>Serve the <a href="/blog/renters-rights-act-2026-landlord-guide">RRA Information Sheet</a></strong> on all existing tenants by 31 May 2026 — a separate £7,000 fine risk</li>
+<li><strong>Use professional referencing</strong> to reduce the risk of a problematic tenancy in the first place</li>
+</ol>
+
+<h2>Frequently Asked Questions</h2>
+<h3>What if I served a Section 21 notice before 1 May 2026?</h3>
+<p>Notices validly served before the deadline generally remain enforceable within their original timeframe, but you should confirm the specific transition rules for your case with a solicitor, as court listings for pre-deadline notices are also subject to the same backlog.</p>
+<h3>Can I still get my property back to sell it?</h3>
+<p>Yes, via Ground 1A, but only after the 12-month protected period and with 4 months' notice — you can no longer use a quick no-fault notice to speed up a sale.</p>
+<h3>Does this apply to lodgers?</h3>
+<p>No — the Act covers assured and assured shorthold tenancies. Live-in landlords letting to lodgers under "excluded occupier" arrangements are largely unaffected.</p>
+
+<p>At <a href="/for-landlords">Elite Tenancy</a>, our six-stage referencing process is built for the post-Section 21 world, reducing risk before a tenancy even starts. <a href="/list-your-property">List your property today.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "find-premium-rentals-london-2026",
+    title: "How to Find Premium Rental Properties in London: A 2026 Guide",
+    excerpt: "London's rental market is competitive but navigable. How top tenants secure premium properties before they're widely advertised, plus the 2026 rules that protect you during the process.",
+    category: "Tenant Guides",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 7,
+    tags: ["london", "rentals", "tenant tips", "premium rentals", "2026"],
+    publishedAt: new Date("2026-05-19"),
+    imageUrl: "https://images.unsplash.com/photo-1633694705199-bc1e0a87c97a?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<p>London's rental market moves fast — average rent citywide is now around <strong>£2,294/month</strong> (May 2026), and premium properties in zones 1–3 regularly receive dozens of applications within hours of listing. The tenants who succeed aren't the ones who apply fastest — they're the ones who are prepared before they even start looking.</p>
+
+<h2>Get Your Documents Ready First</h2>
+<p>Before you start searching, assemble your rental pack: last 3 months' bank statements, last 3 payslips or a self-assessment tax return, an employer reference contact, and a previous landlord reference. Having these ready — ideally as a verified <a href="/blog/renter-passport-uk-2026-guide">Renter Passport</a> — means you can submit a complete application the moment you find the right property, rather than losing it to someone faster.</p>
+
+<h2>Use a Premium Letting Agency</h2>
+<p>General property portals list thousands of properties to everyone at once, but a premium letting agency like Elite Tenancy pre-screens both properties and tenants. That means less raw competition on each listing, and landlords who are themselves properly vetted.</p>
+
+<h2>Know Your Budget — Including All Costs</h2>
+<p>Rent is only part of the cost. Factor in utility bills (typically £150–250/month in London), council tax (varies significantly by borough), and any service charges for managed buildings. A budget of £2,000/month rent can realistically cost £2,400–2,500/month all-in once these are added.</p>
+
+<h2>Move Fast — But Read Everything</h2>
+<p>When you find the right property, move fast on the application. But never skip reading the <a href="/blog/tenancy-agreement-clauses-guide">tenancy agreement</a> itself. Since 1 May 2026 every new tenancy is a rolling Assured Periodic Tenancy with no fixed term — check the notice period, rent-review clause, permitted alterations, and pet policy match what the law now actually allows. If anything looks like it references the old Section 21 system, ask about it before signing.</p>
+
+<h2>Know Your Rights Before You Apply</h2>
+<p>Under the current rules, a landlord cannot demand more than one month's rent in advance, cannot impose a blanket "no pets" policy, and cannot reject you for receiving Universal Credit or Housing Benefit. Knowing this upfront helps you push back politely on outdated requests some agents still make out of habit.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Is it worth offering more rent to secure a premium property?</h3>
+<p>Rental bidding wars are now restricted under the Renters' Rights Act — a landlord advertising at a set price generally cannot solicit or accept offers above it, so focus on presenting a strong, complete application instead.</p>
+<h3>How far in advance should I start looking?</h3>
+<p>For premium zone 1–2 properties, start 4–6 weeks before your target move date — good stock moves within days, but landlords rarely commit more than 6–8 weeks out.</p>
+
+<h2>The Elite Tenancy Advantage</h2>
+<p>Our AI-powered tenant matching system proactively matches you with properties before they're widely advertised, based on your verified profile. <a href="/listings">Join today to access our exclusive pre-market listings.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "hmo-licence-uk-2026-complete-guide",
+    title: "HMO Licence UK 2026: Mandatory Requirements, Room Sizes, Costs & Penalties",
+    excerpt: "HMOs remain the UK's highest-yielding property type — but non-compliance now carries a £40,000 civil penalty and 24-month Rent Repayment Orders. Everything landlords need for 2026, including cost-by-council data.",
+    category: "Landlord Guides",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 9,
+    tags: ["HMO licence UK 2026", "HMO requirements 2026", "HMO penalties £40000", "Rent Repayment Order 24 months", "HMO cost by council"],
+    publishedAt: new Date("2026-05-20"),
+    imageUrl: "https://images.unsplash.com/photo-1776774425479-e62ef3014c7c?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>Do You Need an HMO Licence?</h2>
+<p>A House in Multiple Occupation (HMO) licence is required when your property is rented to <strong>five or more people from two or more separate households</strong> who share facilities. This mandatory licensing threshold has been in place since October 2018.</p>
+<p>Over <strong>70 local councils</strong> also operate additional or selective licensing schemes covering smaller HMOs (3–4 occupants). Always check with your local authority first, as requirements vary significantly by area — see our <a href="/blog/hmo-licence-newham-east-ham-2026">Newham/East Ham HMO guide</a> for a worked local example.</p>
+
+<h2>HMO Licence Cost by Council</h2>
+<p>Fees are set locally and vary widely — budget for two components: a non-refundable application fee, and a further fee only if the licence is granted.</p>
+<table><tr><th>Licence type</th><th>Typical 5-year cost</th></tr>
+<tr><td>Mandatory HMO</td><td>£700–£900 (up to £2,000+ in some London boroughs)</td></tr>
+<tr><td>Additional licensing</td><td>£400–£1,000</td></tr>
+<tr><td>Selective licensing</td><td>£350–£900</td></tr></table>
+<p>On top of the licence fee itself, budget £500–£3,000+ for bringing an older property up to fire safety standard if it isn't already compliant.</p>
+
+<h2>UK HMO Rents in 2026</h2>
+<p>HMOs deliver the UK's highest rental yields — typically <strong>8–14% gross per annum</strong>, versus 5–7% for single-let properties.</p>
+<table><tr><th>City</th><th>Single Room</th><th>En-Suite Room</th><th>Double Room</th></tr>
+<tr><td>London (Inner)</td><td>£850–£1,100/mo</td><td>£1,050–£1,500/mo</td><td>£950–£1,300/mo</td></tr>
+<tr><td>Manchester</td><td>£450–£650/mo</td><td>£600–£850/mo</td><td>£550–£750/mo</td></tr>
+<tr><td>Birmingham</td><td>£400–£600/mo</td><td>£550–£800/mo</td><td>£500–£700/mo</td></tr>
+<tr><td>Leeds</td><td>£380–£580/mo</td><td>£520–£780/mo</td><td>£480–£680/mo</td></tr>
+<tr><td>Bristol</td><td>£500–£750/mo</td><td>£680–£950/mo</td><td>£600–£850/mo</td></tr></table>
+
+<h2>HMO Room Size Requirements</h2>
+<ul><li><strong>Single bedroom:</strong> minimum 6.51m²</li>
+<li><strong>Double bedroom:</strong> minimum 10.22m²</li>
+<li><strong>Children's room (under 10):</strong> minimum 4.64m²</li></ul>
+
+<h2>Mandatory Safety Certificates</h2>
+<ul><li><strong>Gas Safety Certificate:</strong> annual — up to £6,000 fine if missed</li>
+<li><strong>EICR (Electrical):</strong> every 5 years — up to £30,000 fine</li>
+<li><strong>EPC:</strong> minimum E rating — up to £4,000 fine per property</li>
+<li><strong>Fire safety:</strong> interlinked smoke alarms, fire doors, emergency lighting</li></ul>
+
+<h2>Non-Compliance Penalties — Sharply Increased Under the Renters' Rights Act</h2>
+<p>From <strong>1 May 2026</strong>, running an unlicensed HMO carries some of the steepest penalties in UK property law:</p>
+<ul><li><strong>Unlimited fine</strong> on criminal conviction (Section 72 Housing Act 2004 offence)</li>
+<li><strong>Civil penalty up to £40,000</strong> per offence — up from £30,000 before 1 May 2026</li>
+<li><strong>Rent Repayment Order:</strong> tenants can now reclaim up to <strong>24 months'</strong> rent paid during the unlicensed period — doubled from 12 months</li>
+<li><strong>Banning order</strong> from managing or letting any property</li></ul>
+<p>These two penalties <strong>stack</strong>: a council can issue a £40,000 civil penalty at the same time tenants separately pursue a 24-month Rent Repayment Order. On a modest 5-room HMO at £700/room, that RRO alone can exceed £33,000 — on top of the council fine.</p>
+
+<h2>New for 2026: Ground 4A for Student HMOs</h2>
+<p>The Renters' Rights Act introduced <strong>Ground 4A</strong>, letting landlords of qualifying student HMOs regain possession at the end of the academic year to relet to new students — a necessary carve-out given fixed-term tenancies no longer exist.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Do I need a licence for a 4-person HMO?</h3>
+<p>Not under mandatory licensing (which starts at 5 occupants), but you may still need one under your council's additional or selective licensing scheme — always check locally before assuming you're exempt.</p>
+<h3>How long does an HMO licence last?</h3>
+<p>Up to 5 years, after which it must be renewed — apply for renewal well before expiry, as letting without a valid licence (even briefly) exposes you to the full penalty regime above.</p>
+
+<p>At <a href="/for-landlords">Elite Tenancy</a>, our HMO Premium tier handles full licence management, compliance calendars, and room-by-room occupancy tracking. <a href="/valuation">Request a free HMO valuation.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "average-rent-uk-2026-city-price-guide",
+    title: "Average Rent UK 2026: City-by-City Price Guide (ONS & Zoopla Data)",
+    excerpt: "Real 2026 rental data from ONS, HomeLet and Zoopla: England average £1,430/month, London £2,273-2,294, Manchester £1,349. What you should be paying - or charging - in every major UK city.",
+    category: "Rental Market",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 9,
+    tags: ["average rent UK 2026", "UK rental prices 2026", "Manchester rent 2026", "London rent 2026", "rental market data"],
+    publishedAt: new Date("2026-05-22"),
+    imageUrl: "https://images.unsplash.com/photo-1762111359333-4bcaff0678ae?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>UK Rental Market 2026 — The Key Numbers</h2>
+<p>According to ONS data published March 2026, average monthly rent for England reached <strong>£1,430</strong> in February 2026, up 3.6% year-on-year. The HomeLet Rental Index puts the UK-wide average new-tenancy rent at <strong>£1,325/month</strong> as of April 2026, while Zoopla's June 2026 report shows UK-wide new lets averaging <strong>£1,321</strong>, up 2.1% annually.</p>
+<p>Rental growth has moderated significantly — from peaks of 10%+ in 2022/23 to roughly <strong>1.9–2.1% annual growth</strong> in 2026. Earnings are now rising faster than rents for the first time in years. However, rental supply remains well below pre-pandemic levels in most cities, keeping prices elevated relative to wages.</p>
+<p>The average time to find a tenant is now around <strong>20 days</strong>, up from the 7–10 days seen during the 2022 rental frenzy — giving tenants more negotiating power than they've had in years.</p>
+
+<h2>Average Rent by City — 2026</h2>
+<h3>London — Average £2,273–£2,294/month</h3>
+<table><tr><th>Property Type</th><th>Monthly Rent</th></tr>
+<tr><td>1-bed flat (Inner)</td><td>£1,600–£2,800</td></tr>
+<tr><td>2-bed flat (Inner)</td><td>£2,200–£4,000</td></tr>
+<tr><td>1-bed flat (Outer)</td><td>£1,200–£1,800</td></tr>
+<tr><td>HMO double room (Inner)</td><td>£950–£1,300</td></tr>
+<tr><td>HMO en-suite (Inner)</td><td>£1,050–£1,500</td></tr></table>
+<p>London rents are rising at the lowest rate of any UK region — around 1.7–2.0% annually — as affordability limits kick in even for a global city.</p>
+
+<h3>Manchester — Average £1,349/month (+3.0% year-on-year)</h3>
+<table><tr><th>Property Type</th><th>Monthly Rent</th></tr>
+<tr><td>1-bed flat</td><td>£850–£1,200</td></tr>
+<tr><td>2-bed flat</td><td>£1,100–£1,600</td></tr>
+<tr><td>HMO single room</td><td>£450–£650</td></tr>
+<tr><td>HMO en-suite</td><td>£600–£850</td></tr></table>
+<p>See our full <a href="/blog/average-rent-manchester-2026-area-guide">Manchester area-by-area guide</a>.</p>
+
+<h3>Birmingham, Leeds, Bristol</h3>
+<table><tr><th>City</th><th>1-Bed Flat</th><th>2-Bed Flat</th><th>HMO Room</th></tr>
+<tr><td>Birmingham</td><td>£700–£1,100</td><td>£950–£1,400</td><td>£400–£600</td></tr>
+<tr><td>Leeds</td><td>£650–£1,000</td><td>£850–£1,300</td><td>£380–£580</td></tr>
+<tr><td>Bristol</td><td>£900–£1,400</td><td>£1,200–£1,800</td><td>£500–£750</td></tr></table>
+<p>See our <a href="/blog/average-rent-birmingham-2026">Birmingham area guide</a> for a full neighbourhood breakdown.</p>
+
+<h3>Other Major Cities</h3>
+<table><tr><th>City</th><th>1-Bed Flat</th><th>2-Bed Flat</th></tr>
+<tr><td>Sheffield</td><td>£600–£900</td><td>£800–£1,200</td></tr>
+<tr><td>Liverpool</td><td>£580–£850</td><td>£750–£1,100</td></tr>
+<tr><td>Edinburgh</td><td>£900–£1,400</td><td>£1,200–£1,700</td></tr>
+<tr><td>Cardiff</td><td>£650–£950</td><td>£850–£1,250</td></tr>
+<tr><td>Newcastle</td><td>£550–£850</td><td>£700–£1,050</td></tr></table>
+
+<h2>Why Rents Are Still Rising Despite a Cooling Market</h2>
+<p>Chronic undersupply is the core driver: the UK needs roughly 300,000 new homes annually and is consistently building 150,000–200,000. Add the compliance cost of the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act</a> — some smaller landlords are exiting the market rather than adapting, tightening supply further in the short term.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Will rents keep rising in 2027?</h3>
+<p>Most forecasters expect growth to continue but at a slower pace than 2022–2023, tracking closer to wage growth as supply gradually catches up and affordability limits bite.</p>
+<h3>Which cities offer the best value relative to salaries?</h3>
+<p>Manchester, Leeds, and Birmingham consistently offer strong job markets at 40–55% of London's rent — see our <a href="/blog/manchester-vs-london-rent-2026">Manchester vs London comparison</a> for a detailed breakdown.</p>
+
+<h2>The Elite Tenancy Fee Formula</h2>
+<p>Our no-let, no-fee model: <strong>monthly rent × 12 ÷ 52 × 2 = two weeks' rent</strong> (only paid on successful placement).</p>
+<p>Examples: £900/month → £415 fee | £1,400/month → £646 fee | £2,000/month → £923 fee.</p>
+<p><a href="/valuation">Request a free rental valuation</a> or <a href="/listings">browse all available properties.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "average-rent-birmingham-2026",
+    title: "Average Rent in Birmingham 2026: Area-by-Area Price Guide",
+    excerpt: "How much does it cost to rent in Birmingham in 2026? Our area-by-area guide covers average prices for rooms, studios and flats, and why rents have softened slightly this year.",
+    category: "Rental Market",
+    author: "Sophie Reynolds, Property Market Analyst",
+    readTimeMinutes: 6,
+    tags: ["birmingham", "average rent", "market data", "2026"],
+    publishedAt: new Date("2026-05-23"),
+    imageUrl: "https://images.unsplash.com/photo-1562358563-7ef8a5a278ca?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>Birmingham Rent Prices at a Glance (2026)</h2>
+<p>Birmingham remains one of the UK's best-value major cities for renters, offering big-city amenities well below London prices — with average rents falling slightly (-0.7% to -1.1% year-on-year) even as most UK cities see continued rises. Here are typical monthly rents across the city in 2026.</p>
+
+<h2>Average Rents by Property Type</h2>
+<ul><li><strong>Single room (shared house):</strong> £400–£600</li>
+<li><strong>Double / en-suite room:</strong> £500–£800</li>
+<li><strong>Studio:</strong> £700–£950</li>
+<li><strong>1-bed flat:</strong> £750–£1,100</li>
+<li><strong>2-bed flat:</strong> £950–£1,400</li></ul>
+
+<h2>Best Areas to Rent in Birmingham</h2>
+<ul><li><strong>Jewellery Quarter (B1/B3):</strong> trendy, central, loft-style apartments at a premium</li>
+<li><strong>Digbeth:</strong> the creative quarter — up-and-coming and good value</li>
+<li><strong>Edgbaston:</strong> leafy and professional, close to the universities</li>
+<li><strong>Selly Oak & Harborne:</strong> popular with students and young professionals</li>
+<li><strong>City Centre (B2/B4):</strong> high-rise convenience, walk to work</li></ul>
+
+<h2>What Is Driving Birmingham Rents in 2026?</h2>
+<p>Major regeneration — HS2, Paradise, and Smithfield — plus a growing professional population continue to support demand, even as prices have softened slightly compared to the sharper rises seen in Manchester. Rents remain roughly half of comparable London areas, keeping the city attractive to relocators and to landlords seeking lower entry prices with steady yields.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Is Birmingham a good city for buy-to-let in 2026?</h3>
+<p>Entry prices are lower than Manchester or London, and regeneration projects support long-term demand — see our <a href="/blog/buy-to-let-2026-worth-it">buy-to-let 2026 analysis</a> for the wider investment picture.</p>
+<h3>How does Birmingham compare to Manchester for renters?</h3>
+<p>Birmingham is typically slightly cheaper than Manchester across comparable property types, though Manchester currently has stronger rent growth — see our <a href="/blog/average-rent-manchester-2026-area-guide">Manchester guide</a> for a direct comparison.</p>
+
+<h2>Find Your Birmingham Home</h2>
+<p>Elite Tenancy lists quality, verified rentals across Birmingham, from Jewellery Quarter apartments to family homes. Browse our Birmingham listings or let our AI matching tool find your ideal place — free for tenants.</p>
+    `.trim(),
+  },
+
+  {
+    slug: "no-dss-illegal-2026-benefits-tenants-landlord-guide",
+    title: "'No DSS' Is Now Illegal: What UK Landlords Must Know About Benefits Tenants in 2026",
+    excerpt: "From 1 May 2026, refusing tenants on Universal Credit or Housing Benefit carries fines up to £40,000. What's banned, what's still allowed, and how UC direct payments protect landlords.",
+    category: "Compliance & Legal",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 8,
+    tags: ["No DSS 2026 illegal", "DSS tenants Universal Credit", "benefits discrimination landlord", "Renters Rights Act DSS", "housing benefit tenants"],
+    publishedAt: new Date("2026-05-24"),
+    imageUrl: "https://images.unsplash.com/photo-1657073901075-e6b444568dc5?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>The Law Has Changed — "No DSS" Is Now Fully Illegal</h2>
+<p>From <strong>1 May 2026</strong>, the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act 2025</a> formally bans rental discrimination against benefit claimants in statute — no longer just a matter argued case-by-case under the Equality Act 2010, but an explicit prohibition with its own penalty regime.</p>
+<p>Around <strong>1.1 million households</strong> in England's private rented sector receive housing support through Universal Credit (UC) or Housing Benefit. Excluding them from the rental market is now a direct legal breach, not a grey area.</p>
+
+<h2>What Is Prohibited?</h2>
+<ul>
+<li>Advertising with "No DSS", "No Housing Benefit", "No Universal Credit", or "working tenants only"</li>
+<li>Blanket bans on applicants who receive benefits</li>
+<li>Automatically rejecting applications solely because of benefit status</li>
+<li>Instructing a letting agent to exclude benefit claimants from shortlists</li>
+<li>Discriminating against applicants with children</li>
+</ul>
+<p>This also affects insurance: a landlord insurance policy clause excluding benefit claimants or families with children has no legal effect once the policy is renewed after 1 May 2026, or if it started on or after that date.</p>
+
+<h2>The Penalties</h2>
+<ul>
+<li><strong>First breach:</strong> up to £7,000</li>
+<li><strong>Repeat or serious breach:</strong> up to £40,000</li>
+<li>Separate civil claims under the Equality Act 2010 remain available on top of these penalties</li>
+</ul>
+
+<h2>What Landlords Can Still Do</h2>
+<p>Individual, case-by-case assessment is still allowed. Landlords can still:</p>
+<ul>
+<li>Decline based on a <strong>genuine affordability shortfall</strong> between the applicant's Local Housing Allowance rate and the asking rent</li>
+<li>Require <strong>credit checks and references</strong>, applied equally to every applicant</li>
+<li>Ask for a <strong>guarantor</strong>, applied consistently regardless of income source</li>
+<li>Decline based on <strong>poor references</strong> from a previous landlord</li>
+</ul>
+<p>The test that matters: is the rejection based on this applicant's individual circumstances, or an automatic exclusion because of their benefit status? Only the second is unlawful.</p>
+
+<h2>Universal Credit Direct Payments — A Landlord Safeguard</h2>
+<p>Landlords can request an <strong>Alternative Payment Arrangement (APA)</strong> from the DWP, redirecting the housing element of a tenant's Universal Credit straight to the landlord. This is available once a tenant is 2+ months in arrears, or where the tenant is considered vulnerable, and materially reduces arrears risk without needing to refuse the tenancy in the first place.</p>
+
+<h2>Practical Steps for Landlords</h2>
+<ol>
+<li>Remove all "No DSS" language from every listing immediately</li>
+<li>Train anyone handling enquiries on compliant screening language</li>
+<li>Document every declined application and the specific reason</li>
+<li>Apply the same affordability threshold to all applicants, regardless of income source</li>
+<li>Request UC direct payments via the DWP where appropriate rather than declining upfront</li>
+</ol>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Can I still ask for a guarantor from a benefits tenant?</h3>
+<p>Yes, provided the same standard would be asked of any applicant with a comparable affordability profile — the rule is consistency, not a ban on standard referencing.</p>
+<h3>Does this apply to letting agents too?</h3>
+<p>Yes — agents acting on a landlord's instructions are equally liable, and "the landlord told me to" is not a defence.</p>
+
+<p>At <a href="/for-landlords">Elite Tenancy</a>, we run the same thorough referencing on every applicant regardless of income source. <a href="/list-your-property">List your property with us today.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "section-21-abolished-what-it-means-for-tenants",
+    title: "Section 21 Abolished: What It Means for Tenants in 2026",
+    excerpt: "Section 21 no-fault evictions ended 1 May 2026. Here is what the abolition means for tenants' security, the Section 8 grounds that remain, and what to do if you get a notice.",
+    category: "Tenant Guides",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 7,
+    tags: ["section 21", "eviction", "renters rights act", "tenant rights", "2026"],
+    publishedAt: new Date("2026-05-25"),
+    imageUrl: "https://images.unsplash.com/photo-1733244766159-f58f4184fd38?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<p>For decades, a landlord could ask a tenant to leave with no reason at all, using a <strong>Section 21 notice</strong>. It was the single biggest source of insecurity for renters. On <strong>1 May 2026</strong>, the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act 2025</a> <strong>abolished Section 21 entirely</strong>. Here's what that means if you rent.</p>
+
+<h2>No More "No-Fault" Evictions</h2>
+<p>A landlord can no longer evict you simply because the fixed term ended, or because they'd prefer a different tenant. Every eviction now requires a <strong>valid legal reason</strong> under Section 8, proven in court.</p>
+
+<h2>How a Landlord Can Still Seek Possession</h2>
+<p>Landlords keep legitimate routes to their property through <strong>Section 8 grounds</strong>, including:</p>
+<ul><li><strong>Ground 8</strong> — serious rent arrears (3+ months owed at both notice and hearing)</li>
+<li><strong>Ground 8A</strong> — a persistent pattern of lower-level arrears</li>
+<li><strong>Ground 1A</strong> — the landlord genuinely intends to sell the property</li>
+<li><strong>Ground 1</strong> — the landlord or a close family member intends to move in</li>
+<li><strong>Ground 14</strong> — anti-social behaviour</li></ul>
+<p>Each ground carries its own notice period and, crucially, the landlord must be able to <strong>prove</strong> it to a court — a notice on its own changes nothing.</p>
+
+<h2>What This Means for Your Security</h2>
+<p>You can now treat your rented house as a real home. As long as you pay rent and look after the property, you cannot be removed on a whim. Combined with the <strong>12-month protected period</strong> at the start of a tenancy — during which the sale and moving-in grounds can't be used at all — renters have more stability than at any point in the last 40 years.</p>
+
+<h2>If You Receive a Section 8 Notice</h2>
+<ol><li>Check which ground is being used and whether the notice period given is correct for that ground</li>
+<li>Remember a notice is not an eviction — only a court can order possession, and that typically takes 6–12 months given current court backlogs</li>
+<li>Seek free advice from Citizens Advice or Shelter as early as possible</li>
+<li>If it's a rent-arrears ground, paying down the arrears before the hearing may stop the process entirely</li></ol>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Is a Section 21 notice I already received still valid?</h3>
+<p>Notices validly served before 1 May 2026 generally remain enforceable within their original timeframe — get advice from Shelter to check your specific dates, since court listings are also affected by backlogs.</p>
+<h3>What if my landlord just stops accepting rent to force me out?</h3>
+<p>That is not a lawful eviction route and can itself be reported — a landlord must go through the court process regardless of what tactics they try informally.</p>
+
+<h2>The Bottom Line</h2>
+<p>Section 21 is gone. Evictions must now be fair, reasoned, and evidenced in court. At Elite Tenancy we believe good landlord–tenant relationships are built on security and transparency — which is exactly what the new system encourages.</p>
+    `.trim(),
+  },
+
+  {
+    slug: "letting-agent-fees-uk-2026-landlord-guide",
+    title: "How Much Do Letting Agents Charge in 2026? Full UK Fee Breakdown",
+    excerpt: "Traditional letting agents charge 10-20% of rent for full management in 2026 - plus hidden fees. The full UK fee breakdown, what's tax-deductible, and how Elite Tenancy's 8% model compares.",
+    category: "Landlord Guides",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 8,
+    tags: ["letting agent fees 2026", "landlord costs UK", "property management fees UK", "how much letting agents charge", "letting agent comparison"],
+    publishedAt: new Date("2026-05-26"),
+    imageUrl: "https://images.unsplash.com/photo-1489257251256-036cd1ac7606?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>Letting Agent Fee Structures in 2026</h2>
+<p>Letting agent fees in the UK fall into three tiers. Based on current market data, here is what you can expect to pay:</p>
+
+<h3>Tenant Introduction (Let-Only)</h3>
+<ul><li><strong>Cost:</strong> 8–12% of the first year's annual rent (one-off), or a fixed fee of roughly £400–£1,500 depending on location and agent type</li>
+<li><strong>£1,000/month property:</strong> £960–£1,440 one-off</li>
+<li><strong>£1,500/month property:</strong> £1,440–£2,160 one-off</li>
+<li><strong>Includes:</strong> marketing, viewings, referencing, agreement preparation</li></ul>
+
+<h3>Rent Collection</h3>
+<ul><li><strong>Cost:</strong> 3–8% of monthly rent (ongoing)</li>
+<li><strong>£1,000/month property:</strong> £30–£80/month (£360–£960/year)</li></ul>
+
+<h3>Full Management</h3>
+<ul><li><strong>Cost:</strong> 10–15% of monthly rent nationally, rising to 14–20%+ in London — prime central London (Kensington & Chelsea, Mayfair, Knightsbridge) often sees 15–20% inclusive of VAT</li>
+<li><strong>£1,000/month property:</strong> £120–£180/month (£1,440–£2,160/year)</li>
+<li><strong>£1,500/month property:</strong> £180–£270/month (£2,160–£3,240/year)</li></ul>
+
+<h2>Hidden Fees Most Agents Don't Advertise</h2>
+<ul><li><strong>Tenant setup fee:</strong> £150–£400 per tenancy</li>
+<li><strong>Renewal fee:</strong> £100–£250 per renewal (though note: under the Renters' Rights Act, fixed-term renewals no longer exist for new tenancies, so some agents are quietly relabelling this fee — ask exactly what it covers)</li>
+<li><strong>Inventory check-in/out:</strong> £100–£200</li>
+<li><strong>Maintenance markup:</strong> 10–20% added to every contractor invoice</li>
+<li><strong>Court attendance:</strong> £200–£500 per hearing — increasingly relevant now that every eviction requires a Section 8 court hearing rather than an accelerated Section 21 process</li></ul>
+<p>Combined, the effective annual cost of full management commonly reaches <strong>20–25% of rental income</strong> once hidden fees are included. The Tenant Fees Act 2019 already bans charging <em>tenants</em> for most of these — but it does not cap what agents can charge landlords.</p>
+
+<h2>Are Letting Agent Fees Tax Deductible?</h2>
+<p>Yes — letting agent fees are <strong>HMRC-allowable expenses</strong> that can be deducted from rental income before calculating tax liability. Keep detailed records and invoices for every fee paid.</p>
+
+<h2>The Elite Tenancy Model — 8% Managed, No Hidden Fees</h2>
+<p>At <a href="/for-landlords">Elite Tenancy</a>, we charge a flat <strong>8% of monthly rent collected</strong> for full management — no setup fees, no renewal fees, no maintenance markups, and no exit fees.</p>
+
+<h3>How Much Could You Save Per Year?</h3>
+<table><tr><th>Monthly Rent</th><th>Traditional (15%)</th><th>Elite Tenancy (8%)</th><th>Annual Saving</th></tr>
+<tr><td>£800/month</td><td>£1,440/year</td><td>£768/year</td><td><strong>£672</strong></td></tr>
+<tr><td>£1,200/month</td><td>£2,160/year</td><td>£1,152/year</td><td><strong>£1,008</strong></td></tr>
+<tr><td>£1,800/month</td><td>£3,240/year</td><td>£1,728/year</td><td><strong>£1,512</strong></td></tr>
+<tr><td>£2,500/month</td><td>£4,500/year</td><td>£2,400/year</td><td><strong>£2,100</strong></td></tr></table>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Is the cheapest agent always the best value?</h3>
+<p>Not necessarily — check specifically whether Section 8 court-hearing support, Right to Rent checks, and RRA Information Sheet compliance are included, since a cheap headline rate that excludes these can cost far more if something goes wrong.</p>
+<h3>Can I negotiate letting agent fees?</h3>
+<p>Yes — fees are rarely fixed, especially for multiple properties or longer management contracts. Always ask for the full fee schedule in writing before signing.</p>
+
+<p>No let, no fee — if we don't find you a tenant, you pay nothing. <a href="/valuation">Request your free property valuation today.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "assured-periodic-tenancy-explained",
+    title: "Assured Periodic Tenancy Explained: The New UK Standard",
+    excerpt: "Fixed-term ASTs are gone. Here is exactly how the new Assured Periodic Tenancy works: notice periods, rent increases, the 12-month protected period, and how it compares to the old system.",
+    category: "Compliance & Legal",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 7,
+    tags: ["assured periodic tenancy", "renters rights act", "tenancy agreement", "Section 13 rent increase", "2026"],
+    publishedAt: new Date("2026-05-27"),
+    imageUrl: "https://images.unsplash.com/photo-1722487631997-cf1e0f92c2c4?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<p>If you've rented before, you'll know the term "AST" — the Assured Shorthold Tenancy, usually a fixed 6 or 12-month contract. As of <strong>1 May 2026</strong>, that's history. The <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act 2026</a> moved every tenancy in England to one simpler model: the <strong>Assured Periodic Tenancy</strong>.</p>
+
+<h2>What "Periodic" Means</h2>
+<p>A periodic tenancy is a <strong>rolling tenancy</strong> with no fixed end date. Instead of locking you into 12 months, it continues month to month until either side ends it properly under the new rules. Fixed-term ASTs can no longer be created for new lettings.</p>
+
+<h2>How You Give Notice as a Tenant</h2>
+<p>You can leave by giving <strong>two months' notice</strong> at any point. No more paying rent on a flat you've already vacated because a fixed term hadn't technically ended — this is one of the clearest wins for renters in the new system.</p>
+
+<h2>How a Landlord Can End It</h2>
+<p>Because <a href="/blog/section-21-abolished-2026-landlord-guide">Section 21 no-fault evictions have been abolished</a>, a landlord can only end the tenancy on a valid <strong>Section 8</strong> ground — serious rent arrears, anti-social behaviour, or a genuine intention to sell or move in. Each ground carries its own notice period and evidence requirements, and every case now goes to court.</p>
+
+<h2>Rent Increases Under a Periodic Tenancy</h2>
+<p>Rent can only be increased <strong>once per year</strong>, via a formal Section 13 notice (Form 4A), with at least <strong>two months' notice</strong>. If you think a proposed increase is above market rate, you can challenge it at the First-tier Tribunal, free of charge, before the increase takes effect.</p>
+
+<h2>The 12-Month Protected Period</h2>
+<p>The Act introduces a <strong>12-month protected period</strong> at the start of a tenancy, during which landlords cannot use the sale or moving-in grounds to evict. This gives tenants real security in their first year, in exchange for landlords needing to reference much more carefully upfront.</p>
+
+<h2>How This Compares to the Old AST System</h2>
+<table><tr><th>Feature</th><th>Old AST (pre-May 2026)</th><th>Assured Periodic Tenancy (now)</th></tr>
+<tr><td>Fixed term</td><td>Usually 6–12 months</td><td>None — rolling from day one</td></tr>
+<tr><td>Landlord eviction route</td><td>Section 21 (no reason needed) or Section 8</td><td>Section 8 only, with a stated ground</td></tr>
+<tr><td>Tenant notice to leave</td><td>Locked in until fixed term ends (unless break clause)</td><td>2 months' notice, any time</td></tr>
+<tr><td>Rent increases</td><td>Often via clause in contract</td><td>Section 13 only, once a year, 2 months' notice</td></tr>
+</table>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Did my existing tenancy automatically convert?</h3>
+<p>Yes. Every assured shorthold tenancy in England converted to an assured periodic tenancy on 1 May 2026 without needing a new contract signed.</p>
+<h3>Can a landlord still ask me to sign a "fixed term"?</h3>
+<p>No — any clause purporting to create a new fixed term is not enforceable for tenancies entered into after 1 May 2026.</p>
+<h3>What happens to my deposit?</h3>
+<p>Nothing changes for the deposit itself — it remains protected in your existing scheme and follows the <a href="/deposit-protection">standard deposit protection rules</a> regardless of the tenancy type.</p>
+
+<h2>What This Means for You</h2>
+<ul><li>More flexibility — leave with two months' notice, no fixed lock-in</li>
+<li>More security — no no-fault eviction, protected first year</li>
+<li>Clearer rent rules — one increase a year, properly noticed, challengeable at Tribunal</li></ul>
+
+<p>Every tenancy arranged through Elite Tenancy is set up correctly as an Assured Periodic Tenancy with plain-English terms, so you always know exactly where you stand.</p>
+    `.trim(),
+  },
+
+  {
+    slug: "rent-in-advance-legal-2026-uk",
+    title: "How Much Rent in Advance Is Legal in 2026? UK Rules",
+    excerpt: "From 1 May 2026, landlords cannot demand more than one month's rent in advance. What's allowed, what's unenforceable, and what to do if you're asked for more.",
+    category: "Compliance & Legal",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 6,
+    tags: ["rent in advance", "renters rights act", "deposits", "tenant rights", "2026"],
+    publishedAt: new Date("2026-05-29"),
+    imageUrl: "https://images.unsplash.com/photo-1617655501435-8f07714f57ec?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>The New One-Month Cap on Rent in Advance</h2>
+<p>From 1 May 2026, under the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act 2026</a>, a landlord or letting agent in England cannot require <strong>more than one month's rent in advance</strong>. Demands for six or twelve months upfront — once common for students, the self-employed, and overseas tenants — are now <strong>unlawful</strong>, even if the tenant offers to pay more voluntarily.</p>
+
+<h2>What Is Actually Allowed</h2>
+<ul>
+<li><strong>Maximum one month's rent</strong> in advance, and only after the tenancy agreement is signed</li>
+<li>A tenancy deposit capped at <strong>five weeks' rent</strong> where annual rent is under £50,000 (six weeks above that)</li>
+<li>No rent may be requested <strong>before</strong> the tenancy agreement is signed by all parties</li>
+</ul>
+
+<h2>What If a Landlord Asks for More?</h2>
+<p>Any clause requiring more than one month up front is <strong>unenforceable</strong> — it simply has no legal effect, even if it's written into the contract. If you're asked for several months upfront, you can point out the practice is no longer lawful and still proceed with the tenancy on the correct terms. A landlord who takes rent before signing, or more than one month's worth, faces a civil penalty of up to <strong>£5,000</strong> and must repay the excess.</p>
+
+<h2>Why the Rule Changed</h2>
+<p>Large advance payments were quietly shutting lower-income and benefit-reliant tenants out of the market — whoever could pay a year upfront won the property regardless of suitability. The cap levels the playing field and sits alongside the Act's wider ban on rental bidding wars.</p>
+
+<h2>How This Interacts With Deposits and Guarantors</h2>
+<p>The one-month cap is separate from your deposit (still capped at five weeks' rent) and separate from any <strong>guarantor</strong> arrangement, which remains legal and unaffected by this rule. A guarantor is often the right tool where affordability is genuinely tight, rather than asking for months of rent upfront.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Can a landlord ask for proof of income instead of advance rent?</h3>
+<p>Yes — income verification, references, and credit checks are unaffected by this rule and remain the correct way to assess affordability.</p>
+<h3>Does this apply to student lets and short-term tenancies?</h3>
+<p>Yes, the one-month cap applies to assured tenancies generally, including most student HMO lettings arranged directly with a private landlord.</p>
+<h3>What should I do if I already paid several months upfront before May 2026?</h3>
+<p>Speak to your landlord about applying the excess to future rent, or seek advice from Shelter or your local council's housing team if they refuse.</p>
+
+<p>Worried about affordability checks? Elite Tenancy runs fair, transparent referencing — and our service is <strong>completely free for tenants</strong>. Talk to us about finding a home within your budget.</p>
+    `.trim(),
+  },
+
+  {
+    slug: "can-landlord-refuse-pets-2026-uk",
+    title: "Can a Landlord Refuse Pets in 2026? UK Rules Explained",
+    excerpt: "Under the Renters' Rights Act 2026, landlords can no longer unreasonably refuse pets or demand pet insurance. Here is exactly what the 2026 rules mean for tenants and landlords.",
+    category: "Compliance & Legal",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 6,
+    tags: ["pets", "renters rights act", "tenant rights", "pet insurance ban", "2026"],
+    publishedAt: new Date("2026-05-31"),
+    imageUrl: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>Can a Landlord Say No to Pets in 2026?</h2>
+<p>Short answer: not without a good reason. Since the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act 2026</a> came into force on 1 May 2026, tenants in England have a strengthened right to request a pet — and landlords must consider every request fairly and respond within <strong>28 days</strong>.</p>
+
+<h2>What the Law Actually Says</h2>
+<p>A landlord can no longer enforce a blanket "no pets" policy. When a tenant makes a written request to keep a pet, the landlord must:</p>
+<ul>
+<li>Respond in writing within <strong>28 days</strong> (longer only if they've genuinely asked for further information, or need consent from a superior landlord)</li>
+<li>Only refuse where there is a <strong>reasonable</strong> ground</li>
+<li>Not unreasonably withhold consent</li>
+</ul>
+
+<h2>What Counts as a Reasonable Refusal?</h2>
+<p>Reasonable grounds might include a superior lease that forbids pets, or a property genuinely unsuitable for the animal in question — for example, a large dog in a small studio flat with no outdoor access. Government guidance is explicit that a refusal <strong>cannot be based on gut feeling alone</strong>: simply disliking pets, or a general worry about damage with no specifics, is not enough on its own.</p>
+
+<h2>Can a Landlord Charge Extra or Demand Pet Insurance?</h2>
+<p>No. This is a common misconception worth correcting: the Act <strong>removed the option for landlords to require tenants to take out pet damage insurance</strong>, and landlords cannot ask to be reimbursed for such a policy. The standard deposit (still capped at five weeks' rent) is intended to cover pet-related damage, the same as any other damage.</p>
+
+<h2>What If a Landlord Refuses Unreasonably?</h2>
+<p>If a tenant believes a pet request has been unreasonably refused, they can escalate the complaint to the <strong>Private Rented Sector Ombudsman</strong> once it launches, or take the matter to court in the meantime.</p>
+
+<h2>How to Request a Pet the Right Way</h2>
+<ul>
+<li>Put your request <strong>in writing</strong> — email is fine</li>
+<li>Describe the pet clearly: breed, size, and age</li>
+<li>Offer a reference from a previous landlord if you have one</li>
+<li>Don't offer to pay for pet insurance — it isn't required, and a landlord can't ask you to</li>
+</ul>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Does this apply to all pets, including large dogs?</h3>
+<p>Yes, the right to request applies to any pet, but "reasonable grounds" gives more scope to refuse genuinely unsuitable combinations, like a large, high-energy dog in a small flat with no outdoor space.</p>
+<h3>Can a landlord raise the deposit for a pet?</h3>
+<p>No — the deposit cap (five weeks' rent under £50,000 annual rent) is fixed regardless of pets, and cannot be increased specifically because a tenant has an animal.</p>
+
+<p>At Elite Tenancy, many of our homes are pet-friendly and our team helps tenants make strong, well-evidenced pet requests. Browse pet-friendly listings or ask our AI assistant Ellie for help today.</p>
+    `.trim(),
+  },
+
+  {
+    slug: "average-rent-manchester-2026-area-guide",
+    title: "Average Rent in Manchester 2026: Area-by-Area Guide",
+    excerpt: "How much does it cost to rent in Manchester in 2026? A neighbourhood-by-neighbourhood breakdown of average rents for rooms, studios, and 1-3 bed homes, with rents up 3% year-on-year.",
+    category: "Rental Market",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 7,
+    tags: ["manchester", "average rent", "rent prices", "market data", "2026"],
+    publishedAt: new Date("2026-06-02"),
+    imageUrl: "https://images.unsplash.com/photo-1724135869739-6055627ba5df?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<p>Manchester remains one of the UK's strongest rental markets — a true London alternative with world-class jobs, culture and value, and rents rising 3.0% year-on-year to an average of <strong>£1,349/month</strong>. If you're planning a move in 2026, here's what you can realistically expect to pay, area by area.</p>
+
+<h2>Manchester Rent at a Glance (2026)</h2>
+<ul><li><strong>Room in a shared house:</strong> £450–£750</li>
+<li><strong>Studio / 1-bed flat:</strong> £850–£1,400</li>
+<li><strong>2-bed flat:</strong> £1,100–£1,800</li>
+<li><strong>3-bed house:</strong> £1,500–£2,400</li></ul>
+
+<h2>City Centre & Spinningfields (M1, M2, M3)</h2>
+<p>The premium core. Modern high-rise apartments with gyms and concierge. Expect <strong>£1,300–£1,600</strong> for a 1-bed and <strong>£1,700+</strong> for a 2-bed. You pay for walkability and the skyline view.</p>
+
+<h2>Northern Quarter (M1, M4)</h2>
+<p>Creative, independent and central. Converted warehouses and characterful flats, 1-beds around <strong>£1,100–£1,400</strong>. Hugely popular with young professionals.</p>
+
+<h2>New Islington & Ancoats (M4)</h2>
+<p>Manchester's coolest regeneration story — canalside living, top restaurants. Premium 1 and 2-beds from <strong>£1,400–£2,200</strong>.</p>
+
+<h2>Didsbury & Chorlton (M20, M21)</h2>
+<p>Leafy, family-friendly suburbs with great schools and a village feel. 3-bed houses run <strong>£1,600–£2,400</strong>; ideal for families and sharers wanting space.</p>
+
+<h2>Fallowfield & Withington (M14, M20)</h2>
+<p>The student and graduate belt. Affordable shared houses, rooms from <strong>£450–£650</strong>. Excellent value and a lively community.</p>
+
+<h2>Salford Quays & MediaCity (M50)</h2>
+<p>Waterfront living next to the BBC and ITV. Sleek modern flats, 1-beds around <strong>£1,100–£1,450</strong>, with strong transport links via the tram.</p>
+
+<h2>Is Manchester Still Good Value?</h2>
+<p>Yes. A city-centre 1-bed in Manchester costs roughly half the equivalent in London Zone 2 — for a city with comparable jobs, nightlife, and culture. See our full <a href="/blog/manchester-vs-london-rent-2026">Manchester vs London comparison</a> for the complete picture, including why Manchester rents are currently growing faster than London's in percentage terms.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Which Manchester area is best for first-time renters new to the city?</h3>
+<p>Northern Quarter or City Centre for nightlife and walkability; Didsbury or Chorlton if you want a quieter, more residential feel with easy tram access into town.</p>
+<h3>Are Manchester rents likely to keep rising faster than London's?</h3>
+<p>Given the pace of employer relocation (BBC, ITV, Deloitte, Amazon) and continued undersupply, most forecasters expect Manchester's above-average growth to continue through 2026–2027.</p>
+
+<p>Browse Elite Tenancy's available Manchester homes, or use our free AI matching to find the right area and property for your budget in seconds.</p>
+    `.trim(),
+  },
+
+  {
+    slug: "section-13-rent-increase-notice-2026",
+    title: "Section 13 Rent Increase Notice 2026: How It Works Now That It's the Only Option",
+    excerpt: "Since 1 May 2026, Section 13 (Form 4A) is the only lawful way to increase rent in England. Here is the exact process, notice periods, and how tenants can challenge an increase at Tribunal.",
+    category: "Compliance & Legal",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 6,
+    tags: ["Section 13 rent increase", "Form 4A", "Renters Rights Act 2026", "rent increase notice", "First-tier Tribunal"],
+    publishedAt: new Date("2026-07-04"),
+    imageUrl: "https://images.unsplash.com/photo-1678818715417-3c725d9c2b43?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>Why Section 13 Now Matters More Than Ever</h2>
+<p>Before the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act 2025</a>, many landlords increased rent informally — a clause in the tenancy agreement, or simply agreeing a new figure with the tenant at renewal. Since fixed-term tenancies no longer exist and every tenancy is now a rolling <a href="/blog/assured-periodic-tenancy-explained">Assured Periodic Tenancy</a>, that option is gone. From 1 May 2026, <strong>Section 13 is the only lawful route to increase rent</strong> in England.</p>
+
+<h2>The Section 13 Process, Step by Step</h2>
+<ol><li>Complete the official <strong>Form 4A</strong> notice</li>
+<li>Serve it on the tenant with at least <strong>two months' notice</strong> before the increase takes effect</li>
+<li>The new rent takes effect on the following rent-payment date after the notice period expires</li>
+<li>You cannot serve another Section 13 notice for at least <strong>52 weeks</strong> after the last one took effect</li></ol>
+
+<h2>What Section 13 Cannot Do</h2>
+<ul><li>It cannot be used more than once every 52 weeks</li>
+<li>It cannot be backdated or take effect with less than two months' notice</li>
+<li>The proposed rent cannot exceed <strong>open market rent</strong> for a comparable property — this is now an explicit legal test, not just good practice</li>
+<li>It cannot be used at all within the <strong>first year</strong> of a brand-new tenancy</li></ul>
+
+<h2>How a Tenant Can Challenge an Increase</h2>
+<p>If a tenant believes the proposed new rent is above open market rate, they can refer the notice to the <strong>First-tier Tribunal</strong> before the increase takes effect. The referral is free, and the Tribunal will determine the market rent for the property — the tenant cannot be charged more than the Tribunal decides, and in practice cannot end up paying less than they were already paying either.</p>
+
+<h2>Common Mistakes Landlords Make</h2>
+<ul><li>Using an old-style rent-review letter instead of the official Form 4A</li>
+<li>Giving less than two months' notice</li>
+<li>Attempting to increase rent via a side agreement or verbal request instead of the formal notice</li>
+<li>Increasing rent more than once within a 52-week window</li></ul>
+<p>Any of these makes the increase <strong>legally ineffective</strong> — the tenant can simply continue paying the old rent until a valid Section 13 notice is served correctly.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Can I increase rent by any amount I want if I follow the process correctly?</h3>
+<p>No — the increase must reflect genuine open market rent for a comparable property. An excessive increase, even with correct paperwork, can still be reduced by the Tribunal.</p>
+<h3>What if my tenant just doesn't respond to the Section 13 notice?</h3>
+<p>If the tenant doesn't refer it to the Tribunal within the set window, the new rent takes effect automatically as proposed.</p>
+<h3>Does this apply to HMO room-by-room tenancies?</h3>
+<p>Yes, wherever an individual room is let under an assured tenancy — each tenant's rent increase must go through the same Section 13 process individually.</p>
+
+<p>At <a href="/for-landlords">Elite Tenancy</a>, we handle Section 13 notices correctly and on schedule as part of our full management service. <a href="/valuation">Talk to our landlord team.</a></p>
+    `.trim(),
+  },
+
+  {
+    slug: "renters-rights-act-information-sheet-2026",
+    title: "Renters' Rights Act Information Sheet: The 31 May 2026 Deadline Landlords Are Missing",
+    excerpt: "Every landlord with an existing tenancy had to serve the official RRA Information Sheet by 31 May 2026 or face a £7,000 fine. Here is what it must contain, who is exempt, and what to do if you missed the deadline.",
+    category: "Compliance & Legal",
+    author: "Elite Tenancy Editorial Team",
+    readTimeMinutes: 6,
+    tags: ["RRA Information Sheet", "31 May 2026 deadline", "£7000 fine", "Renters Rights Act compliance", "landlord guide"],
+    publishedAt: new Date("2026-07-04"),
+    imageUrl: "https://images.unsplash.com/photo-1698431194884-295617261396?w=1200&q=80&auto=format&fit=crop",
+    content: `
+<h2>What Is the Renters' Rights Act Information Sheet?</h2>
+<p>Alongside the headline changes of the <a href="/blog/renters-rights-act-2026-landlord-guide">Renters' Rights Act 2025</a> — Section 21 abolition, periodic tenancies, the one-month advance rent cap — the government published a mandatory <strong>Information Sheet</strong> that every landlord with an existing assured tenancy had to give their tenant. It is one of the most overlooked compliance steps of the entire Act, because it applies even when nothing else about the tenancy is changing.</p>
+
+<h2>The Deadline: 31 May 2026</h2>
+<p>Landlords had until <strong>31 May 2026</strong> to serve the Information Sheet on every existing tenant. Missing this deadline carries a fine of <strong>up to £7,000</strong> — the same tier of penalty as a first "No DSS" discrimination breach.</p>
+
+<h2>What Must the Information Sheet Contain?</h2>
+<p>The official gov.uk document explains, in plain language, the tenant's new rights under the Act, including:</p>
+<ul><li>The abolition of Section 21 and what replaced it (Section 8 grounds)</li>
+<li>The conversion to a rolling Assured Periodic Tenancy</li>
+<li>The new rent increase process (Section 13, once a year, 2 months' notice)</li>
+<li>The right to request a pet, and the 28-day response requirement</li>
+<li>Protection against benefit/DSS discrimination</li>
+<li>The one-month cap on rent in advance</li></ul>
+
+<h2>Who Needs to Receive One?</h2>
+<p>Any tenant who was already in a tenancy when the Act's core provisions took effect on 1 May 2026. New tenancies signed after that date should have the relevant information built into the tenancy agreement itself, but serving the Information Sheet regardless is the safest approach given how new the enforcement landscape still is.</p>
+
+<h2>How to Serve It Correctly</h2>
+<ol><li>Download the current version of the Information Sheet from gov.uk (do not use a photocopy of an older draft — the document has been updated since first publication)</li>
+<li>Serve it to every named tenant on the tenancy, not just the lead tenant</li>
+<li>Keep dated proof of service — email delivery, signed receipt, or recorded delivery</li>
+<li>Store a copy alongside your other compliance records for that tenancy</li></ol>
+
+<h2>What If You Missed the Deadline?</h2>
+<p>Serve it immediately. Councils are generally expected to focus enforcement on landlords who show no intention of complying at all, rather than those who serve it late but before any complaint is raised — but there is no guarantee of leniency, and the fine remains a real risk the longer it goes unaddressed. This is not a step to leave for "later."</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Does this apply to HMO tenancies too?</h3>
+<p>Yes — the requirement applies to assured and assured shorthold tenancies generally, which includes most HMO lettings to individual tenants.</p>
+<h3>Can a letting agent serve it on my behalf?</h3>
+<p>Yes, provided they do so correctly and you retain evidence it was done — ultimately the landlord remains responsible for compliance even where an agent manages the property.</p>
+<h3>Is there a template I can use?</h3>
+<p>Use the official version published on gov.uk directly rather than a third-party template, since the wording is prescribed and has been updated at least once already.</p>
+
+<p>At <a href="/for-landlords">Elite Tenancy</a>, every tenancy we manage has its Information Sheet compliance tracked automatically. <a href="/valuation">Talk to our landlord team</a> if you're unsure whether yours was served correctly.</p>
+    `.trim(),
+  },
+
 ];
 
 router.post("/seed-articles", async (req, res): Promise<void> => {
