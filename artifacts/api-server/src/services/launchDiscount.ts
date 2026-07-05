@@ -127,20 +127,37 @@ router.get("/status", async (req: Request, res: Response): Promise<void> => {
   res.json({ registered: true, ...rows[0] });
 });
 
-// ── POST /launch-discount/run-daily ──────────────────────────────────────────
+// ── GET+POST /launch-discount/run-daily ──────────────────────────────────────
 // Intended for internal cron use (Vercel Cron → /api/launch-discount/run-daily).
 // Fail closed: this transitions users onto paid Stripe billing, so an unset
 // CRON_SECRET must deny the call, not silently allow it through.
-router.post("/run-daily", async (req: Request, res: Response): Promise<void> => {
-  const secret = req.headers["x-cron-secret"];
-  if (!process.env.CRON_SECRET || secret !== process.env.CRON_SECRET) {
+//
+// Vercel Cron always invokes via GET and sends the secret as a standard
+// `Authorization: Bearer <CRON_SECRET>` header (confirmed against Vercel's
+// own cron docs) — this previously checked a non-standard `x-cron-secret`
+// header on a POST-only route, so Vercel's actual daily cron trigger always
+// 404'd before even reaching this handler. Every free-trial user's 7-day
+// billing warning and day-90 auto-transition to paid Stripe billing has
+// been silently skipped since this was added. GET is now the real handler;
+// POST is kept for manual/admin triggering.
+function cronAuthorized(req: Request): boolean {
+  const secret = process.env.CRON_SECRET;
+  if (!secret) return false;
+  return req.header("authorization") === `Bearer ${secret}`;
+}
+
+async function runDailyHandler(req: Request, res: Response): Promise<void> {
+  if (!cronAuthorized(req)) {
     res.status(401).json({ error: "Unauthorized cron call" });
     return;
   }
 
   const results = await runDailyTransitions();
   res.json(results);
-});
+}
+
+router.get("/run-daily", runDailyHandler);
+router.post("/run-daily", runDailyHandler);
 
 // ── Core Cron Logic ───────────────────────────────────────────────────────────
 
