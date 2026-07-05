@@ -30,6 +30,7 @@ import interestRouter from "./interest";
 import { router as launchDiscountRouter } from "../services/launchDiscount";
 import seedArticlesRouter from "./seedArticles";
 import usaWaitlistRouter from "./usaWaitlist";
+import lodgerRouter from "./lodger";
 
 const router: IRouter = Router();
 
@@ -64,5 +65,6 @@ router.use("/interest",       interestRouter);
 router.use("/launch-discount", launchDiscountRouter);
 router.use(seedArticlesRouter);
 router.use(usaWaitlistRouter);
+router.use(lodgerRouter);
 
 export default router;

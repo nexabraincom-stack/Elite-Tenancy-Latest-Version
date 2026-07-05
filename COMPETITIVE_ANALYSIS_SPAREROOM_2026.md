@@ -100,4 +100,55 @@ This resolves the open "build priority" decision from earlier rather than leavin
 
 ## Next step
 
-I'm proceeding on **Phase 1 (lodger/subletting workflow)** as the next build unless you redirect me — it's self-contained, addresses the one gap that's a real missing feature rather than a missing badge/integration, and has the cleanest monetization story of the four.
+Phase 1 (lodger/subletting workflow) is now in active development — see §6 below for how it's being built, and §7 for the wider competitor set researched beyond SpareRoom.
+
+---
+
+## 6. Lodger workflow — what's actually being built (2026-07-05)
+
+- New `lodger_licences` table linked to an existing `tenancies` row — a tenant requests to take in a lodger, the request is emailed to their landlord for written consent (captured in-app, timestamped — not left to email/text with no record)
+- Landlord approves/declines with an optional note; either decision emails the tenant back
+- Once approved, the host tenant generates a licence agreement — legally distinct from a tenancy (lodger = excluded occupier, no security of tenure), with Rent a Room Scheme (£7,500/year tax-free) guidance built into the generated document, and an explicit "this is a template, not legal advice" disclaimer
+- New public "Find a Lodger" landing page targeting the same keyword cluster SpareRoom's dedicated page ranks for
+
+## 7. Wider competitor research — beyond SpareRoom
+
+Full deep-dive on OpenRent, Rightmove, Zoopla, Gumtree (property), RoomsForLet.co.uk, Roomgo.co.uk/EasyRoommate, and Mondaytofriday.com. One correction to note for internal use: **Roomgo.co.uk and EasyRoommate are not independent competitors — both have been SpareRoom-owned since 2020** (EasyRoommate rebranded to Roomgo the same week SpareRoom acquired it). The real independent set is OpenRent, Rightmove, Zoopla, Gumtree, RoomsForLet, and Mondaytofriday.
+
+### OpenRent
+**Companies House-confirmed financials**: net assets £16.8M, cash £16.6M, ~45–50 staff (FY2024/25 accounts) — treat third-party revenue estimates (~$5.6M cited by some scrapers) as unreliable given they conflict with the balance sheet.
+- **"Rent Now"**: a genuine transaction layer — holding deposit collection, e-signed tenancy agreement, deposit-scheme registration, automated rent collection/payout. The only site researched with a full proptech/fintech stack bolted onto listings.
+- **Tenant Referencing & Credit Checks** is a real, distinct paid product here (credit score, ID/fraud check, Right to Rent, CCJs, affordability, landlord reference) — something SpareRoom has never built.
+- Monetization is 100% landlord-paid, one-off fees (~£69 core package region, Rightmove/Zoopla add-ons ~£29–70) — no subscription, no % of rent, no tenant fees.
+- Content: Landlord Hub blog + a large, active community forum (~2.5M users cited, 1,000+ posts/month) functioning as a UGC SEO engine.
+
+### Gumtree (property)
+- No branded lettings product at all — plain classifieds + paid bump/refresh + subscription tiers (£9.95/listing after 2 free/year; bumps £2–£7.14; subscriptions £50–£270).
+- Zero content-marketing strategy for property (no blog/guides/calculators) — a real vacuum next to OpenRent.
+- Repeatedly flagged industry-wide as the platform most exploited by rental-fraud scammers impersonating real landlords (cited UK rental fraud rising £7.2M → £14.5M, 2021–2025) — the clearest evidence anywhere in this research that landlord verification is a real, monetizable trust gap, not a nice-to-have.
+
+### Rightmove — the most important finding in this whole research pass
+- FY2025 revenue **£425.1m** (+9% YoY), 100% agent/developer-funded B2B, ~£2,600+VAT/month per branch baseline.
+- Owns **Rightmove Landlord & Tenant Services** (formerly Van Mildert, acquired 2019) — one-click tenant referencing **plus three tiers of rent-guarantee/legal-expenses insurance, plus "Agent Revenue Protection"** (recovers 15% of agency fee on tenant non-payment). This is a fully owned business line, not an affiliate referral link.
+- **This proves the model**: integrated referencing + insurance is a real, substantial revenue line at scale in this exact industry — it has just never been built for the room-share/lodger niche specifically. That's the opening.
+
+### Zoopla
+- 2024 revenue fell 7% to £84.17m (£5.17m pre-tax loss, largely a Yourkeys writedown); owned by Silver Lake.
+- Signature asset: **Zoopla Estimate**, an automated valuation model via owned subsidiary Hometrack — a genuine proprietary data moat, distinct from anything a listings site normally has.
+- Weaker on verification than Rightmove: only *prefers* Propertymark/UKALA membership, doesn't require it.
+
+### RoomsForLet.co.uk
+- Best lodger-agreement educational content of any site researched (downloadable templates, Rent-a-Room tax guidance, Right-to-Rent guidance) — but it's content, not a built product.
+- Trust signals are weak (Trustpilot ~2.9/5, complaints about pay-to-contact and clickbait listings) — a reputational opening, not just a feature one.
+
+### Mondaytofriday.com
+- A small, single-niche player: weekday-only lodger lettings (commuters who go home at weekends).
+- The most legally precise competitor content found anywhere in this research — explicitly teaches that these are licences, not ASTs, with no deposit-protection requirement and notice-only termination. Worth matching in our own lodger-page copy.
+- No verification product, no insurance, no city-hub pages, no calculators — informal guidance only.
+
+### The 5 concrete gaps this research surfaces (beyond the lodger workflow already in progress)
+1. **A verified room/lodger vertical** — every specialist (SpareRoom, Roomgo, RoomsForLet, Mondaytofriday) has zero identity/landlord verification; every generalist (Rightmove, Zoopla, Gumtree) treats rooms as an afterthought. No one has combined room-share specialization with real verification.
+2. **Owned referencing + insurance for the room-share niche** — Rightmove proves the revenue model works for full ASTs via agents; nobody has brought it to the informal room/lodger market. Natural Phase 3 upgrade once the lodger workflow (Phase 1) is live.
+3. **A real lodger-vs-AST compliance tool**, not just content — auto-detect which applies, generate the right agreement, flag deposit-protection obligations. RoomsForLet and Mondaytofriday prove the demand exists; nobody has turned it into a product. This is essentially what Phase 1 is already building — worth extending once live.
+4. **Landlord verification as a headline trust claim**, positioned directly against Gumtree's well-documented fraud problem — "every landlord verified" as marketing, not just a quiet feature.
+5. **Content-marketing white space** — Gumtree has nothing, Mondaytofriday has no city hubs despite an obvious remote-work hook, and Rightmove/Zoopla content is generic-lettings, not room-share-specific. A dedicated city-hub + calculator strategy aimed at room-share/lodger searchers specifically is uncontested.

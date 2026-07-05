@@ -225,6 +225,48 @@ export function landlordSubscriptionEmail(name: string, planId: string): { subje
   };
 }
 
+/** Landlord alert: their tenant wants to take in a lodger and needs consent. */
+export function lodgerConsentRequestEmail(data: {
+  landlordName: string;
+  tenantName: string;
+  propertyAddress: string;
+  rentPcm: number;
+  reviewUrl: string;
+}): { subject: string; html: string } {
+  return {
+    subject: `${esc(data.tenantName)} would like to take in a lodger — your consent is needed`,
+    html: shell(
+      "A lodger consent request needs your response",
+      `<p style="font-size:14px;line-height:1.7;margin:0 0 16px;">${esc(data.tenantName)}, your tenant at <strong>${esc(data.propertyAddress)}</strong>, has asked to take in a lodger at £${(data.rentPcm / 100).toFixed(0)}/month.</p>
+       <p style="font-size:14px;line-height:1.7;margin:0 0 16px;">Under the Renters' Rights Act 2026, you can't unreasonably refuse a request like this — but you can still decline for genuine reasons (e.g. it would breach your mortgage or insurance terms). Please review and respond.</p>
+       <p style="margin:0 0 24px;">${btn(data.reviewUrl, "Review the request")}</p>
+       <p style="font-size:13px;color:#6b6256;line-height:1.6;margin:0;">The Elite Tenancy Team</p>`,
+    ),
+  };
+}
+
+/** Tenant notification: landlord approved or declined their lodger request. */
+export function lodgerConsentDecisionEmail(data: {
+  tenantName: string;
+  approved: boolean;
+  note?: string | null;
+  dashboardUrl: string;
+}): { subject: string; html: string } {
+  return {
+    subject: data.approved
+      ? "Your landlord has approved your lodger request"
+      : "Your landlord has responded to your lodger request",
+    html: shell(
+      data.approved ? "Good news — you're all set" : "Your landlord's response",
+      `<p style="font-size:14px;line-height:1.7;margin:0 0 16px;">${esc(data.tenantName)}, your landlord has ${data.approved ? "<strong>approved</strong>" : "<strong>declined</strong>"} your request to take in a lodger.</p>
+       ${data.note ? `<p style="font-size:14px;line-height:1.7;margin:0 0 16px;">Their note: "${esc(data.note)}"</p>` : ""}
+       ${data.approved ? `<p style="font-size:14px;line-height:1.7;margin:0 0 16px;">You can now generate your lodger licence agreement from your dashboard.</p>` : ""}
+       <p style="margin:0 0 24px;">${btn(data.dashboardUrl, "Go to my dashboard")}</p>
+       <p style="font-size:13px;color:#6b6256;line-height:1.6;margin:0;">The Elite Tenancy Team</p>`,
+    ),
+  };
+}
+
 /** Post-placement review request (needs verified domain). */
 export function reviewRequestEmail(name: string, reviewUrl: string): { subject: string; html: string } {
   return {

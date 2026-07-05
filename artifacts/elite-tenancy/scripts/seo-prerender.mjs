@@ -602,6 +602,12 @@ const ROUTES = [
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "DSS Accepted Housing", path: "/dss-accepted-housing" }],
   },
   {
+    path: "/find-a-lodger",
+    title: "Find a Lodger UK 2026 — Consent, Agreement & Rent a Room Scheme | Elite Tenancy",
+    desc: "Taking in a lodger in the UK? Get your landlord's written consent recorded properly, generate a lodger licence agreement, and see how the £7,500 tax-free Rent a Room Scheme works.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Find a Lodger", path: "/find-a-lodger" }],
+  },
+  {
     path: "/rooms-to-let/london",
     title: "Rooms to Let in London 2026 | Elite Tenancy",
     desc: "Find rooms to let in London. Verified landlords, all areas covered. Bills included and furnished options. Zero agency fees.",

@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Home, FileText, CreditCard, Wrench, FolderOpen, MessageSquare, LogOut, User, Gift } from "lucide-react";
+import { Home, FileText, CreditCard, Wrench, FolderOpen, MessageSquare, LogOut, User, Gift, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useUser, useClerk } from "@clerk/react";
 import { useChatContext } from "@/contexts/ChatContext";
@@ -12,6 +12,7 @@ const navItems = [
   { label: "Rent", href: "/tenant/rent", icon: CreditCard },
   { label: "Maintenance", href: "/tenant/maintenance", icon: Wrench },
   { label: "Documents", href: "/tenant/documents", icon: FolderOpen },
+  { label: "Take in a Lodger", href: "/tenant/lodger", icon: Users },
   { label: "Messages", href: "/tenant/messages", icon: MessageSquare },
   { label: "Refer & Earn", href: "/tenant/referral", icon: Gift },
 ];

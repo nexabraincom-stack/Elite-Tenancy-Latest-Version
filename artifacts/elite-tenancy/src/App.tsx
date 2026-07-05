@@ -50,7 +50,9 @@ const AdminUsers = lazy(() => import("@/pages/admin/Users"));
 const AdminSeoDashboard = lazy(() => import("@/pages/admin/SeoDashboard"));
 const AdminReputation = lazy(() => import("@/pages/admin/Reputation"));
 const TenantReferral = lazy(() => import("@/pages/tenant/Referral"));
+const TenantLodger = lazy(() => import("@/pages/tenant/Lodger"));
 const LandlordReferral = lazy(() => import("@/pages/landlord/Referral"));
+const LandlordLodgerRequests = lazy(() => import("@/pages/landlord/LodgerRequests"));
 const AdminReferrals = lazy(() => import("@/pages/admin/Referrals"));
 const AdminRoomWanted = lazy(() => import("@/pages/admin/RoomWanted"));
 const Features = lazy(() => import("@/pages/Features"));
@@ -76,6 +78,7 @@ const RightToRentGuide = lazy(() => import("@/pages/RightToRentGuide"));
 const HmoLicenceGuide = lazy(() => import("@/pages/HmoLicenceGuide"));
 const Section8NoticeGuide = lazy(() => import("@/pages/Section8NoticeGuide"));
 const DssAcceptedHousing = lazy(() => import("@/pages/DssAcceptedHousing"));
+const FindALodger = lazy(() => import("@/pages/FindALodger"));
 
 // International SEO landing pages
 const InternationalStudents = lazy(() => import("@/pages/InternationalStudents"));
@@ -434,6 +437,7 @@ function AppRoutes() {
       <Route path="/hmo-licence-guide" component={HmoLicenceGuide} />
       <Route path="/section-8-notice-guide" component={Section8NoticeGuide} />
       <Route path="/dss-accepted-housing" component={DssAcceptedHousing} />
+      <Route path="/find-a-lodger" component={FindALodger} />
       <Route path="/listings" component={Listings} />
       <Route path="/listings/:id" component={ListingDetail} />
       <Route path="/for-landlords" component={ForLandlords} />
@@ -525,6 +529,9 @@ function AppRoutes() {
       <Route path="/tenant/referral">
         {() => <ProtectedRoute component={TenantReferral} />}
       </Route>
+      <Route path="/tenant/lodger">
+        {() => <ProtectedRoute component={TenantLodger} />}
+      </Route>
 
       {/* Landlord portal — landlord role required */}
       <Route path="/landlord/dashboard">
@@ -556,6 +563,9 @@ function AppRoutes() {
       </Route>
       <Route path="/landlord/referral">
         {() => <ProtectedRoute component={LandlordReferral} requiredRole="landlord" />}
+      </Route>
+      <Route path="/landlord/lodger-requests">
+        {() => <ProtectedRoute component={LandlordLodgerRequests} requiredRole="landlord" />}
       </Route>
 
       {/* Admin portal — admin role required */}

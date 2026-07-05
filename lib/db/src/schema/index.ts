@@ -8,6 +8,13 @@ export const userRoleEnum = pgEnum("user_role", ["tenant", "landlord", "admin"])
 export const tenancyStatusEnum = pgEnum("tenancy_status", ["active", "expired", "terminated"]);
 export const maintenancePriorityEnum = pgEnum("maintenance_priority", ["low", "medium", "high", "emergency"]);
 export const maintenanceStatusEnum = pgEnum("maintenance_status", ["open", "in_progress", "resolved", "closed"]);
+export const lodgerLicenceStatusEnum = pgEnum("lodger_licence_status", [
+  "pending_landlord_consent",
+  "consent_approved",
+  "consent_declined",
+  "active",
+  "ended",
+]);
 
 export const usersTable = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -148,6 +155,35 @@ export const messagesTable = pgTable("messages", {
   readAt: timestamp("read_at"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
+
+// ── Lodger licences (tenant sublets a room to a lodger, with the landlord's
+// written consent captured in-app) ─────────────────────────────────────────
+// Legally distinct from a tenancy: the lodger is an "excluded occupier" under
+// the Protection from Eviction Act 1977 (no security of tenure), and the
+// relationship is between the host tenant and the lodger — the landlord's
+// role here is limited to granting/declining consent for the original
+// tenancy to permit it, per the Renters' Rights Act 2026's "cannot
+// unreasonably refuse" standard.
+export const lodgerLicencesTable = pgTable("lodger_licences", {
+  id: serial("id").primaryKey(),
+  tenancyId: integer("tenancy_id").notNull().references(() => tenanciesTable.id),
+  hostTenantId: integer("host_tenant_id").notNull().references(() => usersTable.id),
+  lodgerName: text("lodger_name").notNull(),
+  lodgerEmail: text("lodger_email").notNull(),
+  lodgerPhone: text("lodger_phone"),
+  lodgerUserId: integer("lodger_user_id").references(() => usersTable.id),
+  roomDescription: text("room_description").notNull(),
+  rentPcm: integer("rent_pcm").notNull(),
+  billsIncluded: boolean("bills_included").notNull().default(false),
+  moveInDate: text("move_in_date"),
+  status: lodgerLicenceStatusEnum("status").notNull().default("pending_landlord_consent"),
+  landlordConsentDecidedAt: timestamp("landlord_consent_decided_at"),
+  landlordConsentNote: text("landlord_consent_note"),
+  agreementContent: text("agreement_content"),
+  agreementGeneratedAt: timestamp("agreement_generated_at"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+export type LodgerLicence = typeof lodgerLicencesTable.$inferSelect;
 
 // ── Renter Passport (two-way AI matching — Play ④) ─────────────────────────────
 
