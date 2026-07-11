@@ -1,13 +1,20 @@
 /**
  * Routing Middleware — dynamic SEO injection for /listings/:id
  *
+ * Plain JS (not .ts): Vercel's build step compiles middleware.ts through
+ * this project's own tsconfig.json, which sets "noEmit": true (Vite
+ * projects normally leave transpilation to Vite, not tsc) — that caused
+ * the compile step to silently no-op ("middleware.ts: Emit skipped") and
+ * the middleware never got attached to the deployment. Plain .js sidesteps
+ * that compile step entirely.
+ *
  * seo-prerender.mjs only prerenders known-at-build-time routes. Individual
  * listing pages are per-row DB content discovered by Googlebot via crawling,
  * so they always fell through to the generic dist/public/index.html shell —
  * which hardcodes the HOMEPAGE canonical, title, and description in the raw
  * HTML. ListingDetail.tsx never calls useSeo() either, so nothing ever
- * corrected it client-side. Confirmed live: curl of /listings/1 and
- * /listings/5 both returned <link rel="canonical" href=".../"> (homepage)
+ * corrected it client-side. Confirmed live via curl: /listings/1 and
+ * /listings/5 both served <link rel="canonical" href=".../"> (homepage)
  * and the homepage <title>, which is exactly why Google Search Console
  * classified every listing page as "Alternate page with proper canonical
  * tag" pointing at the homepage (48 of the 55 not-indexed pages).
@@ -26,7 +33,7 @@ export const config = {
   matcher: ["/listings/:id"],
 };
 
-function esc(str: string): string {
+function esc(str) {
   return str
     .replace(/&/g, "&amp;")
     .replace(/"/g, "&quot;")
@@ -34,28 +41,13 @@ function esc(str: string): string {
     .replace(/>/g, "&gt;");
 }
 
-function truncate(str: string, max: number): string {
+function truncate(str, max) {
   return str.length > max ? `${str.slice(0, max - 1).trimEnd()}…` : str;
 }
 
-interface Listing {
-  id: number;
-  title: string;
-  description?: string | null;
-  city: string;
-  price: number;
-  pricePeriod?: string | null;
-  bedrooms: number;
-  category?: string | null;
-  photos?: string[] | null;
-}
-
-function injectHead(
-  template: string,
-  opts: { title: string; desc: string; canonical: string; ogImage: string; noindex: boolean; breadcrumbName?: string },
-): string {
+function injectHead(template, opts) {
   let html = template;
-  const safe = (s: string) => esc(s);
+  const safe = (s) => esc(s);
 
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${safe(opts.title)}</title>`);
   html = html.replace(
@@ -130,7 +122,7 @@ function injectHead(
   return html;
 }
 
-export default async function middleware(request: Request): Promise<Response> {
+export default async function middleware(request) {
   const url = new URL(request.url);
   const id = url.pathname.split("/")[2];
 
@@ -159,7 +151,7 @@ export default async function middleware(request: Request): Promise<Response> {
     });
   }
 
-  const listing = (await listingRes.json()) as Listing;
+  const listing = await listingRes.json();
 
   const bedroomLabel = listing.bedrooms === 0 ? "Studio" : `${listing.bedrooms}-bed`;
   const category = listing.category ?? "property";
