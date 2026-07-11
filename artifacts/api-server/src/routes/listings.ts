@@ -13,6 +13,31 @@ import { requireAuth } from "../middlewares/requireAuth";
 
 const router: IRouter = Router();
 
+// Live, always-accurate sitemap of active listing pages. seo-prerender.mjs
+// only knows routes at build time, so individual listings (per-row DB
+// content) were never in sitemap.xml — Google only ever found them by
+// crawling internal links. This gives Google an explicit, authoritative
+// URL list with correct lastmod dates, complementing the middleware.js fix
+// that corrects each page's own canonical/title/description.
+router.get("/sitemap-listings.xml", async (_req, res): Promise<void> => {
+  const rows = await db
+    .select({ id: listingsTable.id, updatedAt: listingsTable.updatedAt })
+    .from(listingsTable)
+    .where(eq(listingsTable.status, "active"));
+
+  const urls = rows
+    .map((r) => {
+      const lastmod = r.updatedAt.toISOString().slice(0, 10);
+      return `  <url><loc>https://www.elitetenancy.co.uk/listings/${r.id}</loc><lastmod>${lastmod}</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>`;
+    })
+    .join("\n");
+
+  res.set("Content-Type", "application/xml");
+  res.send(
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`,
+  );
+});
+
 router.get("/listings", async (req, res): Promise<void> => {
   const parsed = GetListingsQueryParams.safeParse(req.query);
   if (!parsed.success) {

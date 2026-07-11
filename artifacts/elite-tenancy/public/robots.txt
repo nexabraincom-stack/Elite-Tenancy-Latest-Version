@@ -5,6 +5,7 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Allow: /api/blog/
+Allow: /api/sitemap-listings.xml
 Disallow: /admin/
 Disallow: /tenant/
 Disallow: /landlord/
@@ -48,3 +49,4 @@ Allow: /
 # LLM-readable site summary: https://www.elitetenancy.co.uk/llms.txt
 
 Sitemap: https://www.elitetenancy.co.uk/sitemap.xml
+Sitemap: https://www.elitetenancy.co.uk/api/sitemap-listings.xml
