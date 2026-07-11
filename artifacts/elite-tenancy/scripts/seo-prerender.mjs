@@ -757,6 +757,150 @@ const ROUTES = [
     desc: "Find rooms to let in Harrogate. Town centre and Bilton, an elegant North Yorkshire spa town. Zero agency fees.",
     breadcrumbs: [{ name: "Home", path: "/" }, { name: "Rooms to Let", path: "/rooms-to-let" }, { name: "Harrogate", path: "/rooms-to-let/harrogate" }],
   },
+
+  // ── Static pages found missing during a GSC "not indexed" audit — these
+  //    routes/components exist and work for real users, but were never
+  //    added here, so they fell back to the homepage's canonical/title in
+  //    the raw HTML (same bug class as /listings/:id, fixed via middleware
+  //    separately since these ARE known at build time). Title/desc copied
+  //    verbatim from each page's own useSeo() call so prerendered HTML
+  //    matches what the client eventually renders. ──────────────────────
+  {
+    path: "/about",
+    title: "About Elite Tenancy | Premium UK Lettings Platform — East Ham, London",
+    desc: "Elite Tenancy Ltd (Companies House no. 17135665) is a premium UK lettings platform based in East Ham, London. We connect verified landlords with pre-referenced tenants via AI-powered matching.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "About", path: "/about" }],
+  },
+  {
+    path: "/renters-rights-act-2025",
+    title: "Renters' Rights Act 2025: Complete Guide for UK Landlords & Tenants",
+    desc: "Full guide to the Renters' Rights Act 2025 — abolition of Section 21, end of fixed-term ASTs, rent increase rules, pets, PRS Database, and what landlords must do now.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Renters' Rights Act 2025", path: "/renters-rights-act-2025" }],
+  },
+  {
+    path: "/tenant-introduction-service",
+    title: "What is a Tenant Introduction Service? | Elite Tenancy UK",
+    desc: "A tenant introduction service finds, references, and introduces tenants to landlords for a one-off fee — instead of an ongoing monthly management percentage. Explained for UK landlords.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Tenant Introduction Service", path: "/tenant-introduction-service" }],
+  },
+  {
+    path: "/deposit-protection",
+    title: "Deposit Protection UK 2026 — Schemes, Caps & Rules | Elite Tenancy",
+    desc: "UK tenancy deposit protection explained: the 5-week cap, 30-day deadline, DPS vs TDS vs MyDeposits, Prescribed Information, and penalties for non-compliance. Updated for 2026.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Deposit Protection", path: "/deposit-protection" }],
+  },
+  {
+    path: "/right-to-rent-guide",
+    title: "Right to Rent Check UK 2026 — Complete Landlord Guide | Elite Tenancy",
+    desc: "Step-by-step Right to Rent guide for landlords. Accepted documents (List A & B), share codes, civil penalties up to £20,000, and record-keeping rules under the Immigration Act 2014.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Right to Rent Guide", path: "/right-to-rent-guide" }],
+  },
+  {
+    path: "/hmo-licence-guide",
+    title: "HMO Licence UK 2026 — Requirements, Costs & How to Apply | Elite Tenancy",
+    desc: "Complete HMO licensing guide for UK landlords: mandatory (5+ tenants), additional (3–4 tenants), and selective licensing explained. Newham Council requirements, minimum room sizes, fees, and penalties for unlicensed HMOs.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "HMO Licence Guide", path: "/hmo-licence-guide" }],
+  },
+  {
+    path: "/section-8-notice-guide",
+    title: "Section 8 Notice UK 2026: Grounds, Notice Periods & How to Serve | Elite Tenancy",
+    desc: "Complete landlord guide to Section 8 notices in England 2026. All grounds for possession, mandatory vs discretionary, notice periods, RRA 2025 changes, court process, and London rent arrears advice.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Section 8 Notice Guide", path: "/section-8-notice-guide" }],
+  },
+  {
+    path: "/rent-calculator",
+    title: "UK Rent Calculator 2026 — Free Affordability, Yield & Deposit Tools",
+    desc: "Free UK rent calculator 2026. Check how much rent you can afford, rental yields for landlords, deposit limits, and compare rents across UK cities and globally.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Rent Calculator", path: "/rent-calculator" }],
+  },
+
+  // ── Extra city landing pages (src/pages/city/extraCities.ts) — same bug:
+  //    routes exist and render correctly for real users via CityPage.tsx,
+  //    just missing from this prerender list. ────────────────────────────
+  {
+    path: "/nottingham",
+    title: "Properties to Rent in Nottingham 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Nottingham. West Bridgford, The Park, and Lace Market. Verified landlords and zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Nottingham", path: "/nottingham" }],
+  },
+  {
+    path: "/leicester",
+    title: "Properties to Rent in Leicester 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Leicester. Clarendon Park, Stoneygate, and Waterside. Verified landlords and zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Leicester", path: "/leicester" }],
+  },
+  {
+    path: "/newcastle",
+    title: "Properties to Rent in Newcastle 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Newcastle upon Tyne. Jesmond, Quayside, and Gosforth. Verified landlords and zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Newcastle", path: "/newcastle" }],
+  },
+  {
+    path: "/coventry",
+    title: "Properties to Rent in Coventry 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Coventry. Earlsdon, Cheylesmore, and the city centre. Verified landlords and zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Coventry", path: "/coventry" }],
+  },
+  {
+    path: "/reading",
+    title: "Properties to Rent in Reading 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Reading. Caversham, Lower Earley, and the town centre, with fast Elizabeth line links to London. Zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Reading", path: "/reading" }],
+  },
+  {
+    path: "/brighton",
+    title: "Properties to Rent in Brighton 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Brighton & Hove. Hove, North Laine, and Kemptown. Verified landlords and zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Brighton", path: "/brighton" }],
+  },
+  {
+    path: "/southampton",
+    title: "Properties to Rent in Southampton 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Southampton. Ocean Village, Portswood, and Bassett. Verified South Coast landlords and zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Southampton", path: "/southampton" }],
+  },
+  {
+    path: "/portsmouth",
+    title: "Properties to Rent in Portsmouth 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Portsmouth. Southsea, Gunwharf Quays, and Old Portsmouth. Verified landlords and zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Portsmouth", path: "/portsmouth" }],
+  },
+  {
+    path: "/oxford",
+    title: "Properties to Rent in Oxford 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Oxford. Jericho, Summertown, and Headington. Verified landlords in one of the UK's most competitive rental markets.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Oxford", path: "/oxford" }],
+  },
+  {
+    path: "/cambridge",
+    title: "Properties to Rent in Cambridge 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Cambridge. Newnham, Petersfield, and the biotech science parks. Verified landlords and zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Cambridge", path: "/cambridge" }],
+  },
+  {
+    path: "/bournemouth",
+    title: "Properties to Rent in Bournemouth 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Bournemouth. Westbourne, Talbot Woods, and Southbourne. Verified Dorset landlords and zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Bournemouth", path: "/bournemouth" }],
+  },
+  {
+    path: "/milton-keynes",
+    title: "Properties to Rent in Milton Keynes 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Milton Keynes. Central Milton Keynes, Caldecotte, and Newport Pagnell, with fast trains to London Euston. Zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Milton Keynes", path: "/milton-keynes" }],
+  },
+  {
+    path: "/norwich",
+    title: "Properties to Rent in Norwich 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Norwich. The Golden Triangle, Thorpe Hamlet, and the city centre. Verified East Anglia landlords and zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Norwich", path: "/norwich" }],
+  },
+  {
+    path: "/derby",
+    title: "Properties to Rent in Derby 2026 | Elite Tenancy",
+    desc: "Find premium properties to rent in Derby. Darley Abbey, Littleover, and the Cathedral Quarter. Verified East Midlands landlords and zero tenant fees.",
+    breadcrumbs: [{ name: "Home", path: "/" }, { name: "Derby", path: "/derby" }],
+  },
 ];
 
 // ─── Blog Articles ─────────────────────────────────────────────────────────────
