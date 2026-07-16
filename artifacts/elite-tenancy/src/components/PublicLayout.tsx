@@ -148,6 +148,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                 <li><Link href="/renter-passport" className="hover:text-primary transition-colors">Renter Passport</Link></li>
                 <li><Link href="/room-wanted" className="hover:text-primary transition-colors">Tenants Wanted Board</Link></li>
                 <li><Link href="/verify-landlord" className="hover:text-primary transition-colors">Verify a Landlord</Link></li>
+                <li><Link href="/newham-licensing-checker" className="hover:text-primary transition-colors">Newham Licensing Checker</Link></li>
                 <li><Link href="/right-to-rent-check" className="hover:text-primary transition-colors">Right to Rent Check</Link></li>
                 <li><Link href="/find-my-match" className="hover:text-primary transition-colors">AI Match</Link></li>
                 <li><Link href="/find-a-room" className="hover:text-primary transition-colors">Find a Room</Link></li>

@@ -211,6 +211,47 @@ export default function Pricing() {
         </div>
       </section>
 
+      {/* Same rent, three ways — a common-unit comparison since the three plans are priced in different units */}
+      <section className="bg-background border-t border-border/50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center mb-10">
+            <span className="inline-flex items-center gap-2 bg-primary/10 text-primary text-[11px] font-semibold uppercase tracking-[0.14em] px-4 py-1.5 rounded-full">
+              Worked example
+            </span>
+            <h2 className="font-display text-3xl font-semibold text-foreground mt-4 tracking-tight">
+              Same rent, three ways
+            </h2>
+            <p className="text-muted-foreground mt-3 max-w-lg mx-auto">
+              The three plans are priced in different units, so here's one example property — £1,300/month rent —
+              shown side by side.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-card border border-border/50 rounded-xl p-6 text-center">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">Introduction Only</p>
+              <p className="font-display text-3xl font-semibold text-primary">£600</p>
+              <p className="text-xs text-muted-foreground mt-1">one-time, on successful let</p>
+              <p className="text-xs text-muted-foreground/70 mt-3 pt-3 border-t border-border/40">≈ £50/mo if spread across a 12-month tenancy</p>
+            </div>
+            <div className="bg-card border-2 border-border/50 rounded-xl p-6 text-center">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">Smart Managed</p>
+              <p className="font-display text-3xl font-semibold text-primary">£39–65</p>
+              <p className="text-xs text-muted-foreground mt-1">per month, for as long as managed</p>
+              <p className="text-xs text-muted-foreground/70 mt-3 pt-3 border-t border-border/40">3–5% of £1,300/month rent</p>
+            </div>
+            <div className="bg-card border-2 border-accent/40 rounded-xl p-6 text-center">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">Premium Managed</p>
+              <p className="font-display text-3xl font-semibold text-primary">£104</p>
+              <p className="text-xs text-muted-foreground mt-1">per month, for as long as managed</p>
+              <p className="text-xs text-muted-foreground/70 mt-3 pt-3 border-t border-border/40">8% of £1,300/month rent</p>
+            </div>
+          </div>
+          <p className="text-xs text-muted-foreground text-center mt-6">
+            Illustrative only — your actual rent, portfolio size, and rate will differ. Get a tailored quote for your property.
+          </p>
+        </div>
+      </section>
+
       {/* FAQs */}
       <section className="bg-card border-t border-border/50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">

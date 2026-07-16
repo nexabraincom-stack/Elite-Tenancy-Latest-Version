@@ -4,7 +4,9 @@ import { ShieldCheck, ShieldAlert, Search, Building2, MapPin, CalendarDays, User
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "wouter";
 import PublicLayout from "@/components/PublicLayout";
+import TrustBadges from "@/components/TrustBadges";
 import { useSeo } from "@/hooks/use-seo";
 
 interface VerifyResult {
@@ -78,6 +80,7 @@ export default function VerifyLandlord() {
             </Button>
           </form>
           <p className="text-xs text-muted-foreground mt-3">Find the company number on the advert, the tenancy agreement, or ask the landlord directly.</p>
+          <TrustBadges className="justify-center mt-5" />
         </div>
       </section>
 
@@ -126,6 +129,16 @@ export default function VerifyLandlord() {
             <p className="text-[11px] text-muted-foreground mt-5">Source: official Companies House register. This confirms a company exists — always combine with a Land Registry title check before paying.</p>
           </motion.div>
         )}
+
+        <div className="mt-8 bg-muted/40 border border-border/50 rounded-xl p-5 text-center">
+          <p className="text-sm text-muted-foreground">
+            Renting in Newham?{" "}
+            <Link href="/newham-licensing-checker" className="text-primary font-medium underline">
+              Check if the property needs a selective licence
+            </Link>{" "}
+            — unlicensed letting risks a £30,000 penalty.
+          </p>
+        </div>
       </section>
     </PublicLayout>
   );
