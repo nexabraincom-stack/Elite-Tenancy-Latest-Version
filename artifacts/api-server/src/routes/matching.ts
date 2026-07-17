@@ -95,6 +95,10 @@ router.post("/matching/score", requireAuth(), async (req, res): Promise<void> =>
     priorities,
   } = req.body;
 
+  const priorityWeights = req.body.priorityWeights as
+    | { budget?: number; space?: number; moveIn?: number; lifestyle?: number }
+    | undefined;
+
   if (!maxBudget) {
     res.status(400).json({ error: "maxBudget is required" });
     return;
@@ -136,6 +140,16 @@ router.post("/matching/score", requireAuth(), async (req, res): Promise<void> =>
     priorities: priorities || "not specified",
   };
 
+  // Renter-stated importance (0-100 each, default neutral 50) for the four factors
+  // we ask the model to score separately — lets the tenant weight the overall
+  // score toward what matters most to them, and lets the UI show why.
+  const weights = {
+    budget: priorityWeights?.budget ?? 50,
+    space: priorityWeights?.space ?? 50,
+    moveIn: priorityWeights?.moveIn ?? 50,
+    lifestyle: priorityWeights?.lifestyle ?? 50,
+  };
+
   const listingSummaries = listings.map((l) => ({
     id: l.id,
     title: l.title,
@@ -157,13 +171,21 @@ router.post("/matching/score", requireAuth(), async (req, res): Promise<void> =>
 A tenant is looking for a property with the following requirements:
 ${JSON.stringify(tenantProfile, null, 2)}
 
+The tenant has told us how much each factor matters to them, on a 0-100 scale (50 = neutral, higher = more important):
+${JSON.stringify(weights, null, 2)}
+
 Below are available properties:
 ${JSON.stringify(listingSummaries, null, 2)}
 
 For each property, provide:
-1. A match score from 0–100 (100 = perfect match)
+1. An overall match score from 0-100 (100 = perfect match), weighted toward the factors the tenant said matter most
 2. A 1-sentence "why it matches" explanation (max 120 chars, conversational and warm)
 3. Up to 3 specific highlights relevant to this tenant's priorities
+4. A breakdown of the SAME overall judgement into 4 named factors, each scored 0-100 independently of the weights above:
+   - "budget": how well the price fits their stated budget range
+   - "space": how well bedrooms/bathrooms/property type fit what they asked for
+   - "moveInFit": how well the available-from date matches their ideal move-in date
+   - "lifestyleFit": how well the property matches their stated lifestyle/priorities free-text
 
 Respond ONLY with valid JSON in this exact format (no markdown):
 {
@@ -172,7 +194,8 @@ Respond ONLY with valid JSON in this exact format (no markdown):
       "id": <listing_id>,
       "score": <0-100>,
       "summary": "<one sentence why it matches>",
-      "highlights": ["<highlight 1>", "<highlight 2>", "<highlight 3>"]
+      "highlights": ["<highlight 1>", "<highlight 2>", "<highlight 3>"],
+      "factors": { "budget": <0-100>, "space": <0-100>, "moveInFit": <0-100>, "lifestyleFit": <0-100> }
     }
   ]
 }
@@ -193,7 +216,12 @@ Sort by score descending. Include all properties.`;
     return;
   }
 
-  let parsed: { matches: Array<{ id: number; score: number; summary: string; highlights: string[] }> };
+  let parsed: {
+    matches: Array<{
+      id: number; score: number; summary: string; highlights: string[];
+      factors?: { budget: number; space: number; moveInFit: number; lifestyleFit: number };
+    }>;
+  };
   try {
     const jsonText = text.replace(/^```json\n?/, "").replace(/\n?```$/, "").trim();
     parsed = JSON.parse(jsonText);

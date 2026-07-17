@@ -6,19 +6,36 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
+import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import PublicLayout from "@/components/PublicLayout";
+import TrustBadges from "@/components/TrustBadges";
 import type { Listing } from "@workspace/api-client-react";
+
+interface MatchFactors {
+  budget: number;
+  space: number;
+  moveInFit: number;
+  lifestyleFit: number;
+}
 
 interface MatchResult {
   id: number;
   score: number;
   summary: string;
   highlights: string[];
+  factors?: MatchFactors;
   listing: Listing;
 }
+
+const FACTOR_LABELS: Record<keyof MatchFactors, string> = {
+  budget: "Budget fit",
+  space: "Space fit",
+  moveInFit: "Move-in timing",
+  lifestyleFit: "Lifestyle fit",
+};
 
 function ScoreBadge({ score }: { score: number }) {
   const color =
@@ -135,6 +152,17 @@ function MatchCard({ match, index }: { match: MatchResult; index: number }) {
                     exit={{ opacity: 0, height: 0 }}
                     className="overflow-hidden"
                   >
+                    {match.factors && (
+                      <div className="mt-3 space-y-2 pb-3 mb-1 border-b border-border/40">
+                        {(Object.keys(FACTOR_LABELS) as Array<keyof MatchFactors>).map((key) => (
+                          <div key={key} className="flex items-center gap-2.5">
+                            <span className="text-[11px] text-muted-foreground w-24 shrink-0">{FACTOR_LABELS[key]}</span>
+                            <ScoreBar score={match.factors![key]} />
+                            <span className="text-[11px] text-muted-foreground w-7 text-right tabular-nums">{match.factors![key]}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                     <ul className="mt-2 space-y-1.5">
                       {match.highlights.map((h, i) => (
                         <li key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
@@ -176,6 +204,17 @@ export default function TenantMatch() {
     priorities: "",
   });
 
+  const [priorityWeights, setPriorityWeights] = useState({
+    budget: 50,
+    space: 50,
+    moveIn: 50,
+    lifestyle: 50,
+  });
+
+  function updateWeight(field: keyof typeof priorityWeights, value: number) {
+    setPriorityWeights((w) => ({ ...w, [field]: value }));
+  }
+
   const [matches, setMatches] = useState<MatchResult[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -203,6 +242,7 @@ export default function TenantMatch() {
         ...(form.moveInDate && { moveInDate: form.moveInDate }),
         ...(form.lifestyle && { lifestyle: form.lifestyle }),
         ...(form.priorities && { priorities: form.priorities }),
+        priorityWeights,
       };
 
       const res = await fetch(`${import.meta.env.BASE_URL}api/matching/score`, {
@@ -245,6 +285,7 @@ export default function TenantMatch() {
           <p className="text-muted-foreground max-w-xl text-lg">
             Tell us what you're looking for and our AI will score every available property against your requirements — ranking the best matches first.
           </p>
+          <TrustBadges className="mt-5" />
         </div>
       </section>
 
@@ -355,6 +396,31 @@ export default function TenantMatch() {
                   />
                 </div>
 
+                <div className="space-y-4 border border-border/40 rounded-lg p-3.5 bg-background/50">
+                  <Label className="text-xs block -mb-1">What matters most to you?</Label>
+                  {(
+                    [
+                      { field: "budget", label: "Budget" },
+                      { field: "space", label: "Space" },
+                      { field: "moveIn", label: "Move-in timing" },
+                      { field: "lifestyle", label: "Lifestyle fit" },
+                    ] as const
+                  ).map(({ field, label }) => (
+                    <div key={field}>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="text-xs text-muted-foreground">{label}</span>
+                        <span className="text-[11px] text-muted-foreground/70 tabular-nums">{priorityWeights[field]}</span>
+                      </div>
+                      <Slider
+                        value={[priorityWeights[field]]}
+                        onValueChange={([v]) => updateWeight(field, v)}
+                        max={100}
+                        step={5}
+                      />
+                    </div>
+                  ))}
+                </div>
+
                 <Button
                   type="submit"
                   disabled={loading || !form.maxBudget}
@@ -393,7 +459,7 @@ export default function TenantMatch() {
                   Your AI Property Matchmaker
                 </h3>
                 <p className="text-muted-foreground max-w-md leading-relaxed">
-                  Fill in your requirements and we'll use Gemini AI to score every available listing against your needs — surfacing the properties most likely to feel like home.
+                  Fill in your requirements and we'll use AI to score every available listing against your needs — surfacing the properties most likely to feel like home.
                 </p>
                 <div className="flex flex-wrap justify-center gap-3 mt-6">
                   {["Scores 0–100", "Explains why", "Ranks best first"].map(tag => (
@@ -415,7 +481,7 @@ export default function TenantMatch() {
                   <Sparkles size={22} className="text-primary" />
                 </motion.div>
                 <h3 className="font-semibold text-foreground mb-2">Analysing properties…</h3>
-                <p className="text-sm text-muted-foreground">Gemini AI is scoring each listing against your requirements</p>
+                <p className="text-sm text-muted-foreground">Our AI is scoring each listing against your requirements</p>
               </div>
             )}
 
@@ -440,7 +506,7 @@ export default function TenantMatch() {
                     <span className="font-semibold text-foreground">{matches.length}</span> properties ranked by AI match score
                   </p>
                   <Badge className="bg-primary/10 text-primary border-primary/20 text-xs gap-1">
-                    <Sparkles size={10} /> Powered by Gemini AI
+                    <Sparkles size={10} /> Powered by AI
                   </Badge>
                 </div>
                 <div className="space-y-4">

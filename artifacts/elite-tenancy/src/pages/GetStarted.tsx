@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Home, KeyRound, Building2, Users2, ArrowRight, ShieldCheck } from "lucide-react";
 import { useSeo } from "@/hooks/use-seo";
+import TrustBadges from "@/components/TrustBadges";
 
 interface PortalOption {
   role: "tenant" | "landlord";
@@ -78,6 +79,7 @@ export default function GetStarted() {
         <p className="text-muted-foreground text-base leading-relaxed">
           Pick the portal that fits you — we'll set your account up accordingly.
         </p>
+        <TrustBadges className="justify-center mt-5" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl w-full mb-8">

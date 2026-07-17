@@ -67,6 +67,7 @@ const ForAgents = lazy(() => import("@/pages/ForAgents"));
 const RenterPassport = lazy(() => import("@/pages/RenterPassport"));
 const RoomWanted = lazy(() => import("@/pages/RoomWanted"));
 const VerifyLandlord = lazy(() => import("@/pages/VerifyLandlord"));
+const NewhamLicensingChecker = lazy(() => import("@/pages/NewhamLicensingChecker"));
 const RightToRentCheck = lazy(() => import("@/pages/RightToRentCheck"));
 const RentCalculator = lazy(() => import("@/pages/RentCalculator"));
 const Faq = lazy(() => import("@/pages/Faq"));
@@ -426,6 +427,7 @@ function AppRoutes() {
       <Route path="/renter-passport" component={RenterPassport} />
       <Route path="/room-wanted" component={RoomWanted} />
       <Route path="/verify-landlord" component={VerifyLandlord} />
+      <Route path="/newham-licensing-checker" component={NewhamLicensingChecker} />
       <Route path="/right-to-rent-check" component={RightToRentCheck} />
       <Route path="/rent-calculator" component={RentCalculator} />
       <Route path="/faq" component={Faq} />
