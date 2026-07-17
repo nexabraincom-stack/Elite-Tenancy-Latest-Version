@@ -33,6 +33,9 @@ import usaWaitlistRouter from "./usaWaitlist";
 import lodgerRouter from "./lodger";
 import seoDashboardRouter from "./seoDashboard";
 import viewingsRouter from "./viewings";
+// TEMPORARY — see file header. Delete this import + router.use() below once
+// the reminder-cron and admin-viewings simulation is done and reported.
+import debugViewingsSimulationRouter from "./_debugViewingsSimulation";
 
 const router: IRouter = Router();
 
@@ -70,5 +73,6 @@ router.use(usaWaitlistRouter);
 router.use(lodgerRouter);
 router.use(seoDashboardRouter);
 router.use(viewingsRouter);
+router.use(debugViewingsSimulationRouter);
 
 export default router;

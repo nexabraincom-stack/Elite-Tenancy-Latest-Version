@@ -327,7 +327,7 @@ async function sendReminder(v: ViewingRow, kind: "day_before" | "same_day"): Pro
   }
 }
 
-async function runReminders(): Promise<{ dayBeforeChecked: number; dayBeforeSent: number; sameDayChecked: number; sameDaySent: number }> {
+export async function runReminders(): Promise<{ dayBeforeChecked: number; dayBeforeSent: number; sameDayChecked: number; sameDaySent: number }> {
   const now = new Date();
   const { dateStr: todayStr } = londonDateParts(now);
   const tomorrowStr = addDaysToDateStr(todayStr, 1);

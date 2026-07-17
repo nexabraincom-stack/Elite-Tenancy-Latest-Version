@@ -91,11 +91,13 @@ router.get("/admin/leads", async (req, res): Promise<void> => {
   );
 });
 
-router.get("/admin/viewings", async (req, res): Promise<void> => {
-  const limit = Math.min(Number(req.query.limit ?? 50), 200);
-  const offset = Number(req.query.offset ?? 0);
-  const requestedStatus = typeof req.query.status === "string" ? req.query.status : undefined;
-  const statusFilter = viewingStatusEnum.enumValues.find((v) => v === requestedStatus);
+// Factored out of the route handler so the same query can be exercised by a
+// debug/test caller without going through the Clerk admin-auth layer, which
+// is a separately-proven mechanism shared by every /admin/* route.
+export async function queryAdminViewings(opts: { limit?: number; offset?: number; status?: string }) {
+  const limit = Math.min(opts.limit ?? 50, 200);
+  const offset = opts.offset ?? 0;
+  const statusFilter = viewingStatusEnum.enumValues.find((v) => v === opts.status);
 
   const rows = await db
     .select({ viewing: viewingsTable, listingTitle: listingsTable.title })
@@ -106,24 +108,59 @@ router.get("/admin/viewings", async (req, res): Promise<void> => {
     .limit(limit)
     .offset(offset);
 
-  res.json(
-    GetAdminViewingsResponse.parse(
-      rows.map(({ viewing, listingTitle }) => ({
-        id: viewing.id,
-        listingId: viewing.listingId,
-        listingTitle: listingTitle ?? null,
-        name: viewing.tenantName,
-        email: viewing.tenantEmail,
-        phone: viewing.tenantPhone ?? null,
-        notes: viewing.notes ?? null,
-        scheduledAt: viewing.scheduledAt.toISOString(),
-        durationMinutes: viewing.durationMinutes,
-        status: viewing.status,
-        createdAt: viewing.createdAt.toISOString(),
-      })),
-    ),
-  );
+  return rows.map(({ viewing, listingTitle }) => ({
+    id: viewing.id,
+    listingId: viewing.listingId,
+    listingTitle: listingTitle ?? null,
+    name: viewing.tenantName,
+    email: viewing.tenantEmail,
+    phone: viewing.tenantPhone ?? null,
+    notes: viewing.notes ?? null,
+    scheduledAt: viewing.scheduledAt.toISOString(),
+    durationMinutes: viewing.durationMinutes,
+    status: viewing.status,
+    createdAt: viewing.createdAt.toISOString(),
+  }));
+}
+
+router.get("/admin/viewings", async (req, res): Promise<void> => {
+  const rows = await queryAdminViewings({
+    limit: Number(req.query.limit ?? 50),
+    offset: Number(req.query.offset ?? 0),
+    status: typeof req.query.status === "string" ? req.query.status : undefined,
+  });
+  res.json(GetAdminViewingsResponse.parse(rows));
 });
+
+// Same rationale as queryAdminViewings above — factored out for debug/test use.
+export async function updateAdminViewingStatus(id: number, status: "completed" | "no_show" | "cancelled") {
+  const patch: Partial<typeof viewingsTable.$inferInsert> = { status };
+  if (status === "completed") patch.completedAt = new Date();
+  if (status === "cancelled") { patch.cancelledAt = new Date(); patch.cancelledBy = "admin"; }
+
+  const updated = await db
+    .update(viewingsTable)
+    .set(patch)
+    .where(eq(viewingsTable.id, id))
+    .returning();
+
+  if (!updated[0]) return null;
+
+  const [listing] = await db.select().from(listingsTable).where(eq(listingsTable.id, updated[0].listingId));
+  return {
+    id: updated[0].id,
+    listingId: updated[0].listingId,
+    listingTitle: listing?.title ?? null,
+    name: updated[0].tenantName,
+    email: updated[0].tenantEmail,
+    phone: updated[0].tenantPhone ?? null,
+    notes: updated[0].notes ?? null,
+    scheduledAt: updated[0].scheduledAt.toISOString(),
+    durationMinutes: updated[0].durationMinutes,
+    status: updated[0].status,
+    createdAt: updated[0].createdAt.toISOString(),
+  };
+}
 
 router.post("/admin/viewings/:id/status", async (req, res): Promise<void> => {
   const paramsParsed = UpdateViewingStatusParams.safeParse(req.params);
@@ -133,35 +170,9 @@ router.post("/admin/viewings/:id/status", async (req, res): Promise<void> => {
     return;
   }
 
-  const { status } = bodyParsed.data;
-  const patch: Partial<typeof viewingsTable.$inferInsert> = { status };
-  if (status === "completed") patch.completedAt = new Date();
-  if (status === "cancelled") { patch.cancelledAt = new Date(); patch.cancelledBy = "admin"; }
-
-  const updated = await db
-    .update(viewingsTable)
-    .set(patch)
-    .where(eq(viewingsTable.id, paramsParsed.data.id))
-    .returning();
-
-  if (!updated[0]) { res.status(404).json({ error: "Viewing not found" }); return; }
-
-  const [listing] = await db.select().from(listingsTable).where(eq(listingsTable.id, updated[0].listingId));
-  res.json(
-    UpdateViewingStatusResponse.parse({
-      id: updated[0].id,
-      listingId: updated[0].listingId,
-      listingTitle: listing?.title ?? null,
-      name: updated[0].tenantName,
-      email: updated[0].tenantEmail,
-      phone: updated[0].tenantPhone ?? null,
-      notes: updated[0].notes ?? null,
-      scheduledAt: updated[0].scheduledAt.toISOString(),
-      durationMinutes: updated[0].durationMinutes,
-      status: updated[0].status,
-      createdAt: updated[0].createdAt.toISOString(),
-    }),
-  );
+  const result = await updateAdminViewingStatus(paramsParsed.data.id, bodyParsed.data.status);
+  if (!result) { res.status(404).json({ error: "Viewing not found" }); return; }
+  res.json(UpdateViewingStatusResponse.parse(result));
 });
 
 router.get("/admin/articles", async (req, res): Promise<void> => {
