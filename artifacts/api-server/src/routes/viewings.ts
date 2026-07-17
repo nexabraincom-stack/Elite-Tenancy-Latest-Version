@@ -187,7 +187,11 @@ router.post("/viewings", async (req, res): Promise<void> => {
   } catch (err) {
     // Postgres unique_violation on the partial index — someone else took this
     // exact slot in the race between the availability check and this insert.
-    if ((err as { code?: string })?.code === "23505") {
+    // Drizzle wraps the underlying pg error in a DrizzleQueryError, so the
+    // real Postgres error code lives at err.cause.code, not err.code.
+    const pgCode = (err as { cause?: { code?: string }; code?: string })?.cause?.code
+      ?? (err as { code?: string })?.code;
+    if (pgCode === "23505") {
       res.status(409).json({ error: "That slot was just taken — please pick another." });
       return;
     }
