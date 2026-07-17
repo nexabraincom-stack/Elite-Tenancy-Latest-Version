@@ -24,7 +24,9 @@ import type {
   BlogArticle,
   ContactInput,
   FinanceSummary,
+  GetAdminViewingsParams,
   GetListingsParams,
+  GetViewingAvailabilityParams,
   HealthStatus,
   LandlordStats,
   Lead,
@@ -43,7 +45,12 @@ import type {
   TenantRecord,
   TenantStats,
   UserRecord,
-  ValuationInput
+  ValuationInput,
+  Viewing,
+  ViewingAvailabilityResponse,
+  ViewingBookingConfirmation,
+  ViewingInput,
+  ViewingStatusUpdateInput
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
@@ -958,6 +965,464 @@ export const useSubmitValuation = <TError = ErrorType<unknown>,
         TContext
       > => {
       return useMutation(getSubmitValuationMutationOptions(options));
+    }
+
+export const getGetViewingAvailabilityUrl = (params: GetViewingAvailabilityParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/api/viewings/availability?${stringifiedParams}` : `/api/viewings/availability`
+}
+
+/**
+ * @summary Get bookable viewing slots for a listing on a given date
+ */
+export const getViewingAvailability = async (params: GetViewingAvailabilityParams, options?: RequestInit): Promise<ViewingAvailabilityResponse> => {
+
+  return customFetch<ViewingAvailabilityResponse>(getGetViewingAvailabilityUrl(params),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetViewingAvailabilityQueryKey = (params?: GetViewingAvailabilityParams,) => {
+    return [
+    `/api/viewings/availability`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetViewingAvailabilityQueryOptions = <TData = Awaited<ReturnType<typeof getViewingAvailability>>, TError = ErrorType<unknown>>(params: GetViewingAvailabilityParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getViewingAvailability>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetViewingAvailabilityQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getViewingAvailability>>> = ({ signal }) => getViewingAvailability(params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getViewingAvailability>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetViewingAvailabilityQueryResult = NonNullable<Awaited<ReturnType<typeof getViewingAvailability>>>
+export type GetViewingAvailabilityQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Get bookable viewing slots for a listing on a given date
+ */
+
+export function useGetViewingAvailability<TData = Awaited<ReturnType<typeof getViewingAvailability>>, TError = ErrorType<unknown>>(
+ params: GetViewingAvailabilityParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getViewingAvailability>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetViewingAvailabilityQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getCreateViewingUrl = () => {
+
+
+
+
+  return `/api/viewings`
+}
+
+/**
+ * @summary Book a property viewing
+ */
+export const createViewing = async (viewingInput: ViewingInput, options?: RequestInit): Promise<ViewingBookingConfirmation> => {
+
+  return customFetch<ViewingBookingConfirmation>(getCreateViewingUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      viewingInput,)
+  }
+);}
+
+
+
+
+export const getCreateViewingMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createViewing>>, TError,{data: BodyType<ViewingInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createViewing>>, TError,{data: BodyType<ViewingInput>}, TContext> => {
+
+const mutationKey = ['createViewing'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createViewing>>, {data: BodyType<ViewingInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createViewing(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateViewingMutationResult = NonNullable<Awaited<ReturnType<typeof createViewing>>>
+    export type CreateViewingMutationBody = BodyType<ViewingInput>
+    export type CreateViewingMutationError = ErrorType<void>
+
+    /**
+ * @summary Book a property viewing
+ */
+export const useCreateViewing = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createViewing>>, TError,{data: BodyType<ViewingInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createViewing>>,
+        TError,
+        {data: BodyType<ViewingInput>},
+        TContext
+      > => {
+      return useMutation(getCreateViewingMutationOptions(options));
+    }
+
+export const getGetViewingByTokenUrl = (token: string,) => {
+
+
+
+
+  return `/api/viewings/manage/${token}`
+}
+
+/**
+ * @summary Look up a booking via its self-service manage token
+ */
+export const getViewingByToken = async (token: string, options?: RequestInit): Promise<ViewingBookingConfirmation> => {
+
+  return customFetch<ViewingBookingConfirmation>(getGetViewingByTokenUrl(token),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetViewingByTokenQueryKey = (token: string,) => {
+    return [
+    `/api/viewings/manage/${token}`
+    ] as const;
+    }
+
+
+export const getGetViewingByTokenQueryOptions = <TData = Awaited<ReturnType<typeof getViewingByToken>>, TError = ErrorType<void>>(token: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getViewingByToken>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetViewingByTokenQueryKey(token);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getViewingByToken>>> = ({ signal }) => getViewingByToken(token, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: !!(token), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getViewingByToken>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetViewingByTokenQueryResult = NonNullable<Awaited<ReturnType<typeof getViewingByToken>>>
+export type GetViewingByTokenQueryError = ErrorType<void>
+
+
+/**
+ * @summary Look up a booking via its self-service manage token
+ */
+
+export function useGetViewingByToken<TData = Awaited<ReturnType<typeof getViewingByToken>>, TError = ErrorType<void>>(
+ token: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getViewingByToken>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetViewingByTokenQueryOptions(token,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getCancelViewingByTokenUrl = (token: string,) => {
+
+
+
+
+  return `/api/viewings/manage/${token}/cancel`
+}
+
+/**
+ * @summary Self-service cancel a booking (idempotent)
+ */
+export const cancelViewingByToken = async (token: string, options?: RequestInit): Promise<ViewingBookingConfirmation> => {
+
+  return customFetch<ViewingBookingConfirmation>(getCancelViewingByTokenUrl(token),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+export const getCancelViewingByTokenMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof cancelViewingByToken>>, TError,{token: string}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof cancelViewingByToken>>, TError,{token: string}, TContext> => {
+
+const mutationKey = ['cancelViewingByToken'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof cancelViewingByToken>>, {token: string}> = (props) => {
+          const {token} = props ?? {};
+
+          return  cancelViewingByToken(token,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CancelViewingByTokenMutationResult = NonNullable<Awaited<ReturnType<typeof cancelViewingByToken>>>
+
+    export type CancelViewingByTokenMutationError = ErrorType<void>
+
+    /**
+ * @summary Self-service cancel a booking (idempotent)
+ */
+export const useCancelViewingByToken = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof cancelViewingByToken>>, TError,{token: string}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof cancelViewingByToken>>,
+        TError,
+        {token: string},
+        TContext
+      > => {
+      return useMutation(getCancelViewingByTokenMutationOptions(options));
+    }
+
+export const getGetAdminViewingsUrl = (params?: GetAdminViewingsParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/api/admin/viewings?${stringifiedParams}` : `/api/admin/viewings`
+}
+
+/**
+ * @summary Get all viewing bookings (admin)
+ */
+export const getAdminViewings = async (params?: GetAdminViewingsParams, options?: RequestInit): Promise<Viewing[]> => {
+
+  return customFetch<Viewing[]>(getGetAdminViewingsUrl(params),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetAdminViewingsQueryKey = (params?: GetAdminViewingsParams,) => {
+    return [
+    `/api/admin/viewings`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetAdminViewingsQueryOptions = <TData = Awaited<ReturnType<typeof getAdminViewings>>, TError = ErrorType<unknown>>(params?: GetAdminViewingsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getAdminViewings>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetAdminViewingsQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getAdminViewings>>> = ({ signal }) => getAdminViewings(params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getAdminViewings>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetAdminViewingsQueryResult = NonNullable<Awaited<ReturnType<typeof getAdminViewings>>>
+export type GetAdminViewingsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Get all viewing bookings (admin)
+ */
+
+export function useGetAdminViewings<TData = Awaited<ReturnType<typeof getAdminViewings>>, TError = ErrorType<unknown>>(
+ params?: GetAdminViewingsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getAdminViewings>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetAdminViewingsQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getUpdateViewingStatusUrl = (id: number,) => {
+
+
+
+
+  return `/api/admin/viewings/${id}/status`
+}
+
+/**
+ * @summary Manually mark a viewing completed, no-show, or cancelled (admin)
+ */
+export const updateViewingStatus = async (id: number,
+    viewingStatusUpdateInput: ViewingStatusUpdateInput, options?: RequestInit): Promise<Viewing> => {
+
+  return customFetch<Viewing>(getUpdateViewingStatusUrl(id),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      viewingStatusUpdateInput,)
+  }
+);}
+
+
+
+
+export const getUpdateViewingStatusMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateViewingStatus>>, TError,{id: number;data: BodyType<ViewingStatusUpdateInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateViewingStatus>>, TError,{id: number;data: BodyType<ViewingStatusUpdateInput>}, TContext> => {
+
+const mutationKey = ['updateViewingStatus'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateViewingStatus>>, {id: number;data: BodyType<ViewingStatusUpdateInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateViewingStatus(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateViewingStatusMutationResult = NonNullable<Awaited<ReturnType<typeof updateViewingStatus>>>
+    export type UpdateViewingStatusMutationBody = BodyType<ViewingStatusUpdateInput>
+    export type UpdateViewingStatusMutationError = ErrorType<void>
+
+    /**
+ * @summary Manually mark a viewing completed, no-show, or cancelled (admin)
+ */
+export const useUpdateViewingStatus = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateViewingStatus>>, TError,{id: number;data: BodyType<ViewingStatusUpdateInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateViewingStatus>>,
+        TError,
+        {id: number;data: BodyType<ViewingStatusUpdateInput>},
+        TContext
+      > => {
+      return useMutation(getUpdateViewingStatusMutationOptions(options));
     }
 
 export const getGetLandlordStatsUrl = () => {

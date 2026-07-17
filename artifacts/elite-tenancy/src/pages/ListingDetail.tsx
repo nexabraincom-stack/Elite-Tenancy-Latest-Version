@@ -1,15 +1,19 @@
 import { useParams } from "wouter";
 import { useState } from "react";
-import { Bed, Bath, CheckCircle2, MapPin, Eye, ChevronLeft, ChevronRight, Send } from "lucide-react";
+import { Bed, Bath, CheckCircle2, MapPin, Eye, ChevronLeft, ChevronRight, Send, CalendarCheck, Clock, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Calendar } from "@/components/ui/calendar";
 import { useToast } from "@/hooks/use-toast";
 import PublicLayout from "@/components/PublicLayout";
-import { useGetListingById, useSubmitLead } from "@workspace/api-client-react";
+import { useGetListingById, useSubmitLead, useGetViewingAvailability, useCreateViewing } from "@workspace/api-client-react";
+import { formatLondonDateTime, formatLondonTime, dateToYMD } from "@/lib/timezone";
 import { Link } from "wouter";
+
+const MAX_BOOKING_DAYS_AHEAD = 21;
 
 export default function ListingDetail() {
   const params = useParams<{ id: string }>();
@@ -20,6 +24,19 @@ export default function ListingDetail() {
   const [photoIndex, setPhotoIndex] = useState(0);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
 
+  const [mode, setMode] = useState<"book" | "ask">("book");
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
+  const [bookingForm, setBookingForm] = useState({ name: "", email: "", phone: "", notes: "" });
+  const [bookingConfirmation, setBookingConfirmation] = useState<{ scheduledAt: string; manageUrl: string } | null>(null);
+
+  const dateStr = selectedDate ? dateToYMD(selectedDate) : "";
+  const { data: availability, isLoading: availabilityLoading } = useGetViewingAvailability(
+    { listingId: id, date: dateStr },
+    { query: { enabled: !!id && !!dateStr, queryKey: [`/api/viewings/availability`, id, dateStr] } },
+  );
+  const createViewing = useCreateViewing();
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     submitLead.mutate(
@@ -28,6 +45,28 @@ export default function ListingDetail() {
         onSuccess: () => {
           toast({ title: "Enquiry sent", description: "We will be in touch within 24 hours." });
           setForm({ name: "", email: "", phone: "", message: "" });
+        },
+      }
+    );
+  }
+
+  function handleDateSelect(date: Date | undefined) {
+    setSelectedDate(date);
+    setSelectedSlot(null);
+  }
+
+  function handleBookingSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!selectedSlot) return;
+    createViewing.mutate(
+      { data: { listingId: id, slotStart: selectedSlot, ...bookingForm } },
+      {
+        onSuccess: (result) => {
+          setBookingConfirmation({ scheduledAt: result.scheduledAt, manageUrl: result.manageUrl });
+        },
+        onError: (err: unknown) => {
+          const message = (err as { data?: { error?: string } })?.data?.error ?? "Please try another time.";
+          toast({ title: "Couldn't book that slot", description: message, variant: "destructive" });
         },
       }
     );
@@ -155,63 +194,188 @@ export default function ListingDetail() {
             </div>
           </div>
 
-          {/* Enquiry form */}
+          {/* Book a viewing / Ask a question */}
           <div className="lg:col-span-1">
             <div className="bg-card border border-border/50 rounded-xl p-6 sticky top-24">
-              <h3 className="font-semibold text-foreground mb-1">Enquire about this property</h3>
-              <p className="text-xs text-muted-foreground mb-5">We typically respond within 2 hours</p>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Label className="text-xs mb-1.5 block">Full Name</Label>
-                  <Input
-                    required
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    placeholder="Your name"
-                    className="bg-background text-sm"
-                  />
-                </div>
-                <div>
-                  <Label className="text-xs mb-1.5 block">Email</Label>
-                  <Input
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    placeholder="your@email.com"
-                    className="bg-background text-sm"
-                  />
-                </div>
-                <div>
-                  <Label className="text-xs mb-1.5 block">Phone (optional)</Label>
-                  <Input
-                    value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    placeholder="+44 7700..."
-                    className="bg-background text-sm"
-                  />
-                </div>
-                <div>
-                  <Label className="text-xs mb-1.5 block">Message</Label>
-                  <Textarea
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="Tell us about yourself and when you'd like to view..."
-                    rows={3}
-                    className="bg-background text-sm resize-none"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  disabled={submitLead.isPending}
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 gap-2"
+              <div className="flex gap-2 mb-5">
+                <button
+                  type="button"
+                  onClick={() => setMode("book")}
+                  className={`flex-1 text-sm font-medium py-2 rounded-lg transition-colors ${mode === "book" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:text-foreground"}`}
                 >
-                  <Send size={14} />
-                  {submitLead.isPending ? "Sending..." : "Send Enquiry"}
-                </Button>
-              </form>
+                  Book a viewing
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMode("ask")}
+                  className={`flex-1 text-sm font-medium py-2 rounded-lg transition-colors ${mode === "ask" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:text-foreground"}`}
+                >
+                  Ask a question
+                </button>
+              </div>
+
+              {mode === "book" ? (
+                bookingConfirmation ? (
+                  <div className="text-center py-4">
+                    <CheckCircle className="mx-auto text-primary mb-3" size={32} />
+                    <h3 className="font-semibold text-foreground mb-1">Viewing confirmed</h3>
+                    <p className="text-sm text-muted-foreground mb-4">{formatLondonDateTime(bookingConfirmation.scheduledAt)}</p>
+                    <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
+                      We've sent a confirmation to your email{bookingForm.phone ? " and WhatsApp" : ""}. Need to change your plans?
+                    </p>
+                    <a href={bookingConfirmation.manageUrl} className="text-xs text-primary underline">
+                      Manage or cancel my booking
+                    </a>
+                  </div>
+                ) : (
+                  <>
+                    <h3 className="font-semibold text-foreground mb-1 flex items-center gap-2">
+                      <CalendarCheck size={16} className="text-primary" /> Book a viewing
+                    </h3>
+                    <p className="text-xs text-muted-foreground mb-4">Pick a date and time that suits you — no phone call needed.</p>
+
+                    <Calendar
+                      mode="single"
+                      selected={selectedDate}
+                      onSelect={handleDateSelect}
+                      disabled={(date: Date) => {
+                        const startOfToday = new Date();
+                        startOfToday.setHours(0, 0, 0, 0);
+                        const horizon = new Date(startOfToday.getTime() + MAX_BOOKING_DAYS_AHEAD * 86400000);
+                        return date < startOfToday || date > horizon || date.getDay() === 0;
+                      }}
+                      className="mx-auto mb-4 [--cell-size:2.1rem]"
+                    />
+
+                    {selectedDate && (
+                      <div className="mb-4">
+                        <p className="text-xs font-medium text-muted-foreground mb-2 flex items-center gap-1.5">
+                          <Clock size={12} /> Available times
+                        </p>
+                        {availabilityLoading ? (
+                          <p className="text-xs text-muted-foreground">Checking availability...</p>
+                        ) : availability?.slots?.length ? (
+                          <div className="grid grid-cols-3 gap-2">
+                            {availability.slots.map((slot) => (
+                              <button
+                                key={slot.startsAt}
+                                type="button"
+                                onClick={() => setSelectedSlot(slot.startsAt)}
+                                className={`text-xs py-1.5 rounded-md border transition-colors ${selectedSlot === slot.startsAt ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary hover:text-foreground"}`}
+                              >
+                                {formatLondonTime(slot.startsAt)}
+                              </button>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-xs text-muted-foreground">No slots left this day — try another date.</p>
+                        )}
+                      </div>
+                    )}
+
+                    {selectedSlot && (
+                      <form onSubmit={handleBookingSubmit} className="space-y-3 border-t border-border/50 pt-4">
+                        <div>
+                          <Label className="text-xs mb-1.5 block">Full Name</Label>
+                          <Input
+                            required
+                            value={bookingForm.name}
+                            onChange={(e) => setBookingForm({ ...bookingForm, name: e.target.value })}
+                            placeholder="Your name"
+                            className="bg-background text-sm"
+                          />
+                        </div>
+                        <div>
+                          <Label className="text-xs mb-1.5 block">Email</Label>
+                          <Input
+                            type="email"
+                            required
+                            value={bookingForm.email}
+                            onChange={(e) => setBookingForm({ ...bookingForm, email: e.target.value })}
+                            placeholder="your@email.com"
+                            className="bg-background text-sm"
+                          />
+                        </div>
+                        <div>
+                          <Label className="text-xs mb-1.5 block">Phone (optional)</Label>
+                          <Input
+                            value={bookingForm.phone}
+                            onChange={(e) => setBookingForm({ ...bookingForm, phone: e.target.value })}
+                            placeholder="+44 7700..."
+                            className="bg-background text-sm"
+                          />
+                        </div>
+                        <Button
+                          type="submit"
+                          disabled={createViewing.isPending}
+                          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 gap-2"
+                        >
+                          <CalendarCheck size={14} />
+                          {createViewing.isPending ? "Booking..." : "Confirm booking"}
+                        </Button>
+                      </form>
+                    )}
+                  </>
+                )
+              ) : (
+                <>
+                  <h3 className="font-semibold text-foreground mb-1">Enquire about this property</h3>
+                  <p className="text-xs text-muted-foreground mb-5">We typically respond within 2 hours</p>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <Label className="text-xs mb-1.5 block">Full Name</Label>
+                      <Input
+                        required
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        placeholder="Your name"
+                        className="bg-background text-sm"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-xs mb-1.5 block">Email</Label>
+                      <Input
+                        type="email"
+                        required
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        placeholder="your@email.com"
+                        className="bg-background text-sm"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-xs mb-1.5 block">Phone (optional)</Label>
+                      <Input
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        placeholder="+44 7700..."
+                        className="bg-background text-sm"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-xs mb-1.5 block">Message</Label>
+                      <Textarea
+                        value={form.message}
+                        onChange={(e) => setForm({ ...form, message: e.target.value })}
+                        placeholder="Tell us anything you'd like to know..."
+                        rows={3}
+                        className="bg-background text-sm resize-none"
+                      />
+                    </div>
+                    <Button
+                      type="submit"
+                      disabled={submitLead.isPending}
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90 gap-2"
+                    >
+                      <Send size={14} />
+                      {submitLead.isPending ? "Sending..." : "Send Enquiry"}
+                    </Button>
+                  </form>
+                </>
+              )}
+
               <p className="text-xs text-muted-foreground text-center mt-4 leading-relaxed">
-                By enquiring, you agree to our Privacy Policy. We never share your details without consent.
+                By {mode === "book" ? "booking" : "enquiring"}, you agree to our Privacy Policy. We never share your details without consent.
               </p>
             </div>
           </div>

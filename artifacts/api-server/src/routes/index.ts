@@ -32,6 +32,7 @@ import seedArticlesRouter from "./seedArticles";
 import usaWaitlistRouter from "./usaWaitlist";
 import lodgerRouter from "./lodger";
 import seoDashboardRouter from "./seoDashboard";
+import viewingsRouter from "./viewings";
 
 const router: IRouter = Router();
 
@@ -68,5 +69,6 @@ router.use(seedArticlesRouter);
 router.use(usaWaitlistRouter);
 router.use(lodgerRouter);
 router.use(seoDashboardRouter);
+router.use(viewingsRouter);
 
 export default router;

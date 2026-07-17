@@ -26,6 +26,8 @@ tags:
     description: Admin panel
   - name: matching
     description: AI-powered tenant matching
+  - name: viewings
+    description: Property viewing bookings
 
 paths:
   /matching/score:
@@ -254,6 +256,135 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SuccessResponse"
+
+  /viewings/availability:
+    get:
+      operationId: getViewingAvailability
+      tags: [viewings]
+      summary: Get bookable viewing slots for a listing on a given date
+      parameters:
+        - in: query
+          name: listingId
+          required: true
+          schema: { type: integer }
+        - in: query
+          name: date
+          required: true
+          description: "London calendar date, YYYY-MM-DD"
+          schema: { type: string }
+      responses:
+        "200":
+          description: Available slots for that date
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ViewingAvailabilityResponse"
+
+  /viewings:
+    post:
+      operationId: createViewing
+      tags: [viewings]
+      summary: Book a property viewing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ViewingInput"
+      responses:
+        "201":
+          description: Viewing booked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ViewingBookingConfirmation"
+        "409":
+          description: Slot no longer available, or an existing upcoming booking already exists for this listing/email
+
+  /viewings/manage/{token}:
+    get:
+      operationId: getViewingByToken
+      tags: [viewings]
+      summary: Look up a booking via its self-service manage token
+      parameters:
+        - in: path
+          name: token
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: The booking
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ViewingBookingConfirmation"
+        "404":
+          description: Not found
+
+  /viewings/manage/{token}/cancel:
+    post:
+      operationId: cancelViewingByToken
+      tags: [viewings]
+      summary: Self-service cancel a booking (idempotent)
+      parameters:
+        - in: path
+          name: token
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Booking cancelled (or already was)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ViewingBookingConfirmation"
+        "404":
+          description: Not found
+
+  /admin/viewings:
+    get:
+      operationId: getAdminViewings
+      tags: [admin]
+      summary: Get all viewing bookings (admin)
+      parameters:
+        - in: query
+          name: status
+          schema: { type: string }
+      responses:
+        "200":
+          description: All viewings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Viewing"
+
+  /admin/viewings/{id}/status:
+    post:
+      operationId: updateViewingStatus
+      tags: [admin]
+      summary: Manually mark a viewing completed, no-show, or cancelled (admin)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ViewingStatusUpdateInput"
+      responses:
+        "200":
+          description: Updated viewing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Viewing"
+        "404":
+          description: Not found
 
   /landlord/stats:
     get:
@@ -719,6 +850,92 @@ components:
         - name
         - email
         - postcode
+
+    ViewingSlot:
+      type: object
+      properties:
+        startsAt: { type: string, description: "ISO instant (UTC)" }
+      required:
+        - startsAt
+
+    ViewingAvailabilityResponse:
+      type: object
+      properties:
+        listingId: { type: integer }
+        date: { type: string }
+        timezone: { type: string }
+        available: { type: boolean }
+        slots:
+          type: array
+          items:
+            $ref: "#/components/schemas/ViewingSlot"
+      required:
+        - listingId
+        - date
+        - timezone
+        - available
+        - slots
+
+    ViewingInput:
+      type: object
+      properties:
+        listingId: { type: integer }
+        slotStart: { type: string, description: "ISO instant (UTC) — must match a real slot from /viewings/availability" }
+        name: { type: string }
+        email: { type: string }
+        phone: { type: string }
+        notes: { type: string }
+      required:
+        - listingId
+        - slotStart
+        - name
+        - email
+
+    # Admin-facing shape — deliberately omits manageToken. A tenant's
+    # self-cancel link must never be visible to anyone browsing the admin
+    # panel; only ViewingBookingConfirmation (returned once, at creation/
+    # lookup-by-token time) carries it.
+    Viewing:
+      type: object
+      properties:
+        id: { type: integer }
+        listingId: { type: integer }
+        listingTitle: { type: ["string", "null"] }
+        name: { type: string }
+        email: { type: string }
+        phone: { type: ["string", "null"] }
+        notes: { type: ["string", "null"] }
+        scheduledAt: { type: string }
+        durationMinutes: { type: integer }
+        status: { type: string }
+        createdAt: { type: string }
+      required:
+        - id
+        - listingId
+        - name
+        - email
+        - scheduledAt
+        - durationMinutes
+        - status
+        - createdAt
+
+    ViewingBookingConfirmation:
+      allOf:
+        - $ref: "#/components/schemas/Viewing"
+        - type: object
+          properties:
+            manageToken: { type: string }
+            manageUrl: { type: string }
+          required:
+            - manageToken
+            - manageUrl
+
+    ViewingStatusUpdateInput:
+      type: object
+      properties:
+        status: { type: string, enum: [completed, no_show, cancelled] }
+      required:
+        - status
 
     SuccessResponse:
       type: object

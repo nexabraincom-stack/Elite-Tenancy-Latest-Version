@@ -130,6 +130,64 @@ export interface ValuationInput {
   message?: string;
 }
 
+export interface ViewingSlot {
+  /** ISO instant (UTC) */
+  startsAt: string;
+}
+
+export interface ViewingAvailabilityResponse {
+  listingId: number;
+  date: string;
+  timezone: string;
+  available: boolean;
+  slots: ViewingSlot[];
+}
+
+export interface ViewingInput {
+  listingId: number;
+  /** ISO instant (UTC) — must match a real slot from /viewings/availability */
+  slotStart: string;
+  name: string;
+  email: string;
+  phone?: string;
+  notes?: string;
+}
+
+export interface Viewing {
+  id: number;
+  listingId: number;
+  /** @nullable */
+  listingTitle?: string | null;
+  name: string;
+  email: string;
+  /** @nullable */
+  phone?: string | null;
+  /** @nullable */
+  notes?: string | null;
+  scheduledAt: string;
+  durationMinutes: number;
+  status: string;
+  createdAt: string;
+}
+
+export type ViewingBookingConfirmation = Viewing & {
+  manageToken: string;
+  manageUrl: string;
+};
+
+export type ViewingStatusUpdateInputStatus = typeof ViewingStatusUpdateInputStatus[keyof typeof ViewingStatusUpdateInputStatus];
+
+
+export const ViewingStatusUpdateInputStatus = {
+  completed: 'completed',
+  no_show: 'no_show',
+  cancelled: 'cancelled',
+} as const;
+
+export interface ViewingStatusUpdateInput {
+  status: ViewingStatusUpdateInputStatus;
+}
+
 export interface SuccessResponse {
   success: boolean;
   message: string;
@@ -284,5 +342,17 @@ bedrooms?: number;
 category?: string;
 furnished?: boolean;
 dssAccepted?: boolean;
+};
+
+export type GetViewingAvailabilityParams = {
+listingId: number;
+/**
+ * London calendar date, YYYY-MM-DD
+ */
+date: string;
+};
+
+export type GetAdminViewingsParams = {
+status?: string;
 };
 
