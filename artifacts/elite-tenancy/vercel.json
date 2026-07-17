@@ -31,7 +31,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://elite-tenancy-latest-ve-git-7b27d4-nexabraincom-stacks-projects.vercel.app/api/:path*"
+      "destination": "https://elite-tenancy-latest-version-api-se-rho.vercel.app/api/:path*"
     },
     {
       "source": "/((?!assets/).*)",
