@@ -45,6 +45,7 @@ const LandlordManaged = lazy(() => import("@/pages/landlord/Managed"));
 const AdminDashboard = lazy(() => import("@/pages/admin/Dashboard"));
 const AdminListings = lazy(() => import("@/pages/admin/Listings"));
 const AdminLeads = lazy(() => import("@/pages/admin/Leads"));
+const AdminViewings = lazy(() => import("@/pages/admin/Viewings"));
 const AdminArticles = lazy(() => import("@/pages/admin/Articles"));
 const AdminUsers = lazy(() => import("@/pages/admin/Users"));
 const AdminSeoDashboard = lazy(() => import("@/pages/admin/SeoDashboard"));
@@ -68,6 +69,7 @@ const RenterPassport = lazy(() => import("@/pages/RenterPassport"));
 const RoomWanted = lazy(() => import("@/pages/RoomWanted"));
 const VerifyLandlord = lazy(() => import("@/pages/VerifyLandlord"));
 const NewhamLicensingChecker = lazy(() => import("@/pages/NewhamLicensingChecker"));
+const ViewingManage = lazy(() => import("@/pages/ViewingManage"));
 const RightToRentCheck = lazy(() => import("@/pages/RightToRentCheck"));
 const RentCalculator = lazy(() => import("@/pages/RentCalculator"));
 const Faq = lazy(() => import("@/pages/Faq"));
@@ -428,6 +430,7 @@ function AppRoutes() {
       <Route path="/room-wanted" component={RoomWanted} />
       <Route path="/verify-landlord" component={VerifyLandlord} />
       <Route path="/newham-licensing-checker" component={NewhamLicensingChecker} />
+      <Route path="/viewings/manage/:token" component={ViewingManage} />
       <Route path="/right-to-rent-check" component={RightToRentCheck} />
       <Route path="/rent-calculator" component={RentCalculator} />
       <Route path="/faq" component={Faq} />
@@ -579,6 +582,9 @@ function AppRoutes() {
       </Route>
       <Route path="/admin/leads">
         {() => <ProtectedRoute component={AdminLeads} requiredRole="admin" />}
+      </Route>
+      <Route path="/admin/viewings">
+        {() => <ProtectedRoute component={AdminViewings} requiredRole="admin" />}
       </Route>
       <Route path="/admin/articles">
         {() => <ProtectedRoute component={AdminArticles} requiredRole="admin" />}

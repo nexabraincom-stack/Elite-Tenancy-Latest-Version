@@ -217,6 +217,7 @@ app.use("/api/matching/score", aiLimiter);
 app.use("/api/passport", aiLimiter);
 app.use("/api/verify", aiLimiter);
 app.use("/api/rtr/check", aiLimiter);
+app.use("/api/viewings", aiLimiter);
 
 // ── Routes ───────────────────────────────────────────────────────────────────
 app.use("/api", router);

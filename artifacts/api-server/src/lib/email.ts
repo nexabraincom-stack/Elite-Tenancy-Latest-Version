@@ -17,6 +17,7 @@
 
 import * as https from "node:https";
 import { logger } from "./logger";
+import { formatLondonDateTime } from "./viewingAvailability";
 
 const RESEND_HOST = "api.resend.com";
 
@@ -263,6 +264,84 @@ export function lodgerConsentDecisionEmail(data: {
        ${data.approved ? `<p style="font-size:14px;line-height:1.7;margin:0 0 16px;">You can now generate your lodger licence agreement from your dashboard.</p>` : ""}
        <p style="margin:0 0 24px;">${btn(data.dashboardUrl, "Go to my dashboard")}</p>
        <p style="font-size:13px;color:#6b6256;line-height:1.6;margin:0;">The Elite Tenancy Team</p>`,
+    ),
+  };
+}
+
+/** Sent immediately when a tenant books a viewing (needs verified domain). */
+export function viewingConfirmationEmail(data: {
+  tenantName: string;
+  listingTitle: string;
+  scheduledAt: Date;
+  manageUrl: string;
+}): { subject: string; html: string } {
+  const when = formatLondonDateTime(data.scheduledAt);
+  return {
+    subject: `Viewing confirmed — ${data.listingTitle}, ${when}`,
+    html: shell(
+      `Your viewing is confirmed, ${esc(data.tenantName)}`,
+      `<p style="font-size:14px;line-height:1.7;margin:0 0 16px;">You're booked in to view <strong>${esc(data.listingTitle)}</strong> on <strong>${esc(when)}</strong>.</p>
+       <p style="font-size:14px;line-height:1.7;margin:0 0 22px;">We'll send you a reminder closer to the time. Need to change your mind or the time doesn't work any more? You can cancel any time.</p>
+       <p style="margin:0 0 24px;">${btn(data.manageUrl, "Manage my booking")}</p>
+       <p style="font-size:13px;color:#6b6256;line-height:1.6;margin:0;">See you soon,<br/>The Elite Tenancy Team</p>`,
+    ),
+  };
+}
+
+/** Day-before reminder (needs verified domain). */
+export function viewingDayBeforeReminderEmail(data: {
+  tenantName: string;
+  listingTitle: string;
+  scheduledAt: Date;
+  manageUrl: string;
+}): { subject: string; html: string } {
+  const when = formatLondonDateTime(data.scheduledAt);
+  return {
+    subject: `Reminder: your viewing tomorrow — ${data.listingTitle}`,
+    html: shell(
+      `See you tomorrow, ${esc(data.tenantName)}`,
+      `<p style="font-size:14px;line-height:1.7;margin:0 0 16px;">Just a reminder — your viewing of <strong>${esc(data.listingTitle)}</strong> is <strong>tomorrow, ${esc(when)}</strong>.</p>
+       <p style="font-size:14px;line-height:1.7;margin:0 0 22px;">If anything's changed and you can no longer make it, please let us know as early as you can so someone else can take the slot.</p>
+       <p style="margin:0 0 24px;">${btn(data.manageUrl, "View or cancel my booking")}</p>
+       <p style="font-size:13px;color:#6b6256;line-height:1.6;margin:0;">The Elite Tenancy Team</p>`,
+    ),
+  };
+}
+
+/** Same-day reminder (needs verified domain). */
+export function viewingSameDayReminderEmail(data: {
+  tenantName: string;
+  listingTitle: string;
+  scheduledAt: Date;
+  manageUrl: string;
+}): { subject: string; html: string } {
+  const when = formatLondonDateTime(data.scheduledAt);
+  return {
+    subject: `Reminder: your viewing today — ${data.listingTitle}`,
+    html: shell(
+      `Today's the day, ${esc(data.tenantName)}`,
+      `<p style="font-size:14px;line-height:1.7;margin:0 0 16px;">Just a reminder — your viewing of <strong>${esc(data.listingTitle)}</strong> is <strong>today, ${esc(when)}</strong>.</p>
+       <p style="font-size:14px;line-height:1.7;margin:0 0 22px;">Running late or can't make it after all? Please let us know as soon as you can.</p>
+       <p style="margin:0 0 24px;">${btn(data.manageUrl, "View or cancel my booking")}</p>
+       <p style="font-size:13px;color:#6b6256;line-height:1.6;margin:0;">The Elite Tenancy Team</p>`,
+    ),
+  };
+}
+
+/** Internal alert when a tenant self-cancels, so no one turns up expecting them. */
+export function viewingCancelledAdminAlertEmail(data: {
+  tenantName: string;
+  listingTitle: string;
+  scheduledAt: Date;
+  cancelledBy: "tenant" | "admin";
+}): { subject: string; html: string } {
+  const when = formatLondonDateTime(data.scheduledAt);
+  return {
+    subject: `Viewing cancelled — ${esc(data.tenantName)}, ${data.listingTitle}`,
+    html: shell(
+      "A viewing has been cancelled",
+      `<p style="font-size:14px;line-height:1.7;margin:0 0 16px;"><strong>${esc(data.tenantName)}</strong>'s viewing of <strong>${esc(data.listingTitle)}</strong>, originally <strong>${esc(when)}</strong>, has been cancelled by the ${esc(data.cancelledBy)}.</p>
+       <p style="font-size:14px;line-height:1.7;margin:0;">That slot is now free again.</p>`,
     ),
   };
 }

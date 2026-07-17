@@ -1,4 +1,5 @@
-import { pgTable, serial, text, integer, boolean, timestamp, pgEnum } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, integer, boolean, timestamp, pgEnum, uniqueIndex } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
 
@@ -15,6 +16,7 @@ export const lodgerLicenceStatusEnum = pgEnum("lodger_licence_status", [
   "active",
   "ended",
 ]);
+export const viewingStatusEnum = pgEnum("viewing_status", ["confirmed", "cancelled", "completed", "no_show"]);
 
 export const usersTable = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -68,6 +70,36 @@ export const leadsTable = pgTable("leads", {
   status: leadStatusEnum("status").notNull().default("new"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
+
+// ── Property viewings (public self-service booking) ────────────────────────────
+// Capacity of 1 concurrent booking per (listing, slot) is enforced by the
+// partial unique index below, not just an application-level check — a plain
+// check-then-insert race-conditions under concurrent requests for the same
+// slot. `manageToken` lets a tenant view/cancel their own booking without an
+// account; it must never be exposed on the admin-facing list endpoint.
+export const viewingsTable = pgTable("viewings", {
+  id: serial("id").primaryKey(),
+  listingId: integer("listing_id").notNull().references(() => listingsTable.id),
+  leadId: integer("lead_id").references(() => leadsTable.id),
+  tenantName: text("tenant_name").notNull(),
+  tenantEmail: text("tenant_email").notNull(),
+  tenantPhone: text("tenant_phone"),
+  notes: text("notes"),
+  scheduledAt: timestamp("scheduled_at", { withTimezone: true }).notNull(),
+  durationMinutes: integer("duration_minutes").notNull().default(30),
+  status: viewingStatusEnum("status").notNull().default("confirmed"),
+  manageToken: text("manage_token").notNull().unique(),
+  dayBeforeReminderSentAt: timestamp("day_before_reminder_sent_at"),
+  sameDayReminderSentAt: timestamp("same_day_reminder_sent_at"),
+  cancelledAt: timestamp("cancelled_at"),
+  cancelledBy: text("cancelled_by"),
+  completedAt: timestamp("completed_at"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("viewings_slot_unique_idx")
+    .on(table.listingId, table.scheduledAt)
+    .where(sql`${table.status} = 'confirmed'`),
+]);
 
 export const blogArticlesTable = pgTable("blog_articles", {
   id: serial("id").primaryKey(),
@@ -242,6 +274,17 @@ export type InsertMessage = z.infer<typeof insertMessageSchema>;
 
 export const insertListingSchema = createInsertSchema(listingsTable).omit({ id: true, createdAt: true, updatedAt: true, viewCount: true, enquiryCount: true });
 export const insertLeadSchema = createInsertSchema(leadsTable).omit({ id: true, createdAt: true });
+export const insertViewingSchema = createInsertSchema(viewingsTable).omit({
+  id: true,
+  createdAt: true,
+  status: true,
+  manageToken: true,
+  dayBeforeReminderSentAt: true,
+  sameDayReminderSentAt: true,
+  cancelledAt: true,
+  cancelledBy: true,
+  completedAt: true,
+});
 export const insertBlogArticleSchema = createInsertSchema(blogArticlesTable).omit({ id: true, createdAt: true });
 export const insertUserSchema = createInsertSchema(usersTable).omit({ id: true, createdAt: true });
 export const insertTenancySchema = createInsertSchema(tenanciesTable).omit({ id: true, createdAt: true });
@@ -253,6 +296,8 @@ export type Listing = typeof listingsTable.$inferSelect;
 export type InsertListing = z.infer<typeof insertListingSchema>;
 export type Lead = typeof leadsTable.$inferSelect;
 export type InsertLead = z.infer<typeof insertLeadSchema>;
+export type Viewing = typeof viewingsTable.$inferSelect;
+export type InsertViewing = z.infer<typeof insertViewingSchema>;
 export type BlogArticle = typeof blogArticlesTable.$inferSelect;
 export type InsertBlogArticle = z.infer<typeof insertBlogArticleSchema>;
 export type User = typeof usersTable.$inferSelect;

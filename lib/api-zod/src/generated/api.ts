@@ -320,6 +320,137 @@ export const SubmitValuationResponse = zod.object({
 
 
 /**
+ * @summary Get bookable viewing slots for a listing on a given date
+ */
+export const GetViewingAvailabilityQueryParams = zod.object({
+  "listingId": zod.coerce.number(),
+  "date": zod.coerce.string().describe('London calendar date, YYYY-MM-DD')
+})
+
+export const GetViewingAvailabilityResponse = zod.object({
+  "listingId": zod.number(),
+  "date": zod.string(),
+  "timezone": zod.string(),
+  "available": zod.boolean(),
+  "slots": zod.array(zod.object({
+  "startsAt": zod.string().describe('ISO instant (UTC)')
+}))
+})
+
+
+/**
+ * @summary Book a property viewing
+ */
+export const CreateViewingBody = zod.object({
+  "listingId": zod.number(),
+  "slotStart": zod.string().describe('ISO instant (UTC) — must match a real slot from \/viewings\/availability'),
+  "name": zod.string(),
+  "email": zod.string(),
+  "phone": zod.string().optional(),
+  "notes": zod.string().optional()
+})
+
+
+/**
+ * @summary Look up a booking via its self-service manage token
+ */
+export const GetViewingByTokenParams = zod.object({
+  "token": zod.coerce.string()
+})
+
+export const GetViewingByTokenResponse = zod.object({
+  "id": zod.number(),
+  "listingId": zod.number(),
+  "listingTitle": zod.string().nullish(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "phone": zod.string().nullish(),
+  "notes": zod.string().nullish(),
+  "scheduledAt": zod.string(),
+  "durationMinutes": zod.number(),
+  "status": zod.string(),
+  "createdAt": zod.string()
+}).and(zod.object({
+  "manageToken": zod.string(),
+  "manageUrl": zod.string()
+}))
+
+
+/**
+ * @summary Self-service cancel a booking (idempotent)
+ */
+export const CancelViewingByTokenParams = zod.object({
+  "token": zod.coerce.string()
+})
+
+export const CancelViewingByTokenResponse = zod.object({
+  "id": zod.number(),
+  "listingId": zod.number(),
+  "listingTitle": zod.string().nullish(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "phone": zod.string().nullish(),
+  "notes": zod.string().nullish(),
+  "scheduledAt": zod.string(),
+  "durationMinutes": zod.number(),
+  "status": zod.string(),
+  "createdAt": zod.string()
+}).and(zod.object({
+  "manageToken": zod.string(),
+  "manageUrl": zod.string()
+}))
+
+
+/**
+ * @summary Get all viewing bookings (admin)
+ */
+export const GetAdminViewingsQueryParams = zod.object({
+  "status": zod.coerce.string().optional()
+})
+
+export const GetAdminViewingsResponseItem = zod.object({
+  "id": zod.number(),
+  "listingId": zod.number(),
+  "listingTitle": zod.string().nullish(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "phone": zod.string().nullish(),
+  "notes": zod.string().nullish(),
+  "scheduledAt": zod.string(),
+  "durationMinutes": zod.number(),
+  "status": zod.string(),
+  "createdAt": zod.string()
+})
+export const GetAdminViewingsResponse = zod.array(GetAdminViewingsResponseItem)
+
+
+/**
+ * @summary Manually mark a viewing completed, no-show, or cancelled (admin)
+ */
+export const UpdateViewingStatusParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const UpdateViewingStatusBody = zod.object({
+  "status": zod.enum(['completed', 'no_show', 'cancelled'])
+})
+
+export const UpdateViewingStatusResponse = zod.object({
+  "id": zod.number(),
+  "listingId": zod.number(),
+  "listingTitle": zod.string().nullish(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "phone": zod.string().nullish(),
+  "notes": zod.string().nullish(),
+  "scheduledAt": zod.string(),
+  "durationMinutes": zod.number(),
+  "status": zod.string(),
+  "createdAt": zod.string()
+})
+
+
+/**
  * @summary Get landlord dashboard stats
  */
 export const GetLandlordStatsResponse = zod.object({
